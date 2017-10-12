@@ -9,6 +9,25 @@ var addEvent = function(object, type, callback) {
     }
 };
 
+function readTextFile(file)
+{
+	var rawFile = new XMLHttpRequest();
+	var allText = "";
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                allText = rawFile.responseText;
+            }
+        }
+    }
+	rawFile.send(null);
+	return allText;
+}
+
 
 var InitDemo = function(){
 
@@ -41,33 +60,11 @@ var InitDemo = function(){
 	
 	// ### Setup Shaders:
 
-	//"Position Shader"
-	var vertexShaderCode = [
-		"precision mediump float;",
-		"attribute vec2 vertPosition;",
-		"attribute vec3 vertColor;",
-		"varying vec3 fragColor;",		
-		"void main(){",
-		"fragColor = vertColor;",
-		"gl_Position = vec4(vertPosition, 0.0, 1.0);",
-		"}",
-	].join("\n");
-
-	//"Color Shader"
-	var fragmentShaderCode = [
-		"precision mediump float;",
-		"varying vec3 fragColor;",				
-		"void main(){",
-		"gl_FragColor = vec4(fragColor,1.0);",
-		"}",
-		"",
-	].join("\n");
-
 	var vertexShader = gl.createShader(gl.VERTEX_SHADER);
 	var fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
 	
-	gl.shaderSource(vertexShader, vertexShaderCode);
-	gl.shaderSource(fragmentShader, fragmentShaderCode);
+	gl.shaderSource(vertexShader, readTextFile("VertexShader.glsl"));
+	gl.shaderSource(fragmentShader, readTextFile("FragmentShader.glsl"));
 
 	gl.compileShader(vertexShader);
 	if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)){
