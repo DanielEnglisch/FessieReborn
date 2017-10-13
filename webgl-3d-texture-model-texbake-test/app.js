@@ -160,7 +160,7 @@ var RunDemo = function (vertexShaderText, fragmentShaderText, SusanImage, SusanM
 	var viewMatrix = new Float32Array(16);
 	var projMatrix = new Float32Array(16);
 	mat4.identity(worldMatrix);
-	mat4.lookAt(viewMatrix, [0, 0, -20], [0, 2.5, 0], [0, 1, 0]); // Camera
+	mat4.lookAt(viewMatrix, [0, 10, -10], [0, 0, 0], [0, 1, 0]); // Camera
 	mat4.perspective(projMatrix, glMatrix.toRadian(45), canvas.clientWidth / canvas.clientHeight, 0.1, 1000.0);
 
 	gl.uniformMatrix4fv(matWorldUniformLocation, gl.FALSE, worldMatrix);
@@ -179,8 +179,8 @@ var RunDemo = function (vertexShaderText, fragmentShaderText, SusanImage, SusanM
 	var angle = 0;
 	var loop = function () {
 		angle = performance.now() / 1000 / 6 * 2 * Math.PI;
-		mat4.rotate(yRotationMatrix, identityMatrix, -90, [1, 0, 0]);
-		mat4.rotate(xRotationMatrix, identityMatrix, angle , [0, 0, 1]);
+		mat4.rotate(yRotationMatrix, identityMatrix, -90, [0, 1, 0]);
+		mat4.rotate(xRotationMatrix, identityMatrix, angle , [0, 1, 0]);
 		mat4.mul(worldMatrix, yRotationMatrix, xRotationMatrix );
 
 		//mat4.rotate(worldRotation, identityMatrix, -90 , [1, 0, 0]);
