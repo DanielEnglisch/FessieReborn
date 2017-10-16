@@ -159,8 +159,18 @@ var RunDemo = function (vertexShaderText, fragmentShaderText, SusanImage, SusanM
 	var worldMatrix = new Float32Array(16);
 	var viewMatrix = new Float32Array(16);
 	var projMatrix = new Float32Array(16);
+
+	var locX = -30;
+	var locY = -30;
+	var locZ = -10;
+
+	var mX = 0;
+	var mY = 0;
+	var mZ = 0;
+	
+
 	mat4.identity(worldMatrix);
-	mat4.lookAt(viewMatrix, [0, 10, -10], [0, 0, 0], [0, 1, 0]); // Camera
+	mat4.lookAt(viewMatrix, [locX, locY, locZ], [0,0,0], [0, 1, 0]); // Camera
 	mat4.perspective(projMatrix, glMatrix.toRadian(45), canvas.clientWidth / canvas.clientHeight, 0.1, 1000.0);
 
 	gl.uniformMatrix4fv(matWorldUniformLocation, gl.FALSE, worldMatrix);
@@ -171,6 +181,25 @@ var RunDemo = function (vertexShaderText, fragmentShaderText, SusanImage, SusanM
 	var yRotationMatrix = new Float32Array(16);
 	var worldRotation = new Float32Array(16);
 	
+	// Key Event
+	document.addEventListener('keydown', function(event) {
+		if (event.keyCode == 38) {
+			mat4.lookAt(viewMatrix, [locX, ++locY, locZ], [locX+5, locY, locZ+5], [0, 1, 0]); // Camera			
+		}else if (event.keyCode == 40) {
+			mat4.lookAt(viewMatrix, [locX, --locY, locZ], [locX+5, locY, locZ+5], [0, 1, 0]); // Camera			
+		} else if (event.keyCode == 37) {
+			mat4.lookAt(viewMatrix, [locX, locY, --locZ], [locX+5, locY, locZ+5], [0, 1, 0]); // Camera			
+		}else if (event.keyCode == 39) {
+			mat4.lookAt(viewMatrix, [locX, locY, ++locZ], [locX+5, locY, locZ+5], [0, 1, 0]); // Camera			
+		}else if (event.keyCode == 87) {
+			mat4.lookAt(viewMatrix, [++locX, locY, locZ], [locX+5, locY, locZ+5], [0, 1, 0]); // Camera			
+		}else if (event.keyCode == 83) {
+			mat4.lookAt(viewMatrix, [--locX, locY, locZ], [locX+5, locY, locZ+5], [0, 1, 0]); // Camera			
+		}
+
+		console.info(locX + " " + locY + " " + locZ);
+	});
+
 	//
 	// Main render loop
 	//
@@ -178,9 +207,14 @@ var RunDemo = function (vertexShaderText, fragmentShaderText, SusanImage, SusanM
 	mat4.identity(identityMatrix);
 	var angle = 0;
 	var loop = function () {
+
+		mat4.perspective(projMatrix, glMatrix.toRadian(45), canvas.clientWidth / canvas.clientHeight, 0.1, 1000.0);
+		gl.uniformMatrix4fv(matViewUniformLocation, gl.FALSE, viewMatrix);
+		
+
 		angle = performance.now() / 1000 / 6 * 2 * Math.PI;
 		mat4.rotate(yRotationMatrix, identityMatrix, -90, [0, 1, 0]);
-		mat4.rotate(xRotationMatrix, identityMatrix, angle , [0, 1, 0]);
+		mat4.rotate(xRotationMatrix, identityMatrix,0 , [0, 1, 0]);
 		mat4.mul(worldMatrix, yRotationMatrix, xRotationMatrix );
 
 		//mat4.rotate(worldRotation, identityMatrix, -90 , [1, 0, 0]);
