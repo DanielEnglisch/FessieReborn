@@ -2,14 +2,16 @@ var context = null;
 var planets = new Array();
 var canvas = document.getElementById("screen");
 var zoomFactor = 80;
-var time = 0;
-var deltaT = 1e-3;
+var time = 0.0;
+const deltaT = 1e-3;
+const G = 6.674e-11;
+const rExponent = 3.00;
 
 function Planet(x, y, mass,vx,vy) {
     this.x = x;
     this.y = y;
     this.vx = vx;
-    this.vy = ,vy;
+    this.vy = vy;
     this.ax = 0;
     this.ay = 0;
     this.mass = mass;
@@ -24,8 +26,9 @@ function Planet(x, y, mass,vx,vy) {
 
     this.getDistanceTo = function (o) {
         return Math.sqrt(
-            Math.pow(this.getDeltaX(o), 2) +
-            Math.pow(this.getDeltaY(o), 2));
+            Math.pow(this.getDeltaX(o), 2.0) +
+            Math.pow(this.getDeltaY(o), 2.0)
+        );
     };
 };
 
@@ -34,23 +37,28 @@ var main = function () {
     addEvents();
     initCanvas();
 
-    var p1 = new Planet(0, -20000, 3e24,20000,0);
-    var p2 = new Planet(0, 20000, 3e24,-20000,0);
+    var p1 = new Planet(0.0, -20000.0, 3e24,20000.0,0.0);
+    var p2 = new Planet(0.0, 20000.0, 3e24,-20000.0,0.0);
 
     planets.push(p1);
     planets.push(p2);
-    console.info(planets.length);
-    // Main loop
-    window.setInterval(function () {
-        update();
-        redraw();
-    }, 10);
 
+    loop();
 };
+
+var loop = function(){
+    update();
+    redraw();
+    requestAnimationFrame(loop);
+}
 
 var addEvents = function () {
     window.addEventListener("click", function (e) {
-        planets.push(new Planet((e.x - (window.innerWidth / 2)) * zoomFactor, (e.y - (window.innerHeight / 2)) * zoomFactor, 6 * Math.pow(10, 24)));
+        planets.push(new Planet(
+            (e.x - (window.innerWidth / 2.0)) * zoomFactor,
+            (e.y - (window.innerHeight / 2.0)) * zoomFactor,
+            3e24,0.0,0.0
+        ));
     });
 
     window.addEventListener("resize", function (e) {
@@ -61,14 +69,8 @@ var addEvents = function () {
 
 var update = function () {
 
-    //console.info(planets.length);
-
     planets.forEach(function (p) {
 
-        var G = 6.67384e-11;
-        var rExponent = 3;
-
-        // #1:Beschleunigung-Schleife:
         planets.forEach(function (o1) {
 
             var ax = 0.0;
@@ -80,7 +82,7 @@ var update = function () {
 
                     var deltaX = o1.getDeltaX(o2);
                     var deltaY = o1.getDeltaY(o2);
-                    var r = o1.getDistanceTo(o2);
+                    var r = o1.getDistanceTo(o2);                    
 
                     ax += (G * o2.mass * deltaX) / Math.pow(r, rExponent);
                     ay += (G * o2.mass * deltaY) / Math.pow(r, rExponent);
@@ -96,8 +98,8 @@ var update = function () {
         });
 
         planets.forEach(function (o) {
-            o.x += (deltaT * o.vx) + (0.5 * o.ax * Math.pow(deltaT, 2));
-            o.y += (deltaT * o.vy) + (0.5 * o.ay * Math.pow(deltaT, 2));
+            o.x += (deltaT * o.vx) + (0.5 * o.ax * Math.pow(deltaT, 2.0));
+            o.y += (deltaT * o.vy) + (0.5 * o.ay * Math.pow(deltaT, 2.0));
         });
     });
 
