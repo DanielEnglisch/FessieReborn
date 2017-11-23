@@ -1,11 +1,3 @@
-var canvas = document.getElementById("screen");
-var context = null;
-const scale = 75;
-
-var rocks = new Array();
-
-var player = null;
-
 const Block = {
     AIR: 0,
     WALL: 1,
@@ -13,20 +5,38 @@ const Block = {
     ROCK: 3
 };
 
+const Direc = {
+    LEFT: 0,
+    RIGHT: 1,
+    DOWN: 2,
+    UP: 3,
+    NONE: 4
+};
+
+var canvas = document.getElementById("screen");
+var context = null;
+const scale = 75;
+var moveDir = Direc.NONE;
+var rocks = new Array();
+
+var player = null;
+
+
+
 // 1 = Solid blocks
 // 2 = Player
 // 3 = Crates
 // 4 = Exit
 var world = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 3, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 1, 0, 0, 0, 1],
-    [1, 0, 3, 1, 1, 1, 1, 0, 0, 1],
+    [1, 2, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 3, 0, 1],
-    [1, 0, 2, 3, 0, 1, 1, 1, 0, 1],
-    [1, 0, 0, 1, 0, 0, 0, 0, 0, 1],
-    [1, 0, 3, 1, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
 
@@ -175,12 +185,30 @@ var main = function () {
     loop();
 };
 
+
+
+var keyUpdate = function(){
+    console.log("MOVING");
+    if (moveDir == Direc.UP) {
+        console.log("UP ARROW");
+        movePlayer(0, -1);
+    }  else if (moveDir == Direc.DOWN) {
+        console.log("DOWN ARROW");
+        movePlayer(0, +1);
+    } else if (moveDir == Direc.LEFT) {
+        console.log("LEFT ARROW");
+        movePlayer(-1, 0);
+    } else if (moveDir == Direc.RIGHT){
+        console.log("RIGHT ARROW");
+        movePlayer(1, 0);
+    }
+}
 var loop = function () {
+    setInterval("keyUpdate",500);
     update();
     redraw();
     requestAnimationFrame(loop);
 }
-
 var movePlayer = function (dx, dy) {
     var success = true;
 
@@ -209,37 +237,58 @@ var movePlayer = function (dx, dy) {
     player.pos.x += dx;
     player.pos.y += dy;
 }
-
+var keyDown = false;
 var addEvents = function () {
     window.addEventListener("resize", function (e) {
         console.log("RESIZE");
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     });
-
-    document.onkeydown = function (e) {
-
-        e = e || window.event;
-
-        if (e.keyCode == '38') {
-            console.log("UP ARROW");
-            movePlayer(0, -1);
-        } else if (e.keyCode == '40') {
-            console.log("DOWN ARROW");
-            movePlayer(0, +1);
-        } else if (e.keyCode == '37') {
-            console.log("LEFT ARROW");
-            movePlayer(-1, 0);
-        } else if (e.keyCode == '39') {
-            console.log("RIGHT ARROW");
-            movePlayer(1, 0);
-
+    var keys = 0;
+    window.onkeydown = function (e) {
+        
+        if (e.repeat)
+            return;
+       
+        if (e.keyCode == 38) {
+            moveDir = Direc.UP;
+            keys++;
+        } else if (e.keyCode == 40) {
+            moveDir = Direc.DOWN;
+            keys++;
+        } else if ((e.keyCode == 37)) {
+            moveDir = Direc.LEFT;
+            keys++;
+        } else if (e.keyCode == 39) {
+            moveDir = Direc.RIGHT;
+            keys++;
         }
+        
+        keyUpdate();
+        time = time = new Date().getTime();
+        keyDown = true;
+        
+    };
+
+    window.onkeyup = function (e) {
+        keys--;
+        if(keys == 0)
+            moveDir = Direc.NONE;
+        
     };
 };
+var time = new Date().getTime();
+var getDeltaT = function(){
+    var newTime = new Date().getTime();
+    var delta = newTime-time;
+    return delta;
+}
 
 var update = function () {
-
+    if(getDeltaT() >= 250){
+        time = time = new Date().getTime();  
+        keyUpdate();    
+    }
     rocks.forEach(function (rock) {
         rock.update();
     });
