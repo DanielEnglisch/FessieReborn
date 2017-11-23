@@ -20,13 +20,27 @@ function round(num) {
     return +(Math.round(num + "e+2") + "e-2");
 }
 
+var isPlayer = function (x, y) {
+    return x == player.pos.x && y == player.pos.y;
+}
+
 function Rock(pos) {
     this.blockPos = pos;
     this.pos = new Vec(pos.x, pos.y);
     this.update = function () {
-        if (world[this.blockPos.x][this.blockPos.y + 1] == 0) {
-            this.pos.y += 0.1;
-            this.pos.y = round(this.pos.y);
+        var succ = true;
+        if (world[this.blockPos.x][this.blockPos.y + 1] == 0 && !isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
+            var tmp_pos = this.pos;
+            rocks.forEach(function (r) {
+                if (tmp_pos.x == r.pos.x && tmp_pos.y + 1 == r.pos.y) {
+                    succ = false;
+                }
+            });
+            if (succ) {
+                this.pos.y += 0.1;
+                this.pos.y = round(this.pos.y);
+            }
+
         }
         this.blockPos = toBlockPos(this.pos);
     }
@@ -99,7 +113,7 @@ var movePlayer = function (dx, dy) {
     else {
         rocks.forEach(function (rock) {
             if (player.pos.x + dx == rock.pos.x && player.pos.y + dy == rock.pos.y) {
-                if (!moveRock(rock, dx, dy))
+                if (dy == -1 || !moveRock(rock, dx, dy))
                     success = false;
             }
         });
