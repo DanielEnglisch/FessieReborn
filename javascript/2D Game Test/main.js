@@ -233,14 +233,14 @@ var movePlayer = function (dx, dy) {
     player.pos.x += dx;
     player.pos.y += dy;
 }
-var keyDown = false;
+var keys = 0;
+
 var addEvents = function () {
     window.addEventListener("resize", function (e) {
         console.log("RESIZE");
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     });
-    var keys = 0;
     window.onkeydown = function (e) {
         
         if (e.repeat)
@@ -262,7 +262,6 @@ var addEvents = function () {
         
         keyUpdate();
         time = time = new Date().getTime();
-        keyDown = true;
         
     };
 
