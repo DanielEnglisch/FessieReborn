@@ -6,6 +6,13 @@ var rocks = new Array();
 
 var player = null;
 
+const Block = {
+    AIR: 0,
+    WALL: 1,
+    PLAYER: 2,
+    ROCK: 3
+};
+
 // 1 = Solid blocks
 // 2 = Player
 // 3 = Crates
@@ -22,7 +29,6 @@ var world = [
     [1, 2, 0, 1, 0, 0, 0, 0, 4, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
-
 
 var Vec = function (x, y) {
     this.x = x;
@@ -88,7 +94,7 @@ function Rock(pos) {
     var succ = true;
 
     // When requested position is wall return
-    if (world[this.blockPos.x + dx][this.blockPos.y + dy] == 1)
+    if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.WALL)
         return false;
     // Check if requested position is rock
     var myBlockPos = this.blockPos;
@@ -142,13 +148,11 @@ var loop = function () {
     requestAnimationFrame(loop);
 }
 
-
-
 var movePlayer = function (dx, dy) {
     var success = true;
 
     // When requested position is wall return
-    if (world[player.pos.x + dx][player.pos.y + dy] == 1)
+    if (world[player.pos.x + dx][player.pos.y + dy] == Block.WALL)
         return;
     else {
         // Check if requested position is rock
