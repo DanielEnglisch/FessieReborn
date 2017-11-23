@@ -1,7 +1,28 @@
 var canvas = document.getElementById("screen");
 var context = null;
+const scale = 75;
 
 var rocks = new Array();
+
+var player = null;
+
+// 1 = Solid blocks
+// 2 = Player
+// 3 = Crates
+// 4 = Exit
+var world = [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 0, 3, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 1, 0, 0, 0, 1],
+    [1, 3, 0, 1, 1, 1, 1, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 3, 0, 0, 1],
+    [1, 0, 0, 3, 0, 1, 1, 1, 0, 1],
+    [1, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+    [1, 2, 0, 1, 0, 0, 0, 0, 4, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+];
+
 
 var Vec = function (x, y) {
     this.x = x;
@@ -23,6 +44,40 @@ function round(num) {
 var isPlayer = function (x, y) {
     return x == player.pos.x && y == player.pos.y;
 }
+
+function transpose(a) {
+    
+      // Calculate the width and height of the Array
+      var w = a.length || 0;
+      var h = a[0] instanceof Array ? a[0].length : 0;
+    
+      // In case it is a zero matrix, no transpose routine needed.
+      if(h === 0 || w === 0) { return []; }
+    
+      /**
+       * @var {Number} i Counter
+       * @var {Number} j Counter
+       * @var {Array} t Transposed data is stored in this array.
+       */
+      var i, j, t = [];
+    
+      // Loop through every item in the outer array (height)
+      for(i=0; i<h; i++) {
+    
+        // Insert a new row (array)
+        t[i] = [];
+    
+        // Loop through every item per item in outer array (width)
+        for(j=0; j<w; j++) {
+    
+          // Save transposed data.
+          t[i][j] = a[j][i];
+        }
+      }
+    
+      return t;
+    }
+    
 
 function Rock(pos) {
     this.blockPos = pos;
@@ -46,27 +101,16 @@ function Rock(pos) {
     }
 }
 
-var player = null;
-
-var world = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 2, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 1, 0, 0, 0, 1],
-    [1, 0, 0, 3, 1, 1, 1, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 3, 1, 1, 1, 0, 1],
-    [1, 0, 0, 1, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 1, 0, 0, 0, 0, 4, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-];
-
 var initWorld = function () {
-    for (var y = 0; y < world.length; y++) {
-        for (var x = 0; x < world.length; x++) {
+
+    world = transpose(world);
+
+    for (var x = 0; x < world.length; x++) {
+        for (var y = 0; y < world.length; y++) {
 
             if (world[x][y] == 2) {
                 player = new Player(new Vec(x, y));
+                world[x][y] = 0;
             } else if (world[x][y] == 3) {
                 rocks.push(new Rock(new Vec(x, y)));
             }
@@ -169,13 +213,12 @@ var initCanvas = function () {
     context.font = "15px Arial";
 };
 
-const scale = 75;
 
 var redraw = function () {
     context.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-    for (var y = 0; y < world.length; y++) {
-        for (var x = 0; x < world.length; x++) {
+    for (var x = 0; x < world.length; x++) {
+        for (var y = 0; y < world.length; y++) {
 
             // Walls
             if (world[x][y] == 1) {
