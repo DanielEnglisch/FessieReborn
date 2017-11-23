@@ -16,7 +16,7 @@ var world = [
     [1, 0, 0, 0, 0, 1, 0, 0, 0, 1],
     [1, 3, 0, 1, 1, 1, 1, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 3, 0, 0, 1],
+    [1, 0, 0, 0, 0, 3, 0, 3, 0, 1],
     [1, 0, 0, 3, 0, 1, 1, 1, 0, 1],
     [1, 0, 0, 1, 0, 0, 0, 0, 0, 1],
     [1, 2, 0, 1, 0, 0, 0, 0, 4, 1],
@@ -34,7 +34,7 @@ function Player(pos) {
 }
 
 var toBlockPos = function (pos) {
-    return new Vec(pos.x | 0, pos.y | 0);
+    return new Vec(Math.ceil(pos.x), Math.ceil(pos.y));
 }
 
 function round(num) {
@@ -46,58 +46,69 @@ var isPlayer = function (x, y) {
 }
 
 function transpose(a) {
-    
-      // Calculate the width and height of the Array
-      var w = a.length || 0;
-      var h = a[0] instanceof Array ? a[0].length : 0;
-    
-      // In case it is a zero matrix, no transpose routine needed.
-      if(h === 0 || w === 0) { return []; }
-    
-      /**
-       * @var {Number} i Counter
-       * @var {Number} j Counter
-       * @var {Array} t Transposed data is stored in this array.
-       */
-      var i, j, t = [];
-    
-      // Loop through every item in the outer array (height)
-      for(i=0; i<h; i++) {
-    
+
+    // Calculate the width and height of the Array
+    var w = a.length || 0;
+    var h = a[0] instanceof Array ? a[0].length : 0;
+
+    // In case it is a zero matrix, no transpose routine needed.
+    if (h === 0 || w === 0) {
+        return [];
+    }
+
+    /**
+     * @var {Number} i Counter
+     * @var {Number} j Counter
+     * @var {Array} t Transposed data is stored in this array.
+     */
+    var i, j, t = [];
+
+    // Loop through every item in the outer array (height)
+    for (i = 0; i < h; i++) {
+
         // Insert a new row (array)
         t[i] = [];
-    
+
         // Loop through every item per item in outer array (width)
-        for(j=0; j<w; j++) {
-    
-          // Save transposed data.
-          t[i][j] = a[j][i];
+        for (j = 0; j < w; j++) {
+
+            // Save transposed data.
+            t[i][j] = a[j][i];
         }
-      }
-    
-      return t;
     }
-    
+
+    return t;
+}
+
 
 function Rock(pos) {
     this.blockPos = pos;
     this.pos = new Vec(pos.x, pos.y);
-    this.update = function () {
-        var succ = true;
-        if (world[this.blockPos.x][this.blockPos.y + 1] == 0 && !isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
-            var tmp_pos = this.pos;
-            rocks.forEach(function (r) {
-                if (tmp_pos.x == r.pos.x && tmp_pos.y + 1 == r.pos.y) {
-                    succ = false;
-                }
-            });
-            if (succ) {
-                this.pos.y += 0.1;
-                this.pos.y = round(this.pos.y);
-            }
+    this.moveRock = function (dx, dy) {
+    var succ = true;
 
+    // When requested position is wall return
+    if (world[this.blockPos.x + dx][this.blockPos.y + dy] == 1)
+        return false;
+    // Check if requested position is rock
+    var myBlockPos = this.blockPos;
+    rocks.forEach(function (r) {
+        if (myBlockPos.x + dx == r.blockPos.x && myBlockPos.y + dy == r.blockPos.y) {
+            succ = false;
         }
-        this.blockPos = toBlockPos(this.pos);
+    });
+
+    if (!succ)
+        return false;
+
+    this.blockPos.x += dx;
+    this.blockPos.y += dy;
+    this.pos = this.blockPos;
+    return true;
+    }
+    this.falling = false;
+    this.update = function () {
+
     }
 }
 
@@ -131,33 +142,19 @@ var loop = function () {
     requestAnimationFrame(loop);
 }
 
-var moveRock = function (rock, dx, dy) {
-    var succ = true;
-    if (world[rock.pos.x + dx][rock.pos.y + dy] == 1)
-        return false;
 
-    rocks.forEach(function (r) {
-        if (rock.pos.x + dx == r.pos.x && rock.pos.y + dy == r.pos.y) {
-            succ = false;
-        }
-    });
-
-    if (!succ)
-        return false;
-
-    rock.pos.x += dx;
-    rock.pos.y += dy;
-    return true;
-}
 
 var movePlayer = function (dx, dy) {
     var success = true;
+
+    // When requested position is wall return
     if (world[player.pos.x + dx][player.pos.y + dy] == 1)
         return;
     else {
+        // Check if requested position is rock
         rocks.forEach(function (rock) {
-            if (player.pos.x + dx == rock.pos.x && player.pos.y + dy == rock.pos.y) {
-                if (dy == -1 || !moveRock(rock, dx, dy))
+            if (player.pos.x + dx == rock.blockPos.x && player.pos.y + dy == rock.blockPos.y) {
+                if (dy == -1 || !rock.moveRock(dx, dy))
                     success = false;
             }
         });
