@@ -30,10 +30,10 @@ var player = null;
 var world = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 2, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 3, 0, 3, 0, 3, 0, 0, 1],
+    [1, 0, 1, 0, 1, 0, 1, 0, 0, 1],
+    [1, 0, 0, 3, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 1, 0, 1, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -266,7 +266,16 @@ var addEvents = function () {
     };
 
     window.onkeyup = function (e) {
-        keys--;
+
+        if (e.keyCode == 38) {
+            keys--;
+        } else if (e.keyCode == 40) {
+            keys--;
+        } else if ((e.keyCode == 37)) {
+            keys--;
+        } else if (e.keyCode == 39) {
+            keys--;
+        }
         if(keys == 0)
             moveDir = Direc.NONE;
         
@@ -280,6 +289,7 @@ var getDeltaT = function(){
 }
 
 var update = function () {
+    console.log("keys pressen: "+ keys);
     if(getDeltaT() >= 250){
         time = time = new Date().getTime();  
         keyUpdate();    
