@@ -188,18 +188,14 @@ var main = function () {
 
 
 var keyUpdate = function(){
-    console.log("MOVING");
+
     if (moveDir == Direc.UP) {
-        console.log("UP ARROW");
         movePlayer(0, -1);
     }  else if (moveDir == Direc.DOWN) {
-        console.log("DOWN ARROW");
         movePlayer(0, +1);
     } else if (moveDir == Direc.LEFT) {
-        console.log("LEFT ARROW");
         movePlayer(-1, 0);
     } else if (moveDir == Direc.RIGHT){
-        console.log("RIGHT ARROW");
         movePlayer(1, 0);
     }
 }
@@ -233,7 +229,7 @@ var movePlayer = function (dx, dy) {
     }
     if (!success)
         return;
-    console.log("Moving");
+
     player.pos.x += dx;
     player.pos.y += dy;
 }
