@@ -298,6 +298,9 @@ var update = function () {
         rock.update();
     });
 };
+var img = new Image();
+var sandImg = new Image();
+var playerImg = new Image();
 
 var initCanvas = function () {
     var canvas = document.getElementById("screen");
@@ -305,6 +308,10 @@ var initCanvas = function () {
     canvas.height = window.innerHeight;
     context = canvas.getContext("2d");
     context.font = "15px Arial";
+
+    img.src = "wall.jpg";
+    sandImg.src= "sand.png";
+    playerImg.src = "head.png";
 };
 
 
@@ -315,26 +322,29 @@ var redraw = function () {
         for (var y = 0; y < world.length; y++) {
 
             // Walls
-            if (world[x][y] == 1) {
-                context.fillStyle = "#FF0000";
-            } else {
-                context.fillStyle = "#00FFFF";
-            }
-
-            context.fillRect(x * scale, y * scale, scale, scale);
+            if (world[x][y] == Block.WALL) {
+                context.drawImage(img, x*scale, y*scale,scale,scale);
+            }else{
+                context.fillStyle = "#0000FF";
+                context.fillRect(x * scale, y * scale, scale, scale);
+                
             context.stroke();
+            }
+               
+            
+            
         }
     }
 
     // Draw Player
     context.fillStyle = "#0000FF";
-    context.fillRect(player.pos.x * scale, player.pos.y * scale, scale, scale);
+    context.drawImage(playerImg, player.pos.x * scale, player.pos.y * scale, scale, scale);
     context.stroke();
 
     // Draw Rocks
     context.fillStyle = "#FFFF00";
     rocks.forEach(function (rock) {
-        context.fillRect(rock.pos.x * scale, rock.pos.y * scale, scale, scale);
+        context.drawImage(sandImg, rock.pos.x*scale, rock.pos.y*scale,scale,scale);
         context.stroke();
     });
 
