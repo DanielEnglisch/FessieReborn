@@ -1,8 +1,8 @@
 
 var currentLevel = null;
 
-var reloadLevel= function(){    
-  loadLevel(currentLevel);
+var reloadLevel= function(){  
+    loadLevel(currentLevel);
 }
 
 var loadLevel=function(file){

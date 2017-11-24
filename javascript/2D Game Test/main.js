@@ -1,7 +1,7 @@
 var canvas = document.getElementById("screen");
 var context = null;
 const scale = 64;
-const gravity = 0.05;
+const gravity = 0.1;
 
 var rocks = new Array();
 var player = null;
@@ -19,7 +19,7 @@ var isRock = function (x, y) {
 }
 
 var isPlayer = function (x, y) {
-    return player.pos.x == x && player.pos.y == y;
+    return player.blockPos.x == x && player.blockPos.y == y;
 }
 
 var isWall = function (x, y) {
@@ -47,6 +47,8 @@ var loop = function () {
     requestAnimationFrame(loop);
 }
 
+var keys = [];
+
 var addEvents = function () {
     window.addEventListener("resize", function (e) {
         console.log("RESIZE");
@@ -58,28 +60,42 @@ var addEvents = function () {
         if (e.repeat)
             return;
 
-        if (e.keyCode == 38) {
-            player.move(0, -1);
-            player.looking = Direc.UP;
-        } else if (e.keyCode == 40) {
-            player.move(0, +1);
-            player.looking = Direc.DOWN;
-        } else if ((e.keyCode == 37)) {
-            player.move(-1, 0);
-                        player.looking = Direc.LEFT;
-        } else if (e.keyCode == 39) {
-            player.move(1, 0);
-            player.looking = Direc.RIGHT;
-        } else if (e.keyCode == 82) {
-            reloadLevel();
-        }
-        
+        keys[e.keyCode] = true;
+
+
+    };
+    window.onkeyup = function (e) {
+
+        if (e.repeat)
+            return;
+
+        keys[e.keyCode] = false;
+
+
     };
 
 }
 
 var update = function () {
 
+    if (keys[38]) {
+        player.move(0, -1);
+        player.looking = Direc.UP;
+    } else if (keys[40]) {
+        player.move(0, +1);
+        player.looking = Direc.DOWN;
+    } else if (keys[37]) {
+        player.move(-1, 0);
+        player.looking = Direc.LEFT;
+    } else if (keys[39]) {
+        player.move(1, 0);
+        player.looking = Direc.RIGHT;
+    } else if (keys[82]) {
+        reloadLevel();
+    }
+
+
+    player.update();
     rocks.forEach(function (rock) {
         rock.update();
     });
