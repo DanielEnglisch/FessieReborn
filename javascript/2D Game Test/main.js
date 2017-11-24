@@ -22,15 +22,6 @@ var player = null;
 var moveDir = Direc.NONE;
 var world = [];
 
-var toBlockPos = function (pos) {
-    return new Vec(Math.ceil(pos.x), Math.ceil(pos.y));
-}
-
-var isPlayer = function (x, y) {
-    return x == player.pos.x && y == player.pos.y;
-}
-
-
 
 var isRock = function (x, y) {
     var succ = false;
@@ -98,7 +89,6 @@ var movePlayer = function (dx, dy) {
     player.pos.x += dx;
     player.pos.y += dy;
 }
-var keys = 0;
 
 var addEvents = function () {
     window.addEventListener("resize", function (e) {
@@ -126,12 +116,8 @@ var addEvents = function () {
         } else if (e.keyCode == 82) {
             reloadLevel();
         }
-
-
     };
-
 }
-
 
 var update = function () {
 
@@ -166,6 +152,7 @@ var redraw = function () {
             if (world[x][y] == Block.WALL) {
                 context.drawImage(img, x * scale, y * scale, scale, scale);
             } else {
+                // Everthing else
                 context.fillStyle = "#75aaff";
                 context.fillRect(x * scale, y * scale, scale, scale);
 
