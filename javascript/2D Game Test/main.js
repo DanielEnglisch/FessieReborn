@@ -28,7 +28,7 @@ var player = null;
 // 3 = Crates
 // 4 = Exit
 var world = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+   /* [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 2, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 3, 0, 3, 0, 3, 0, 0, 1],
     [1, 3, 1, 0, 1, 0, 1, 0, 0, 1],
@@ -37,7 +37,7 @@ var world = [
     [1, 3, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 3, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],*/
 ];
 
 var Vec = function (x, y) {
@@ -159,12 +159,50 @@ function Rock(pos) {
     }
 }
 
+
+function readTextFile(file)
+{
+    var allText = null;
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                allText = rawFile.responseText;
+            }
+        }
+    }
+    rawFile.send(null);
+    return allText;
+}
+
 var initWorld = function () {
+
+    // Load form file
+    var txt = readTextFile('00.lvl');
+    var rows = txt.split('\n');
+    var numcol = 0;
+    for(var x = 0;x < rows.length-1;x++){
+        var lineArr = [];
+        for(var y = 0;y < rows[x].length-1;y++){
+            lineArr[y] = rows[x].charAt(y);
+            numcol = rows[x].length;
+        }
+        world[x] = lineArr;
+        numcol++;
+    }
+    console.log("Loaded level with size "  + numcol + "x"+ rows.length);
+
+
+
 
     world = transpose(world);
 
     for (var x = 0; x < world.length; x++) {
-        for (var y = 0; y < world.length; y++) {
+        for (var y = 0; y < world[0].length; y++) {
 
             if (world[x][y] == 2) {
                 player = new Player(new Vec(x, y));
@@ -319,7 +357,7 @@ var redraw = function () {
     context.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
     for (var x = 0; x < world.length; x++) {
-        for (var y = 0; y < world.length; y++) {
+        for (var y = 0; y < world[0].length; y++) {
 
             // Walls
             if (world[x][y] == Block.WALL) {
