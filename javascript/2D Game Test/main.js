@@ -37,9 +37,11 @@ var initWorld = function () {
 var main = function () {
     addEvents();
     initCanvas();
+    loadTextures();
     initWorld();
     loop();
 };
+
 
 var loop = function () {
     update();
@@ -80,16 +82,12 @@ var update = function () {
 
     if (keys[38]) {
         player.move(0, -1);
-        player.looking = Direc.UP;
     } else if (keys[40]) {
         player.move(0, +1);
-        player.looking = Direc.DOWN;
     } else if (keys[37]) {
         player.move(-1, 0);
-        player.looking = Direc.LEFT;
     } else if (keys[39]) {
         player.move(1, 0);
-        player.looking = Direc.RIGHT;
     } else if (keys[82]) {
         reloadLevel();
     }
@@ -100,9 +98,6 @@ var update = function () {
         rock.update();
     });
 };
-var img = new Image();
-var rockImg = new Image();
-var playerImg = new Image();
 
 var initCanvas = function () {
     var canvas = document.getElementById("screen");
@@ -111,9 +106,7 @@ var initCanvas = function () {
     context = canvas.getContext("2d");
     context.font = "15px Arial";
 
-    img.src = "wall.jpg";
-    rockImg.src = "rock.png";
-    playerImg.src = "p.png";
+    
 };
 
 
@@ -137,7 +130,24 @@ var redraw = function () {
     }
 
     // Draw Player
-    context.drawImage(playerImg, player.pos.x * scale, player.pos.y * scale, scale, scale);
+     // Update direction image
+     switch (player.looking) {
+        case Direc.UP:
+        context.drawImage(img_up, player.pos.x * scale, player.pos.y * scale, scale, scale);
+        break;
+        case Direc.DOWN:
+        context.drawImage(img_down, player.pos.x * scale, player.pos.y * scale, scale, scale);
+        break;
+        case Direc.LEFT:
+        context.drawImage(img_left, player.pos.x * scale, player.pos.y * scale, scale, scale);
+        break;
+        case Direc.RIGHT:
+        context.drawImage(img_right, player.pos.x * scale, player.pos.y * scale, scale, scale);
+        break;
+        default:
+        context.drawImage(img_p, player.pos.x * scale, player.pos.y * scale, scale, scale);
+        break;
+    }
     context.stroke();
 
     // Draw Rocks
