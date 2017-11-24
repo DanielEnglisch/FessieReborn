@@ -19,27 +19,34 @@ var Vec = function (x, y) {
 };
 
 function Player(pos, look) {
-    this.pos = pos;
+    this.blockPos = pos;
+    this.pos = new Vec(this.blockPos.x, this.blockPos.y);
     this.looking = look;
+    this.moving = false;
     this.move = function (dx, dy) {
+
+        if (this.moving)
+            return;
+
         var success = true;
 
         // When requested position is wall return
-        if (world[player.pos.x + dx][player.pos.y + dy] == Block.WALL)
+        if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.WALL)
             return;
         else {
             // Check if requested position is rock
+            var playerblockpos = this.blockPos;
             rocks.forEach(function (rock) {
                 if (rock.falling) {
-                    if (player.pos.x + dx == rock.blockPos.x && player.pos.y + dy == rock.blockPos.y ||
-                        player.pos.x + dx == rock.blockPos.x && player.pos.y + dy == rock.blockPos.y - 1) {
+                    if (playerblockpos.x + dx == rock.blockPos.x && playerblockpos.y + dy == rock.blockPos.y ||
+                        playerblockpos.x + dx == rock.blockPos.x && playerblockpos.y + dy == rock.blockPos.y - 1) {
                         success = false;
                         // Death when moving up an falling obj
                         if (dy == -1)
                             reloadLevel();
                     }
                 } else
-                if (player.pos.x + dx == rock.blockPos.x && player.pos.y + dy == rock.blockPos.y) {
+                if (playerblockpos.x + dx == rock.blockPos.x && playerblockpos.y + dy == rock.blockPos.y) {
                     if (dy == -1 || !rock.moveRock(dx, dy))
                         success = false;
                 }
@@ -49,8 +56,36 @@ function Player(pos, look) {
         if (!success)
             return;
 
-        player.pos.x += dx;
-        player.pos.y += dy;
+        this.blockPos.x += dx;
+        this.blockPos.y += dy;
+    }
+
+    this.update = function () {
+
+        // Basic animaiton
+        if (this.pos.x < this.blockPos.x) {
+            this.moving = true;
+            this.pos.x += gravity;
+            this.pos.x = Math.round(this.pos.x * 100) / 100
+            return;
+        } else if (this.pos.x > this.blockPos.x) {
+            this.moving = true;
+            this.pos.x -= gravity;
+            this.pos.x = Math.round(this.pos.x * 100) / 100
+            return;
+        } else if (this.pos.y < this.blockPos.y) {
+            this.moving = true;
+            this.pos.y += gravity;
+            this.pos.y = Math.round(this.pos.y * 100) / 100
+            return;
+        } else if (this.pos.y > this.blockPos.y) {
+            this.moving = true;
+            this.pos.y -= gravity;
+            this.pos.y = Math.round(this.pos.y * 100) / 100
+            return;
+        } else {
+            this.moving = false;
+        }
     }
 
 }
@@ -58,8 +93,11 @@ function Player(pos, look) {
 function Rock(pos) {
     this.blockPos = pos;
     this.pos = new Vec(pos.x, pos.y);
-    this.falling = false;
+    this.moving = false;
     this.moveRock = function (dx, dy) {
+
+        if (this.moving)
+            return;
 
         var succ = true;
 
@@ -79,14 +117,39 @@ function Rock(pos) {
 
         this.blockPos.x += dx;
         this.blockPos.y += dy;
-        this.pos = this.blockPos;
+        //this.pos = this.blockPos;
         return true;
     }
 
     this.update = function () {
 
+        if (isAir(this.blockPos.x, this.blockPos.y + 1)) {
+            this.blockPos = new Vec(this.blockPos.x, this.blockPos.y + 1);
+        }
+
+        // Basic animaiton
+        if (this.pos.x < this.blockPos.x) {
+            this.moving = true;
+            this.pos.x += gravity;
+            this.pos.x = Math.round(this.pos.x * 100) / 100
+        } else if (this.pos.x > this.blockPos.x) {
+            this.moving = true;
+            this.pos.x -= gravity;
+            this.pos.x = Math.round(this.pos.x * 100) / 100
+        } else if (this.pos.y < this.blockPos.y) {
+            this.moving = true;
+            this.pos.y += gravity;
+            this.pos.y = Math.round(this.pos.y * 100) / 100
+        } else if (this.pos.y > this.blockPos.y) {
+            this.moving = true;
+            this.pos.y -= gravity;
+            this.pos.y = Math.round(this.pos.y * 100) / 100
+        }else{
+            this.moving = false;
+        }
+
         // If rock is on other rock -> slip to side if possible
-        if (!this.falling && isRock(this.blockPos.x, this.blockPos.y + 1)) {
+        if (isRock(this.blockPos.x, this.blockPos.y + 1)) {
             // If Right and below Is air
             if (isAir(this.blockPos.x + 1, this.blockPos.y) &&
                 isAir(this.blockPos.x + 1, this.blockPos.y + 1)) {
@@ -99,22 +162,7 @@ function Rock(pos) {
             }
         }
 
-        // If falling and not at end position
-        if (this.falling && this.pos.y < this.blockPos.y) {
-            this.pos.y += gravity;
-            this.pos.y = Math.round(this.pos.y * 100) / 100
-        } else if (this.pos.y == this.blockPos.y) {
-            this.falling = false;
-            if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
-                //Death
-                reloadLevel();
-            }
-        }
 
-        if (!this.falling && isAir(this.blockPos.x, this.blockPos.y + 1)) {
-            console.log("Falling");
-            this.falling = true;
-            this.blockPos = new Vec(this.blockPos.x, this.blockPos.y + 1);
-        }
+
     }
 }
