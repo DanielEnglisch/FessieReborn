@@ -137,7 +137,7 @@ var initCanvas = function () {
     context.font = "15px Arial";
 
     img.src = "wall.jpg";
-    sandImg.src = "sand.png";
+    sandImg.src = "rock.png";
     playerImg.src = "head.png";
 };
 
