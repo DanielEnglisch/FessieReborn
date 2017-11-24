@@ -90,6 +90,7 @@ var update = function () {
         player.move(1, 0);
     } else if (keys[82]) {
         reloadLevel();
+        keys[82] = false;
     }
 
 
