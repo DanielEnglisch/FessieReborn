@@ -153,7 +153,7 @@ var redraw = function () {
                 context.drawImage(img, x * scale, y * scale, scale, scale);
             } else {
                 // Everthing else
-                context.fillStyle = "#75aaff";
+                context.fillStyle = "#12489e";
                 context.fillRect(x * scale, y * scale, scale, scale);
 
                 context.stroke();
