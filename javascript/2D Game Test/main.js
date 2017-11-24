@@ -104,7 +104,9 @@ var addEvents = function () {
         } else if (e.keyCode == 82) {
             reloadLevel();
         }
+        
     };
+
 }
 
 var update = function () {
@@ -160,23 +162,18 @@ var redraw = function () {
     switch (player.looking) {
         case Direc.UP:
             playerImg.src = "p_up.png";
-            console.log("img up");            
             break;
         case Direc.DOWN:
             playerImg.src = "p_down.png";
-            console.log("img down");            
             break;
         case Direc.LEFT:
             playerImg.src = "p_left.png";
-            console.log("img left");
             break;
         case Direc.RIGHT:
             playerImg.src = "p_right.png";
-            console.log("img right");            
             break;
         default:
             playerImg.src = "p.png";
-            console.log("img neutral");            
             break;
     }
     context.drawImage(playerImg, player.pos.x * scale, player.pos.y * scale, scale, scale);
