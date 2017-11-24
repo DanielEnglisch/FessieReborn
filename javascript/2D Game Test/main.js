@@ -15,7 +15,7 @@ const Direc = {
 
 var canvas = document.getElementById("screen");
 var context = null;
-const scale = 75;
+const scale = 32;
 var moveDir = Direc.NONE;
 var rocks = new Array();
 
@@ -325,7 +325,7 @@ var redraw = function () {
             if (world[x][y] == Block.WALL) {
                 context.drawImage(img, x * scale, y * scale, scale, scale);
             } else {
-                context.fillStyle = "#0000FF";
+                context.fillStyle = "#75aaff";
                 context.fillRect(x * scale, y * scale, scale, scale);
 
                 context.stroke();
