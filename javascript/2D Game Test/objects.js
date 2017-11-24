@@ -21,6 +21,38 @@ var Vec = function (x, y) {
 function Player(pos, look) {
     this.pos = pos;
     this.looking = look;
+    this.move = function (dx, dy) {
+        var success = true;
+
+        // When requested position is wall return
+        if (world[player.pos.x + dx][player.pos.y + dy] == Block.WALL)
+            return;
+        else {
+            // Check if requested position is rock
+            rocks.forEach(function (rock) {
+                if (rock.falling) {
+                    if (player.pos.x + dx == rock.blockPos.x && player.pos.y + dy == rock.blockPos.y ||
+                        player.pos.x + dx == rock.blockPos.x && player.pos.y + dy == rock.blockPos.y - 1) {
+                        success = false;
+                        // Death when moving up an falling obj
+                        if (dy == -1)
+                            reloadLevel();
+                    }
+                } else
+                if (player.pos.x + dx == rock.blockPos.x && player.pos.y + dy == rock.blockPos.y) {
+                    if (dy == -1 || !rock.moveRock(dx, dy))
+                        success = false;
+                }
+            });
+
+        }
+        if (!success)
+            return;
+
+        player.pos.x += dx;
+        player.pos.y += dy;
+    }
+
 }
 
 function Rock(pos) {
@@ -58,12 +90,12 @@ function Rock(pos) {
             // If Right and below Is air
             if (isAir(this.blockPos.x + 1, this.blockPos.y) &&
                 isAir(this.blockPos.x + 1, this.blockPos.y + 1)) {
-                this.moveRock(1,0);
+                this.moveRock(1, 0);
 
-            // If Left and below Is air
+                // If Left and below Is air
             } else if (isAir(this.blockPos.x - 1, this.blockPos.y) &&
-                       isAir(this.blockPos.x - 1, this.blockPos.y + 1)) {
-                this.moveRock(-1,0);
+                isAir(this.blockPos.x - 1, this.blockPos.y + 1)) {
+                this.moveRock(-1, 0);
             }
         }
 
@@ -73,7 +105,7 @@ function Rock(pos) {
             this.pos.y = Math.round(this.pos.y * 100) / 100
         } else if (this.pos.y == this.blockPos.y) {
             this.falling = false;
-            if(isPlayer(this.blockPos.x, this.blockPos.y+1)){
+            if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
                 //Death
                 reloadLevel();
             }
