@@ -7,7 +7,6 @@ var player = null;
 var moveDir = Direc.NONE;
 var world = [];
 
-
 var isRock = function (x, y) {
     var succ = false;
     rocks.forEach(function (r) {
@@ -46,37 +45,6 @@ var loop = function () {
     redraw();
     requestAnimationFrame(loop);
 }
-var movePlayer = function (dx, dy) {
-    var success = true;
-
-    // When requested position is wall return
-    if (world[player.pos.x + dx][player.pos.y + dy] == Block.WALL)
-        return;
-    else {
-        // Check if requested position is rock
-        rocks.forEach(function (rock) {
-            if (rock.falling) {
-                if (player.pos.x + dx == rock.blockPos.x && player.pos.y + dy == rock.blockPos.y ||
-                    player.pos.x + dx == rock.blockPos.x && player.pos.y + dy == rock.blockPos.y - 1) {
-                    success = false;
-                    // Death when moving up an falling obj
-                    if (dy == -1)
-                        reloadLevel();
-                }
-            } else
-            if (player.pos.x + dx == rock.blockPos.x && player.pos.y + dy == rock.blockPos.y) {
-                if (dy == -1 || !rock.moveRock(dx, dy))
-                    success = false;
-            }
-        });
-
-    }
-    if (!success)
-        return;
-
-    player.pos.x += dx;
-    player.pos.y += dy;
-}
 
 var addEvents = function () {
     window.addEventListener("resize", function (e) {
@@ -90,16 +58,16 @@ var addEvents = function () {
             return;
 
         if (e.keyCode == 38) {
-            movePlayer(0, -1);
+            player.move(0, -1);
             player.looking = Direc.UP;
         } else if (e.keyCode == 40) {
-            movePlayer(0, +1);
+            player.move(0, +1);
             player.looking = Direc.DOWN;
         } else if ((e.keyCode == 37)) {
-            movePlayer(-1, 0);
-            player.looking = Direc.LEFT;
+            player.move(-1, 0);
+                        player.looking = Direc.LEFT;
         } else if (e.keyCode == 39) {
-            movePlayer(1, 0);
+            player.move(1, 0);
             player.looking = Direc.RIGHT;
         } else if (e.keyCode == 82) {
             reloadLevel();
@@ -151,9 +119,6 @@ var redraw = function () {
 
                 context.stroke();
             }
-
-
-
         }
     }
 
