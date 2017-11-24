@@ -1,15 +1,16 @@
 
 var currentLevel = null;
 
-var reloadLevel= function(){
+var reloadLevel= function(){    
   loadLevel(currentLevel);
+  
 }
 
 var loadLevel=function(file){
   // Reset everything:
   currentLevel = file;
   world = [];
-  player = null;
+  player = null;  
   rocks = [];
   // Load form file into world matrix
   var txt = readTextFile(file);
@@ -33,7 +34,7 @@ var loadLevel=function(file){
       for (var y = 0; y < world[0].length; y++) {
 
           if (world[x][y] == Block.PLAYER) {
-              player = new Player(new Vec(x, y));
+              player = new Player(new Vec(x, y), Direc.NONE);
               world[x][y] = 0;
           } else if (world[x][y] == Block.ROCK) {
               rocks.push(new Rock(new Vec(x, y)));
@@ -42,4 +43,5 @@ var loadLevel=function(file){
           }
       }
   }
+  
 }
