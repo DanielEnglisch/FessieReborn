@@ -65,21 +65,7 @@ var main = function () {
     loop();
 };
 
-var keyUpdate = function () {
-
-    if (moveDir == Direc.UP) {
-        movePlayer(0, -1);
-    } else if (moveDir == Direc.DOWN) {
-        movePlayer(0, +1);
-    } else if (moveDir == Direc.LEFT) {
-        movePlayer(-1, 0);
-    } else if (moveDir == Direc.RIGHT) {
-        movePlayer(1, 0);
-        reloadLevel();
-    }
-}
 var loop = function () {
-    setInterval("keyUpdate", 250);
     update();
     redraw();
     requestAnimationFrame(loop);
@@ -126,55 +112,29 @@ var addEvents = function () {
             return;
 
         if (e.keyCode == 38) {
-            moveDir = Direc.UP;
-            keys++;
+            movePlayer(0, -1);
+
         } else if (e.keyCode == 40) {
-            moveDir = Direc.DOWN;
-            keys++;
+            movePlayer(0, +1);
+
         } else if ((e.keyCode == 37)) {
-            moveDir = Direc.LEFT;
-            keys++;
+            movePlayer(-1, 0);
+
         } else if (e.keyCode == 39) {
-            moveDir = Direc.RIGHT;
-            keys++;
-        }else if (e.keyCode == 82){
+            movePlayer(1, 0);
+
+        } else if (e.keyCode == 82) {
             reloadLevel();
         }
 
-        keyUpdate();
-        time = time = new Date().getTime();
 
     };
 
-    window.onkeyup = function (e) {
-
-        if (e.keyCode == 38) {
-            keys--;
-        } else if (e.keyCode == 40) {
-            keys--;
-        } else if ((e.keyCode == 37)) {
-            keys--;
-        } else if (e.keyCode == 39) {
-            keys--;
-        }
-        if (keys == 0)
-            moveDir = Direc.NONE;
-
-    };
-};
-var time = new Date().getTime();
-var getDeltaT = function () {
-    var newTime = new Date().getTime();
-    var delta = newTime - time;
-    return delta;
 }
 
+
 var update = function () {
-    console.log("keys pressen: " + keys);
-    if (getDeltaT() >= 250) {
-        time = time = new Date().getTime();
-        keyUpdate();
-    }
+
     rocks.forEach(function (rock) {
         rock.update();
     });
