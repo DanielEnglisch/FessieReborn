@@ -196,9 +196,6 @@ var initWorld = function () {
     }
     console.log("Loaded level with size "  + numcol + "x"+ rows.length);
 
-
-
-
     world = transpose(world);
 
     for (var x = 0; x < world.length; x++) {
