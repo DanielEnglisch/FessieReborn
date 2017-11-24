@@ -137,24 +137,6 @@ var redraw = function () {
     }
 
     // Draw Player
-    context.fillStyle = "#0000FF";
-    switch (player.looking) {
-        case Direc.UP:
-            playerImg.src = "p_up.png";
-            break;
-        case Direc.DOWN:
-            playerImg.src = "p_down.png";
-            break;
-        case Direc.LEFT:
-            playerImg.src = "p_left.png";
-            break;
-        case Direc.RIGHT:
-            playerImg.src = "p_right.png";
-            break;
-        default:
-            playerImg.src = "p.png";
-            break;
-    }
     context.drawImage(playerImg, player.pos.x * scale, player.pos.y * scale, scale, scale);
     context.stroke();
 
