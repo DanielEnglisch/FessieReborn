@@ -151,7 +151,7 @@ function Rock(pos) {
             this.falling = false;
         }
 
-        if (!this.falling  && isAir(this.blockPos.x, this.blockPos.y + 1)) {
+        if (!this.falling && isAir(this.blockPos.x, this.blockPos.y + 1)) {
             console.log("Falling");
             this.falling = true;
             this.blockPos = new Vec(this.blockPos.x, this.blockPos.y + 1);
@@ -172,7 +172,7 @@ var initWorld = function () {
             } else if (world[x][y] == 3) {
                 rocks.push(new Rock(new Vec(x, y)));
                 world[x][y] = 0;
-                
+
             }
         }
     }
@@ -187,20 +187,20 @@ var main = function () {
 
 
 
-var keyUpdate = function(){
+var keyUpdate = function () {
 
     if (moveDir == Direc.UP) {
         movePlayer(0, -1);
-    }  else if (moveDir == Direc.DOWN) {
+    } else if (moveDir == Direc.DOWN) {
         movePlayer(0, +1);
     } else if (moveDir == Direc.LEFT) {
         movePlayer(-1, 0);
-    } else if (moveDir == Direc.RIGHT){
+    } else if (moveDir == Direc.RIGHT) {
         movePlayer(1, 0);
     }
 }
 var loop = function () {
-    setInterval("keyUpdate",250);
+    setInterval("keyUpdate", 250);
     update();
     redraw();
     requestAnimationFrame(loop);
@@ -214,12 +214,12 @@ var movePlayer = function (dx, dy) {
     else {
         // Check if requested position is rock
         rocks.forEach(function (rock) {
-            if(rock.falling){
+            if (rock.falling) {
                 if (player.pos.x + dx == rock.blockPos.x && player.pos.y + dy == rock.blockPos.y ||
-                    player.pos.x + dx == rock.blockPos.x && player.pos.y + dy == rock.blockPos.y-1) {
-                        success = false;
+                    player.pos.x + dx == rock.blockPos.x && player.pos.y + dy == rock.blockPos.y - 1) {
+                    success = false;
                 }
-            }else
+            } else
             if (player.pos.x + dx == rock.blockPos.x && player.pos.y + dy == rock.blockPos.y) {
                 if (dy == -1 || !rock.moveRock(dx, dy))
                     success = false;
@@ -242,10 +242,10 @@ var addEvents = function () {
         canvas.height = window.innerHeight;
     });
     window.onkeydown = function (e) {
-        
+
         if (e.repeat)
             return;
-       
+
         if (e.keyCode == 38) {
             moveDir = Direc.UP;
             keys++;
@@ -259,10 +259,10 @@ var addEvents = function () {
             moveDir = Direc.RIGHT;
             keys++;
         }
-        
+
         keyUpdate();
         time = time = new Date().getTime();
-        
+
     };
 
     window.onkeyup = function (e) {
@@ -276,23 +276,23 @@ var addEvents = function () {
         } else if (e.keyCode == 39) {
             keys--;
         }
-        if(keys == 0)
+        if (keys == 0)
             moveDir = Direc.NONE;
-        
+
     };
 };
 var time = new Date().getTime();
-var getDeltaT = function(){
+var getDeltaT = function () {
     var newTime = new Date().getTime();
-    var delta = newTime-time;
+    var delta = newTime - time;
     return delta;
 }
 
 var update = function () {
-    console.log("keys pressen: "+ keys);
-    if(getDeltaT() >= 250){
-        time = time = new Date().getTime();  
-        keyUpdate();    
+    console.log("keys pressen: " + keys);
+    if (getDeltaT() >= 250) {
+        time = time = new Date().getTime();
+        keyUpdate();
     }
     rocks.forEach(function (rock) {
         rock.update();
@@ -310,7 +310,7 @@ var initCanvas = function () {
     context.font = "15px Arial";
 
     img.src = "wall.jpg";
-    sandImg.src= "sand.png";
+    sandImg.src = "sand.png";
     playerImg.src = "head.png";
 };
 
@@ -323,16 +323,16 @@ var redraw = function () {
 
             // Walls
             if (world[x][y] == Block.WALL) {
-                context.drawImage(img, x*scale, y*scale,scale,scale);
-            }else{
+                context.drawImage(img, x * scale, y * scale, scale, scale);
+            } else {
                 context.fillStyle = "#0000FF";
                 context.fillRect(x * scale, y * scale, scale, scale);
-                
-            context.stroke();
+
+                context.stroke();
             }
-               
-            
-            
+
+
+
         }
     }
 
@@ -344,7 +344,7 @@ var redraw = function () {
     // Draw Rocks
     context.fillStyle = "#FFFF00";
     rocks.forEach(function (rock) {
-        context.drawImage(sandImg, rock.pos.x*scale, rock.pos.y*scale,scale,scale);
+        context.drawImage(sandImg, rock.pos.x * scale, rock.pos.y * scale, scale, scale);
         context.stroke();
     });
 
