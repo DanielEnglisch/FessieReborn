@@ -1,18 +1,3 @@
-const Block = {
-    AIR: 0,
-    WALL: 1,
-    PLAYER: 2,
-    ROCK: 3
-};
-
-const Direc = {
-    LEFT: 0,
-    RIGHT: 1,
-    DOWN: 2,
-    UP: 3,
-    NONE: 4
-};
-
 var canvas = document.getElementById("screen");
 var context = null;
 const scale = 32;
@@ -75,7 +60,7 @@ var movePlayer = function (dx, dy) {
                     player.pos.x + dx == rock.blockPos.x && player.pos.y + dy == rock.blockPos.y - 1) {
                     success = false;
                     // Death when moving up an falling obj
-                    if(dy == -1)
+                    if (dy == -1)
                         reloadLevel();
                 }
             } else
@@ -106,16 +91,16 @@ var addEvents = function () {
 
         if (e.keyCode == 38) {
             movePlayer(0, -1);
-
+            player.looking = Direc.UP;
         } else if (e.keyCode == 40) {
             movePlayer(0, +1);
-
+            player.looking = Direc.DOWN;
         } else if ((e.keyCode == 37)) {
             movePlayer(-1, 0);
-
+            player.looking = Direc.LEFT;
         } else if (e.keyCode == 39) {
             movePlayer(1, 0);
-
+            player.looking = Direc.RIGHT;
         } else if (e.keyCode == 82) {
             reloadLevel();
         }
@@ -130,7 +115,10 @@ var update = function () {
 };
 var img = new Image();
 var sandImg = new Image();
+
 var playerImg = new Image();
+
+
 
 var initCanvas = function () {
     var canvas = document.getElementById("screen");
@@ -141,7 +129,7 @@ var initCanvas = function () {
 
     img.src = "wall.jpg";
     sandImg.src = "rock.png";
-    playerImg.src = "head.png";
+    playerImg.src = "p.png";
 };
 
 
@@ -169,6 +157,28 @@ var redraw = function () {
 
     // Draw Player
     context.fillStyle = "#0000FF";
+    switch (player.looking) {
+        case Direc.UP:
+            playerImg.src = "p_up.png";
+            console.log("img up");            
+            break;
+        case Direc.DOWN:
+            playerImg.src = "p_down.png";
+            console.log("img down");            
+            break;
+        case Direc.LEFT:
+            playerImg.src = "p_left.png";
+            console.log("img left");
+            break;
+        case Direc.RIGHT:
+            playerImg.src = "p_right.png";
+            console.log("img right");            
+            break;
+        default:
+            playerImg.src = "p.png";
+            console.log("img neutral");            
+            break;
+    }
     context.drawImage(playerImg, player.pos.x * scale, player.pos.y * scale, scale, scale);
     context.stroke();
 

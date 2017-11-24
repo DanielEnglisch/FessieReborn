@@ -1,10 +1,26 @@
+const Block = {
+    AIR: 0,
+    WALL: 1,
+    PLAYER: 2,
+    ROCK: 3
+};
+
+const Direc = {
+    UP: 0,
+    DOWN: 1,
+    LEFT: 2,
+    RIGHT: 3,
+    NONE: 4
+};
+
 var Vec = function (x, y) {
     this.x = x;
     this.y = y;
 };
 
-function Player(pos) {
+function Player(pos, look) {
     this.pos = pos;
+    this.looking = look;
 }
 
 function Rock(pos) {
