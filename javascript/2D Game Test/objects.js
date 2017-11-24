@@ -39,12 +39,14 @@ function Rock(pos) {
 
         // If rock is on other rock -> slip to side if possible
         if (!this.falling && isRock(this.blockPos.x, this.blockPos.y + 1)) {
-            // If Right Is air
-            if (isAir(this.blockPos.x + 1, this.blockPos.y + 1)) {
+            // If Right and below Is air
+            if (isAir(this.blockPos.x + 1, this.blockPos.y) &&
+                isAir(this.blockPos.x + 1, this.blockPos.y + 1)) {
                 this.moveRock(1,0);
 
-            // If Left Is air
-            } else if (isAir(this.blockPos.x - 1, this.blockPos.y + 1)) {
+            // If Left and below Is air
+            } else if (isAir(this.blockPos.x - 1, this.blockPos.y) &&
+                       isAir(this.blockPos.x - 1, this.blockPos.y + 1)) {
                 this.moveRock(-1,0);
             }
         }
