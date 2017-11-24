@@ -1,6 +1,7 @@
 var canvas = document.getElementById("screen");
 var context = null;
-const scale = 32;
+const scale = 64;
+const gravity = 0.05;
 
 var rocks = new Array();
 var player = null;
@@ -84,11 +85,8 @@ var update = function () {
     });
 };
 var img = new Image();
-var sandImg = new Image();
-
+var rockImg = new Image();
 var playerImg = new Image();
-
-
 
 var initCanvas = function () {
     var canvas = document.getElementById("screen");
@@ -98,7 +96,7 @@ var initCanvas = function () {
     context.font = "15px Arial";
 
     img.src = "wall.jpg";
-    sandImg.src = "rock.png";
+    rockImg.src = "rock.png";
     playerImg.src = "p.png";
 };
 
@@ -147,7 +145,7 @@ var redraw = function () {
     // Draw Rocks
     context.fillStyle = "#FFFF00";
     rocks.forEach(function (rock) {
-        context.drawImage(sandImg, rock.pos.x * scale, rock.pos.y * scale, scale, scale);
+        context.drawImage(rockImg, rock.pos.x * scale, rock.pos.y * scale, scale, scale);
         context.stroke();
     });
 

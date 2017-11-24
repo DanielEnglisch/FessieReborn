@@ -101,7 +101,7 @@ function Rock(pos) {
 
         // If falling and not at end position
         if (this.falling && this.pos.y < this.blockPos.y) {
-            this.pos.y += 0.1;
+            this.pos.y += gravity;
             this.pos.y = Math.round(this.pos.y * 100) / 100
         } else if (this.pos.y == this.blockPos.y) {
             this.falling = false;
