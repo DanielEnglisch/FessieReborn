@@ -13,6 +13,33 @@ const Direc = {
     NONE: 4
 };
 
+var updateAnimaiton = function (movable) {
+    // Basic animaiton
+    if (movable.pos.x < movable.blockPos.x) {
+        movable.moving = true;
+        movable.pos.x += gravity;
+        movable.pos.x = Math.round(movable.pos.x * 100) / 100
+        return;
+    } else if (movable.pos.x > movable.blockPos.x) {
+        movable.moving = true;
+        movable.pos.x -= gravity;
+        movable.pos.x = Math.round(movable.pos.x * 100) / 100
+        return;
+    } else if (movable.pos.y < movable.blockPos.y) {
+        movable.moving = true;
+        movable.pos.y += gravity;
+        movable.pos.y = Math.round(movable.pos.y * 100) / 100
+        return;
+    } else if (movable.pos.y > movable.blockPos.y) {
+        movable.moving = true;
+        movable.pos.y -= gravity;
+        movable.pos.y = Math.round(movable.pos.y * 100) / 100
+        return;
+    } else {
+        movable.moving = false;
+    }
+}
+
 var Vec = function (x, y) {
     this.x = x;
     this.y = y;
@@ -91,30 +118,7 @@ function Player(pos, look) {
 
     this.update = function () {
 
-        // Basic animaiton
-        if (this.pos.x < this.blockPos.x) {
-            this.moving = true;
-            this.pos.x += gravity;
-            this.pos.x = Math.round(this.pos.x * 100) / 100
-            return;
-        } else if (this.pos.x > this.blockPos.x) {
-            this.moving = true;
-            this.pos.x -= gravity;
-            this.pos.x = Math.round(this.pos.x * 100) / 100
-            return;
-        } else if (this.pos.y < this.blockPos.y) {
-            this.moving = true;
-            this.pos.y += gravity;
-            this.pos.y = Math.round(this.pos.y * 100) / 100
-            return;
-        } else if (this.pos.y > this.blockPos.y) {
-            this.moving = true;
-            this.pos.y -= gravity;
-            this.pos.y = Math.round(this.pos.y * 100) / 100
-            return;
-        } else {
-            this.moving = false;
-        }
+        updateAnimaiton(this);
     }
 
 }
@@ -156,26 +160,7 @@ function Rock(pos) {
             this.blockPos = new Vec(this.blockPos.x, this.blockPos.y + 1);
         }
 
-        // Basic animaiton
-        if (this.pos.x < this.blockPos.x) {
-            this.moving = true;
-            this.pos.x += gravity;
-            this.pos.x = Math.round(this.pos.x * 100) / 100
-        } else if (this.pos.x > this.blockPos.x) {
-            this.moving = true;
-            this.pos.x -= gravity;
-            this.pos.x = Math.round(this.pos.x * 100) / 100
-        } else if (this.pos.y < this.blockPos.y) {
-            this.moving = true;
-            this.pos.y += gravity;
-            this.pos.y = Math.round(this.pos.y * 100) / 100
-        } else if (this.pos.y > this.blockPos.y) {
-            this.moving = true;
-            this.pos.y -= gravity;
-            this.pos.y = Math.round(this.pos.y * 100) / 100
-        } else {
-            this.moving = false;
-        }
+        updateAnimaiton(this);
 
         // If rock is on other rock -> slip to side if possible
         if (isRock(this.blockPos.x, this.blockPos.y + 1)) {
