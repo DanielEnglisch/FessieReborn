@@ -96,24 +96,6 @@ function Player(pos, look) {
         else if (dx == 0 && dy == -1)
             player.looking = Direc.UP;
 
-        // Update direction image
-        switch (player.looking) {
-            case Direc.UP:
-                playerImg.src = "p_up.png";
-                break;
-            case Direc.DOWN:
-                playerImg.src = "p_down.png";
-                break;
-            case Direc.LEFT:
-                playerImg.src = "p_left.png";
-                break;
-            case Direc.RIGHT:
-                playerImg.src = "p_right.png";
-                break;
-            default:
-                playerImg.src = "p.png";
-                break;
-        }
     }
 
     this.update = function () {
