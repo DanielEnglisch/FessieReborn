@@ -74,6 +74,9 @@ var movePlayer = function (dx, dy) {
                 if (player.pos.x + dx == rock.blockPos.x && player.pos.y + dy == rock.blockPos.y ||
                     player.pos.x + dx == rock.blockPos.x && player.pos.y + dy == rock.blockPos.y - 1) {
                     success = false;
+                    // Death when moving up an falling obj
+                    if(dy == -1)
+                        reloadLevel();
                 }
             } else
             if (player.pos.x + dx == rock.blockPos.x && player.pos.y + dy == rock.blockPos.y) {
