@@ -31,7 +31,7 @@ var isAir = function (x, y) {
 }
 
 var initWorld = function () {
-    loadLevel('00.lvl');
+    loadLevel('level/00.lvl');
 }
 
 var main = function () {
@@ -53,7 +53,6 @@ var keys = [];
 
 var addEvents = function () {
     window.addEventListener("resize", function (e) {
-        console.log("RESIZE");
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     });
@@ -107,7 +106,7 @@ var initCanvas = function () {
     context = canvas.getContext("2d");
     context.font = "15px Arial";
 
-    
+
 };
 
 
@@ -131,23 +130,23 @@ var redraw = function () {
     }
 
     // Draw Player
-     // Update direction image
-     switch (player.looking) {
+    // Update direction image
+    switch (player.looking) {
         case Direc.UP:
-        context.drawImage(img_up, player.pos.x * scale, player.pos.y * scale, scale, scale);
-        break;
+            context.drawImage(img_up, player.pos.x * scale, player.pos.y * scale, scale, scale);
+            break;
         case Direc.DOWN:
-        context.drawImage(img_down, player.pos.x * scale, player.pos.y * scale, scale, scale);
-        break;
+            context.drawImage(img_down, player.pos.x * scale, player.pos.y * scale, scale, scale);
+            break;
         case Direc.LEFT:
-        context.drawImage(img_left, player.pos.x * scale, player.pos.y * scale, scale, scale);
-        break;
+            context.drawImage(img_left, player.pos.x * scale, player.pos.y * scale, scale, scale);
+            break;
         case Direc.RIGHT:
-        context.drawImage(img_right, player.pos.x * scale, player.pos.y * scale, scale, scale);
-        break;
+            context.drawImage(img_right, player.pos.x * scale, player.pos.y * scale, scale, scale);
+            break;
         default:
-        context.drawImage(img_p, player.pos.x * scale, player.pos.y * scale, scale, scale);
-        break;
+            context.drawImage(img_p, player.pos.x * scale, player.pos.y * scale, scale, scale);
+            break;
     }
     context.stroke();
 
