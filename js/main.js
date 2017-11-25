@@ -17,6 +17,16 @@ var isFallable = function (x, y) {
     return succ;
 }
 
+var getFallable = function(x,y){
+    var result = null;
+    fallables.forEach(function (f) {
+        if (x == f.blockPos.x && y == f.blockPos.y) {
+            result = f;
+        }
+    });
+    return result;
+}
+
 var isPlayer = function (x, y) {
     return player.blockPos.x == x && player.blockPos.y == y;
 }

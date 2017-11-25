@@ -80,16 +80,16 @@ function Player(pos) {
                         success = false;
                     }
                 } else
-                // Try to move fallable
-                if (playerblockpos.x + dx == f.blockPos.x && playerblockpos.y + dy == f.blockPos.y) {
-                    if(f.type == Block.TRASH){
-                        // TODO: Collect
-                        console.log("Collected resting trash");
-                    }else
                     // Try to move fallable
-                    if (dy == -1 || !f.move(dx, dy))
-                        success = false;
-                }
+                    if (playerblockpos.x + dx == f.blockPos.x && playerblockpos.y + dy == f.blockPos.y) {
+                        if (f.type == Block.TRASH) {
+                            // TODO: Collect
+                            console.log("Collected resting trash");
+                        } else
+                            // Try to move fallable
+                            if (dy == -1 || !f.move(dx, dy))
+                                success = false;
+                    }
             });
 
         }
@@ -118,34 +118,35 @@ function Player(pos) {
         this.updateAnimaiton();
     }
 
-    this.draw = function(context){
-    switch (this.looking) {
-        case Direc.UP:
-            context.drawImage(tex.player_up, this.pos.x * scale, this.pos.y * scale, scale, scale);
-            break;
-        case Direc.DOWN:
-            context.drawImage(tex.player_down, this.pos.x * scale, this.pos.y * scale, scale, scale);
-            break;
-        case Direc.LEFT:
-            context.drawImage(tex.player_left, this.pos.x * scale, this.pos.y * scale, scale, scale);
-            break;
-        case Direc.RIGHT:
-            context.drawImage(tex.player_right, this.pos.x * scale, this.pos.y * scale, scale, scale);
-            break;
-        default:
-            context.drawImage(tex.player_neutral, this.pos.x * scale, this.pos.y * scale, scale, scale);
-            break;
-    }
-    context.stroke();
+    this.draw = function (context) {
+        switch (this.looking) {
+            case Direc.UP:
+                context.drawImage(tex.player_up, this.pos.x * scale, this.pos.y * scale, scale, scale);
+                break;
+            case Direc.DOWN:
+                context.drawImage(tex.player_down, this.pos.x * scale, this.pos.y * scale, scale, scale);
+                break;
+            case Direc.LEFT:
+                context.drawImage(tex.player_left, this.pos.x * scale, this.pos.y * scale, scale, scale);
+                break;
+            case Direc.RIGHT:
+                context.drawImage(tex.player_right, this.pos.x * scale, this.pos.y * scale, scale, scale);
+                break;
+            default:
+                context.drawImage(tex.player_neutral, this.pos.x * scale, this.pos.y * scale, scale, scale);
+                break;
+        }
+        context.stroke();
     }
 
-    this.kill = function(){
+    this.kill = function () {
         reloadLevel();
     }
 
 }
 
 inherits(Fallable, GameObject);
+
 function Fallable(pos, type) {
     Fallable.super_.call(this, pos, type);
 
@@ -178,45 +179,82 @@ function Fallable(pos, type) {
     }
 
     this.update = function () {
-        if(!this.updateAnimaiton())
+        if (!this.updateAnimaiton())
             return;
 
-        if (isAir(this.blockPos.x, this.blockPos.y + 1)) {
-            this.blockPos = new Vec(this.blockPos.x, this.blockPos.y + 1);
-            // If Player is below trash
-        }else if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
+        if (this.moving && isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
             player.kill();
         }
-                
-        // If Fallable is on other Fallable -> slip to side if possible
-        if (isFallable(this.blockPos.x, this.blockPos.y + 1)) {
-            // If Right and right below Is air
-            if (isAir(this.blockPos.x + 1, this.blockPos.y) &&
-                isAir(this.blockPos.x + 1, this.blockPos.y + 1)) {
-                this.move(1, 0);
 
+        // If Fallable is on other Fallable -> slip to side if possible
+        if (
+            isFallable(this.blockPos.x, this.blockPos.y + 1)
+        ) {
+            // If Right and right below Is air
+            if (
+                isAir(this.blockPos.x + 1, this.blockPos.y) &&
+                isAir(this.blockPos.x + 1, this.blockPos.y + 1)
+                ) {
+                if(!canSlipAbove(this))
+                this.move(+1, 0);
+                
             // If Left and left  below Is air
-            } else if (isAir(this.blockPos.x - 1, this.blockPos.y) &&
-                isAir(this.blockPos.x - 1, this.blockPos.y + 1)) {
+            } else if (
+                isAir(this.blockPos.x - 1, this.blockPos.y) &&
+                isAir(this.blockPos.x - 1, this.blockPos.y + 1)
+            ) {
+                if(!canSlipAbove(this))
                 this.move(-1, 0);
             }
+        } else if (isAir(this.blockPos.x, this.blockPos.y + 1)) {
+            this.blockPos = new Vec(this.blockPos.x, this.blockPos.y + 1);
         }
     }
 }
 
+// Check if the fallable above could slip
+var canSlipAbove= function(fallable){
+    var above = getFallable(fallable.blockPos.x, fallable.blockPos.y-1);
+    if(above)
+        return false;
+    else{
+        if (
+            isFallable(fallable.blockPos.x, fallable.blockPos.y + 1)
+        ) {
+            // If Right and right below Is air
+            if (
+                isAir(fallable.blockPos.x + 1, fallable.blockPos.y) &&
+                isAir(fallable.blockPos.x + 1, fallable.blockPos.y + 1)
+                ) {
+                return true;
+                
+            // If Left and left  below Is air
+            } else if (
+                isAir(fallable.blockPos.x - 1, fallable.blockPos.y) &&
+                isAir(fallable.blockPos.x - 1, fallable.blockPos.y + 1)
+            ) {
+                return false;
+            }
+        } 
+    }
+        
+}
+
 inherits(Dumpster, Fallable);
+
 function Dumpster(pos) {
     Dumpster.super_.call(this, pos, Block.DUMPSTER);
-    this.draw = function(context){
+    this.draw = function (context) {
         context.drawImage(tex.dumpster, this.pos.x * scale, this.pos.y * scale, scale, scale);
         context.stroke();
     }
 }
 
 inherits(Trash, Fallable);
+
 function Trash(pos) {
     Trash.super_.call(this, pos, Block.TRASH);
-    this.draw = function(context){
+    this.draw = function (context) {
         context.drawImage(tex.trash, this.pos.x * scale, this.pos.y * scale, scale, scale);
         context.stroke();
     }
