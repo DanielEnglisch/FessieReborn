@@ -7,7 +7,8 @@ function TexturesBundle() {
 
   this.dumpster = new Image();
   this.wall = new Image();
-
+  this.trash = new Image();
+  
   this.load = function() {
     this.player_neutral.src = "img/p.png";
     this.player_up.src = "img/p_up.png";
@@ -17,6 +18,7 @@ function TexturesBundle() {
 
     this.wall.src = "img/wall.png";
     this.dumpster.src = "img/dumpster.png";
+    this.trash.src = "img/trash.png";
     
   }
 

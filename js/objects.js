@@ -30,24 +30,25 @@ var GameObject = function (position, type) {
             this.moving = true;
             this.pos.x += gravity;
             this.pos.x = Math.round(this.pos.x * 100) / 100
-            return;
+            return false;
         } else if (this.pos.x > this.blockPos.x) {
             this.moving = true;
             this.pos.x -= gravity;
             this.pos.x = Math.round(this.pos.x * 100) / 100
-            return;
+            return false;
         } else if (this.pos.y < this.blockPos.y) {
             this.moving = true;
             this.pos.y += gravity;
             this.pos.y = Math.round(this.pos.y * 100) / 100
-            return;
+            return false;
         } else if (this.pos.y > this.blockPos.y) {
             this.moving = true;
             this.pos.y -= gravity;
             this.pos.y = Math.round(this.pos.y * 100) / 100
-            return;
+            return false;
         } else {
             this.moving = false;
+            return true;
         }
     };
 };
@@ -59,6 +60,7 @@ function Player(pos) {
     this.looking = Direc.NONE;
     this.move = function (dx, dy) {
 
+        // Can't move when already moving
         if (this.moving)
             return;
 
@@ -71,28 +73,35 @@ function Player(pos) {
             // Check if requested position is Fallable
             var playerblockpos = this.blockPos;
             fallables.forEach(function (f) {
+                // When fallable is falling
                 if (Fallable.falling) {
                     if (playerblockpos.x + dx == f.blockPos.x && playerblockpos.y + dy == f.blockPos.y ||
                         playerblockpos.x + dx == f.blockPos.x && playerblockpos.y + dy == f.blockPos.y - 1) {
                         success = false;
-                        // Death when moving up an falling obj
-                        if (dy == -1)
-                            reloadLevel();
                     }
                 } else
+                // Try to move fallable
                 if (playerblockpos.x + dx == f.blockPos.x && playerblockpos.y + dy == f.blockPos.y) {
+                    if(f.type == Block.TRASH){
+                        // TODO: Collect
+                        console.log("Collected resting trash");
+                    }else
+                    // Try to move fallable
                     if (dy == -1 || !f.move(dx, dy))
                         success = false;
                 }
             });
 
         }
+
         if (!success)
             return;
 
+        // Move player
         this.blockPos.x += dx;
         this.blockPos.y += dy;
 
+        // Adjust look direction
         if (dx == 1 && dy == 0)
             player.looking = Direc.RIGHT;
         else if (dx == -1 && dy == 0)
@@ -130,10 +139,13 @@ function Player(pos) {
     context.stroke();
     }
 
+    this.kill = function(){
+        reloadLevel();
+    }
+
 }
 
 inherits(Fallable, GameObject);
-
 function Fallable(pos, type) {
     Fallable.super_.call(this, pos, type);
 
@@ -166,20 +178,24 @@ function Fallable(pos, type) {
     }
 
     this.update = function () {
-        this.updateAnimaiton();
+        if(!this.updateAnimaiton())
+            return;
 
         if (isAir(this.blockPos.x, this.blockPos.y + 1)) {
             this.blockPos = new Vec(this.blockPos.x, this.blockPos.y + 1);
+            // If Player is below trash
+        }else if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
+            player.kill();
         }
-
+                
         // If Fallable is on other Fallable -> slip to side if possible
         if (isFallable(this.blockPos.x, this.blockPos.y + 1)) {
-            // If Right and below Is air
+            // If Right and right below Is air
             if (isAir(this.blockPos.x + 1, this.blockPos.y) &&
                 isAir(this.blockPos.x + 1, this.blockPos.y + 1)) {
                 this.move(1, 0);
 
-                // If Left and below Is air
+            // If Left and left  below Is air
             } else if (isAir(this.blockPos.x - 1, this.blockPos.y) &&
                 isAir(this.blockPos.x - 1, this.blockPos.y + 1)) {
                 this.move(-1, 0);
@@ -193,6 +209,15 @@ function Dumpster(pos) {
     Dumpster.super_.call(this, pos, Block.DUMPSTER);
     this.draw = function(context){
         context.drawImage(tex.dumpster, this.pos.x * scale, this.pos.y * scale, scale, scale);
+        context.stroke();
+    }
+}
+
+inherits(Trash, Fallable);
+function Trash(pos) {
+    Trash.super_.call(this, pos, Block.TRASH);
+    this.draw = function(context){
+        context.drawImage(tex.trash, this.pos.x * scale, this.pos.y * scale, scale, scale);
         context.stroke();
     }
 }
