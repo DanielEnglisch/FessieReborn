@@ -87,7 +87,7 @@ function Player(pos) {
                             console.log("Collected resting trash");
                         } else
                             // Try to move fallable
-                            if (dy == -1 || !f.move(dx, dy))
+                            if (dy == -1 || !f.move(dx, dy, true))
                                 success = false;
                     }
             });
@@ -117,23 +117,26 @@ function Player(pos) {
 
     this.update = function () {
 
-        if(player.pos.x * scale + xOffset > window.innerWidth/2 + 1*scale){
-            xOffset -= gravity*scale;
-            xOffset = Math.round(xOffset);        
-        }  if(player.pos.x * scale + xOffset < window.innerWidth/2 - 1*scale){
-            xOffset += gravity*scale;
-            xOffset = Math.round(xOffset);        
-        }  if(player.pos.y * scale + yOffset > window.innerHeight/2 + 1*scale){
-            yOffset -= gravity*scale;
-            yOffset = Math.round(yOffset);        
-        } if(player.pos.y * scale + yOffset < window.innerHeight/2 - 1*scale){
-            yOffset += gravity*scale;
-            yOffset = Math.round(yOffset);        
+        if (player.pos.x * scale + xOffset > window.innerWidth / 2 + 1 * scale) {
+            xOffset -= gravity * scale;
+            xOffset = Math.round(xOffset);
+        }
+        if (player.pos.x * scale + xOffset < window.innerWidth / 2 - 1 * scale) {
+            xOffset += gravity * scale;
+            xOffset = Math.round(xOffset);
+        }
+        if (player.pos.y * scale + yOffset > window.innerHeight / 2 + 1 * scale) {
+            yOffset -= gravity * scale;
+            yOffset = Math.round(yOffset);
+        }
+        if (player.pos.y * scale + yOffset < window.innerHeight / 2 - 1 * scale) {
+            yOffset += gravity * scale;
+            yOffset = Math.round(yOffset);
         }
 
         this.updateAnimaiton();
-       
-        
+
+
     }
 
     this.draw = function (context) {
@@ -142,16 +145,16 @@ function Player(pos) {
                 context.drawImage(tex.player_up, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
                 break;
             case Direc.DOWN:
-                context.drawImage(tex.player_down, this.pos.x * scale+ xOffset, this.pos.y * scale + yOffset, scale, scale);
+                context.drawImage(tex.player_down, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
                 break;
             case Direc.LEFT:
-                context.drawImage(tex.player_left, this.pos.x * scale+ xOffset, this.pos.y * scale + yOffset, scale, scale);
+                context.drawImage(tex.player_left, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
                 break;
             case Direc.RIGHT:
-                context.drawImage(tex.player_right, this.pos.x * scale+ xOffset, this.pos.y * scale + yOffset, scale, scale);
+                context.drawImage(tex.player_right, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
                 break;
             default:
-                context.drawImage(tex.player_neutral, this.pos.x * scale+ xOffset, this.pos.y * scale + yOffset, scale, scale);
+                context.drawImage(tex.player_neutral, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
                 break;
         }
         context.stroke();
@@ -164,11 +167,15 @@ function Player(pos) {
 
 }
 
+var dump_land = new Audio('audio/dumpster_land.wav');
+var dump_move = new Audio('audio/dumpster_move.wav');
+
 inherits(Fallable, GameObject);
+
 function Fallable(pos, type) {
     Fallable.super_.call(this, pos, type);
 
-    this.move = function (dx, dy) {
+    this.move = function (dx, dy, playerCause = false) {
 
         // Can't move when it's already moving
         if (this.moving)
@@ -193,19 +200,31 @@ function Fallable(pos, type) {
         this.blockPos.x += dx;
         this.blockPos.y += dy;
 
+        if(playerCause){
+            var sound2 = dump_move.cloneNode();
+            sound2.play();    
+        }
+       
         return true;
     }
-    
+
     this.isFalling = false;
     this.wasFalling = false;
 
     this.update = function () {
-        if (!this.updateAnimaiton()){
+        if (!this.updateAnimaiton()) {
             return;
         }
 
-        if(this.isFalling){
+        // Fallable land even
+        if (this.isFalling && !isAir(this.blockPos.x, this.blockPos.y + 1)) {
             this.isFalling = false;
+
+            // Play laning sound
+            var sound2 = dump_land.cloneNode();
+            sound2.play();
+            console.log("land");
+
             if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
                 player.kill();
             }
@@ -219,17 +238,17 @@ function Fallable(pos, type) {
             if (
                 isAir(this.blockPos.x + 1, this.blockPos.y) &&
                 isAir(this.blockPos.x + 1, this.blockPos.y + 1)
-                ) {
-                if(!belowCanSlip(this))
+            ) {
+                if (!belowCanSlip(this))
                     this.move(+1, 0);
-                
-            // If Left and left  below Is air
+
+                // If Left and left  below Is air
             } else if (
                 isAir(this.blockPos.x - 1, this.blockPos.y) &&
                 isAir(this.blockPos.x - 1, this.blockPos.y + 1)
             ) {
-            if(!belowCanSlip(this))                
-                this.move(-1, 0);
+                if (!belowCanSlip(this))
+                    this.move(-1, 0);
             }
         } else if (isAir(this.blockPos.x, this.blockPos.y + 1)) {
             this.blockPos = new Vec(this.blockPos.x, this.blockPos.y + 1);
@@ -238,19 +257,20 @@ function Fallable(pos, type) {
     }
 }
 
-var belowCanSlip = function(fallable){
-    var below = getFallable(fallable.blockPos.x, fallable.blockPos.y +1);
+var belowCanSlip = function (fallable) {
+    var below = getFallable(fallable.blockPos.x, fallable.blockPos.y + 1);
     if (
         isAir(below.blockPos.x + 1, below.blockPos.y) &&
         isAir(below.blockPos.x + 1, below.blockPos.y + 1)
-        ) {
-return true;        
-    // If Left and left  below Is air
+    ) {
+        return true;
+        // If Left and left  below Is air
     } else if (
         isAir(below.blockPos.x - 1, below.blockPos.y) &&
         isAir(below.blockPos.x - 1, below.blockPos.y + 1)
     ) {
-return true;    }
+        return true;
+    }
 }
 
 
