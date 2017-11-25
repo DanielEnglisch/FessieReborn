@@ -195,15 +195,15 @@ function Fallable(pos, type) {
                 isAir(this.blockPos.x + 1, this.blockPos.y) &&
                 isAir(this.blockPos.x + 1, this.blockPos.y + 1)
                 ) {
-                if(!canSlipAbove(this))
-                this.move(+1, 0);
+                if(!belowCanSlip(this))
+                    this.move(+1, 0);
                 
             // If Left and left  below Is air
             } else if (
                 isAir(this.blockPos.x - 1, this.blockPos.y) &&
                 isAir(this.blockPos.x - 1, this.blockPos.y + 1)
             ) {
-                if(!canSlipAbove(this))
+            if(!belowCanSlip(this))                
                 this.move(-1, 0);
             }
         } else if (isAir(this.blockPos.x, this.blockPos.y + 1)) {
@@ -212,33 +212,21 @@ function Fallable(pos, type) {
     }
 }
 
-// Check if the fallable above could slip
-var canSlipAbove= function(fallable){
-    var above = getFallable(fallable.blockPos.x, fallable.blockPos.y-1);
-    if(above)
-        return false;
-    else{
-        if (
-            isFallable(fallable.blockPos.x, fallable.blockPos.y + 1)
+var belowCanSlip = function(fallable){
+    var below = getFallable(fallable.blockPos.x, fallable.blockPos.y +1);
+    if (
+        isAir(below.blockPos.x + 1, below.blockPos.y) &&
+        isAir(below.blockPos.x + 1, below.blockPos.y + 1)
         ) {
-            // If Right and right below Is air
-            if (
-                isAir(fallable.blockPos.x + 1, fallable.blockPos.y) &&
-                isAir(fallable.blockPos.x + 1, fallable.blockPos.y + 1)
-                ) {
-                return true;
-                
-            // If Left and left  below Is air
-            } else if (
-                isAir(fallable.blockPos.x - 1, fallable.blockPos.y) &&
-                isAir(fallable.blockPos.x - 1, fallable.blockPos.y + 1)
-            ) {
-                return false;
-            }
-        } 
-    }
-        
+return true;        
+    // If Left and left  below Is air
+    } else if (
+        isAir(below.blockPos.x - 1, below.blockPos.y) &&
+        isAir(below.blockPos.x - 1, below.blockPos.y + 1)
+    ) {
+return true;    }
 }
+
 
 inherits(Dumpster, Fallable);
 
