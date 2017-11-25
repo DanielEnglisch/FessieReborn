@@ -121,19 +121,19 @@ function Player(pos) {
     this.draw = function (context) {
         switch (this.looking) {
             case Direc.UP:
-                context.drawImage(tex.player_up, this.pos.x * scale, this.pos.y * scale, scale, scale);
+                context.drawImage(tex.player_up, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
                 break;
             case Direc.DOWN:
-                context.drawImage(tex.player_down, this.pos.x * scale, this.pos.y * scale, scale, scale);
+                context.drawImage(tex.player_down, this.pos.x * scale+ xOffset, this.pos.y * scale + yOffset, scale, scale);
                 break;
             case Direc.LEFT:
-                context.drawImage(tex.player_left, this.pos.x * scale, this.pos.y * scale, scale, scale);
+                context.drawImage(tex.player_left, this.pos.x * scale+ xOffset, this.pos.y * scale + yOffset, scale, scale);
                 break;
             case Direc.RIGHT:
-                context.drawImage(tex.player_right, this.pos.x * scale, this.pos.y * scale, scale, scale);
+                context.drawImage(tex.player_right, this.pos.x * scale+ xOffset, this.pos.y * scale + yOffset, scale, scale);
                 break;
             default:
-                context.drawImage(tex.player_neutral, this.pos.x * scale, this.pos.y * scale, scale, scale);
+                context.drawImage(tex.player_neutral, this.pos.x * scale+ xOffset, this.pos.y * scale + yOffset, scale, scale);
                 break;
         }
         context.stroke();
@@ -233,7 +233,7 @@ inherits(Dumpster, Fallable);
 function Dumpster(pos) {
     Dumpster.super_.call(this, pos, Block.DUMPSTER);
     this.draw = function (context) {
-        context.drawImage(tex.dumpster, this.pos.x * scale, this.pos.y * scale, scale, scale);
+        context.drawImage(tex.dumpster, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
         context.stroke();
     }
 }
@@ -243,7 +243,7 @@ inherits(Trash, Fallable);
 function Trash(pos) {
     Trash.super_.call(this, pos, Block.TRASH);
     this.draw = function (context) {
-        context.drawImage(tex.trash, this.pos.x * scale, this.pos.y * scale, scale, scale);
+        context.drawImage(tex.trash, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
         context.stroke();
     }
 }
