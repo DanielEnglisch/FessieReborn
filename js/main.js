@@ -3,6 +3,9 @@ var context = null;
 const scale = 64;
 const gravity = 0.1;
 
+var xOffset = 110;
+var yOffset = 110;
+
 var fallables = new Array();
 var player = null;
 var world = [];
@@ -131,11 +134,11 @@ var redraw = function () {
 
             // Walls
             if (world[x][y] == Block.WALL) {
-                context.drawImage(tex.wall, x * scale, y * scale, scale, scale);
+                context.drawImage(tex.wall, x * scale + xOffset, y * scale + yOffset, scale, scale);
             } else {
                 // Everthing else
                 context.fillStyle = "#12489e";
-                context.fillRect(x * scale, y * scale, scale, scale);
+                context.fillRect(x * scale + xOffset, y * scale  + yOffset, scale, scale);
 
                 context.stroke();
             }
