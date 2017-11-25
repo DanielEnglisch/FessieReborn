@@ -112,10 +112,28 @@ function Player(pos) {
         else if (dx == 0 && dy == -1)
             player.looking = Direc.UP;
 
+
     }
 
     this.update = function () {
+
+        if(player.pos.x * scale + xOffset > window.innerWidth/2 + 1*scale){
+            xOffset -= gravity*scale;
+            xOffset = Math.round(xOffset);        
+        }  if(player.pos.x * scale + xOffset < window.innerWidth/2 - 1*scale){
+            xOffset += gravity*scale;
+            xOffset = Math.round(xOffset);        
+        }  if(player.pos.y * scale + yOffset > window.innerHeight/2 + 1*scale){
+            yOffset -= gravity*scale;
+            yOffset = Math.round(yOffset);        
+        } if(player.pos.y * scale + yOffset < window.innerHeight/2 - 1*scale){
+            yOffset += gravity*scale;
+            yOffset = Math.round(yOffset);        
+        }
+
         this.updateAnimaiton();
+       
+        
     }
 
     this.draw = function (context) {
@@ -147,7 +165,6 @@ function Player(pos) {
 }
 
 inherits(Fallable, GameObject);
-
 function Fallable(pos, type) {
     Fallable.super_.call(this, pos, type);
 

@@ -8,6 +8,7 @@ function TexturesBundle() {
   this.dumpster = new Image();
   this.wall = new Image();
   this.trash = new Image();
+  this.air = new Image();
   
   this.load = function() {
     this.player_neutral.src = "img/p.png";
@@ -19,6 +20,7 @@ function TexturesBundle() {
     this.wall.src = "img/wall.png";
     this.dumpster.src = "img/dumpster.png";
     this.trash.src = "img/trash.png";
+    this.air.src = "img/air.png";    
     
   }
 

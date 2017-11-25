@@ -35,6 +35,8 @@ var loadLevel = function (file) {
             if (world[x][y] == Block.PLAYER) {
                 console.log("added player!");                
                 player = new Player(new Vec(x, y), Direc.NONE);
+                refreshOffset();
+                
                 world[x][y] = 0;
             } else if (world[x][y] == Block.DUMPSTER) {
                 console.log("added dumoster!");                

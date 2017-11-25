@@ -64,11 +64,20 @@ var loop = function () {
 
 var keys = [];
 
+var refreshOffset = function(){
+    xOffset = 0;
+    yOffset = 0;
+    xOffset -= player.blockPos.x * scale - window.innerWidth / 2;
+    yOffset -= player.blockPos.y * scale - window.innerHeight / 2 -1*scale;
+}
+
 var addEvents = function () {
     window.addEventListener("resize", function (e) {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+        refreshOffset();
     });
+    
     window.onkeydown = function (e) {
 
         if (e.repeat)
@@ -125,7 +134,7 @@ var initCanvas = function () {
 
 var redraw = function () {
     context.clearRect(0, 0, window.innerWidth, window.innerHeight);
-
+    context.imageSmoothingEnabled = false;
     for (var x = 0; x < world.length; x++) {
         for (var y = 0; y < world[0].length; y++) {
 
@@ -134,11 +143,11 @@ var redraw = function () {
                 context.drawImage(tex.wall, x * scale + xOffset, y * scale + yOffset, scale, scale);
             } else {
                 // Everthing else
-                context.fillStyle = "#12489e";
-                context.fillRect(x * scale + xOffset, y * scale  + yOffset, scale, scale);
-
-                context.stroke();
+                context.drawImage(tex.air, x * scale + xOffset, y * scale + yOffset, scale, scale);
+                
             }
+            context.stroke();
+            
         }
     }
 
