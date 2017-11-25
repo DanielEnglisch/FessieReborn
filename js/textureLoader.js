@@ -1,19 +1,24 @@
+function TexturesBundle() {
+  this.player_neutral = new Image();
+  this.player_up = new Image();
+  this.player_down = new Image();
+  this.player_left = new Image();
+  this.player_right = new Image();
 
-var img = new Image();
-var rockImg = new Image();
-var img_p = new Image();
-var img_left = new Image();
-var img_right = new Image();
-var img_down = new Image();
-var img_up = new Image();
+  this.dumpster = new Image();
+  this.wall = new Image();
+
+  this.load = function() {
+    this.player_neutral.src = "img/p.png";
+    this.player_up.src = "img/p_up.png";
+    this.player_down.src = "img/p_down.png";
+    this.player_left.src = "img/p_left.png";
+    this.player_right.src = "img/p_right.png";
+
+    this.wall.src = "img/wall.png";
+    this.dumpster.src = "img/dumpster.png";
+    
+  }
 
 
-var loadTextures = function(){
-  img.src = "img/wall.jpg";
-  rockImg.src = "img/rock.png";
-  img_p.src = "img/p.png";
-  img_up.src = "img/p_up.png";
-  img_down.src = "img/p_down.png";
-  img_left.src = "img/p_left.png";
-  img_right.src = "img/p_right.png";
 }

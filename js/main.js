@@ -3,15 +3,14 @@ var context = null;
 const scale = 64;
 const gravity = 0.1;
 
-var rocks = new Array();
+var fallables = new Array();
 var player = null;
-var moveDir = Direc.NONE;
 var world = [];
 
-var isRock = function (x, y) {
+var isFallable = function (x, y) {
     var succ = false;
-    rocks.forEach(function (r) {
-        if (x == r.blockPos.x && y == r.blockPos.y) {
+    fallables.forEach(function (f) {
+        if (x == f.blockPos.x && y == f.blockPos.y) {
             succ = true;
         }
     });
@@ -27,20 +26,24 @@ var isWall = function (x, y) {
 }
 
 var isAir = function (x, y) {
-    return world[x][y] == Block.AIR && !isPlayer(x, y) && !isRock(x, y);
+    return world[x][y] == Block.AIR && !isPlayer(x, y) && !isFallable(x, y);
 }
 
 var initWorld = function () {
     loadLevel('level/00.lvl');
 }
 
+var tex = new TexturesBundle();
+
 var main = function () {
     addEvents();
     initCanvas();
-    loadTextures();
     initWorld();
+    tex.load();
     loop();
 };
+
+
 
 
 var loop = function () {
@@ -94,8 +97,8 @@ var update = function () {
 
 
     player.update();
-    rocks.forEach(function (rock) {
-        rock.update();
+    fallables.forEach(function (f) {
+        f.update();
     });
 };
 
@@ -118,7 +121,7 @@ var redraw = function () {
 
             // Walls
             if (world[x][y] == Block.WALL) {
-                context.drawImage(img, x * scale, y * scale, scale, scale);
+                context.drawImage(tex.wall, x * scale, y * scale, scale, scale);
             } else {
                 // Everthing else
                 context.fillStyle = "#12489e";
@@ -129,32 +132,11 @@ var redraw = function () {
         }
     }
 
-    // Draw Player
-    // Update direction image
-    switch (player.looking) {
-        case Direc.UP:
-            context.drawImage(img_up, player.pos.x * scale, player.pos.y * scale, scale, scale);
-            break;
-        case Direc.DOWN:
-            context.drawImage(img_down, player.pos.x * scale, player.pos.y * scale, scale, scale);
-            break;
-        case Direc.LEFT:
-            context.drawImage(img_left, player.pos.x * scale, player.pos.y * scale, scale, scale);
-            break;
-        case Direc.RIGHT:
-            context.drawImage(img_right, player.pos.x * scale, player.pos.y * scale, scale, scale);
-            break;
-        default:
-            context.drawImage(img_p, player.pos.x * scale, player.pos.y * scale, scale, scale);
-            break;
-    }
-    context.stroke();
+    player.draw(context);
 
-    // Draw Rocks
-    context.fillStyle = "#FFFF00";
-    rocks.forEach(function (rock) {
-        context.drawImage(rockImg, rock.pos.x * scale, rock.pos.y * scale, scale, scale);
-        context.stroke();
+    // Draw fallables
+    fallables.forEach(function (f) {
+        f.draw(context);
     });
 
 };
