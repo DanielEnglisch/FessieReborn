@@ -140,6 +140,7 @@ function Player(pos) {
     }
 
     this.kill = function () {
+        alert("You died!");
         reloadLevel();
     }
 
@@ -177,13 +178,20 @@ function Fallable(pos, type) {
 
         return true;
     }
+    
+    this.isFalling = false;
+    this.wasFalling = false;
 
     this.update = function () {
-        if (!this.updateAnimaiton())
+        if (!this.updateAnimaiton()){
             return;
+        }
 
-        if (this.moving && isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
-            player.kill();
+        if(this.isFalling){
+            this.isFalling = false;
+            if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
+                player.kill();
+            }
         }
 
         // If Fallable is on other Fallable -> slip to side if possible
@@ -208,6 +216,7 @@ function Fallable(pos, type) {
             }
         } else if (isAir(this.blockPos.x, this.blockPos.y + 1)) {
             this.blockPos = new Vec(this.blockPos.x, this.blockPos.y + 1);
+            this.isFalling = true;
         }
     }
 }

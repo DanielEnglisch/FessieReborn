@@ -3,8 +3,8 @@ var context = null;
 const scale = 64;
 const gravity = 0.1;
 
-var xOffset = 110;
-var yOffset = 110;
+var xOffset = 0;
+var yOffset = 0;
 
 var fallables = new Array();
 var player = null;
@@ -55,9 +55,6 @@ var main = function () {
     tex.load();
     loop();
 };
-
-
-
 
 var loop = function () {
     update();
