@@ -33,21 +33,19 @@ var loadLevel = function (file) {
         for (var y = 0; y < world[0].length; y++) {
             
             if (world[x][y] == Block.PLAYER) {
-                console.log("added player!");                
+
                 player = new Player(new Vec(x, y), Direc.NONE);
                 refreshOffset();
                 
                 world[x][y] = 0;
             } else if (world[x][y] == Block.DUMPSTER) {
-                console.log("added dumoster!");                
+
                 fallables.push(new Dumpster(new Vec(x, y)));
                 world[x][y] = 0;
             } else if (world[x][y] == Block.TRASH) {
-                console.log("added trash!");
+
                 fallables.push(new Trash(new Vec(x, y)));
                 world[x][y] = 0;
-            }else{
-                console.log("No GameObj: " + world[x][y]);
             }
         }
     }
