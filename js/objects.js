@@ -72,9 +72,11 @@ function Player(pos) {
         // When requested position is wall return
         if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.WALL)
             return;
-        else if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.DIRT)
-        world[this.blockPos.x + dx][this.blockPos.y + dy] = 0;
-        else {
+        // Walk on dirt
+        else if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.DIRT){
+         world[this.blockPos.x + dx][this.blockPos.y + dy] = 0;
+         playAudio(audio.walk);
+        }else {
             // Check if requested position is Fallable
             var playerblockpos = this.blockPos;
             fallables.forEach(function (f, index, obj) {
@@ -118,7 +120,6 @@ function Player(pos) {
             player.looking = Direc.DOWN;
         else if (dx == 0 && dy == -1)
             player.looking = Direc.UP;
-
 
     }
 
