@@ -119,23 +119,7 @@ function Player(pos) {
 
     this.update = function () {
 
-        if (player.pos.x * scale + xOffset > window.innerWidth / 2 + 1 * scale) {
-            xOffset -= gravity * scale;
-            xOffset = Math.round(xOffset);
-        }
-        if (player.pos.x * scale + xOffset < window.innerWidth / 2 - 1 * scale) {
-            xOffset += gravity * scale;
-            xOffset = Math.round(xOffset);
-        }
-        if (player.pos.y * scale + yOffset > window.innerHeight / 2 + 1 * scale) {
-            yOffset -= gravity * scale;
-            yOffset = Math.round(yOffset);
-        }
-        if (player.pos.y * scale + yOffset < window.innerHeight / 2 - 1 * scale) {
-            yOffset += gravity * scale;
-            yOffset = Math.round(yOffset);
-        }
-
+        refreshOffset();
         this.updateAnimaiton();
 
 
