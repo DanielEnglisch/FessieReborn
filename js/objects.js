@@ -26,27 +26,29 @@ var GameObject = function (position, type) {
     this.pos = new Vec(position.x, position.y);
     this.updateAnimaiton = function () {
         // Basic animaiton
-        if (this.pos.x < this.blockPos.x) {
+        if (this.pos.x+gravity < this.blockPos.x) {
             this.moving = true;
             this.pos.x += gravity;
             this.pos.x = Math.round(this.pos.x * 100) / 100
             return false;
-        } else if (this.pos.x > this.blockPos.x) {
+        } else if (this.pos.x - gravity > this.blockPos.x) {
             this.moving = true;
             this.pos.x -= gravity;
             this.pos.x = Math.round(this.pos.x * 100) / 100
             return false;
-        } else if (this.pos.y < this.blockPos.y) {
+        } else if (this.pos.y + gravity< this.blockPos.y) {
             this.moving = true;
             this.pos.y += gravity;
             this.pos.y = Math.round(this.pos.y * 100) / 100
             return false;
-        } else if (this.pos.y > this.blockPos.y) {
+        } else if (this.pos.y - gravity > this.blockPos.y) {
             this.moving = true;
             this.pos.y -= gravity;
             this.pos.y = Math.round(this.pos.y * 100) / 100
             return false;
         } else {
+            this.pos.x = this.blockPos.x;
+            this.pos.y = this.blockPos.y;
             this.moving = false;
             return true;
         }
