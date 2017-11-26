@@ -127,8 +127,8 @@ var initCanvas = function () {
     canvas.height = window.innerHeight;
     context = canvas.getContext("2d");
     context.font = "15px Arial";
-
-
+    context.imageSmoothingEnabled = true;
+    context.imageSmoothingQuality = "high";
 };
 
 
@@ -141,6 +141,8 @@ var redraw = function () {
             // Walls
             if (world[x][y] == Block.WALL) {
                 context.drawImage(tex.wall, x * scale + xOffset, y * scale + yOffset, scale, scale);
+            } else if (world[x][y] == Block.DIRT) {
+                context.drawImage(tex.dirt, x * scale + xOffset, y * scale + yOffset, scale, scale);
             } else {
                 // Everthing else
                 context.drawImage(tex.air, x * scale + xOffset, y * scale + yOffset, scale, scale);
