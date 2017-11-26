@@ -67,8 +67,8 @@ var keys = [];
 var refreshOffset = function(){
     xOffset = 0;
     yOffset = 0;
-    xOffset -= player.blockPos.x * scale - window.innerWidth / 2;
-    yOffset -= player.blockPos.y * scale - window.innerHeight / 2 -1*scale;
+    xOffset -= player.pos.x * scale - window.innerWidth / 2;
+    yOffset -= player.pos.y * scale - window.innerHeight / 2 -1*scale;
 }
 
 var addEvents = function () {
