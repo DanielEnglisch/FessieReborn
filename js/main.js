@@ -47,6 +47,7 @@ var initWorld = function () {
 }
 
 var tex = new TexturesBundle();
+var audio = new AudioBundle();
 
 var main = function () {
     addEvents();

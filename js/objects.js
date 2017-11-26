@@ -156,13 +156,21 @@ function Player(pos) {
 
 }
 
-var dump_land = new Audio('audio/dumpster_land.wav');
-var dump_move = new Audio('audio/dumpster_move.wav');
+
 
 inherits(Fallable, GameObject);
 
 function Fallable(pos, type) {
     Fallable.super_.call(this, pos, type);
+
+    this.fallEvent = function(){
+        
+        playAudio(audio.dump_land);
+
+        if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
+            player.kill();
+        }
+    }
 
     this.move = function (dx, dy, playerCause = false) {
 
@@ -173,7 +181,7 @@ function Fallable(pos, type) {
         var succ = true;
 
         // When requested position is wall return
-        if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.WALL)
+        if (world[this.blockPos.x + dx][this.blockPos.y + dy] != Block.AIR)
             return false;
         // Check if requested position is Fallable
         var myBlockPos = this.blockPos;
@@ -190,8 +198,7 @@ function Fallable(pos, type) {
         this.blockPos.y += dy;
 
         if (playerCause) {
-            var sound2 = dump_move.cloneNode();
-            sound2.play();
+            playAudio(audio.dump_move);
         }
 
         return true;
@@ -209,14 +216,8 @@ function Fallable(pos, type) {
         if (this.isFalling && !isAir(this.blockPos.x, this.blockPos.y + 1)) {
             this.isFalling = false;
 
-            // Play laning sound
-            var sound2 = dump_land.cloneNode();
-            sound2.play();
-            console.log("land");
+            this.fallEvent();
 
-            if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
-                player.kill();
-            }
         }
 
         // If Fallable is on other Fallable -> slip to side if possible
