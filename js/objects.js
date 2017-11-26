@@ -77,7 +77,7 @@ function Player(pos) {
         else {
             // Check if requested position is Fallable
             var playerblockpos = this.blockPos;
-            fallables.forEach(function (f) {
+            fallables.forEach(function (f, index, obj) {
                 // When fallable is falling
                 if (Fallable.falling) {
                     if (playerblockpos.x + dx == f.blockPos.x && playerblockpos.y + dy == f.blockPos.y ||
@@ -88,8 +88,10 @@ function Player(pos) {
                     // Try to move fallable
                     if (playerblockpos.x + dx == f.blockPos.x && playerblockpos.y + dy == f.blockPos.y) {
                         if (f.type == Block.TRASH) {
-                            // TODO: Collect
-                            console.log("Collected resting trash");
+                            obj.splice(index, 1);
+                            // TODO: increment score
+                            playAudio(audio.trash_collect);
+
                         } else
                             // Try to move fallable
                             if (dy == -1 || !f.move(dx, dy, true))
@@ -165,11 +167,7 @@ function Fallable(pos, type) {
 
     this.fallEvent = function(){
         
-        playAudio(audio.dump_land);
-
-        if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
-            player.kill();
-        }
+      
     }
 
     this.move = function (dx, dy, playerCause = false) {
@@ -276,6 +274,13 @@ function Dumpster(pos) {
         context.drawImage(tex.dumpster, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
         context.stroke();
     }
+    this.fallEvent = function(){
+        playAudio(audio.dump_land);
+        
+                if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
+                    player.kill();
+                }
+    }
 }
 
 inherits(Trash, Fallable);
@@ -285,5 +290,12 @@ function Trash(pos) {
     this.draw = function (context) {
         context.drawImage(tex.trash, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
         context.stroke();
+    }
+    this.fallEvent = function(){
+        playAudio(audio.trash_land);
+        
+        if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
+                    player.kill();
+        }
     }
 }
