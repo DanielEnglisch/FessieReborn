@@ -4,6 +4,7 @@ const Block = {
     PLAYER: 2,
     DUMPSTER: 3,
     TRASH: 4,
+    DIRT: 5
 };
 
 const Direc = {
@@ -26,7 +27,7 @@ var GameObject = function (position, type) {
     this.pos = new Vec(position.x, position.y);
     this.updateAnimaiton = function () {
         // Basic animaiton
-        if (this.pos.x+gravity < this.blockPos.x) {
+        if (this.pos.x + gravity < this.blockPos.x) {
             this.moving = true;
             this.pos.x += gravity;
             this.pos.x = Math.round(this.pos.x * 100) / 100
@@ -36,7 +37,7 @@ var GameObject = function (position, type) {
             this.pos.x -= gravity;
             this.pos.x = Math.round(this.pos.x * 100) / 100
             return false;
-        } else if (this.pos.y + gravity< this.blockPos.y) {
+        } else if (this.pos.y + gravity < this.blockPos.y) {
             this.moving = true;
             this.pos.y += gravity;
             this.pos.y = Math.round(this.pos.y * 100) / 100
@@ -71,6 +72,8 @@ function Player(pos) {
         // When requested position is wall return
         if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.WALL)
             return;
+        else if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.DIRT)
+        world[this.blockPos.x + dx][this.blockPos.y + dy] = 0;
         else {
             // Check if requested position is Fallable
             var playerblockpos = this.blockPos;
@@ -186,11 +189,11 @@ function Fallable(pos, type) {
         this.blockPos.x += dx;
         this.blockPos.y += dy;
 
-        if(playerCause){
+        if (playerCause) {
             var sound2 = dump_move.cloneNode();
-            sound2.play();    
+            sound2.play();
         }
-       
+
         return true;
     }
 
@@ -245,6 +248,10 @@ function Fallable(pos, type) {
 
 var belowCanSlip = function (fallable) {
     var below = getFallable(fallable.blockPos.x, fallable.blockPos.y + 1);
+    var below_below = getFallable(fallable.blockPos.x, fallable.blockPos.y + 2);
+
+    if(!below_below)
+        return false;
     if (
         isAir(below.blockPos.x + 1, below.blockPos.y) &&
         isAir(below.blockPos.x + 1, below.blockPos.y + 1)
