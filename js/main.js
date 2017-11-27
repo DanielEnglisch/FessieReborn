@@ -1,7 +1,9 @@
 var canvas = document.getElementById("screen");
 var context = null;
 const scale = 64;
-const gravity = 0.1;
+const gravity = 0.075;
+const movementSpeed = 0.1;
+
 
 var xOffset = 0;
 var yOffset = 0;
@@ -80,6 +82,8 @@ var addEvents = function () {
         canvas.height= window.innerHeight-40;
         refreshOffset();
     });
+
+    
     
     window.onkeydown = function (e) {
 

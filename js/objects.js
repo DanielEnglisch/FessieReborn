@@ -25,26 +25,26 @@ var GameObject = function (position, type) {
     this.type = type;
     this.moving = false;
     this.pos = new Vec(position.x, position.y);
-    this.updateAnimaiton = function () {
+    this.updateAnimaiton = function (speed) {
         // Basic animaiton
-        if (this.pos.x + gravity < this.blockPos.x) {
+        if (this.pos.x + speed < this.blockPos.x) {
             this.moving = true;
-            this.pos.x += gravity;
+            this.pos.x += speed;
             this.pos.x = Math.round(this.pos.x * 100) / 100
             return false;
-        } else if (this.pos.x - gravity > this.blockPos.x) {
+        } else if (this.pos.x - speed > this.blockPos.x) {
             this.moving = true;
-            this.pos.x -= gravity;
+            this.pos.x -= speed;
             this.pos.x = Math.round(this.pos.x * 100) / 100
             return false;
-        } else if (this.pos.y + gravity < this.blockPos.y) {
+        } else if (this.pos.y + speed < this.blockPos.y) {
             this.moving = true;
-            this.pos.y += gravity;
+            this.pos.y += speed;
             this.pos.y = Math.round(this.pos.y * 100) / 100
             return false;
-        } else if (this.pos.y - gravity > this.blockPos.y) {
+        } else if (this.pos.y - speed > this.blockPos.y) {
             this.moving = true;
-            this.pos.y -= gravity;
+            this.pos.y -= speed;
             this.pos.y = Math.round(this.pos.y * 100) / 100
             return false;
         } else {
@@ -126,7 +126,7 @@ function Player(pos) {
     this.update = function () {
 
         refreshOffset();
-        this.updateAnimaiton();
+        this.updateAnimaiton(movementSpeed);
 
 
     }
@@ -207,7 +207,7 @@ function Fallable(pos, type) {
     this.wasFalling = false;
 
     this.update = function () {
-        if (!this.updateAnimaiton()) {
+        if (!this.updateAnimaiton(gravity)) {
             return;
         }
 
