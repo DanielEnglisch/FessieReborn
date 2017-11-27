@@ -75,7 +75,7 @@ function Player(pos) {
         // Walk on dirt
         else if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.DIRT){
          world[this.blockPos.x + dx][this.blockPos.y + dy] = 0;
-         playAudio(audio.walk);
+         playAudio(audio.dirt);
         }else {
             // Check if requested position is Fallable
             var playerblockpos = this.blockPos;
