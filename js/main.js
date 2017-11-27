@@ -70,6 +70,8 @@ var refreshOffset = function(){
     yOffset = 0;
     xOffset -= player.pos.x * scale - window.innerWidth / 2;
     yOffset -= player.pos.y * scale - window.innerHeight / 2 -1*scale;
+    xOffset = Math.round(xOffset);
+    yOffset = Math.round(yOffset);
 }
 
 var addEvents = function () {
