@@ -68,8 +68,8 @@ var keys = [];
 var refreshOffset = function(){
     xOffset = 0;
     yOffset = 0;
-    xOffset -= player.pos.x * scale - canvas.width / 2;
-    yOffset -= player.pos.y * scale - canvas.height / 2 -1*scale;
+    xOffset -= player.pos.x * scale - canvas.width / 2 +1 *scale;
+    yOffset -= player.pos.y * scale - canvas.height / 2 +0*scale;
     xOffset = Math.round(xOffset);
     yOffset = Math.round(yOffset);
 }
@@ -77,7 +77,7 @@ var refreshOffset = function(){
 var addEvents = function () {
     window.addEventListener("resize", function (e) {
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        canvas.height= window.innerHeight-40;
         refreshOffset();
     });
     
@@ -127,7 +127,7 @@ var update = function () {
 var initCanvas = function () {
     var canvas = document.getElementById("screen");
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.height= window.innerHeight-40;
     context = canvas.getContext("2d");
     context.font = "15px Arial";
 };

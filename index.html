@@ -1,34 +1,60 @@
 <!doctype html>
+<html>
 
 <head>
-  <meta charset="utf-8">
-  <title>Fessie</title>
-  <link href="css/style.css" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf8">
+  <title>Example</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: #12489e;
+      padding: 0;
+    }
+
+    #navigation{
+      width: 100%;
+      background: red;
+      height: 30px;
+      padding: 0;
+      margin: 0;
+    }
+
+    canvas{
+      margin: 0;
+      padding: 0;
+    }
+
+
+
+    
+
+    
+
+  </style>
 </head>
 
 <body onload="main();">
-  <header></header>
-  <div id="main">
-    <article>
-        <canvas id="screen">
-            Can't display canvas!
-        </canvas>
-    </article>
-    <nav>
-      <div class="header" id="myHeader">
-        <h2>Server Output</h2>
-      </div>
-     
-    </nav>
-   
+
+  <div id="navigation">
 
   </div>
-  
-  <script type="text/javascript" src="js/utils.js"></script>       
+
+  <div id="wrapper">
+    <canvas id="screen">
+      Not found
+    </canvas>
+  </div>
+
+  <script type="text/javascript" src="js/utils.js"></script>
   <script type="text/javascript" src="js/textureLoader.js"></script>
-  <script type="text/javascript" src="js/audioLoader.js"></script>                                        
+  <script type="text/javascript" src="js/audioLoader.js"></script>
   <script type="text/javascript" src="js/objects.js"></script>
-  <script type="text/javascript" src="js/worldLoader.js"></script>                                
-  <script type="text/javascript" src="js/main.js"></script>        
+  <script type="text/javascript" src="js/worldLoader.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
 </body>
+
+</html>
