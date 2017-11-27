@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: green;
+}
+
+#main {
+  display: flex;
+  min-height: calc(100vh - 40vh);
+}
+
+#main>article {
+  flex: 1;
+}
+
+#main>nav,
+#main>aside {
+  flex: 0 0 10vw;
+  background: yellow;
+}
+
+#main>nav {
+  order: -1;
+}
+
+header,
+footer {
+  background: blue;
+  height: 5vh;
+}
+
+.header {
+  text-align: center;
+  padding: 10px 16px;
+  width: 100%;
+  background: #555;
+  color: #f1f1f1;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  background: red;
+}

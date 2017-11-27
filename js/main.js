@@ -68,8 +68,8 @@ var keys = [];
 var refreshOffset = function(){
     xOffset = 0;
     yOffset = 0;
-    xOffset -= player.pos.x * scale - window.innerWidth / 2;
-    yOffset -= player.pos.y * scale - window.innerHeight / 2 -1*scale;
+    xOffset -= player.pos.x * scale - canvas.width / 2;
+    yOffset -= player.pos.y * scale - canvas.height / 2 -1*scale;
     xOffset = Math.round(xOffset);
     yOffset = Math.round(yOffset);
 }
@@ -130,8 +130,6 @@ var initCanvas = function () {
     canvas.height = window.innerHeight;
     context = canvas.getContext("2d");
     context.font = "15px Arial";
-    context.imageSmoothingEnabled = true;
-    context.imageSmoothingQuality = "high";
 };
 
 
