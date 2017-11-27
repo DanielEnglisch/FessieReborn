@@ -4,7 +4,7 @@ function AudioBundle() {
     this.dump_move = new Audio('audio/dumpster_move.wav');
     this.trash_land = new Audio('audio/trash_land.wav');
     this.trash_collect = new Audio('audio/trash_collect.wav');
-    this.walk = new Audio('audio/walk.wav');            
+    this.dirt = new Audio('audio/dirt.wav');            
 }
 
 var playAudio = function(audio){
