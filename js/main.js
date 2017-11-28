@@ -12,6 +12,7 @@ var yOffset = 0;
 var fallables = new Array();
 var player = null;
 var world = [];
+var exit = null;
 
 var isFallable = function (x, y) {
     var succ = false;
@@ -41,8 +42,12 @@ var isWall = function (x, y) {
     return world[x][y] == Block.WALL;
 }
 
+var isExit = function(x,y){
+    return exit.pos.x == x && exit.pos.y == y;
+}
+
 var isAir = function (x, y) {
-    return world[x][y] == Block.AIR && !isPlayer(x, y) && !isFallable(x, y);
+    return world[x][y] == Block.AIR && !isPlayer(x, y) && !isFallable(x, y) && !isExit(x,y);
 }
 
 var initWorld = function () {
@@ -169,6 +174,7 @@ var redraw = function () {
     }
 
     player.draw(context);
+    exit.draw(context);
 
     // Draw fallables
     fallables.forEach(function (f) {

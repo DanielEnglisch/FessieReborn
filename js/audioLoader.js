@@ -18,6 +18,8 @@ function AudioBundle() {
     this.walk = new Audio('audio/walk.wav');
     
     this.die = new Audio('audio/die.wav');
+    this.exit_open = new Audio('audio/exit_open.wav');
+    this.finish = new Audio('audio/finish.wav');
     
 }
 
