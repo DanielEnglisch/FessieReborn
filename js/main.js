@@ -173,7 +173,7 @@ var redraw = function () {
     context.font = "24px Arial";    
     context.textAlign="center";
     context.textBaseline = "middle";
-    context.fillStyle = "red";
+    context.fillStyle = "rgb(248, 132, 0)";
     context.fillText("Score: " + score,canvas.width/2,canvas.height-25); 
     
 
