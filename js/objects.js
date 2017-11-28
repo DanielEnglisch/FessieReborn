@@ -75,7 +75,7 @@ function Player(pos) {
         // Walk on dirt
         else if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.DIRT){
          world[this.blockPos.x + dx][this.blockPos.y + dy] = 0;
-         playAudio(audio.dirt);
+         playDirt();
         }else {
             // Check if requested position is Fallable
             var playerblockpos = this.blockPos;
@@ -122,6 +122,9 @@ function Player(pos) {
         else if (dx == 0 && dy == -1)
             player.looking = Direc.UP;
 
+        // Normal walk sound
+        playAudio(audio.walk);
+
     }
 
     this.update = function () {
@@ -155,6 +158,7 @@ function Player(pos) {
     }
 
     this.kill = function () {
+        playAudio(audio.die);
         alert("You died!");
         reloadLevel();
     }
