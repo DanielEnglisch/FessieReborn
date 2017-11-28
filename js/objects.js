@@ -91,7 +91,8 @@ function Player(pos) {
                     if (playerblockpos.x + dx == f.blockPos.x && playerblockpos.y + dy == f.blockPos.y) {
                         if (f.type == Block.TRASH) {
                             obj.splice(index, 1);
-                            // TODO: increment score
+                            // increment score
+                            score++;
                             playAudio(audio.trash_collect);
 
                         } else

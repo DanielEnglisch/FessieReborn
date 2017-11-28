@@ -3,6 +3,7 @@ var context = null;
 const scale = 64;
 const gravity = 0.075;
 const movementSpeed = 0.1;
+var score = 0;
 
 
 var xOffset = 0;
@@ -78,6 +79,7 @@ var refreshOffset = function(){
 
 var addEvents = function () {
     window.addEventListener("resize", function (e) {
+        console.log("RESIZE");
         canvas.width = window.innerWidth;
         canvas.height= window.innerHeight-40;
         refreshOffset();
@@ -133,7 +135,6 @@ var initCanvas = function () {
     canvas.width = window.innerWidth;
     canvas.height= window.innerHeight-40;
     context = canvas.getContext("2d");
-    context.font = "15px Arial";
 };
 
 
@@ -164,5 +165,16 @@ var redraw = function () {
     fallables.forEach(function (f) {
         f.draw(context);
     });
+
+    // Score Test
+    context.fillStyle = "black";    
+    context.fillRect(0, canvas.height-50, canvas.width, 50);
+    context.stroke();
+    context.font = "24px Arial";    
+    context.textAlign="center";
+    context.textBaseline = "middle";
+    context.fillStyle = "red";
+    context.fillText("Score: " + score,canvas.width/2,canvas.height-25); 
+    
 
 };
