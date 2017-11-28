@@ -57,6 +57,7 @@ var main = function () {
     initCanvas();
     initWorld();
     tex.load();
+    startBackgroundMusic();
     loop();
 };
 
