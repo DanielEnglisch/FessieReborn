@@ -61,8 +61,18 @@ var main = function () {
     loop();
 };
 
+
+var time = Date.now();
+var thresh = 1000/120;
+
 var loop = function () {
-    update();
+
+    if (Date.now() -  time >= thresh) {
+        update();
+       time = Date.now();
+        
+    }
+
     redraw();
     requestAnimationFrame(loop);
 }
