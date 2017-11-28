@@ -62,7 +62,6 @@ function TexturesBundle() {
       case 15: return this.trash15; break;
       case 16: return this.trash16; break;
       case 17: return this.trash17; break;
-      
     }
     
   };
@@ -70,6 +69,8 @@ function TexturesBundle() {
   this.wall = new Image();
   this.air = new Image();
   this.dirt = new Image();
+  this.exit_open = new Image();
+  this.exit_closed = new Image();
   
   this.load = function() {
     this.player_neutral.src = "img/p.png";
@@ -79,7 +80,8 @@ function TexturesBundle() {
     this.player_right.src = "img/p_right.png";
 
     this.wall.src = "img/wall.png";
-
+    this.exit_closed.src = "img/exit_closed.png";
+    this.exit_open.src = "img/exit_open.png";
     this.dumpster1.src = "img/dumpster1.png";
     this.dumpster2.src = "img/dumpster2.png";
     this.dumpster3.src = "img/dumpster3.png";

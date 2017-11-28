@@ -12,6 +12,7 @@ var loadLevel = function (file) {
     fallables = [];
     keys = [];
     score = 0;
+    exit = null;
     // Load form file into world matrix
     var txt = readTextFile(file);
     var rows = txt.split('\n');
@@ -46,6 +47,9 @@ var loadLevel = function (file) {
             } else if (world[x][y] == Block.TRASH) {
 
                 fallables.push(new Trash(new Vec(x, y)));
+                world[x][y] = 0;
+            } else if (world[x][y] == Block.EXIT) {
+                exit = new Exit(new Vec(x, y));
                 world[x][y] = 0;
             }
         }

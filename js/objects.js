@@ -4,7 +4,8 @@ const Block = {
     PLAYER: 2,
     DUMPSTER: 3,
     TRASH: 4,
-    DIRT: 5
+    DIRT: 5,
+    EXIT: 6
 };
 
 const Direc = {
@@ -76,6 +77,14 @@ function Player(pos) {
         else if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.DIRT){
          world[this.blockPos.x + dx][this.blockPos.y + dy] = 0;
          playDirt();
+        } else if (isExit(this.blockPos.x + dx,this.blockPos.y + dy)){
+                // TODO: Exit logic
+                if(exit.isOpen == false)
+                    return;
+                else{
+                    playAudio(audio.finish);
+                    reloadLevel();
+                }
         }else {
             // Check if requested position is Fallable
             var playerblockpos = this.blockPos;
@@ -94,6 +103,7 @@ function Player(pos) {
                             // increment score
                             score++;
                             playAudio(audio.trash_collect);
+                            exit.open();
 
                         } else
                             // Try to move fallable
@@ -305,5 +315,23 @@ function Trash(pos) {
         if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
                     player.kill();
         }
+    }
+}
+
+function Exit(pos){
+
+    this.open = function(){
+        playAudio(audio.exit_open);
+        this.isOpen = true;
+    }
+    this.isOpen = false;
+    this.pos = pos;
+    this.draw = function(context){
+        if(this.isOpen)
+            context.drawImage(tex.exit_open, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
+        else
+            context.drawImage(tex.exit_closed, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
+        
+        context.stroke();
     }
 }
