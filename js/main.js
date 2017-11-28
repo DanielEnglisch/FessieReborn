@@ -68,6 +68,7 @@ var loop = function () {
 var keys = [];
 
 var refreshOffset = function(){
+    return;
     xOffset = 0;
     yOffset = 0;
     xOffset -= player.pos.x * scale - canvas.width / 2 +1 *scale;
