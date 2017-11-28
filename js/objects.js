@@ -276,8 +276,9 @@ inherits(Dumpster, Fallable);
 
 function Dumpster(pos) {
     Dumpster.super_.call(this, pos, Block.DUMPSTER);
+    this.image = tex.dumpster();
     this.draw = function (context) {
-        context.drawImage(tex.dumpster, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
+        context.drawImage(this.image, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
         context.stroke();
     }
     this.fallEvent = function(){
@@ -293,8 +294,9 @@ inherits(Trash, Fallable);
 
 function Trash(pos) {
     Trash.super_.call(this, pos, Block.TRASH);
+    this.image = tex.trash();    
     this.draw = function (context) {
-        context.drawImage(tex.trash, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
+        context.drawImage(this.image, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
         context.stroke();
     }
     this.fallEvent = function(){
