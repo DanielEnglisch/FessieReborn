@@ -11,6 +11,7 @@ var loadLevel = function (file) {
     player = null;
     fallables = [];
     keys = [];
+    score = 0;
     // Load form file into world matrix
     var txt = readTextFile(file);
     var rows = txt.split('\n');
