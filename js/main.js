@@ -1,8 +1,8 @@
 var canvas = document.getElementById("screen");
 var context = null;
 const scale = 64;
-const gravity = 0.075;
-const movementSpeed = 0.1;
+const gravity = 0.05;
+const movementSpeed = 0.075;
 var score = 0;
 
 
@@ -61,7 +61,6 @@ var main = function () {
     loop();
 };
 
-
 var time = Date.now();
 var thresh = 1000/120;
 
@@ -70,7 +69,6 @@ var loop = function () {
     if (Date.now() -  time >= thresh) {
         update();
        time = Date.now();
-        
     }
 
     redraw();
