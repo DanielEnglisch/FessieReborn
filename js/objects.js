@@ -27,14 +27,14 @@ var GameObject = function (position, type) {
     this.pos = new Vec(position.x, position.y);
     this.updateAnimaiton = function (speed) {
         // Basic animaiton
-        if (this.pos.x + speed < this.blockPos.x) {
+        if (this.pos.x + movementSpeed < this.blockPos.x) {
             this.moving = true;
-            this.pos.x += speed;
+            this.pos.x += movementSpeed;
             this.pos.x = Math.round(this.pos.x * 100) / 100
             return false;
-        } else if (this.pos.x - speed > this.blockPos.x) {
+        } else if (this.pos.x - movementSpeed > this.blockPos.x) {
             this.moving = true;
-            this.pos.x -= speed;
+            this.pos.x -= movementSpeed;
             this.pos.x = Math.round(this.pos.x * 100) / 100
             return false;
         } else if (this.pos.y + speed < this.blockPos.y) {
@@ -132,6 +132,7 @@ function Player(pos) {
     }
 
     this.draw = function (context) {
+
         switch (this.looking) {
             case Direc.UP:
                 context.drawImage(tex.player_up, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
