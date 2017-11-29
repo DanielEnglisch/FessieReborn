@@ -43,7 +43,7 @@
     canvas {
       margin: 0;
       padding: 0;
-      background: green;
+      background: black;
       float: left;
       
     }
@@ -84,12 +84,12 @@
   <div id="palett">
     <img src="../img/air.png" width="32px" height="32px" id="0">      
     <img src="../img/wall.png" width="32px" height="32px" id="1">
-    <img src="../img/exit_open.png" width="32px" height="32px" id="6">          
     <img src="../img/p.png" width="32px" height="32px" id="2">          
-    <img src="../img/steel_wall.png" width="32px" height="32px" id="7">
-    <img src="../img/dirt.png" width="32px" height="32px" id="5">
     <img src="../img/dumpster1.png" width="32px" height="32px" id="3">
-    <img src="../img/trash1.png" width="32px" height="32px" id="4">
+    <img src="../img/trash13.png" width="32px" height="32px" id="4">
+    <img src="../img/dirt.png" width="32px" height="32px" id="5">
+    <img src="../img/exit_open.png" width="32px" height="32px" id="6">          
+    <img src="../img/steel_wall.png" width="32px" height="32px" id="7">
   </div>
   <div id="wrapper">
     <canvas id="screen">

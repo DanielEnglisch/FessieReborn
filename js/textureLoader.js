@@ -41,11 +41,12 @@ function TexturesBundle() {
   this.trash15 = new Image();
   this.trash16 = new Image();
   this.trash17 = new Image();
+  this.trash18 = new Image();
   
 
    // Trash variation
    this.trash = function(){
-    var num = Math.floor(Math.random() * 17) + 1;
+    var num = Math.floor(Math.random() * 18) + 1;
     switch(num){
       case 1: return this.trash1; break;
       case 2: return this.trash2; break;
@@ -64,6 +65,7 @@ function TexturesBundle() {
       case 15: return this.trash15; break;
       case 16: return this.trash16; break;
       case 17: return this.trash17; break;
+      case 18: return this.trash18; break;      
     }
     
   };
@@ -107,7 +109,7 @@ function TexturesBundle() {
     this.trash15.src = dir + "trash15.png";
     this.trash16.src = dir + "trash16.png";
     this.trash17.src = dir + "trash17.png";
-    
+    this.trash18.src = dir + "trash18.png";
     
     this.air.src = dir + "air.png";    
     this.dirt.src = dir + "dirt.png";    
