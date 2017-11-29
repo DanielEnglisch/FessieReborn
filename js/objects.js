@@ -112,10 +112,15 @@ function Player(pos) {
                     if (playerblockpos.x + dx == f.blockPos.x && playerblockpos.y + dy == f.blockPos.y) {
                         if (f.type == Block.TRASH) {
                             obj.splice(index, 1);
-                            // increment score
-                            score++;
+
+                            items_left--;
                             playAudio(audio.trash_collect);
-                            exit.open();
+
+                            if(items_left == 0)
+                            {
+                                exit.open();
+                            }
+                           
 
                         } else
                             // Try to move fallable

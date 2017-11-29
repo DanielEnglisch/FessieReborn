@@ -3,7 +3,7 @@ var context = null;
 const scale = 64;
 const gravity = 0.05;
 const movementSpeed = 0.075;
-var score = 0;
+var items_left = 0;
 
 
 var xOffset = 0;
@@ -155,7 +155,7 @@ var redraw = function () {
     context.textAlign="center";
     context.textBaseline = "middle";
     context.fillStyle = "rgb(248, 132, 0)";
-    context.fillText("Score: " + score,canvas.width/2,canvas.height-25); 
+    context.fillText("Items left: " + items_left,canvas.width/2,canvas.height-25); 
     
 
 };
