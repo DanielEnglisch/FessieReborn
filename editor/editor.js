@@ -59,7 +59,7 @@ var main = function(){
       
       context = canvas.getContext("2d");
 
-      canvas.addEventListener('click', function(event) { 
+      canvas.addEventListener('mousedown', function(event) { 
          world[
              Math.floor(event.offsetX/scale) * size
              +  Math.floor(event.offsetY/scale)] = paintID;
@@ -112,6 +112,10 @@ var draw = function(){
                 
             }else if(world[x*size+y] == Block.TRASH){
                 context.drawImage(tex.trash1, x * scale , y * scale , scale, scale);            
+                context.stroke();
+                
+            }else if(world[x*size+y] == Block.EXIT){
+                context.drawImage(tex.exit_open, x * scale , y * scale , scale, scale);            
                 context.stroke();
                 
             }
