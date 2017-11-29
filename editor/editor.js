@@ -27,7 +27,7 @@ var main = function(){
     for(var i = 0; i < size*size; i++){
         world[i] = 0;
     }
-        tex.load();
+        tex.load("../img/");
       $('img').click(function (e) {
         paintID = e.target.id;
       });

@@ -25,7 +25,7 @@ var main = function () {
     addEvents();
     initCanvas();
     initWorld();
-    tex.load();
+    tex.load("img/");
     startBackgroundMusic();
     loop();
 };

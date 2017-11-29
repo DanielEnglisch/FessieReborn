@@ -1,3 +1,5 @@
+
+
 function TexturesBundle() {
   this.player_neutral = new Image();
   this.player_up = new Image();
@@ -73,43 +75,43 @@ function TexturesBundle() {
   this.exit_closed = new Image();
   this.steel_wall = new Image();
   
-  this.load = function() {
-    this.player_neutral.src = "img/p.png";
-    this.player_up.src = "img/p_up.png";
-    this.player_down.src = "img/p_down.png";
-    this.player_left.src = "img/p_left.png";
-    this.player_right.src = "img/p_right.png";
+  this.load = function(dir) {
+    this.player_neutral.src = dir + "p.png";
+    this.player_up.src = dir + "p_up.png";
+    this.player_down.src = dir + "p_down.png";
+    this.player_left.src = dir + "p_left.png";
+    this.player_right.src = dir + "p_right.png";
 
-    this.wall.src = "img/wall.png";
-    this.exit_closed.src = "img/exit_closed.png";
-    this.exit_open.src = "img/exit_open.png";
-    this.dumpster1.src = "img/dumpster1.png";
-    this.dumpster2.src = "img/dumpster2.png";
-    this.dumpster3.src = "img/dumpster3.png";
-    this.dumpster4.src = "img/dumpster4.png";
+    this.wall.src = dir + "wall.png";
+    this.exit_closed.src = dir + "exit_closed.png";
+    this.exit_open.src = dir + "exit_open.png";
+    this.dumpster1.src = dir + "dumpster1.png";
+    this.dumpster2.src = dir + "dumpster2.png";
+    this.dumpster3.src = dir + "dumpster3.png";
+    this.dumpster4.src = dir + "dumpster4.png";
 
-    this.trash1.src = "img/trash1.png";
-    this.trash2.src = "img/trash2.png";
-    this.trash3.src = "img/trash3.png";
-    this.trash4.src = "img/trash4.png";
-    this.trash5.src = "img/trash5.png";
-    this.trash6.src = "img/trash6.png";
-    this.trash7.src = "img/trash7.png";
-    this.trash8.src = "img/trash8.png";
-    this.trash9.src = "img/trash9.png";
-    this.trash10.src = "img/trash10.png";
-    this.trash11.src = "img/trash11.png";
-    this.trash12.src = "img/trash12.png";
-    this.trash13.src = "img/trash13.png";
-    this.trash14.src = "img/trash14.png";
-    this.trash15.src = "img/trash15.png";
-    this.trash16.src = "img/trash16.png";
-    this.trash17.src = "img/trash17.png";
+    this.trash1.src = dir + "trash1.png";
+    this.trash2.src = dir + "trash2.png";
+    this.trash3.src = dir + "trash3.png";
+    this.trash4.src = dir + "trash4.png";
+    this.trash5.src = dir + "trash5.png";
+    this.trash6.src = dir + "trash6.png";
+    this.trash7.src = dir + "trash7.png";
+    this.trash8.src = dir + "trash8.png";
+    this.trash9.src = dir + "trash9.png";
+    this.trash10.src = dir + "trash10.png";
+    this.trash11.src = dir + "trash11.png";
+    this.trash12.src = dir + "trash12.png";
+    this.trash13.src = dir + "trash13.png";
+    this.trash14.src = dir + "trash14.png";
+    this.trash15.src = dir + "trash15.png";
+    this.trash16.src = dir + "trash16.png";
+    this.trash17.src = dir + "trash17.png";
     
     
-    this.air.src = "img/air.png";    
-    this.dirt.src = "img/dirt.png";    
-    this.steel_wall.src = "img/steel_wall.png";    
+    this.air.src = dir + "air.png";    
+    this.dirt.src = dir + "dirt.png";    
+    this.steel_wall.src = dir + "steel_wall.png";    
     
   }
 
