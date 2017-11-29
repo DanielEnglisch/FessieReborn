@@ -339,3 +339,42 @@ function Exit(pos){
         context.stroke();
     }
 }
+
+
+// GETTERS:
+
+var isFallable = function (x, y) {
+    var succ = false;
+    fallables.forEach(function (f) {
+        if (x == f.blockPos.x && y == f.blockPos.y) {
+            succ = true;
+        }
+    });
+    return succ;
+}
+
+var getFallable = function(x,y){
+    var result = null;
+    fallables.forEach(function (f) {
+        if (x == f.blockPos.x && y == f.blockPos.y) {
+            result = f;
+        }
+    });
+    return result;
+}
+
+var isPlayer = function (x, y) {
+    return player.blockPos.x == x && player.blockPos.y == y;
+}
+
+var isWall = function (x, y) {
+    return world[x][y] == Block.WALL;
+}
+
+var isExit = function(x,y){
+    return exit.pos.x == x && exit.pos.y == y;
+}
+
+var isAir = function (x, y) {
+    return world[x][y] == Block.AIR && !isPlayer(x, y) && !isFallable(x, y) && !isExit(x,y);
+}
