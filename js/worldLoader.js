@@ -1,12 +1,10 @@
-var currentLevel = null;
 
 var reloadLevel = function () {
-    loadLevel(currentLevel);
+    loadLevel();
 }
 
-var loadLevel = function (file) {
+var loadLevel = function () {
     // Reset everything:
-    currentLevel = file;
     world = [];
     player = null;
     fallables = [];
@@ -14,7 +12,7 @@ var loadLevel = function (file) {
     score = 0;
     exit = null;
     // Load form file into world matrix
-    var txt = readTextFile(file);
+    var txt = levelString;
     var rows = txt.split('X');
     var numcol = 0;
     for (var x = 0; x < rows.length ; x++) {
