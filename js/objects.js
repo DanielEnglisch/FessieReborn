@@ -65,6 +65,17 @@ function Player(pos) {
     this.looking = Direc.NONE;
     this.move = function (dx, dy) {
 
+        // Adjust look direction
+        if (dx == 1 && dy == 0)
+        player.looking = Direc.RIGHT;
+    else if (dx == -1 && dy == 0)
+        player.looking = Direc.LEFT;
+
+    else if (dx == 0 && dy == 1)
+        player.looking = Direc.DOWN;
+    else if (dx == 0 && dy == -1)
+        player.looking = Direc.UP;
+
         // Can't move when already moving
         if (this.moving)
             return;
@@ -122,16 +133,7 @@ function Player(pos) {
         this.blockPos.x += dx;
         this.blockPos.y += dy;
 
-        // Adjust look direction
-        if (dx == 1 && dy == 0)
-            player.looking = Direc.RIGHT;
-        else if (dx == -1 && dy == 0)
-            player.looking = Direc.LEFT;
-
-        else if (dx == 0 && dy == 1)
-            player.looking = Direc.DOWN;
-        else if (dx == 0 && dy == -1)
-            player.looking = Direc.UP;
+        
 
         // Normal walk sound
         playAudio(audio.walk);
