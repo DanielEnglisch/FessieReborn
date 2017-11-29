@@ -63,8 +63,8 @@
 <body onload="main();">
 
   <div id="navigation">
-    <a href="../">Game</a>
-    <a href="#">Info</a>
+  <a href="#" id="gamelink">Game</a>
+  <a href="#">Info</a>
     <a href="#">Level Editor</a>
     <a href="#">Login</a>
   </div>

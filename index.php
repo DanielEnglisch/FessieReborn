@@ -52,9 +52,16 @@
 <body onload="main();">
 
   <div id="navigation">
-    <a href="javascript:window.location.reload(true);">Game</a>
+    <a href="#" id="gamelink">Game</a>
     <a href="#">Info</a>
-    <a href="./editor">Level Editor</a>
+    <?php 
+    if(!empty($_GET['lvl'])){
+      echo '<a href="./editor/?lvl=' . $_GET['lvl'] . '">Level Editor</a>';
+    }else{
+     echo '<a href="./editor">Level Editor</a>';
+    }
+  
+  ?>
     <a href="#">Login</a>
   </div>
 

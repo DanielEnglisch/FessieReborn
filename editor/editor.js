@@ -47,27 +47,21 @@ var main = function () {
         paintID = e.target.id;
     });
 
-
-    window.onkeydown = function (e) {
-
-        if (e.repeat)
-            return;
-
+    $('#gamelink').click(function (e) {
         var lvl = "";
+        
+                for (var x = 0; x < size; x++) {
+                    for (var y = 0; y < size; y++) {
+                        if(world[x * size + y] != undefined)
+                            lvl += "" + world[x * size + y];
+                    }
+                    lvl += "X";
+        
+                }
+        
+                window.location.href = "../?lvl=" + lvl;
+    });
 
-        for (var x = 0; x < size; x++) {
-            for (var y = 0; y < size; y++) {
-                if(world[x * size + y] != undefined)
-                    lvl += "" + world[x * size + y];
-            }
-            lvl += "X";
-
-        }
-
-
-        window.location.href = "../?lvl=" + lvl;
-
-    };
 
     canvas = document.getElementById("screen");
     canvas.width = window.innerWidth;
@@ -79,10 +73,6 @@ var main = function () {
         world[
             Math.floor(event.offsetX / scale) * size +
             Math.floor(event.offsetY / scale)] = paintID;
-        console.log(world[
-            Math.floor(event.offsetX / scale) * size +
-            Math.floor(event.offsetY / scale)]);
-
     }, false);
 
     loop();
