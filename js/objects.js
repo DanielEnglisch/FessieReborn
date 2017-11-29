@@ -268,7 +268,8 @@ function Fallable(pos, type) {
 var belowCanSlip = function (fallable) {
     var below = getFallable(fallable.blockPos.x, fallable.blockPos.y + 1);
     var below_below = getFallable(fallable.blockPos.x, fallable.blockPos.y + 2);
-
+    if(!below_below)
+        return false;
    
     if (
         isAir(below.blockPos.x + 1, below.blockPos.y) &&
