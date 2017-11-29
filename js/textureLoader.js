@@ -71,6 +71,7 @@ function TexturesBundle() {
   this.dirt = new Image();
   this.exit_open = new Image();
   this.exit_closed = new Image();
+  this.steel_wall = new Image();
   
   this.load = function() {
     this.player_neutral.src = "img/p.png";
@@ -108,6 +109,7 @@ function TexturesBundle() {
     
     this.air.src = "img/air.png";    
     this.dirt.src = "img/dirt.png";    
+    this.steel_wall.src = "img/steel_wall.png";    
     
   }
 

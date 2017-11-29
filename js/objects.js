@@ -6,6 +6,7 @@ const Block = {
     TRASH: 4,
     DIRT: 5,
     EXIT: 6,
+    STEEL_WALL: 7
 };
 
 const Direc = {
@@ -71,7 +72,7 @@ function Player(pos) {
         var success = true;
 
         // When requested position is wall return
-        if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.WALL)
+        if (isWall(this.blockPos.x + dx,this.blockPos.y + dy))
             return;
         // Walk on dirt
         else if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.DIRT){
@@ -196,7 +197,7 @@ function Fallable(pos, type) {
         var succ = true;
 
         // When requested position is wall return
-        if (world[this.blockPos.x + dx][this.blockPos.y + dy] != Block.AIR)
+        if (!isAir(this.blockPos.x + dx,this.blockPos.y + dy))
             return false;
         // Check if requested position is Fallable
         var myBlockPos = this.blockPos;
@@ -368,7 +369,7 @@ var isPlayer = function (x, y) {
 }
 
 var isWall = function (x, y) {
-    return world[x][y] == Block.WALL;
+    return world[x][y] == Block.WALL || world[x][y] == Block.STEEL_WALL;
 }
 
 var isExit = function(x,y){

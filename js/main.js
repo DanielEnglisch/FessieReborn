@@ -125,6 +125,8 @@ var redraw = function () {
             // Walls
             if (world[x][y] == Block.WALL) {
                 context.drawImage(tex.wall, x * scale + xOffset, y * scale + yOffset, scale, scale);
+            } else if (world[x][y] == Block.STEEL_WALL) {
+                context.drawImage(tex.steel_wall, x * scale + xOffset, y * scale + yOffset, scale, scale);
             } else if (world[x][y] == Block.DIRT) {
                 context.drawImage(tex.dirt, x * scale + xOffset, y * scale + yOffset, scale, scale);
             } else {
