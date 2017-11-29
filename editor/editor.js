@@ -96,7 +96,7 @@ var loop = function () {
 }
 
 var draw = function () {
-    context.clearRect(0, 0, canvas.innerWidth, canvas.innerHeight);
+    context.clearRect(0, 0, canvas.width, canvas.height);
 
     for (var x = 0; x < size; x++) {
         for (var y = 0; y < size; y++) {
