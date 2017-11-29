@@ -31,13 +31,16 @@ var main = function () {
 
     // Load form file into world matrix
     var txt = levelString;
+    
     var ind = 0;
-    for(var i = 0; i < txt.lenght; i++){
-        if(txt.charAt(i) != 'X'){
+    for(var i = 0; i < txt.length; i++){
+        if(txt.charAt(i) != "X"){
             world[ind++] = txt.charAt(i);
-            console.log(txt.charAt(i));
         }
+        console.log(txt.charAt(i));
+        
     }
+    //console.log(txt);
 
     tex.load("../img/");
     $('img').click(function (e) {
@@ -87,7 +90,6 @@ var main = function () {
 
 
 var loop = function () {
-    console.log("0: " + world[0 * size + 0]);
     draw();
     requestAnimationFrame(loop);
 }
