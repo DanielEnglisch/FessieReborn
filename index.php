@@ -54,7 +54,7 @@
   <div id="navigation">
     <a href="javascript:window.location.reload(true);">Game</a>
     <a href="#">Info</a>
-    <a href="#">Level Editor</a>
+    <a href="./editor">Level Editor</a>
     <a href="#">Login</a>
   </div>
 
@@ -63,6 +63,19 @@
       Not found
     </canvas>
   </div>
+
+
+  <script type="text/javascript">
+  <?php 
+    if(!empty($_GET['lvl'])){
+      echo 'var levelString = "' . $_GET['lvl'] .'";';
+    }else{
+     echo ' var levelString = "11111111X15533451X15723251X15155551X15135551X11161111";';
+    }
+  
+  ?>
+    
+  </script>
 
   <script type="text/javascript" src="js/utils.js"></script>
   <script type="text/javascript" src="js/textureLoader.js"></script>

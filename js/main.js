@@ -15,7 +15,7 @@ var world = [];
 var exit = null;
 
 var initWorld = function () {
-    loadLevel('level/00.lvl');
+    loadLevel();
 }
 
 var tex = new TexturesBundle();
