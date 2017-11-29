@@ -25,14 +25,14 @@ const Block = {
 
 var main = function () {
 
-    for (var i = 0; i < size * size; i++) {
-        world[i] = 0;
-    }
+   
+
 
     // Load form file into world matrix
     var txt = levelString;
     
     var ind = 0;
+    size = txt.split("X")[0].length;
     for(var i = 0; i < txt.length; i++){
         if(txt.charAt(i) != "X"){
             world[ind++] = txt.charAt(i);
@@ -57,7 +57,8 @@ var main = function () {
 
         for (var x = 0; x < size; x++) {
             for (var y = 0; y < size; y++) {
-                lvl += "" + world[x * size + y];
+                if(world[x * size + y] != undefined)
+                    lvl += "" + world[x * size + y];
             }
             lvl += "X";
 
