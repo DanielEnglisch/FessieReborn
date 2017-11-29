@@ -69,6 +69,18 @@
     <a href="#">Login</a>
   </div>
 
+  <script type="text/javascript">
+    <?php 
+      if(!empty($_GET['lvl'])){
+        echo 'var levelString = "' . $_GET['lvl'] .'";';
+      }else{
+       echo ' var levelString = "1111111111X1355544441X1365544441X1552544441X1555544441X1331711171X1555555551X1331117111X1455555551X1111111111X";';
+      }
+    
+    ?>
+      
+    </script>
+    
   <div id="palett">
     <img src="../img/air.png" width="32px" height="32px" id="0">      
     <img src="../img/wall.png" width="32px" height="32px" id="1">
