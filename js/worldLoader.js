@@ -15,11 +15,11 @@ var loadLevel = function (file) {
     exit = null;
     // Load form file into world matrix
     var txt = readTextFile(file);
-    var rows = txt.split('\n');
+    var rows = txt.split('X');
     var numcol = 0;
-    for (var x = 0; x < rows.length - 1; x++) {
+    for (var x = 0; x < rows.length ; x++) {
         var lineArr = [];
-        for (var y = 0; y < rows[x].length - 1; y++) {
+        for (var y = 0; y < rows[x].length; y++) {
             lineArr[y] = rows[x].charAt(y);
             numcol = rows[x].length;
         }
