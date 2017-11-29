@@ -15,7 +15,7 @@ var loadLevel = function () {
     var txt = levelString;
     var rows = txt.split('X');
     var numcol = 0;
-    for (var x = 0; x < rows.length ; x++) {
+    for (var x = 0; x < rows.length-1 ; x++) {
         var lineArr = [];
         for (var y = 0; y < rows[x].length; y++) {
             lineArr[y] = rows[x].charAt(y);
@@ -25,8 +25,6 @@ var loadLevel = function () {
         numcol++;
     }
     console.log("Loaded level with size " + numcol + "x" + rows.length);
-
-    world = transpose(world);
 
     // Exctracting Game Objects from matrix
     for (var x = 0; x < world.length; x++) {
