@@ -5,7 +5,7 @@ const Block = {
     DUMPSTER: 3,
     TRASH: 4,
     DIRT: 5,
-    EXIT: 6
+    EXIT: 6,
 };
 
 const Direc = {
@@ -300,8 +300,12 @@ function Dumpster(pos) {
     }
 }
 
-inherits(Trash, Fallable);
+inherits(Collectable, Fallable);
+function Collectable(pos, type) {
+    Collectable.super_.call(this, pos, type);
+}
 
+inherits(Trash, Collectable);
 function Trash(pos) {
     Trash.super_.call(this, pos, Block.TRASH);
     this.image = tex.trash();    
@@ -311,15 +315,15 @@ function Trash(pos) {
     }
     this.fallEvent = function(){
         playAudio(audio.trash_land);
-        
         if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
-                    player.kill();
+            player.kill();
         }
     }
 }
 
-function Exit(pos){
 
+
+function Exit(pos){
     this.open = function(){
         playAudio(audio.exit_open);
         this.isOpen = true;
