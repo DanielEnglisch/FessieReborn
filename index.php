@@ -70,7 +70,7 @@
     if(!empty($_GET['lvl'])){
       echo 'var levelString = "' . $_GET['lvl'] .'";';
     }else{
-     echo ' var levelString = "11111111X15533451X15723251X15155551X15135551X11161111";';
+     echo ' var levelString = "1111111111X1355544441X1365544441X1552544441X1555544441X1331711171X1555555551X1331117111X1455555551X1111111111X";';
     }
   
   ?>
