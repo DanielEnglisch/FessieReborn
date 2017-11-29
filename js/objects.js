@@ -190,8 +190,8 @@ function Fallable(pos, type) {
 
     this.move = function (dx, dy, playerCause = false) {
 
-        // Can't move when it's already moving
-        if (this.moving)
+        // Can't move when it's already moving and cant move vertically
+        if (this.moving || dy != 0)
             return;
 
         var succ = true;
