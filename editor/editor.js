@@ -63,7 +63,9 @@ var main = function () {
         
                 }
         
-                window.location.href = "../?lvl=" + lvl;
+               // window.location.href = "../?lvl=" + lvl;
+               window.location.href = "../";
+
     });
 
 

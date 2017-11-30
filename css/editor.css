@@ -1,0 +1,52 @@
+ * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: #000000;
+      padding: 0;
+    }
+
+    #navigation {
+      min-height: 30px;
+      min-width: 100%;
+      background: #000000;
+      box-shadow: 5px 55px 50px -20px #b6b6b6;
+      display: flex;
+      align-content: center;
+      vertical-align: middle;
+    }
+
+    #navigation>a {
+      padding-top: 7px;
+      background: #1a1a1a;
+      font-family: "Lucida Console";
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      vertical-align: middle;
+      width: 33%;
+    }
+
+    #navigation>a:hover {
+      color: rgb(248, 132, 0);
+    }
+
+    canvas {
+      margin: 0;
+      padding: 0;
+      background: black;
+      float: left;
+      
+    }
+    
+    #palett{
+    float:left;
+    min-width: 32px;
+    height: calc(100% - 30px);
+    background: red;
+    display: flex;
+    flex-flow: wrap;
+    align-content: flex-start;
+   }

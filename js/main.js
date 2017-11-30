@@ -4,7 +4,7 @@ const scale = 64;
 const gravity = 0.05;
 const movementSpeed = 0.075;
 var items_left = 0;
-
+var STOP = false;
 
 var xOffset = 0;
 var yOffset = 0;
@@ -88,6 +88,15 @@ var addEvents = function () {
 
 var update = function () {
 
+    
+    player.update();
+    fallables.forEach(function (f) {
+        f.update();
+    });
+
+    if(STOP)
+    return;
+
     if (keys[38]) {
         player.move(0, -1);
     } else if (keys[40]) {
@@ -102,10 +111,6 @@ var update = function () {
     }
 
 
-    player.update();
-    fallables.forEach(function (f) {
-        f.update();
-    });
 };
 
 var initCanvas = function () {

@@ -85,8 +85,11 @@ function Player(pos) {
                 if(exit.isOpen == false)
                     return;
                 else{
-                    playAudio(audio.finish);
-                    reloadLevel();
+                    audio.finish.addEventListener('ended', function() {
+                        window.location.href = "?lvl=" + nextLevel;                                            
+                    }, true);
+                    audio.finish.play();
+                    STOP = true;
                 }
         }else {
             // Check if requested position is Fallable
