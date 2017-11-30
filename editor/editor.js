@@ -68,8 +68,8 @@ var main = function () {
 
 
     canvas = document.getElementById("screen");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.width = scale * size;
+    canvas.height = scale * size;
 
     context = canvas.getContext("2d");
 
