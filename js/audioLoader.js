@@ -14,12 +14,22 @@ function AudioBundle() {
     this.music1 = new Audio('audio/music1.wav');
     this.music2 = new Audio('audio/music2.wav');
     this.music3 = new Audio('audio/music3.wav');
- 
+    this.music4 = new Audio('audio/music4.wav');
+    this.music5 = new Audio('audio/music5.wav');
+    this.music6 = new Audio('audio/music6.wav');
+    
     this.walk = new Audio('audio/walk.wav');
     
     this.die = new Audio('audio/die.wav');
     this.exit_open = new Audio('audio/exit_open.wav');
     this.finish = new Audio('audio/finish.wav');
+
+    this.explosion = new Audio('audio/explosion.wav');
+    this.fire = new Audio('audio/fire.wav');
+    this.forece_field = new Audio('audio/forece_field.wav');
+    this.slime_explosion = new Audio('audio/slime_explosion.wav');
+    this.slime_squash = new Audio('audio/slime_squash.wav');
+    this.train = new Audio('audio/train.wav');
     
 }
 
