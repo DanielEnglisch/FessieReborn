@@ -76,7 +76,15 @@ function TexturesBundle() {
   this.exit_open = new Image();
   this.exit_closed = new Image();
   this.steel_wall = new Image();
+
+  this.fire = new Image();
+  this.fire_ball = new Image();
+  this.force_field = new Image();
+  this.bomb = new Image();
+  this.bluewall = new Image();
+  this.sewer = new Image();
   
+
   this.load = function(dir) {
     this.player_neutral.src = dir + "p.png";
     this.player_up.src = dir + "p_up.png";
@@ -114,6 +122,13 @@ function TexturesBundle() {
     this.air.src = dir + "air.png";    
     this.dirt.src = dir + "dirt.png";    
     this.steel_wall.src = dir + "steel_wall.png";    
+    
+    this.bomb.src = dir + "bomb.png";    
+    this.force_field.src = dir + "force_field.png";    
+    this.fire_ball.src = dir + "fire_ball.png";    
+    this.fire.src = dir + "fire.png";    
+    this.bluewall.src = dir + "bluewall.png";    
+    this.sewer.src = dir + "sewer.png";    
     
   }
 
