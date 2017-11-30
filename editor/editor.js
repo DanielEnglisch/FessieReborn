@@ -1,6 +1,7 @@
 var paintID = 0;
 var scale = 64;
-var size = 10;
+var xsize = 20;
+var ysize = 20;
 
 var world = [];
 var context = null;
@@ -25,56 +26,65 @@ const Block = {
     STEEL_WALL: 7
 };
 
-
-var main = function () {
-
-   
-
-
-    // Load form file into world matrix
-    var txt = levelString;
+var loadEditor = function(txt){
+    world = [];
     
+    xsize = txt.split("X")[0].length;
+    ysize = txt.split("X").length;
+
     var ind = 0;
-    size = txt.split("X")[0].length;
     for(var i = 0; i < txt.length; i++){
         if(txt.charAt(i) != "X"){
             world[ind++] = txt.charAt(i);                
         }
-        console.log(txt.charAt(i));
         
     }
+    canvas.width = scale * xsize;
+    canvas.height = scale * ysize;
+    console.log(xsize + " - " + ysize);
+}
+
+
+var main = function () {
+
+    
 
     // Change block
     tex.load("../img/");
     $('img').click(function (e) {
-        paintID = e.target.id;
-    });
 
-    // Export level on click
-    $('#gamelink').click(function (e) {
-        var lvl = "";
-        
-                for (var x = 0; x < size; x++) {
-                    for (var y = 0; y < size; y++) {
-                        if(world[x * size + y] != undefined)
-                            lvl += "" + world[x * size + y];
+        if(e.target.id == "10x10"){
+            loadEditor("1111111111X1255555551X1555545551X1555555551X1555555551X1555555551X1555555551X1555555551X1555555561X1111111111");
+        }else if(e.target.id == "20x20"){
+            loadEditor("11111111111111111111X12555555555455555561X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X11111111111111111111");
+        }else if(e.target.id == "save"){
+            var lvl = "";
+            
+                    for (var x = 0; x < xsize; x++) {
+                        for (var y = 0; y < ysize; y++) {
+                            if(world[x * xsize + y] != undefined)
+                                lvl += "" + world[x * xsize + y];
+                        }
+                        lvl += "X";
+            
                     }
-                    lvl += "X";
-        
-                }
-        
-               // window.location.href = "../?lvl=" + lvl;
-               window.location.href = "../";
-
+            
+                    lvl = lvl.substring(0, lvl.length - 1);
+                   alert(lvl);
+        }else
+            paintID = e.target.id;
     });
 
 
     canvas = document.getElementById("screen");
-    canvas.width = scale * size;
-    canvas.height = scale * size;
+    canvas.width = scale * ysize;
+    canvas.height = scale * xsize;
 
     context = canvas.getContext("2d");
 
+    // Load form file into world matrix
+    loadEditor("1111111111X1255555551X1555545551X1555555551X1555555551X1555555551X1555555551X1555555551X1555555561X1111111111");
+    
     canvas.addEventListener('mousedown', function (event) {
 
         if(paintID == Block.PLAYER){
@@ -90,7 +100,7 @@ var main = function () {
         }
 
         world[
-            Math.floor(event.offsetX / scale) * size +
+            Math.floor(event.offsetX / scale) * ysize +
             Math.floor(event.offsetY / scale)] = paintID;
 
 
@@ -110,38 +120,38 @@ var loop = function () {
 var draw = function () {
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    for (var x = 0; x < size; x++) {
-        for (var y = 0; y < size; y++) {
+    for (var x = 0; x < xsize; x++) {
+        for (var y = 0; y < ysize; y++) {
 
-            if (world[x * size + y] == Block.AIR) {
+            if (world[x * ysize + y] == Block.AIR) {
                 context.drawImage(tex.air, x * scale, y * scale, scale, scale);
                 context.stroke();
 
-            } else if (world[x * size + y] == Block.WALL) {
+            } else if (world[x * ysize + y] == Block.WALL) {
                 context.drawImage(tex.wall, x * scale, y * scale, scale, scale);
                 context.stroke();
 
-            } else if (world[x * size + y] == Block.STEEL_WALL) {
+            } else if (world[x * ysize + y] == Block.STEEL_WALL) {
                 context.drawImage(tex.steel_wall, x * scale, y * scale, scale, scale);
                 context.stroke();
 
-            } else if (world[x * size + y] == Block.DUMPSTER) {
+            } else if (world[x * ysize + y] == Block.DUMPSTER) {
                 context.drawImage(tex.dumpster1, x * scale, y * scale, scale, scale);
                 context.stroke();
 
-            } else if (world[x * size + y] == Block.DIRT) {
+            } else if (world[x * ysize + y] == Block.DIRT) {
                 context.drawImage(tex.dirt, x * scale, y * scale, scale, scale);
                 context.stroke();
 
-            } else if (world[x * size + y] == Block.PLAYER) {
+            } else if (world[x * ysize + y] == Block.PLAYER) {
                 context.drawImage(tex.player_neutral, x * scale, y * scale, scale, scale);
                 context.stroke();
 
-            } else if (world[x * size + y] == Block.TRASH) {
+            } else if (world[x * ysize + y] == Block.TRASH) {
                 context.drawImage(tex.trash13, x * scale, y * scale, scale, scale);
                 context.stroke();
 
-            } else if (world[x * size + y] == Block.EXIT) {
+            } else if (world[x * ysize + y] == Block.EXIT) {
                 context.drawImage(tex.exit_open, x * scale, y * scale, scale, scale);
                 context.stroke();
 

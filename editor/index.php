@@ -1,30 +1,3 @@
-<?php
-
- 
-$db = new PDO('mysql:host=localhost;dbname=fessie;charset=utf8', 'root', '');
-$levelString = "";
-$nextLevel = 0;
-$lvl = 1;
-
-if(!empty($_GET['lvl'])){
-  $lvl = $_GET['lvl'];
-}
-
-  $stmt = $db->prepare("SELECT data FROM levels WHERE id = ?");
-  $stmt->execute(array($lvl));
-  if(!$stmt){
-    print_r( $db->errorInfo());
-    die;
-  }
-  $row = $stmt->fetch(PDO::FETCH_ASSOC);
-  
-  $levelString = $row['data'];
-  $nextLevel = $lvl +1;
-
- 
- 
-?>
-
 <!doctype html>
 <html>
 
@@ -37,18 +10,11 @@ if(!empty($_GET['lvl'])){
 <body onload="main();">
 
   <div id="navigation">
-  <a href="#" id="gamelink">Game</a>
+  <a href="../">Game</a>
   <a href="#">Info</a>
   <a href="#">Level Editor</a>
   <a href="#">Login</a>
   </div>
-
-  <script type="text/javascript">
-     <?php 
-     echo 'var levelString = "' . $levelString .'";';
-  ?>
-      
-    </script>
     
   <div id="palett">
     <img src="../img/air.png" width="32px" height="32px" id="0">      
@@ -59,6 +25,11 @@ if(!empty($_GET['lvl'])){
     <img src="../img/dirt.png" width="32px" height="32px" id="5">
     <img src="../img/exit_open.png" width="32px" height="32px" id="6">          
     <img src="../img/steel_wall.png" width="32px" height="32px" id="7">
+
+    <img src="../img/10x10.png" width="32px" height="32px" id="10x10">
+    <img src="../img/20x20.png" width="32px" height="32px" id="20x20">
+    <img src="../img/save.png" width="32px" height="32px" id="save">
+
   </div>
   <div id="wrapper">
     <canvas id="screen">
