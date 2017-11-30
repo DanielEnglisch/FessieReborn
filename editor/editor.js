@@ -6,7 +6,10 @@ var world = [];
 var context = null;
 var canvas = null;
 
-
+var Vec = function (x, y) {
+    this.x = x;
+    this.y = y;
+};
 
 var tex = new TexturesBundle();
 
@@ -35,18 +38,19 @@ var main = function () {
     size = txt.split("X")[0].length;
     for(var i = 0; i < txt.length; i++){
         if(txt.charAt(i) != "X"){
-            world[ind++] = txt.charAt(i);
+            world[ind++] = txt.charAt(i);                
         }
         console.log(txt.charAt(i));
         
     }
-    //console.log(txt);
 
+    // Change block
     tex.load("../img/");
     $('img').click(function (e) {
         paintID = e.target.id;
     });
 
+    // Export level on click
     $('#gamelink').click(function (e) {
         var lvl = "";
         
@@ -70,9 +74,25 @@ var main = function () {
     context = canvas.getContext("2d");
 
     canvas.addEventListener('mousedown', function (event) {
+
+        if(paintID == Block.PLAYER){
+            for(var i = 0; i < world.length; i++){
+               if(world[i] == Block.PLAYER)
+                world[i] = Block.AIR;
+            }
+        }else if(paintID == Block.EXIT){
+            for(var i = 0; i < world.length; i++){
+               if(world[i] == Block.EXIT)
+                world[i] = Block.AIR;
+            }
+        }
+
         world[
             Math.floor(event.offsetX / scale) * size +
             Math.floor(event.offsetY / scale)] = paintID;
+
+
+
     }, false);
 
     loop();
