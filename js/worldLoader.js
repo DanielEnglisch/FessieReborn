@@ -51,4 +51,11 @@ var loadLevel = function () {
         }
     }
 
+    // Check if exit and play was set
+    if(!player || !exit){
+        alert("World is missing an exit or a player!");
+        throw new Error("World is missing an exit or a player!");
+    }
+
+
 }
