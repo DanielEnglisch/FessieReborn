@@ -147,9 +147,9 @@ function Player(pos) {
 
     this.update = function () {
 
-        refreshOffset();
         this.updateAnimaiton(movementSpeed);
-
+        refreshOffset();
+        
 
     }
 

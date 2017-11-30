@@ -49,8 +49,8 @@ var keys = [];
 var refreshOffset = function(){
     xOffset = 0;
     yOffset = 0;
-    xOffset -= player.pos.x * scale - canvas.width / 2 +1 *scale;
-    yOffset -= player.pos.y * scale - canvas.height / 2 +0*scale;
+    xOffset -= player.pos.x * scale - canvas.width / 2  + 1*scale;
+    yOffset -= player.pos.y * scale - canvas.height / 2 + 0*scale;
     xOffset = Math.round(xOffset);
     yOffset = Math.round(yOffset);
 }

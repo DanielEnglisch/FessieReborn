@@ -1,6 +1,6 @@
 var paintID = 0;
 var scale = 64;
-var size =10;
+var size = 10;
 
 var world = [];
 var context = null;
