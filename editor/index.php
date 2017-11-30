@@ -1,23 +1,26 @@
 <?php
 
-  $db = new PDO('mysql:host=localhost;dbname=fessie;charset=utf8', 'root', '');
-  $levelString = "";
-  $nextLevel = 0;
-  $lvl = $_GET['lvl'];
-  if(empty($lvl)){
-    $lvl = 1;
-  }
+ 
+$db = new PDO('mysql:host=localhost;dbname=fessie;charset=utf8', 'root', '');
+$levelString = "";
+$nextLevel = 0;
+$lvl = 1;
 
-    $sql = "SELECT data FROM levels WHERE id = " . $lvl;
-    $stmt = $db->query($sql); 
-    if(!$stmt){
-      print_r( $db->errorInfo());
-      die;
-    }
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-    $levelString = $row['data'];
-    $nextLevel = $lvl +1;
+if(!empty($_GET['lvl'])){
+  $lvl = $_GET['lvl'];
+}
+
+  $stmt = $db->prepare("SELECT data FROM levels WHERE id = ?");
+  $stmt->execute(array($lvl));
+  if(!$stmt){
+    print_r( $db->errorInfo());
+    die;
+  }
+  $row = $stmt->fetch(PDO::FETCH_ASSOC);
+  
+  $levelString = $row['data'];
+  $nextLevel = $lvl +1;
+
  
  
 ?>

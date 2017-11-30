@@ -3,13 +3,14 @@
   $db = new PDO('mysql:host=localhost;dbname=fessie;charset=utf8', 'root', '');
   $levelString = "";
   $nextLevel = 0;
-  $lvl = $_GET['lvl'];
-  if(empty($lvl)){
-    $lvl = 1;
+  $lvl = 1;
+
+  if(!empty($_GET['lvl'])){
+    $lvl = $_GET['lvl'];
   }
 
-    $sql = "SELECT data FROM levels WHERE id = " . $lvl;
-    $stmt = $db->query($sql); 
+    $stmt = $db->prepare("SELECT data FROM levels WHERE id = ?");
+    $stmt->execute(array($lvl));
     if(!$stmt){
       print_r( $db->errorInfo());
       die;
