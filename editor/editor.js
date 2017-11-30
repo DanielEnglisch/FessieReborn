@@ -116,7 +116,7 @@ var draw = function () {
                 context.stroke();
 
             } else if (world[x * size + y] == Block.TRASH) {
-                context.drawImage(tex.trash1, x * scale, y * scale, scale, scale);
+                context.drawImage(tex.trash13, x * scale, y * scale, scale, scale);
                 context.stroke();
 
             } else if (world[x * size + y] == Block.EXIT) {
