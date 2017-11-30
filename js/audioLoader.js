@@ -26,7 +26,7 @@ function AudioBundle() {
 
     this.explosion = new Audio('audio/explosion.wav');
     this.fire = new Audio('audio/fire.wav');
-    this.forece_field = new Audio('audio/forece_field.wav');
+    this.force_field = new Audio('audio/force_field.wav');
     this.slime_explosion = new Audio('audio/slime_explosion.wav');
     this.slime_squash = new Audio('audio/slime_squash.wav');
     this.train = new Audio('audio/train.wav');
