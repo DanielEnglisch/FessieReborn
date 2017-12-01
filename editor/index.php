@@ -41,6 +41,7 @@
     <img src="../img/dirt.png" width="32px" height="32px" id="5">
     <img src="../img/exit_open.png" width="32px" height="32px" id="6">          
     <img src="../img/steel_wall.png" width="32px" height="32px" id="7">
+    <img src="../img/bomb.png" width="32px" height="32px" id="8">
 
     <img src="../img/10x10.png" width="32px" height="32px" id="10x10">
     <img src="../img/20x20.png" width="32px" height="32px" id="20x20">

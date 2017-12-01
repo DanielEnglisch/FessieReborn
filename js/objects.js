@@ -28,26 +28,26 @@ var GameObject = function (position, type) {
     this.type = type;
     this.moving = false;
     this.pos = new Vec(position.x, position.y);
-    this.updateAnimaiton = function (speed) {
+    this.updateAnimaiton = function (yspeed, xspeed = movementSpeed) {
         // Basic animaiton
-        if (this.pos.x + movementSpeed < this.blockPos.x) {
+        if (this.pos.x + xspeed < this.blockPos.x) {
             this.moving = true;
-            this.pos.x += movementSpeed;
+            this.pos.x += xspeed;
             this.pos.x = Math.round(this.pos.x * 100) / 100
             return false;
         } else if (this.pos.x - movementSpeed > this.blockPos.x) {
             this.moving = true;
-            this.pos.x -= movementSpeed;
+            this.pos.x -= xspeed;
             this.pos.x = Math.round(this.pos.x * 100) / 100
             return false;
-        } else if (this.pos.y + speed < this.blockPos.y) {
+        } else if (this.pos.y + yspeed < this.blockPos.y) {
             this.moving = true;
-            this.pos.y += speed;
+            this.pos.y += yspeed;
             this.pos.y = Math.round(this.pos.y * 100) / 100
             return false;
-        } else if (this.pos.y - speed > this.blockPos.y) {
+        } else if (this.pos.y - yspeed > this.blockPos.y) {
             this.moving = true;
-            this.pos.y -= speed;
+            this.pos.y -= yspeed;
             this.pos.y = Math.round(this.pos.y * 100) / 100
             return false;
         } else {
@@ -82,8 +82,8 @@ function Player(pos) {
             world[this.blockPos.x + dx][this.blockPos.y + dy] = 0;
             playDirt();
             // If is monster
-        } else if (isMonster(this.blockPos.x + dx,this.blockPos.y + dy)) {
-            
+        } else if (isMonster(this.blockPos.x + dx, this.blockPos.y + dy)) {
+
             return;
 
         } else if (isExit(this.blockPos.x + dx, this.blockPos.y + dy)) {
@@ -413,48 +413,76 @@ var isExit = function (x, y) {
 
 
 var isAir = function (x, y) {
-    return world[x][y] == Block.AIR && !isPlayer(x, y) && !isFallable(x, y) && !isExit(x, y) && !isMonster(x,y);
+    return world[x][y] == Block.AIR && !isPlayer(x, y) && !isFallable(x, y) && !isExit(x, y) && !isMonster(x, y);
 }
 
 
 // AI-Test
 inherits(Monster, GameObject);
-function Monster(pos){
+function Monster(pos) {
     Monster.super_.call(this, pos, Block.MONSTER);
-    this.hasOrder = false;
-    this.moveDown = 0;
-    this.lastTick = Date.now();;
-    this.update = function(){
-        if(!this.updateAnimaiton(movementSpeed))
+    this.dir = Direc.RIGHT;
+    this.lastTick = Date.now();
+    this.update = function () {
+
+        if(isFallable(this.pos.x, this.pos.y)){
+            monsters.splice(monsters.indexOf(this), 1);
+            return;
+        }
+
+        if (!this.updateAnimaiton(0.015, 0.015))
             return;
 
-        var time = Date.now();
+        if (this.dir == Direc.RIGHT) {
 
-        if(time - this.lastTick < 200)
-            return;
-        else{
-            this.lastTick = time;
+            if (isAir(this.blockPos.x + 1, this.blockPos.y))
+                this.blockPos.x++;
+            else {
+                if ((Math.floor(Math.random() * 2) + 1) == 1) {
+                    this.dir = Direc.DOWN;
+                } else
+                    this.dir = Direc.LEFT;
+            }
+
+        } else if (this.dir == Direc.DOWN) {
+
+            if (isAir(this.blockPos.x, this.blockPos.y + 1))
+                this.blockPos.y++;
+            else {
+                if ((Math.floor(Math.random() * 2) + 1) == 1) {
+                    this.dir = Direc.RIGHT;
+                } else
+                    this.dir = Direc.UP;
+            }
+
+        } else if (this.dir == Direc.LEFT) {
+
+            if (isAir(this.blockPos.x - 1, this.blockPos.y))
+                this.blockPos.x--;
+            else {
+                if ((Math.floor(Math.random() * 2) + 1) == 1) {
+                    this.dir = Direc.UP;
+                } else
+                    this.dir = Direc.RIGHT;
+            }
+
+        } else if (this.dir == Direc.UP) {
+
+            if (isAir(this.blockPos.x, this.blockPos.y - 1))
+                this.blockPos.y--;
+            else {
+                if ((Math.floor(Math.random() * 2) + 1) == 1) {
+                    this.dir = Direc.LEFT;
+                } else
+                    this.dir = Direc.DOWN;
+            }
+
         }
-        console.log("AI TICK");
 
-        if(!this.hasOrder){
-            this.moveDown = 2;
-            this.hasOrder = true;
-        }else{
-            if(this.moveDown != 0)
-            {
-                if(isAir(this.blockPos.x, this.blockPos.y+1))
-                    this.blockPos.y++;
-                else if(world[this.blockPos.x ][this.blockPos.y+1] == Block.DIRT){
-                    world[this.blockPos.x ][this.blockPos.y+1] = Block.AIR;                    
-                    this.blockPos.y++;
-                }
 
-                this.moveDown--;
-            }else
-            this.hasOrder = false;
-        }
-    };
+
+    }
+
 
     this.draw = function (context) {
         context.drawImage(tex.bomb, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
