@@ -57,5 +57,9 @@ var loadLevel = function () {
         throw new Error("World is missing an exit or a player!");
     }
 
+    // Check if there is 0 trash
+    if(items_left == 0)
+        exit.open();
+
 
 }
