@@ -39,7 +39,7 @@
 <body onload="main();">
 
   <div id="navigation">
-    <a href="#">Game</a>
+    <a href="index.php">Game</a>
     <a href="#">Info</a>
     <?php echo '<a href="./editor?data=' . $levelString . '">Level Editor</a>'; ?>
     <a href="#">Login</a>
