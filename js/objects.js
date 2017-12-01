@@ -183,6 +183,8 @@ function Player(pos) {
     }
 
     this.kill = function () {
+        if(STOP)
+            return;
         playAudio(audio.die);
         alert("You died!");
         reloadLevel();
