@@ -108,6 +108,12 @@ var update = function () {
     } else if (keys[82]) {
         reloadLevel();
         keys[82] = false;
+    }else if(keys[27]){
+        // ESC
+        if(levelTesting)
+            window.location.href = "./editor/?data=" + levelString;  
+
+        keys[27] = false;
     }
 
 

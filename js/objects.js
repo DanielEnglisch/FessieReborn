@@ -86,6 +86,10 @@ function Player(pos) {
                     return;
                 else{
                     audio.finish.addEventListener('ended', function() {
+
+                        if(levelTesting)
+                        window.location.href = "./editor/?data=" + levelString;                                                                    
+                        else
                         window.location.href = "?lvl=" + nextLevel;                                            
                     }, true);
                     audio.finish.play();

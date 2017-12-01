@@ -4,11 +4,13 @@
   $levelString = "";
   $nextLevel = 0;
   $lvl = 1;
+  $levelTesting = false;
 
   if(!empty($_GET['lvl'])){
     $lvl = $_GET['lvl'];
   }
-
+  // If there is no data arg load from db
+  if(empty($_GET['data'])){
     $stmt = $db->prepare("SELECT data FROM levels WHERE id = ?");
     $stmt->execute(array($lvl));
     if(!$stmt){
@@ -19,11 +21,12 @@
     
     $levelString = $row['data'];
     $nextLevel = $lvl +1;
- 
- 
+  }else{
+    $levelString = $_GET['data'];
+    $levelTesting = true;
+  }
+    
 ?>
-
-
 <!doctype html>
 <html>
 
@@ -36,9 +39,9 @@
 <body onload="main();">
 
   <div id="navigation">
-    <a href="#" id="gamelink">Game</a>
+    <a href="#">Game</a>
     <a href="#">Info</a>
-    <a href="./editor">Level Editor</a>
+    <?php echo '<a href="./editor?data=' . $levelString . '">Level Editor</a>'; ?>
     <a href="#">Login</a>
   </div>
 
@@ -53,6 +56,10 @@
   <?php 
      echo 'var levelString = "' . $levelString .'";';
      echo 'var nextLevel = ' . $nextLevel .';';
+    if($levelTesting)
+      echo 'var levelTesting = true;';
+    else
+      echo 'var levelTesting = false;';
   ?>
   </script>
 

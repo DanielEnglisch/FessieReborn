@@ -1,3 +1,13 @@
+<?php
+
+  $levelString = "";
+
+  if(!empty($_GET['data'])){
+    $levelString = $_GET['data'];
+  }
+    
+ 
+?>
 <!doctype html>
 <html>
 
@@ -15,6 +25,12 @@
   <a href="#">Level Editor</a>
   <a href="#">Login</a>
   </div>
+  
+  <script type="text/javascript">
+  <?php 
+     echo 'var levelString = "' . $levelString .'";';
+  ?>
+  </script>
     
   <div id="palett">
     <img src="../img/air.png" width="32px" height="32px" id="0">      

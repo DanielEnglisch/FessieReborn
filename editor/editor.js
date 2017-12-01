@@ -26,18 +26,18 @@ const Block = {
     STEEL_WALL: 7
 };
 
-var loadEditor = function(txt){
+var loadEditor = function (txt) {
     world = [];
-    
+
     xsize = txt.split("X")[0].length;
     ysize = txt.split("X").length;
 
     var ind = 0;
-    for(var i = 0; i < txt.length; i++){
-        if(txt.charAt(i) != "X"){
-            world[ind++] = txt.charAt(i);                
+    for (var i = 0; i < txt.length; i++) {
+        if (txt.charAt(i) != "X") {
+            world[ind++] = txt.charAt(i);
         }
-        
+
     }
     canvas.width = scale * xsize;
     canvas.height = scale * ysize;
@@ -47,31 +47,31 @@ var loadEditor = function(txt){
 
 var main = function () {
 
-    
+  
 
     // Change block
     tex.load("../img/");
     $('img').click(function (e) {
 
-        if(e.target.id == "10x10"){
+        if (e.target.id == "10x10") {
             loadEditor("1111111111X1255555551X1555545551X1555555551X1555555551X1555555551X1555555551X1555555551X1555555561X1111111111");
-        }else if(e.target.id == "20x20"){
+        } else if (e.target.id == "20x20") {
             loadEditor("11111111111111111111X12555555555455555561X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X11111111111111111111");
-        }else if(e.target.id == "save"){
+        } else if (e.target.id == "save") {
             var lvl = "";
-            
-                    for (var x = 0; x < xsize; x++) {
-                        for (var y = 0; y < ysize; y++) {
-                            if(world[x * xsize + y] != undefined)
-                                lvl += "" + world[x * xsize + y];
-                        }
-                        lvl += "X";
-            
-                    }
-            
-                    lvl = lvl.substring(0, lvl.length - 1);
-                   alert(lvl);
-        }else
+
+            for (var x = 0; x < xsize; x++) {
+                for (var y = 0; y < ysize; y++) {
+                    if (world[x * xsize + y] != undefined)
+                        lvl += "" + world[x * xsize + y];
+                }
+                lvl += "X";
+
+            }
+
+            lvl = lvl.substring(0, lvl.length - 1);
+            window.location.href = "../?data=" + lvl;
+        } else
             paintID = e.target.id;
     });
 
@@ -83,19 +83,20 @@ var main = function () {
     context = canvas.getContext("2d");
 
     // Load form file into world matrix
-    loadEditor("1111111111X1255555551X1555545551X1555555551X1555555551X1555555551X1555555551X1555555551X1555555561X1111111111");
-    
+    if(levelString != "")
+        loadEditor(levelString);
+
     canvas.addEventListener('mousedown', function (event) {
 
-        if(paintID == Block.PLAYER){
-            for(var i = 0; i < world.length; i++){
-               if(world[i] == Block.PLAYER)
-                world[i] = Block.AIR;
+        if (paintID == Block.PLAYER) {
+            for (var i = 0; i < world.length; i++) {
+                if (world[i] == Block.PLAYER)
+                    world[i] = Block.AIR;
             }
-        }else if(paintID == Block.EXIT){
-            for(var i = 0; i < world.length; i++){
-               if(world[i] == Block.EXIT)
-                world[i] = Block.AIR;
+        } else if (paintID == Block.EXIT) {
+            for (var i = 0; i < world.length; i++) {
+                if (world[i] == Block.EXIT)
+                    world[i] = Block.AIR;
             }
         }
 
