@@ -31,13 +31,13 @@ var main = function () {
 };
 
 var time = Date.now();
-var thresh = 1000/120;
+var thresh = 1000 / 120;
 
 var loop = function () {
 
-    if (Date.now() -  time >= thresh) {
+    if (Date.now() - time >= thresh) {
         update();
-       time = Date.now();
+        time = Date.now();
     }
 
     redraw();
@@ -46,11 +46,11 @@ var loop = function () {
 
 var keys = [];
 
-var refreshOffset = function(){
+var refreshOffset = function () {
     xOffset = 0;
     yOffset = 0;
-    xOffset -= player.pos.x * scale - canvas.width / 2  + 1*scale;
-    yOffset -= player.pos.y * scale - canvas.height / 2 + 0*scale;
+    xOffset -= player.pos.x * scale - canvas.width / 2 + 1 * scale;
+    yOffset -= player.pos.y * scale - canvas.height / 2 + 0 * scale;
     xOffset = Math.round(xOffset);
     yOffset = Math.round(yOffset);
 }
@@ -59,12 +59,12 @@ var addEvents = function () {
     window.addEventListener("resize", function (e) {
         console.log("RESIZE");
         canvas.width = window.innerWidth;
-        canvas.height= window.innerHeight-40;
+        canvas.height = window.innerHeight - 40;
         refreshOffset();
     });
 
-    
-    
+
+
     window.onkeydown = function (e) {
 
         if (e.repeat)
@@ -88,14 +88,14 @@ var addEvents = function () {
 
 var update = function () {
 
-    
+
     player.update();
     fallables.forEach(function (f) {
         f.update();
     });
 
-    if(STOP)
-    return;
+    if (STOP)
+        return;
 
     if (keys[38]) {
         player.move(0, -1);
@@ -108,10 +108,10 @@ var update = function () {
     } else if (keys[82]) {
         reloadLevel();
         keys[82] = false;
-    }else if(keys[27]){
+    } else if (keys[27]) {
         // ESC
-        if(levelTesting)
-            window.location.href = "./editor/?data=" + levelString;  
+        if (levelTesting)
+            window.location.href = "./editor/?data=" + levelString;
 
         keys[27] = false;
     }
@@ -122,7 +122,7 @@ var update = function () {
 var initCanvas = function () {
     var canvas = document.getElementById("screen");
     canvas.width = window.innerWidth;
-    canvas.height= window.innerHeight-40;
+    canvas.height = window.innerHeight - 40;
     context = canvas.getContext("2d");
 };
 
@@ -143,10 +143,10 @@ var redraw = function () {
             } else {
                 // Everthing else
                 context.drawImage(tex.air, x * scale + xOffset, y * scale + yOffset, scale, scale);
-                
+
             }
             context.stroke();
-            
+
         }
     }
 
@@ -159,14 +159,14 @@ var redraw = function () {
     });
 
     // Score Test
-    context.fillStyle = "black";    
-    context.fillRect(0, canvas.height-50, canvas.width, 50);
+    context.fillStyle = "black";
+    context.fillRect(0, canvas.height - 50, canvas.width, 50);
     context.stroke();
-    context.font = "24px Arial";    
-    context.textAlign="center";
+    context.font = "24px Arial";
+    context.textAlign = "center";
     context.textBaseline = "middle";
     context.fillStyle = "rgb(248, 132, 0)";
-    context.fillText("Items left: " + items_left,canvas.width/2,canvas.height-25); 
-    
+    context.fillText("Items left: " + items_left, canvas.width / 2, canvas.height - 25);
+
 
 };

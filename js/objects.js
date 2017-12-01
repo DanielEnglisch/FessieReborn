@@ -65,7 +65,7 @@ function Player(pos) {
     this.looking = Direc.NONE;
     this.move = function (dx, dy) {
 
-    
+
 
         // Can't move when already moving
         if (this.moving)
@@ -74,28 +74,28 @@ function Player(pos) {
         var success = true;
 
         // When requested position is wall return
-        if (isWall(this.blockPos.x + dx,this.blockPos.y + dy))
+        if (isWall(this.blockPos.x + dx, this.blockPos.y + dy))
             return;
         // Walk on dirt
-        else if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.DIRT){
-         world[this.blockPos.x + dx][this.blockPos.y + dy] = 0;
-         playDirt();
-        } else if (isExit(this.blockPos.x + dx,this.blockPos.y + dy)){
-                // TODO: Exit logic
-                if(exit.isOpen == false)
-                    return;
-                else{
-                    audio.finish.addEventListener('ended', function() {
+        else if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.DIRT) {
+            world[this.blockPos.x + dx][this.blockPos.y + dy] = 0;
+            playDirt();
+        } else if (isExit(this.blockPos.x + dx, this.blockPos.y + dy)) {
+            // TODO: Exit logic
+            if (exit.isOpen == false)
+                return;
+            else {
+                audio.finish.addEventListener('ended', function () {
 
-                        if(levelTesting)
-                        window.location.href = "./editor/?data=" + levelString;                                                                    
-                        else
-                        window.location.href = "?lvl=" + nextLevel;                                            
-                    }, true);
-                    audio.finish.play();
-                    STOP = true;
-                }
-        }else {
+                    if (levelTesting)
+                        window.location.href = "./editor/?data=" + levelString;
+                    else
+                        window.location.href = "?lvl=" + nextLevel;
+                }, true);
+                audio.finish.play();
+                STOP = true;
+            }
+        } else {
             // Check if requested position is Fallable
             var playerblockpos = this.blockPos;
             fallables.forEach(function (f, index, obj) {
@@ -114,11 +114,10 @@ function Player(pos) {
                             items_left--;
                             playAudio(audio.trash_collect);
 
-                            if(items_left == 0)
-                            {
+                            if (items_left == 0) {
                                 exit.open();
                             }
-                           
+
 
                         } else
                             // Try to move fallable
@@ -136,12 +135,12 @@ function Player(pos) {
         this.blockPos.x += dx;
         this.blockPos.y += dy;
 
-            // Adjust look direction
-            if (dx == 1 && dy == 0)
+        // Adjust look direction
+        if (dx == 1 && dy == 0)
             player.looking = Direc.RIGHT;
         else if (dx == -1 && dy == 0)
             player.looking = Direc.LEFT;
-    
+
         else if (dx == 0 && dy == 1)
             player.looking = Direc.DOWN;
         else if (dx == 0 && dy == -1)
@@ -156,7 +155,7 @@ function Player(pos) {
 
         this.updateAnimaiton(movementSpeed);
         refreshOffset();
-        
+
 
     }
 
@@ -183,7 +182,7 @@ function Player(pos) {
     }
 
     this.kill = function () {
-        if(STOP)
+        if (STOP)
             return;
         playAudio(audio.die);
         alert("You died!");
@@ -199,9 +198,9 @@ inherits(Fallable, GameObject);
 function Fallable(pos, type) {
     Fallable.super_.call(this, pos, type);
 
-    this.fallEvent = function(){
-        
-      
+    this.fallEvent = function () {
+
+
     }
 
     this.move = function (dx, dy, playerCause = false) {
@@ -213,7 +212,7 @@ function Fallable(pos, type) {
         var succ = true;
 
         // When requested position is wall return
-        if (!isAir(this.blockPos.x + dx,this.blockPos.y + dy))
+        if (!isAir(this.blockPos.x + dx, this.blockPos.y + dy))
             return false;
         // Check if requested position is Fallable
         var myBlockPos = this.blockPos;
@@ -282,9 +281,9 @@ function Fallable(pos, type) {
 var belowCanSlip = function (fallable) {
     var below = getFallable(fallable.blockPos.x, fallable.blockPos.y + 1);
     var below_below = getFallable(fallable.blockPos.x, fallable.blockPos.y + 2);
-    if(!below_below)
+    if (!below_below)
         return false;
-   
+
     if (
         isAir(below.blockPos.x + 1, below.blockPos.y) &&
         isAir(below.blockPos.x + 1, below.blockPos.y + 1)
@@ -309,29 +308,31 @@ function Dumpster(pos) {
         context.drawImage(this.image, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
         context.stroke();
     }
-    this.fallEvent = function(){
+    this.fallEvent = function () {
         playAudio(audio.dump_land);
-        
-                if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
-                    player.kill();
-                }
+
+        if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
+            player.kill();
+        }
     }
 }
 
 inherits(Collectable, Fallable);
+
 function Collectable(pos, type) {
     Collectable.super_.call(this, pos, type);
 }
 
 inherits(Trash, Collectable);
+
 function Trash(pos) {
     Trash.super_.call(this, pos, Block.TRASH);
-    this.image = tex.trash();    
+    this.image = tex.trash();
     this.draw = function (context) {
         context.drawImage(this.image, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
         context.stroke();
     }
-    this.fallEvent = function(){
+    this.fallEvent = function () {
         playAudio(audio.trash_land);
         if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
             player.kill();
@@ -341,19 +342,19 @@ function Trash(pos) {
 
 
 
-function Exit(pos){
-    this.open = function(){
+function Exit(pos) {
+    this.open = function () {
         playAudio(audio.exit_open);
         this.isOpen = true;
     }
     this.isOpen = false;
     this.pos = pos;
-    this.draw = function(context){
-        if(this.isOpen)
+    this.draw = function (context) {
+        if (this.isOpen)
             context.drawImage(tex.exit_open, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
         else
             context.drawImage(tex.exit_closed, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
-        
+
         context.stroke();
     }
 }
@@ -371,7 +372,7 @@ var isFallable = function (x, y) {
     return succ;
 }
 
-var getFallable = function(x,y){
+var getFallable = function (x, y) {
     var result = null;
     fallables.forEach(function (f) {
         if (x == f.blockPos.x && y == f.blockPos.y) {
@@ -389,10 +390,10 @@ var isWall = function (x, y) {
     return world[x][y] == Block.WALL || world[x][y] == Block.STEEL_WALL;
 }
 
-var isExit = function(x,y){
+var isExit = function (x, y) {
     return exit.pos.x == x && exit.pos.y == y;
 }
 
 var isAir = function (x, y) {
-    return world[x][y] == Block.AIR && !isPlayer(x, y) && !isFallable(x, y) && !isExit(x,y);
+    return world[x][y] == Block.AIR && !isPlayer(x, y) && !isFallable(x, y) && !isExit(x, y);
 }

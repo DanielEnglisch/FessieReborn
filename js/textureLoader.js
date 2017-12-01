@@ -1,5 +1,3 @@
-
-
 function TexturesBundle() {
   this.player_neutral = new Image();
   this.player_up = new Image();
@@ -11,19 +9,27 @@ function TexturesBundle() {
   this.dumpster2 = new Image();
   this.dumpster3 = new Image();
   this.dumpster4 = new Image();
-  
+
   // Dumpster variation
-  this.dumpster = function(){
+  this.dumpster = function () {
     var num = Math.floor(Math.random() * 4) + 1;
-    switch(num){
-      case 1: return this.dumpster1; break;
-      case 2: return this.dumpster2; break;
-      case 3: return this.dumpster3; break;
-      case 4: return this.dumpster4; break;
+    switch (num) {
+      case 1:
+        return this.dumpster1;
+        break;
+      case 2:
+        return this.dumpster2;
+        break;
+      case 3:
+        return this.dumpster3;
+        break;
+      case 4:
+        return this.dumpster4;
+        break;
     }
-    
+
   };
-  
+
   this.trash1 = new Image();
   this.trash2 = new Image();
   this.trash3 = new Image();
@@ -42,32 +48,68 @@ function TexturesBundle() {
   this.trash16 = new Image();
   this.trash17 = new Image();
   this.trash18 = new Image();
-  
 
-   // Trash variation
-   this.trash = function(){
+
+  // Trash variation
+  this.trash = function () {
     var num = Math.floor(Math.random() * 18) + 1;
-    switch(num){
-      case 1: return this.trash1; break;
-      case 2: return this.trash2; break;
-      case 3: return this.trash3; break;
-      case 4: return this.trash4; break;
-      case 5: return this.trash5; break;
-      case 6: return this.trash6; break;
-      case 7: return this.trash7; break;
-      case 8: return this.trash8; break;
-      case 9: return this.trash9; break;
-      case 10: return this.trash10; break;
-      case 11: return this.trash11; break;
-      case 12: return this.trash12; break;
-      case 13: return this.trash13; break;
-      case 14: return this.trash14; break;
-      case 15: return this.trash15; break;
-      case 16: return this.trash16; break;
-      case 17: return this.trash17; break;
-      case 18: return this.trash18; break;      
+    switch (num) {
+      case 1:
+        return this.trash1;
+        break;
+      case 2:
+        return this.trash2;
+        break;
+      case 3:
+        return this.trash3;
+        break;
+      case 4:
+        return this.trash4;
+        break;
+      case 5:
+        return this.trash5;
+        break;
+      case 6:
+        return this.trash6;
+        break;
+      case 7:
+        return this.trash7;
+        break;
+      case 8:
+        return this.trash8;
+        break;
+      case 9:
+        return this.trash9;
+        break;
+      case 10:
+        return this.trash10;
+        break;
+      case 11:
+        return this.trash11;
+        break;
+      case 12:
+        return this.trash12;
+        break;
+      case 13:
+        return this.trash13;
+        break;
+      case 14:
+        return this.trash14;
+        break;
+      case 15:
+        return this.trash15;
+        break;
+      case 16:
+        return this.trash16;
+        break;
+      case 17:
+        return this.trash17;
+        break;
+      case 18:
+        return this.trash18;
+        break;
     }
-    
+
   };
 
   this.wall = new Image();
@@ -83,9 +125,9 @@ function TexturesBundle() {
   this.bomb = new Image();
   this.bluewall = new Image();
   this.sewer = new Image();
-  
 
-  this.load = function(dir) {
+
+  this.load = function (dir) {
     this.player_neutral.src = dir + "p.png";
     this.player_up.src = dir + "p_up.png";
     this.player_down.src = dir + "p_down.png";
@@ -118,18 +160,18 @@ function TexturesBundle() {
     this.trash16.src = dir + "trash16.png";
     this.trash17.src = dir + "trash17.png";
     this.trash18.src = dir + "trash18.png";
-    
-    this.air.src = dir + "air.png";    
-    this.dirt.src = dir + "dirt.png";    
-    this.steel_wall.src = dir + "steel_wall.png";    
-    
-    this.bomb.src = dir + "bomb.png";    
-    this.force_field.src = dir + "force_field.png";    
-    this.fire_ball.src = dir + "fire_ball.png";    
-    this.fire.src = dir + "fire.png";    
-    this.bluewall.src = dir + "bluewall.png";    
-    this.sewer.src = dir + "sewer.png";    
-    
+
+    this.air.src = dir + "air.png";
+    this.dirt.src = dir + "dirt.png";
+    this.steel_wall.src = dir + "steel_wall.png";
+
+    this.bomb.src = dir + "bomb.png";
+    this.force_field.src = dir + "force_field.png";
+    this.fire_ball.src = dir + "fire_ball.png";
+    this.fire.src = dir + "fire.png";
+    this.bluewall.src = dir + "bluewall.png";
+    this.sewer.src = dir + "sewer.png";
+
   }
 
 

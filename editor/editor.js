@@ -47,7 +47,7 @@ var loadEditor = function (txt) {
 
 var main = function () {
 
-  
+
 
     // Change block
     tex.load("../img/");
@@ -83,7 +83,7 @@ var main = function () {
     context = canvas.getContext("2d");
 
     // Load form file into world matrix
-    if(levelString != "")
+    if (levelString != "")
         loadEditor(levelString);
 
     canvas.addEventListener('mousedown', function (event) {

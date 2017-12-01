@@ -1,4 +1,3 @@
-
 var reloadLevel = function () {
     loadLevel();
 }
@@ -15,7 +14,7 @@ var loadLevel = function () {
     var txt = levelString;
     var rows = txt.split('X');
     var numcol = 0;
-    for (var x = 0; x < rows.length ; x++) {
+    for (var x = 0; x < rows.length; x++) {
         var lineArr = [];
         for (var y = 0; y < rows[x].length; y++) {
             lineArr[y] = rows[x].charAt(y);
@@ -24,17 +23,17 @@ var loadLevel = function () {
         world[x] = lineArr;
         numcol++;
     }
-    console.log("Loaded level with size " + (numcol-1) + "x" + rows.length);
+    console.log("Loaded level with size " + (numcol - 1) + "x" + rows.length);
 
     // Exctracting Game Objects from matrix
     for (var x = 0; x < world.length; x++) {
         for (var y = 0; y < world[0].length; y++) {
-            
+
             if (world[x][y] == Block.PLAYER) {
 
                 player = new Player(new Vec(x, y), Direc.NONE);
                 refreshOffset();
-                
+
                 world[x][y] = 0;
             } else if (world[x][y] == Block.DUMPSTER) {
 
@@ -52,13 +51,13 @@ var loadLevel = function () {
     }
 
     // Check if exit and play was set
-    if(!player || !exit){
+    if (!player || !exit) {
         alert("World is missing an exit or a player!");
         throw new Error("World is missing an exit or a player!");
     }
 
     // Check if there is 0 trash
-    if(items_left == 0)
+    if (items_left == 0)
         exit.open();
 
 
