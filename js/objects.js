@@ -6,7 +6,8 @@ const Block = {
     TRASH: 4,
     DIRT: 5,
     EXIT: 6,
-    STEEL_WALL: 7
+    STEEL_WALL: 7,
+    MONSTER: 8
 };
 
 const Direc = {
@@ -80,6 +81,11 @@ function Player(pos) {
         else if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.DIRT) {
             world[this.blockPos.x + dx][this.blockPos.y + dy] = 0;
             playDirt();
+            // If is monster
+        } else if (isMonster(this.blockPos.x + dx,this.blockPos.y + dy)) {
+            
+            return;
+
         } else if (isExit(this.blockPos.x + dx, this.blockPos.y + dy)) {
             // TODO: Exit logic
             if (exit.isOpen == false)
@@ -372,6 +378,16 @@ var isFallable = function (x, y) {
     return succ;
 }
 
+var isMonster = function (x, y) {
+    var succ = false;
+    monsters.forEach(function (f) {
+        if (x == f.blockPos.x && y == f.blockPos.y) {
+            succ = true;
+        }
+    });
+    return succ;
+}
+
 var getFallable = function (x, y) {
     var result = null;
     fallables.forEach(function (f) {
@@ -394,6 +410,55 @@ var isExit = function (x, y) {
     return exit.pos.x == x && exit.pos.y == y;
 }
 
+
+
 var isAir = function (x, y) {
-    return world[x][y] == Block.AIR && !isPlayer(x, y) && !isFallable(x, y) && !isExit(x, y);
+    return world[x][y] == Block.AIR && !isPlayer(x, y) && !isFallable(x, y) && !isExit(x, y) && !isMonster(x,y);
+}
+
+
+// AI-Test
+inherits(Monster, GameObject);
+function Monster(pos){
+    Monster.super_.call(this, pos, Block.MONSTER);
+    this.hasOrder = false;
+    this.moveDown = 0;
+    this.lastTick = Date.now();;
+    this.update = function(){
+        if(!this.updateAnimaiton(movementSpeed))
+            return;
+
+        var time = Date.now();
+
+        if(time - this.lastTick < 200)
+            return;
+        else{
+            this.lastTick = time;
+        }
+        console.log("AI TICK");
+
+        if(!this.hasOrder){
+            this.moveDown = 2;
+            this.hasOrder = true;
+        }else{
+            if(this.moveDown != 0)
+            {
+                if(isAir(this.blockPos.x, this.blockPos.y+1))
+                    this.blockPos.y++;
+                else if(world[this.blockPos.x ][this.blockPos.y+1] == Block.DIRT){
+                    world[this.blockPos.x ][this.blockPos.y+1] = Block.AIR;                    
+                    this.blockPos.y++;
+                }
+
+                this.moveDown--;
+            }else
+            this.hasOrder = false;
+        }
+    };
+
+    this.draw = function (context) {
+        context.drawImage(tex.bomb, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
+        context.stroke();
+    }
+
 }

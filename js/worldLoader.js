@@ -10,6 +10,7 @@ var loadLevel = function () {
     keys = [];
     items_left = 0;
     exit = null;
+    monsters = [];
     // Load form file into world matrix
     var txt = levelString;
     var rows = txt.split('X');
@@ -45,6 +46,9 @@ var loadLevel = function () {
                 items_left++;
             } else if (world[x][y] == Block.EXIT) {
                 exit = new Exit(new Vec(x, y));
+                world[x][y] = 0;
+            }else if (world[x][y] == Block.MONSTER) {
+                monsters.push(new Monster(new Vec(x, y)));
                 world[x][y] = 0;
             }
         }

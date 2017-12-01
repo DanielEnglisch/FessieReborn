@@ -9,10 +9,11 @@ var STOP = false;
 var xOffset = 0;
 var yOffset = 0;
 
-var fallables = new Array();
+var fallables = [];
 var player = null;
 var world = [];
 var exit = null;
+var monsters = [];
 
 var initWorld = function () {
     loadLevel();
@@ -90,8 +91,13 @@ var update = function () {
 
 
     player.update();
+
     fallables.forEach(function (f) {
         f.update();
+    });
+
+    monsters.forEach(function (m) {
+        m.update();
     });
 
     if (STOP)
@@ -156,6 +162,11 @@ var redraw = function () {
     // Draw fallables
     fallables.forEach(function (f) {
         f.draw(context);
+    });
+
+    // Draw monsters
+    monsters.forEach(function (m) {
+        m.draw(context);
     });
 
     // Score Test
