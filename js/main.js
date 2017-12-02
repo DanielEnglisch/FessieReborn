@@ -117,18 +117,38 @@ var update = function () {
     if (STOP)
         return;
 
-    if (keys[38]) {
-        player.move(0, -1);
-    } else if (keys[40]) {
-        player.move(0, +1);
-    } else if (keys[37]) {
-        player.move(-1, 0);
-    } else if (keys[39]) {
-        player.move(1, 0);
-    } else if (keys[82]) {
+    if(keys[17]){
+        console.log("GRABBING");
+        if (keys[38]) {
+            player.grab(0, -1);
+        } else if (keys[40]) {
+            player.grab(0, +1);
+        } else if (keys[37]) {
+            player.grab(-1, 0);
+        } else if (keys[39]) {
+            player.grab(1, 0);
+        } 
+    }else{
+        if (keys[38]) {
+            player.move(0, -1);
+        } else if (keys[40]) {
+            player.move(0, +1);
+        } else if (keys[37]) {
+            player.move(-1, 0);
+        } else if (keys[39]) {
+            player.move(1, 0);
+        } 
+    }
+    
+    
+
+
+    if (keys[82]) {
         reloadLevel();
         keys[82] = false;
-    } else if (keys[27]) {
+    } 
+    
+    if (keys[27]) {
         // ESC
         if (levelTesting)
             window.location.href = "./editor/?data=" + levelString;

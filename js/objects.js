@@ -64,6 +64,28 @@ inherits(Player, GameObject);
 function Player(pos) {
     Player.super_.call(this, pos, Block.PLAYER);
     this.looking = Direc.NONE;
+    this.grab = function (dx, dy) {
+
+        if (this.moving)
+            return;
+        if (isTrash(this.blockPos.x + dx, this.blockPos.y + dy)) {
+            fallables.splice(fallables.indexOf(getTrash(this.blockPos.x + dx, this.blockPos.y + dy)), 1);
+
+            items_left--;
+            playAudio(audio.trash_collect);
+
+            if (items_left == 0) {
+                exit.open();
+            }
+        }
+
+        else if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.DIRT) {
+            world[this.blockPos.x + dx][this.blockPos.y + dy] = 0;
+            playDirt();
+        }
+
+
+    }
     this.move = function (dx, dy) {
 
 
@@ -373,6 +395,17 @@ var isFallable = function (x, y) {
     return succ;
 }
 
+
+var isTrash = function (x, y) {
+    var succ = false;
+    fallables.forEach(function (f) {
+        if (x == f.blockPos.x && y == f.blockPos.y && f.type == Block.TRASH) {
+            succ = true;
+        }
+    });
+    return succ;
+}
+
 var isMonster = function (x, y) {
     var succ = false;
     monsters.forEach(function (f) {
@@ -387,6 +420,16 @@ var getFallable = function (x, y) {
     var result = null;
     fallables.forEach(function (f) {
         if (x == f.blockPos.x && y == f.blockPos.y) {
+            result = f;
+        }
+    });
+    return result;
+}
+
+var getTrash = function (x, y) {
+    var result = null;
+    fallables.forEach(function (f) {
+        if (x == f.blockPos.x && y == f.blockPos.y && f.type == Block.TRASH) {
             result = f;
         }
     });
