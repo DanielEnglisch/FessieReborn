@@ -41,10 +41,10 @@
  }
 
  #palett {
-   float: left;
+   float: top;
    min-width: 32px;
    height: calc(100% - 30px);
-   background: red;
+   background: white;
    display: flex;
    flex-flow: wrap;
    align-content: flex-start;

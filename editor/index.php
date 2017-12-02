@@ -33,7 +33,7 @@
   </script>
     
   <div id="palett">
-    <img src="../img/air.png" width="32px" height="32px" id="0">      
+    <img src="../img/air.png" width="32px" height="32px" id="0" style="border:3px solid rgb(248, 132, 0);">      
     <img src="../img/wall.png" width="32px" height="32px" id="1">
     <img src="../img/p.png" width="32px" height="32px" id="2">          
     <img src="../img/dumpster1.png" width="32px" height="32px" id="3">
@@ -45,7 +45,8 @@
 
     <img src="../img/10x10.png" width="32px" height="32px" id="10x10">
     <img src="../img/20x20.png" width="32px" height="32px" id="20x20">
-    <img src="../img/save.png" width="32px" height="32px" id="save">
+    <img src="../img/test.png" width="32px" height="32px" id="test">
+    <img src="../img/export.png" width="32px" height="32px" id="export">
 
   </div>
   <div id="wrapper">

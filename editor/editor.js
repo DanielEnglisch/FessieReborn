@@ -45,6 +45,21 @@ var loadEditor = function (txt) {
     console.log(xsize + " - " + ysize);
 }
 
+var getData = function () {
+    var lvl = "";
+
+    for (var x = 0; x < xsize; x++) {
+        for (var y = 0; y < ysize; y++) {
+            if (world[x * xsize + y] != undefined)
+                lvl += "" + world[x * xsize + y];
+        }
+        lvl += "X";
+
+    }
+
+    lvl = lvl.substring(0, lvl.length - 1);
+    return lvl;
+}
 
 var main = function () {
 
@@ -58,22 +73,18 @@ var main = function () {
             loadEditor("1111111111X1255555551X1555545551X1555555551X1555555551X1555555551X1555555551X1555555551X1555555561X1111111111");
         } else if (e.target.id == "20x20") {
             loadEditor("11111111111111111111X12555555555455555561X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X15555555555555555551X11111111111111111111");
-        } else if (e.target.id == "save") {
-            var lvl = "";
+        } else if (e.target.id == "test") {
 
-            for (var x = 0; x < xsize; x++) {
-                for (var y = 0; y < ysize; y++) {
-                    if (world[x * xsize + y] != undefined)
-                        lvl += "" + world[x * xsize + y];
-                }
-                lvl += "X";
+            window.location.href = "../?data=" + getData();
+        } else if (e.target.id == "export") {
 
-            }
-
-            lvl = lvl.substring(0, lvl.length - 1);
-            window.location.href = "../?data=" + lvl;
-        } else
+            alert("http://localhost/WDP3-Project/?data=" + getData());
+        } else {
             paintID = e.target.id;
+            $('img').css('border', 'none');
+            e.target.style.border = "3px solid rgb(248, 132, 0)";
+        }
+
     });
 
 
@@ -157,7 +168,7 @@ var draw = function () {
                 context.drawImage(tex.exit_open, x * scale, y * scale, scale, scale);
                 context.stroke();
 
-            }else if (world[x * ysize + y] == Block.SILVER_MONSTER) {
+            } else if (world[x * ysize + y] == Block.SILVER_MONSTER) {
                 context.drawImage(tex.silver_monster, x * scale, y * scale, scale, scale);
                 context.stroke();
 
