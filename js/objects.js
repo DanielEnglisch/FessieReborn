@@ -414,8 +414,6 @@ var isExit = function (x, y) {
     return exit.pos.x == x && exit.pos.y == y;
 }
 
-
-
 var isAir = function (x, y) {
     return world[x][y] == Block.AIR && !isPlayer(x, y) && !isFallable(x, y) && !isExit(x, y) && !isMonster(x, y);
 }
