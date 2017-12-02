@@ -133,15 +133,19 @@ function Player(pos) {
                     // Try to move fallable
                     if (playerblockpos.x + dx == f.blockPos.x && playerblockpos.y + dy == f.blockPos.y) {
                         if (f.type == Block.TRASH) {
-                            obj.splice(index, 1);
 
+                            // If trash is moving and you are runnin
+                            if(dy == -1 && f.moving){
+                                player.kill();
+                            }
+
+                            obj.splice(index, 1);
                             items_left--;
                             playAudio(audio.trash_collect);
 
                             if (items_left == 0) {
                                 exit.open();
                             }
-
 
                         } else
                             // Try to move fallable
