@@ -65,24 +65,15 @@ var addEvents = function () {
     });
 
 
-
     window.onkeydown = function (e) {
-
         if (e.repeat)
             return;
-
         keys[e.keyCode] = true;
-
-
     };
     window.onkeyup = function (e) {
-
         if (e.repeat)
             return;
-
         keys[e.keyCode] = false;
-
-
     };
 
 }
@@ -93,9 +84,9 @@ var update = function () {
 
     // Fallables -> Monsters
     fallables.forEach(function (f) {
-        if(f.isFalling){
+        if (f.isFalling) {
             monsters.forEach(function (m) {
-                if(Math.abs(f.pos.x - m.pos.x)<1 && Math.abs(f.pos.y - m.pos.y)<1)
+                if (Math.abs(f.pos.x - m.pos.x) < 1 && Math.abs(f.pos.y - m.pos.y) < 1)
                     m.kill();
             });
         }
@@ -103,15 +94,15 @@ var update = function () {
 
     // Fallables -> Player
     fallables.forEach(function (f) {
-        if(f.isFalling){
-            if(Math.abs(f.pos.x - player.pos.x)<1 && Math.abs(f.pos.y - player.pos.y)<1)
-            player.kill();
+        if (f.isFalling) {
+            if (Math.abs(f.pos.x - player.pos.x) < 1 && Math.abs(f.pos.y - player.pos.y) < 1)
+                player.kill();
         }
     });
 
     // Player -> Monsters
     monsters.forEach(function (f) {
-        if(Math.abs(f.pos.x - player.pos.x)<1 && Math.abs(f.pos.y - player.pos.y)<1)
+        if (Math.abs(f.pos.x - player.pos.x) < 1 && Math.abs(f.pos.y - player.pos.y) < 1)
             player.kill();
     });
 

@@ -24,7 +24,7 @@ const Block = {
     DIRT: 5,
     EXIT: 6,
     STEEL_WALL: 7,
-    MONSTER: 8
+    SILVER_MONSTER: 8
 };
 
 var loadEditor = function (txt) {
@@ -157,7 +157,7 @@ var draw = function () {
                 context.drawImage(tex.exit_open, x * scale, y * scale, scale, scale);
                 context.stroke();
 
-            }else if (world[x * ysize + y] == Block.MONSTER) {
+            }else if (world[x * ysize + y] == Block.SILVER_MONSTER) {
                 context.drawImage(tex.silver_monster, x * scale, y * scale, scale, scale);
                 context.stroke();
 

@@ -7,7 +7,7 @@ const Block = {
     DIRT: 5,
     EXIT: 6,
     STEEL_WALL: 7,
-    MONSTER: 8
+    SILVER_MONSTER: 8
 };
 
 const Direc = {
@@ -424,7 +424,7 @@ var isAir = function (x, y) {
 // AI-Test
 inherits(Monster, GameObject);
 function Monster(pos) {
-    Monster.super_.call(this, pos, Block.MONSTER);
+    Monster.super_.call(this, pos, -1);
     this.dir = Direc.RIGHT;
     this.movementSpeed = 0.015;
     this.kill = function () {
@@ -440,9 +440,9 @@ function Monster(pos) {
 
 }
 
-inherits(SilverBomb, Monster);
-function SilverBomb(pos) {
-    SilverBomb.super_.call(this, pos, Block.MONSTER);
+inherits(SilverMonster, Monster);
+function SilverMonster(pos) {
+    SilverMonster.super_.call(this, pos, Block.SILVER_MONSTER);
     this.dir = Direc.RIGHT;
     this.movementSpeed = 0.015;
     this.update = function () {
@@ -498,11 +498,8 @@ function SilverBomb(pos) {
 
         }
 
-
-
         this.blockPos.x += dx;
         this.blockPos.y += dy;
-
 
     }
 
