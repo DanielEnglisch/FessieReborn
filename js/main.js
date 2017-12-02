@@ -86,24 +86,21 @@ var update = function () {
     fallables.forEach(function (f) {
         if (f.isFalling) {
             monsters.forEach(function (m) {
-                if (Math.abs(f.pos.x - m.pos.x) < 1 && Math.abs(f.pos.y - m.pos.y) < 1)
+                if (Math.abs(f.pos.x - m.pos.x) < 0.7 && Math.abs(f.pos.y - m.pos.y) < 0.7)
                     m.kill();
             });
         }
     });
 
-    // Fallables -> Player
-    fallables.forEach(function (f) {
-        if (f.isFalling) {
-            if (Math.abs(f.pos.x - player.pos.x) < 1 && Math.abs(f.pos.y - player.pos.y) < 1)
-                player.kill();
-        }
-    });
+   
 
     // Player -> Monsters
     monsters.forEach(function (f) {
-        if (Math.abs(f.pos.x - player.pos.x) < 1 && Math.abs(f.pos.y - player.pos.y) < 1)
+        if (Math.abs(f.pos.x - player.pos.x) < 1 && Math.abs(f.pos.y - player.pos.y) < 1){
+            f.kill();
             player.kill();
+        }
+           
     });
 
 

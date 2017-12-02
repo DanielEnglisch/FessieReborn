@@ -335,7 +335,9 @@ function Trash(pos) {
     }
     this.fallEvent = function () {
         playAudio(audio.trash_land);
-
+        if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
+            player.kill();
+        }
     }
 }
 
@@ -426,6 +428,7 @@ function Monster(pos) {
     this.dir = Direc.RIGHT;
     this.movementSpeed = 0.015;
     this.kill = function () {
+        playAudio(audio.explosion);
         monsters.splice(monsters.indexOf(this), 1);
     }
     this.update = function () {
