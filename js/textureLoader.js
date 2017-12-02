@@ -125,6 +125,7 @@ function TexturesBundle() {
   this.bomb = new Image();
   this.bluewall = new Image();
   this.sewer = new Image();
+  this.silver_monster = new Image();
 
 
   this.load = function (dir) {
@@ -171,7 +172,7 @@ function TexturesBundle() {
     this.fire.src = dir + "fire.png";
     this.bluewall.src = dir + "bluewall.png";
     this.sewer.src = dir + "sewer.png";
-
+    this.silver_monster.src = dir + "silver_monster.png";
   }
 
 

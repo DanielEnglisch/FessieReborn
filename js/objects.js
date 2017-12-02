@@ -83,7 +83,7 @@ function Player(pos) {
             playDirt();
             // If is monster
         } else if (isMonster(this.blockPos.x + dx, this.blockPos.y + dy)) {
-
+            player.kill();
             return;
 
         } else if (isExit(this.blockPos.x + dx, this.blockPos.y + dy)) {
@@ -319,6 +319,10 @@ function Dumpster(pos) {
 
         if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
             player.kill();
+        }else if(isMonster(this.blockPos.x, this.blockPos.y + 1)){
+            console.log("Monster death");
+            var mon = getMonster(this.blockPos.x, this.blockPos.y + 1);
+            monsters.splice(monsters.indexOf(mon), 1);            
         }
     }
 }
@@ -398,6 +402,17 @@ var getFallable = function (x, y) {
     return result;
 }
 
+var getMonster = function (x, y) {
+    var result = null;
+    monsters.forEach(function (f) {
+        if (x == f.blockPos.x && y == f.blockPos.y) {
+            result = f;
+        }
+    });
+    return result;
+}
+
+
 var isPlayer = function (x, y) {
     return player.blockPos.x == x && player.blockPos.y == y;
 }
@@ -422,21 +437,33 @@ inherits(Monster, GameObject);
 function Monster(pos) {
     Monster.super_.call(this, pos, Block.MONSTER);
     this.dir = Direc.RIGHT;
-    this.lastTick = Date.now();
+    this.movementSpeed = 0.015;
     this.update = function () {
 
-        if(isFallable(this.pos.x, this.pos.y)){
-            monsters.splice(monsters.indexOf(this), 1);
-            return;
-        }
+    }
 
-        if (!this.updateAnimaiton(0.015, 0.015))
+    this.draw = function (context) {
+       
+    }
+
+}
+
+inherits(SilverBomb, Monster);
+function SilverBomb(pos) {
+    SilverBomb.super_.call(this, pos, Block.MONSTER);
+    this.dir = Direc.RIGHT;
+    this.movementSpeed = 0.015;
+    this.update = function () {
+
+        if (!this.updateAnimaiton( this.movementSpeed, this.movementSpeed))
             return;
+
+        var dx = 0, dy = 0;
 
         if (this.dir == Direc.RIGHT) {
 
-            if (isAir(this.blockPos.x + 1, this.blockPos.y))
-                this.blockPos.x++;
+            if (isAir(this.blockPos.x + 1, this.blockPos.y)|| isPlayer(this.blockPos.x+1, this.blockPos.y ))
+                dx++;
             else {
                 if ((Math.floor(Math.random() * 2) + 1) == 1) {
                     this.dir = Direc.DOWN;
@@ -446,8 +473,8 @@ function Monster(pos) {
 
         } else if (this.dir == Direc.DOWN) {
 
-            if (isAir(this.blockPos.x, this.blockPos.y + 1))
-                this.blockPos.y++;
+            if (isAir(this.blockPos.x, this.blockPos.y + 1) || isPlayer(this.blockPos.x, this.blockPos.y + 1))
+                dy++;
             else {
                 if ((Math.floor(Math.random() * 2) + 1) == 1) {
                     this.dir = Direc.RIGHT;
@@ -457,8 +484,8 @@ function Monster(pos) {
 
         } else if (this.dir == Direc.LEFT) {
 
-            if (isAir(this.blockPos.x - 1, this.blockPos.y))
-                this.blockPos.x--;
+            if (isAir(this.blockPos.x - 1, this.blockPos.y)|| isPlayer(this.blockPos.x-1, this.blockPos.y ))
+                dx--;
             else {
                 if ((Math.floor(Math.random() * 2) + 1) == 1) {
                     this.dir = Direc.UP;
@@ -468,8 +495,8 @@ function Monster(pos) {
 
         } else if (this.dir == Direc.UP) {
 
-            if (isAir(this.blockPos.x, this.blockPos.y - 1))
-                this.blockPos.y--;
+            if (isAir(this.blockPos.x, this.blockPos.y - 1) || isPlayer(this.blockPos.x, this.blockPos.y - 1) )
+                dy--;
             else {
                 if ((Math.floor(Math.random() * 2) + 1) == 1) {
                     this.dir = Direc.LEFT;
@@ -479,13 +506,20 @@ function Monster(pos) {
 
         }
 
+        // Move monster
+        if(isPlayer(this.blockPos.x + dx, this.blockPos.y + dy)){
+            player.kill();
+        }
+
+        this.blockPos.x += dx;
+        this.blockPos.y += dy;
 
 
     }
 
 
     this.draw = function (context) {
-        context.drawImage(tex.bomb, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
+        context.drawImage(tex.silver_monster, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
         context.stroke();
     }
 

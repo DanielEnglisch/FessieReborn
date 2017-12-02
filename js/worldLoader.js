@@ -48,7 +48,7 @@ var loadLevel = function () {
                 exit = new Exit(new Vec(x, y));
                 world[x][y] = 0;
             }else if (world[x][y] == Block.MONSTER) {
-                monsters.push(new Monster(new Vec(x, y)));
+                monsters.push(new SilverBomb(new Vec(x, y)));
                 world[x][y] = 0;
             }
         }
