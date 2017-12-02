@@ -484,6 +484,8 @@ function Monster(pos) {
 
 }
 
+
+
 inherits(SilverMonster, Monster);
 function SilverMonster(pos) {
     SilverMonster.super_.call(this, pos, Block.SILVER_MONSTER);
@@ -542,8 +544,23 @@ function SilverMonster(pos) {
 
         }
 
-        this.blockPos.x += dx;
-        this.blockPos.y += dy;
+        // Check if dumpster is not in the way (pos)
+        var bp = this.blockPos;
+        var coll = false;
+        fallables.forEach(function(dumpster){
+            if(Math.abs(bp.x + dx - dumpster.pos.x) < 1 && Math.abs(bp.y + dy - dumpster.pos.y) < 1){
+                coll=true;
+            }
+        });
+
+        // If nothing in the way move
+        if(!coll){
+            this.blockPos.x += dx;
+            this.blockPos.y += dy;
+        }
+            
+
+      
 
     }
 

@@ -140,9 +140,6 @@ var update = function () {
         } 
     }
     
-    
-
-
     if (keys[82]) {
         reloadLevel();
         keys[82] = false;
@@ -155,7 +152,6 @@ var update = function () {
 
         keys[27] = false;
     }
-
 
 };
 
