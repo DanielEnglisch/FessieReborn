@@ -119,23 +119,23 @@ var update = function () {
 
     if(keys[17]){
         console.log("GRABBING");
-        if (keys[38]) {
+        if (keys[38]||keys[87]) {
             player.grab(0, -1);
-        } else if (keys[40]) {
+        } else if (keys[40]||keys[83]) {
             player.grab(0, +1);
-        } else if (keys[37]) {
+        } else if (keys[37]||keys[65]) {
             player.grab(-1, 0);
-        } else if (keys[39]) {
+        } else if (keys[39]||keys[68]) {
             player.grab(1, 0);
         } 
     }else{
-        if (keys[38]) {
+        if (keys[38]||keys[87]) {
             player.move(0, -1);
-        } else if (keys[40]) {
+        } else if (keys[40]||keys[83]) {
             player.move(0, +1);
-        } else if (keys[37]) {
+        } else if (keys[37]||keys[65]) {
             player.move(-1, 0);
-        } else if (keys[39]) {
+        } else if (keys[39]||keys[68]) {
             player.move(1, 0);
         } 
     }
