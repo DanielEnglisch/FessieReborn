@@ -158,7 +158,7 @@ var draw = function () {
                 context.stroke();
 
             }else if (world[x * ysize + y] == Block.MONSTER) {
-                context.drawImage(tex.bomb, x * scale, y * scale, scale, scale);
+                context.drawImage(tex.silver_monster, x * scale, y * scale, scale, scale);
                 context.stroke();
 
             }

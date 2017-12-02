@@ -82,10 +82,6 @@ function Player(pos) {
             world[this.blockPos.x + dx][this.blockPos.y + dy] = 0;
             playDirt();
             // If is monster
-        } else if (isMonster(this.blockPos.x + dx, this.blockPos.y + dy)) {
-            player.kill();
-            return;
-
         } else if (isExit(this.blockPos.x + dx, this.blockPos.y + dy)) {
             // TODO: Exit logic
             if (exit.isOpen == false)
@@ -277,7 +273,7 @@ function Fallable(pos, type) {
                 if (!belowCanSlip(this))
                     this.move(-1, 0);
             }
-        } else if (isAir(this.blockPos.x, this.blockPos.y + 1)) {
+        } else if (isAir(this.blockPos.x, this.blockPos.y + 1) || isMonster(this.blockPos.x, this.blockPos.y + 1)) {
             this.blockPos = new Vec(this.blockPos.x, this.blockPos.y + 1);
             this.isFalling = true;
         }
@@ -316,13 +312,8 @@ function Dumpster(pos) {
     }
     this.fallEvent = function () {
         playAudio(audio.dump_land);
-
         if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
             player.kill();
-        }else if(isMonster(this.blockPos.x, this.blockPos.y + 1)){
-            console.log("Monster death");
-            var mon = getMonster(this.blockPos.x, this.blockPos.y + 1);
-            monsters.splice(monsters.indexOf(mon), 1);            
         }
     }
 }
@@ -344,9 +335,7 @@ function Trash(pos) {
     }
     this.fallEvent = function () {
         playAudio(audio.trash_land);
-        if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
-            player.kill();
-        }
+
     }
 }
 
@@ -438,12 +427,15 @@ function Monster(pos) {
     Monster.super_.call(this, pos, Block.MONSTER);
     this.dir = Direc.RIGHT;
     this.movementSpeed = 0.015;
+    this.kill = function () {
+        monsters.splice(monsters.indexOf(this), 1);
+    }
     this.update = function () {
 
     }
 
     this.draw = function (context) {
-       
+
     }
 
 }
@@ -455,14 +447,14 @@ function SilverBomb(pos) {
     this.movementSpeed = 0.015;
     this.update = function () {
 
-        if (!this.updateAnimaiton( this.movementSpeed, this.movementSpeed))
+        if (!this.updateAnimaiton(this.movementSpeed, this.movementSpeed))
             return;
 
         var dx = 0, dy = 0;
 
         if (this.dir == Direc.RIGHT) {
 
-            if (isAir(this.blockPos.x + 1, this.blockPos.y)|| isPlayer(this.blockPos.x+1, this.blockPos.y ))
+            if (isAir(this.blockPos.x + 1, this.blockPos.y) || isPlayer(this.blockPos.x + 1, this.blockPos.y))
                 dx++;
             else {
                 if ((Math.floor(Math.random() * 2) + 1) == 1) {
@@ -484,7 +476,7 @@ function SilverBomb(pos) {
 
         } else if (this.dir == Direc.LEFT) {
 
-            if (isAir(this.blockPos.x - 1, this.blockPos.y)|| isPlayer(this.blockPos.x-1, this.blockPos.y ))
+            if (isAir(this.blockPos.x - 1, this.blockPos.y) || isPlayer(this.blockPos.x - 1, this.blockPos.y))
                 dx--;
             else {
                 if ((Math.floor(Math.random() * 2) + 1) == 1) {
@@ -495,7 +487,7 @@ function SilverBomb(pos) {
 
         } else if (this.dir == Direc.UP) {
 
-            if (isAir(this.blockPos.x, this.blockPos.y - 1) || isPlayer(this.blockPos.x, this.blockPos.y - 1) )
+            if (isAir(this.blockPos.x, this.blockPos.y - 1) || isPlayer(this.blockPos.x, this.blockPos.y - 1))
                 dy--;
             else {
                 if ((Math.floor(Math.random() * 2) + 1) == 1) {
@@ -506,10 +498,7 @@ function SilverBomb(pos) {
 
         }
 
-        // Move monster
-        if(isPlayer(this.blockPos.x + dx, this.blockPos.y + dy)){
-            player.kill();
-        }
+
 
         this.blockPos.x += dx;
         this.blockPos.y += dy;

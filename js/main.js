@@ -89,6 +89,32 @@ var addEvents = function () {
 
 var update = function () {
 
+    // New collision detection
+
+    // Fallables -> Monsters
+    fallables.forEach(function (f) {
+        if(f.isFalling){
+            monsters.forEach(function (m) {
+                if(Math.abs(f.pos.x - m.pos.x)<1 && Math.abs(f.pos.y - m.pos.y)<1)
+                    m.kill();
+            });
+        }
+    });
+
+    // Fallables -> Player
+    fallables.forEach(function (f) {
+        if(f.isFalling){
+            if(Math.abs(f.pos.x - player.pos.x)<1 && Math.abs(f.pos.y - player.pos.y)<1)
+            player.kill();
+        }
+    });
+
+    // Player -> Monsters
+    monsters.forEach(function (f) {
+        if(Math.abs(f.pos.x - player.pos.x)<1 && Math.abs(f.pos.y - player.pos.y)<1)
+            player.kill();
+    });
+
 
     player.update();
 
