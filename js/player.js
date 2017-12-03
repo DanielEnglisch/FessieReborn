@@ -125,7 +125,8 @@ function Player(pos) {
     }
 
     this.draw = function (context) {
-
+        if(STOP)
+            return;
         switch (this.looking) {
             case Direc.UP:
                 context.drawImage(tex.player_up, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
