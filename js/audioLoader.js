@@ -1,3 +1,6 @@
+const vol_music = 0.2;
+const vol_sound = 0.7;
+
 function AudioBundle() {
     this.dump_land = new Audio('audio/dumpster_land.wav');
     this.dump_move = new Audio('audio/dumpster_move.wav');
@@ -72,11 +75,13 @@ var playDirt = function () {
             newMusic = audio.dirt4.cloneNode();
             break;
     }
+    newMusic.volume = vol_sound;
     newMusic.play();
 
 }
 
 var playAudio = function (audio) {
     var sound = audio.cloneNode();
+    sound.volume = vol_sound;
     sound.play();
 }
