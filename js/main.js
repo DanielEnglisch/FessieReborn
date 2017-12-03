@@ -1,26 +1,8 @@
-var canvas = document.getElementById("screen");
-var context = null;
-const scale = 64;
-const gravity = 0.05;
-const movementSpeed = 0.075;
-var items_left = 0;
-var STOP = false;
-
-var xOffset = 0;
-var yOffset = 0;
-
-var fallables = [];
-var player = null;
-var world = [];
-var exit = null;
-var monsters = [];
 
 var initWorld = function () {
     loadLevel();
 }
 
-var tex = new TexturesBundle();
-var audio = new AudioBundle();
 
 var main = function () {
     addEvents();
@@ -31,12 +13,11 @@ var main = function () {
     loop();
 };
 
-var time = Date.now();
-var thresh = 1000 / 120;
+
 
 var loop = function () {
 
-    if (Date.now() - time >= thresh) {
+    if (Date.now() - time >= 1000/ups) {
         update();
         time = Date.now();
     }
@@ -45,7 +26,6 @@ var loop = function () {
     requestAnimationFrame(loop);
 }
 
-var keys = [];
 
 var refreshOffset = function () {
     xOffset = 0;
@@ -251,28 +231,7 @@ var redraw = function () {
 
 };
 
-const Explosion = {
-    FIRE: 0,
-    SLIME: 1,
-    TRASH: 2,
-};
 
-var explosion_overlays = [];
-
-function ExplosionOverlay(pos, img, time) {
-    this.image = img;
-    this.timeUntil = time;
-    this.blockPos = pos;
-    this.update = function () {
-        if (Date.now() >= this.timeUntil) {
-            explosion_overlays.splice(explosion_overlays.indexOf(this), 1);
-        }
-    }
-    this.draw = function (context) {
-        context.drawImage(this.image, this.blockPos.x * scale + xOffset, this.blockPos.y * scale + yOffset, scale, scale);
-        context.stroke();
-    }
-}
 var spawnExplosion = function (blockPos, type) {
 
     if(type == Explosion.SLIME)

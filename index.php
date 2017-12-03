@@ -62,11 +62,20 @@
       echo 'var levelTesting = false;';
   ?>
   </script>
-
-  <script type="text/javascript" src="js/utils.js"></script>
   <script type="text/javascript" src="js/textureLoader.js"></script>
   <script type="text/javascript" src="js/audioLoader.js"></script>
+  
+  <script type="text/javascript" src="js/utils.js"></script>
+  <script type="text/javascript" src="js/getters.js"></script>
+
+  <script type="text/javascript" src="js/generals.js"></script>
+  <script type="text/javascript" src="js/player.js"></script>
+  <script type="text/javascript" src="js/silvermonster.js"></script>
   <script type="text/javascript" src="js/objects.js"></script>
+
+  <script type="text/javascript" src="js/enums.js"></script>
+  <script type="text/javascript" src="js/globals.js"></script>
+  
   <script type="text/javascript" src="js/worldLoader.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
 </body>

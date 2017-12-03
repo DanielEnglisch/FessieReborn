@@ -9,3 +9,12 @@ function inherits(ctor, superCtor) {
     }
   });
 };
+
+var Vec = function (x, y) {
+  this.x = x;
+  this.y = y;
+};
+
+var posToBlock = function(pos){
+  return new Vec(Math.floor(pos.x),Math.floor(pos.y));
+}

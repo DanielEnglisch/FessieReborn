@@ -1,5 +1,4 @@
-const vol_music = 0.2;
-const vol_sound = 0.7;
+
 
 function AudioBundle() {
     this.dump_land = new Audio('audio/dumpster_land.wav');
@@ -11,7 +10,7 @@ function AudioBundle() {
     this.dirt2 = new Audio('audio/dirt2.wav');
     this.dirt3 = new Audio('audio/dirt3.wav');
     this.dirt4 = new Audio('audio/dirt4.wav');
-
+    
 
     this.music1 = new Audio('audio/music1.wav');
     this.music2 = new Audio('audio/music2.wav');
@@ -32,7 +31,6 @@ function AudioBundle() {
     this.slime_explosion = new Audio('audio/slime_explosion.wav');
     this.slime_squash = new Audio('audio/slime_squash.wav');
     this.train = new Audio('audio/train.wav');
-
 }
 
 var startBackgroundMusic = function () {
