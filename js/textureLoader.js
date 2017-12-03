@@ -127,6 +127,9 @@ function TexturesBundle() {
   this.sewer = new Image();
   this.silver_monster = new Image();
 
+  this.fire_explosion = new Image();
+  this.slime_explosion = new Image();
+
 
   this.load = function (dir) {
     this.player_neutral.src = dir + "p.png";
@@ -173,6 +176,10 @@ function TexturesBundle() {
     this.bluewall.src = dir + "bluewall.png";
     this.sewer.src = dir + "sewer.png";
     this.silver_monster.src = dir + "silver_monster.png";
+
+    this.fire_explosion.src = dir + "fire_explosion.png";
+    this.slime_explosion.src = dir + "slime_explosion.png";
+    
   }
 
 

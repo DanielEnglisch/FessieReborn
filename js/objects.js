@@ -64,6 +64,7 @@ inherits(Player, GameObject);
 function Player(pos) {
     Player.super_.call(this, pos, Block.PLAYER);
     this.looking = Direc.NONE;
+    this.isDead = false;
     this.grab = function (dx, dy) {
 
         if (this.moving)
@@ -213,8 +214,12 @@ function Player(pos) {
         if (STOP)
             return;
         playAudio(audio.die);
-        alert("You died!");
-        reloadLevel();
+        STOP = true;
+        this.isDead = true;
+        setTimeout(function(){
+            reloadLevel();
+
+        }, 2000);
     }
 
 }
@@ -467,6 +472,10 @@ var isAir = function (x, y) {
     return world[x][y] == Block.AIR && !isPlayer(x, y) && !isFallable(x, y) && !isExit(x, y) && !isMonster(x, y);
 }
 
+var posToBlock = function(pos){
+
+    return new Vec(Math.floor(pos.x),Math.floor(pos.y));
+}
 
 // AI-Test
 inherits(Monster, GameObject);
@@ -475,8 +484,9 @@ function Monster(pos) {
     this.dir = Direc.RIGHT;
     this.movementSpeed = 0.015;
     this.kill = function () {
-        playAudio(audio.explosion);
         monsters.splice(monsters.indexOf(this), 1);
+        spawnExplosion(posToBlock(this.pos) , Explosion.FIRE);
+        
     }
     this.update = function () {
 

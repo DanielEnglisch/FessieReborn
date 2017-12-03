@@ -92,16 +92,38 @@ var update = function () {
         }
     });
 
-   
+
 
     // Player -> Monsters
     monsters.forEach(function (f) {
-        if (Math.abs(f.pos.x - player.pos.x) < 1 && Math.abs(f.pos.y - player.pos.y) < 1){
+        if (Math.abs(f.pos.x - player.pos.x) < 1 && Math.abs(f.pos.y - player.pos.y) < 1) {
             f.kill();
             player.kill();
         }
-           
+
     });
+
+    // Monster -> Explosion overlay
+    explosion_overlays.forEach(function (f) {
+        // Player -> Explosion overlay
+        if (Math.abs(f.blockPos.x - player.pos.x) < 1 && Math.abs(f.blockPos.y - player.pos.y) < 1) {
+            player.kill();
+        }
+        // Monster -> Explosion overlay
+        monsters.forEach(function (m) {
+            if (Math.abs(f.blockPos.x - m.pos.x) < 1 && Math.abs(f.blockPos.y - m.pos.y) < 1)
+                m.kill();
+        });
+        // Trash -> explosion overlay
+        fallables.forEach(function (t) {
+            if (t.type == Block.TRASH) {
+                if (Math.abs(f.blockPos.x - t.pos.x) < 1 && Math.abs(f.blockPos.y - t.pos.y) < 1)
+                    fallables.splice(fallables.indexOf(t), 1);
+            }
+        });
+
+    });
+
 
 
     player.update();
@@ -114,37 +136,41 @@ var update = function () {
         m.update();
     });
 
+    explosion_overlays.forEach(function (m) {
+        m.update();
+    });
+
     if (STOP)
         return;
 
-    if(keys[17]){
+    if (keys[17]) {
         console.log("GRABBING");
-        if (keys[38]||keys[87]) {
+        if (keys[38] || keys[87]) {
             player.grab(0, -1);
-        } else if (keys[40]||keys[83]) {
+        } else if (keys[40] || keys[83]) {
             player.grab(0, +1);
-        } else if (keys[37]||keys[65]) {
+        } else if (keys[37] || keys[65]) {
             player.grab(-1, 0);
-        } else if (keys[39]||keys[68]) {
+        } else if (keys[39] || keys[68]) {
             player.grab(1, 0);
-        } 
-    }else{
-        if (keys[38]||keys[87]) {
+        }
+    } else {
+        if (keys[38] || keys[87]) {
             player.move(0, -1);
-        } else if (keys[40]||keys[83]) {
+        } else if (keys[40] || keys[83]) {
             player.move(0, +1);
-        } else if (keys[37]||keys[65]) {
+        } else if (keys[37] || keys[65]) {
             player.move(-1, 0);
-        } else if (keys[39]||keys[68]) {
+        } else if (keys[39] || keys[68]) {
             player.move(1, 0);
-        } 
+        }
     }
-    
+
     if (keys[82]) {
         reloadLevel();
         keys[82] = false;
-    } 
-    
+    }
+
     if (keys[27]) {
         // ESC
         if (levelTesting)
@@ -199,6 +225,13 @@ var redraw = function () {
         m.draw(context);
     });
 
+    // Draw explosionjs
+    explosion_overlays.forEach(function (m) {
+        m.draw(context);
+    });
+
+
+
     // Score Test
     context.fillStyle = "black";
     context.fillRect(0, canvas.height - 50, canvas.width, 50);
@@ -208,6 +241,69 @@ var redraw = function () {
     context.textBaseline = "middle";
     context.fillStyle = "rgb(248, 132, 0)";
     context.fillText("Items left: " + items_left, canvas.width / 2, canvas.height - 25);
+    if (player.isDead == true) {
+        context.font = "72px Arial";
+        context.fillStyle = "red";
+        context.fillText("You got recked!", canvas.width / 2, canvas.height / 2);
+    }
 
+
+
+};
+
+const Explosion = {
+    FIRE: 0,
+    SLIME: 1,
+    TRASH: 2,
+};
+
+var explosion_overlays = [];
+
+function ExplosionOverlay(pos, img, time) {
+    this.image = img;
+    this.timeUntil = time;
+    this.blockPos = pos;
+    this.update = function () {
+        if (Date.now() >= this.timeUntil) {
+            explosion_overlays.splice(explosion_overlays.indexOf(this), 1);
+        }
+    }
+    this.draw = function (context) {
+        context.drawImage(this.image, this.blockPos.x * scale + xOffset, this.blockPos.y * scale + yOffset, scale, scale);
+        context.stroke();
+    }
+}
+var spawnExplosion = function (blockPos, type) {
+
+    if(type == Explosion.SLIME)
+        playAudio(audio.slime_explosion);
+    else
+        playAudio(audio.explosion);    
+
+    for (var x = blockPos.x - 1; x <= blockPos.x + 1; x++) {
+        for (var y = blockPos.y - 1; y <= blockPos.y + 1; y++) {
+            if (isPlayer(x, y))
+                player.kill();
+            if (world[x][y] == Block.DIRT) {
+                world[x][y] = Block.AIR;
+            }
+            if (isMonster(x, y)) {
+                getMonster(x, y).kill();
+            }
+
+            switch (type) {
+                case Explosion.FIRE:
+                    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.fire_explosion, Date.now() + 1000)); 
+                    break;
+                case Explosion.SLIME:
+                    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.slime_explosion, Date.now() + 10000)); 
+                    break;
+                case Explosion.TRASH: if(isAir(x,y))fallables.push(new Trash(new Vec(x,y)));
+                    break;
+            }
+        }
+    }
+
+    
 
 };
