@@ -50,7 +50,7 @@ var startBackgroundMusic = function () {
     newMusic.addEventListener('ended', function () {
         startBackgroundMusic();
     }, false);
-
+    newMusic.volume = 0.25;
     newMusic.play();
 
 }
