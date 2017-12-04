@@ -127,11 +127,8 @@ function TexturesBundle() {
   this.sewer = new Image();
   this.silver_monster = new Image();
 
-  this.fire_explosion = [];
-  this.slime_explosion = new Image();
-  for(var i = 0; i < 10; i++){
-    this.fire_explosion[i] = new Image();
-  }
+  this.slime_explosion = new Animation(1000);
+  this.fire_explosion = new Animation(1000);
 
 
   this.load = function (dir) {
@@ -180,21 +177,52 @@ function TexturesBundle() {
     this.sewer.src = dir + "sewer.png";
     this.silver_monster.src = dir + "silver_monster.png";
 
-    this.fire_explosion.src = dir + "fire_explosion.gif";
-    this.slime_explosion.src = dir + "slime_explosion.png";
+    this.slime_explosion.load(dir + "slime_explosion/");
+    this.fire_explosion.load(dir + "fire_explosion/");
 
-    this.fire_explosion[0].src = dir + "fire_explosion/0.png";
-    this.fire_explosion[1].src = dir + "fire_explosion/1.png";
-    this.fire_explosion[2].src = dir + "fire_explosion/2.png";
-    this.fire_explosion[3].src = dir + "fire_explosion/3.png";
-    this.fire_explosion[4].src = dir + "fire_explosion/4.png";
-    this.fire_explosion[5].src = dir + "fire_explosion/5.png";
-    this.fire_explosion[6].src = dir + "fire_explosion/6.png";
-    this.fire_explosion[7].src = dir + "fire_explosion/7.png";
-    this.fire_explosion[8].src = dir + "fire_explosion/8.png";
-    this.fire_explosion[9].src = dir + "fire_explosion/9.png";
-    
   }
+
+
+}
+
+function Animation(duration){
+
+  this.imageId= 0;
+  this.duration = duration;
+  this.getImage = function(){
+    return this.images[this.imageId];
+  }
+  this.images = [];
+  this.cooldownUntil = Date.now() +  this.duration/this.images.length;
+  this.load = function(dir){
+    var _this = this;    
+    readTextFile(dir + "info.json",function(txt){
+      var obj= JSON.parse(txt);
+      var num_images = obj.num_images;
+      //Init
+      for(var i = 0; i < num_images; i++){
+        _this.images[i] = new Image();
+      }
+
+      // Set SRC:
+      for(var i = 0; i < num_images; i++){
+        _this.images[i].src = dir + "" + i +".png";
+      }
+
+      _this.cooldownUntil = Date.now() +  _this.duration/_this.images.length;
+    });
+
+  }
+
+  this.update = function(){
+
+    
+    if (Date.now() >= this.cooldownUntil) {
+      this.imageId = (this.imageId+1) % (this.images.length);    
+      this.cooldownUntil = Date.now() + this.duration/this.images.length;
+    }
+  }
+
 
 
 }

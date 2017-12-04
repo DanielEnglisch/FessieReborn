@@ -252,10 +252,10 @@ var spawnExplosion = function (blockPos, type) {
 
             switch (type) {
                 case Explosion.FIRE:
-                    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.fire_explosion[0], Date.now() + 1000)); 
+                    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.fire_explosion,1000)); 
                     break;
                 case Explosion.SLIME:
-                    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.slime_explosion, Date.now() + 10000)); 
+                    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.slime_explosion,10000)); 
                     break;
                 case Explosion.TRASH: if(isAir(x,y))fallables.push(new Trash(new Vec(x,y)));
                     break;

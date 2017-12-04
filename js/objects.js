@@ -57,18 +57,12 @@ function Exit(pos) {
 }
 
 function ExplosionOverlay(pos, img, time) {
-    this.image = img;
-    this.timeUntil = time;
-    this.imgId = 0;
-    this.cooldownUntil = Date.now() + 1000/10;
+    this.animation = Object.assign({},img);
+    this.timeUntil = Date.now() + time;
     this.blockPos = pos;
     this.update = function () {
 
-        if (Date.now() >= this.cooldownUntil) {
-            this.imgId = this.imgId+1 % 9;
-            this.image = tex.fire_explosion[this.imgId];
-            this.cooldownUntil = Date.now() + 1000/10;
-        }
+        this.animation.update();
 
 
         if (Date.now() >= this.timeUntil) {
@@ -76,7 +70,7 @@ function ExplosionOverlay(pos, img, time) {
         }
     }
     this.draw = function (context) {
-        context.drawImage(this.image, this.blockPos.x * scale + xOffset, this.blockPos.y * scale + yOffset, scale, scale);
+        context.drawImage(this.animation.getImage(), this.blockPos.x * scale + xOffset, this.blockPos.y * scale + yOffset, scale, scale);
         context.stroke();
     }
 }
