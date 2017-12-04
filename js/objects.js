@@ -59,8 +59,18 @@ function Exit(pos) {
 function ExplosionOverlay(pos, img, time) {
     this.image = img;
     this.timeUntil = time;
+    this.imgId = 0;
+    this.cooldownUntil = Date.now() + 1000/10;
     this.blockPos = pos;
     this.update = function () {
+
+        if (Date.now() >= this.cooldownUntil) {
+            this.imgId = this.imgId+1 % 9;
+            this.image = tex.fire_explosion[this.imgId];
+            this.cooldownUntil = Date.now() + 1000/10;
+        }
+
+
         if (Date.now() >= this.timeUntil) {
             explosion_overlays.splice(explosion_overlays.indexOf(this), 1);
         }

@@ -127,8 +127,11 @@ function TexturesBundle() {
   this.sewer = new Image();
   this.silver_monster = new Image();
 
-  this.fire_explosion = new Image();
+  this.fire_explosion = [];
   this.slime_explosion = new Image();
+  for(var i = 0; i < 10; i++){
+    this.fire_explosion[i] = new Image();
+  }
 
 
   this.load = function (dir) {
@@ -177,8 +180,19 @@ function TexturesBundle() {
     this.sewer.src = dir + "sewer.png";
     this.silver_monster.src = dir + "silver_monster.png";
 
-    this.fire_explosion.src = dir + "fire_explosion.png";
+    this.fire_explosion.src = dir + "fire_explosion.gif";
     this.slime_explosion.src = dir + "slime_explosion.png";
+
+    this.fire_explosion[0].src = dir + "fire_explosion/0.png";
+    this.fire_explosion[1].src = dir + "fire_explosion/1.png";
+    this.fire_explosion[2].src = dir + "fire_explosion/2.png";
+    this.fire_explosion[3].src = dir + "fire_explosion/3.png";
+    this.fire_explosion[4].src = dir + "fire_explosion/4.png";
+    this.fire_explosion[5].src = dir + "fire_explosion/5.png";
+    this.fire_explosion[6].src = dir + "fire_explosion/6.png";
+    this.fire_explosion[7].src = dir + "fire_explosion/7.png";
+    this.fire_explosion[8].src = dir + "fire_explosion/8.png";
+    this.fire_explosion[9].src = dir + "fire_explosion/9.png";
     
   }
 
