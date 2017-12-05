@@ -129,8 +129,8 @@ function TexturesBundle() {
 
   this.slime_explosion = new Animation(1000);
   this.fire_explosion = new Animation(1000);
-
-
+  this.silver_monster_anim = new Animation(1500);
+  
   this.load = function (dir) {
     this.player_neutral.src = dir + "p.png";
     this.player_up.src = dir + "p_up.png";
@@ -175,10 +175,11 @@ function TexturesBundle() {
     this.fire.src = dir + "fire.png";
     this.bluewall.src = dir + "bluewall.png";
     this.sewer.src = dir + "sewer.png";
-    this.silver_monster.src = dir + "silver_monster.png";
 
+    this.silver_monster.src = dir + "silver_monster.png";
     this.slime_explosion.load(dir + "slime_explosion/");
     this.fire_explosion.load(dir + "fire_explosion/");
+    this.silver_monster_anim.load(dir + "silver_monster/");
 
   }
 
@@ -195,23 +196,23 @@ function Animation(duration){
   this.images = [];
   this.cooldownUntil = Date.now() +  this.duration/this.images.length;
   this.load = function(dir){
-    var _this = this;    
-    readTextFile(dir + "info.json",function(txt){
-      var obj= JSON.parse(txt);
+
+    
+    var obj= loadJSON(dir + "info.json")
       var num_images = obj.num_images;
       //Init
       for(var i = 0; i < num_images; i++){
-        _this.images[i] = new Image();
+        this.images[i] = new Image();
       }
 
       // Set SRC:
       for(var i = 0; i < num_images; i++){
-        _this.images[i].src = dir + "" + i +".png";
+        this.images[i].src = dir + "" + i +".png";
       }
 
-      _this.cooldownUntil = Date.now() +  _this.duration/_this.images.length;
-    });
+      this.cooldownUntil = Date.now() +  this.duration/this.images.length;
 
+      
   }
 
   this.update = function(){
