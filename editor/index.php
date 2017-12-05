@@ -54,6 +54,7 @@
       Not found
     </canvas>
   </div>
+  <script type="text/javascript" src="../js/utils.js"></script>  
   <script type="text/javascript" src="../js/textureLoader.js"></script>  
   <script type="text/javascript" src="editor.js"></script>
   
