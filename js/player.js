@@ -129,19 +129,19 @@ function Player(pos) {
             return;
         switch (this.looking) {
             case Direc.UP:
-                context.drawImage(tex.player_up, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
+                context.drawImage(tex.player_up, this.pos.x * scale, this.pos.y * scale, scale, scale);
                 break;
             case Direc.DOWN:
-                context.drawImage(tex.player_down, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
+                context.drawImage(tex.player_down, this.pos.x * scale, this.pos.y * scale, scale, scale);
                 break;
             case Direc.LEFT:
-                context.drawImage(tex.player_left, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
+                context.drawImage(tex.player_left, this.pos.x * scale, this.pos.y * scale, scale, scale);
                 break;
             case Direc.RIGHT:
-                context.drawImage(tex.player_right, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
+                context.drawImage(tex.player_right, this.pos.x * scale, this.pos.y * scale, scale, scale);
                 break;
             default:
-                context.drawImage(tex.player_neutral, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
+                context.drawImage(tex.player_neutral, this.pos.x * scale, this.pos.y * scale, scale, scale);
                 break;
         }
         context.stroke();

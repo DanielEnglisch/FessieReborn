@@ -8,7 +8,7 @@ function Dumpster(pos) {
     Dumpster.super_.call(this, pos, Block.DUMPSTER);
     this.image = tex.dumpster();
     this.draw = function (context) {
-        context.drawImage(this.image, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
+        context.drawImage(this.image, this.pos.x * scale , this.pos.y * scale , scale, scale);
         context.stroke();
     }
     this.fallEvent = function () {
@@ -26,7 +26,7 @@ function Trash(pos) {
     Trash.super_.call(this, pos, Block.TRASH);
     this.image = tex.trash();
     this.draw = function (context) {
-        context.drawImage(this.image, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
+        context.drawImage(this.image, this.pos.x * scale , this.pos.y * scale , scale, scale);
         context.stroke();
     }
     this.fallEvent = function () {
@@ -48,9 +48,9 @@ function Exit(pos) {
     this.pos = pos;
     this.draw = function (context) {
         if (this.isOpen)
-            context.drawImage(tex.exit_open, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
+            context.drawImage(tex.exit_open, this.pos.x * scale , this.pos.y * scale , scale, scale);
         else
-            context.drawImage(tex.exit_closed, this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
+            context.drawImage(tex.exit_closed, this.pos.x * scale , this.pos.y * scale , scale, scale);
 
         context.stroke();
     }
@@ -70,7 +70,7 @@ function ExplosionOverlay(pos, img, time) {
         }
     }
     this.draw = function (context) {
-        context.drawImage(this.animation.getImage(), this.blockPos.x * scale + xOffset, this.blockPos.y * scale + yOffset, scale, scale);
+        context.drawImage(this.animation.getImage(), this.blockPos.x * scale , this.blockPos.y * scale , scale, scale);
         context.stroke();
     }
 }

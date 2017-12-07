@@ -170,21 +170,25 @@ var initCanvas = function () {
 
 
 var redraw = function () {
-    context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    //context.clearRect(0, 0, window.innerWidth, window.innerHeight);
     context.imageSmoothingEnabled = false;
+
+    context.save();
+    context.translate(xOffset,yOffset);
+
     for (var x = 0; x < world.length; x++) {
         for (var y = 0; y < world[0].length; y++) {
 
             // Walls
             if (world[x][y] == Block.WALL) {
-                context.drawImage(tex.wall, x * scale + xOffset, y * scale + yOffset, scale, scale);
+                context.drawImage(tex.wall, x * scale , y * scale , scale, scale);
             } else if (world[x][y] == Block.STEEL_WALL) {
-                context.drawImage(tex.steel_wall, x * scale + xOffset, y * scale + yOffset, scale, scale);
+                context.drawImage(tex.steel_wall, x * scale , y * scale , scale, scale);
             } else if (world[x][y] == Block.DIRT) {
-                context.drawImage(tex.dirt, x * scale + xOffset, y * scale + yOffset, scale, scale);
+                context.drawImage(tex.dirt, x * scale , y * scale , scale, scale);
             } else {
                 // Everthing else
-                context.drawImage(tex.air, x * scale + xOffset, y * scale + yOffset, scale, scale);
+                context.drawImage(tex.air, x * scale , y * scale , scale, scale);
 
             }
             context.stroke();
@@ -210,6 +214,8 @@ var redraw = function () {
         m.draw(context);
     });
 
+   
+    context.restore();
 
 
     // Score Test

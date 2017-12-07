@@ -4,7 +4,7 @@ function SilverMonster(pos) {
     SilverMonster.super_.call(this, pos, Block.SILVER_MONSTER);
     this.dir = Direc.RIGHT;
     this.animation = tex.silver_monster_anim;
-    this.movementSpeed = 0.015;
+    this.movementSpeed = 0.01;
     this.update = function () {
         this.animation.update();
         if (!this.updateAnimaiton(this.movementSpeed, this.movementSpeed))
@@ -80,7 +80,7 @@ function SilverMonster(pos) {
 
 
     this.draw = function (context) {
-        context.drawImage(tex.silver_monster_anim.getImage(), this.pos.x * scale + xOffset, this.pos.y * scale + yOffset, scale, scale);
+        context.drawImage(tex.silver_monster_anim.getImage(), this.pos.x * scale + 0, this.pos.y * scale + 0, scale, scale);
         context.stroke();
     }
 
