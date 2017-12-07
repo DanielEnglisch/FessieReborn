@@ -170,9 +170,7 @@ var initCanvas = function () {
 
 
 var redraw = function () {
-    //context.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    context.imageSmoothingEnabled = false;
-
+    context.clearRect(0, 0, window.innerWidth, window.innerHeight);
     context.save();
     context.translate(xOffset,yOffset);
 
