@@ -1,5 +1,6 @@
 var GameObject = function (position, type) {
     this.blockPos = position;
+    this.sourceBlock = position;
     this.type = type;
     this.moving = false;
     this.pos = new Vec(position.x, position.y);
@@ -26,6 +27,7 @@ var GameObject = function (position, type) {
             this.pos.y = Math.round(this.pos.y * 100) / 100
             return false;
         } else {
+            this.sourceBlock = new Vec(this.blockPos.x, this.blockPos.y);
             this.pos.x = this.blockPos.x;
             this.pos.y = this.blockPos.y;
             this.moving = false;
@@ -50,7 +52,7 @@ function Fallable(pos, type) {
             return;
 
         var succ = true;
-
+        
         // When requested position is wall return
         if (!isAir(this.blockPos.x + dx, this.blockPos.y + dy))
             return false;
