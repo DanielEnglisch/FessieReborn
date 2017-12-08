@@ -10,7 +10,7 @@ var GameObject = function (position, type) {
             this.pos.x += xspeed;
             this.pos.x = Math.round(this.pos.x * 100) / 100
             return false;
-        } else if (this.pos.x - movementSpeed > this.blockPos.x) {
+        } else if (this.pos.x - xspeed > this.blockPos.x) {
             this.moving = true;
             this.pos.x -= xspeed;
             this.pos.x = Math.round(this.pos.x * 100) / 100
