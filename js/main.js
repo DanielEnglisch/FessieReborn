@@ -20,10 +20,12 @@ var loop = function () {
     if (Date.now() - time >= 1000/ups) {
         update();
         time = Date.now();
+        
     }
 
-    redraw();
+    redraw();    
     requestAnimationFrame(loop);
+    
 }
 
 
@@ -58,6 +60,7 @@ var addEvents = function () {
 
 }
 
+
 var update = function () {
 
     // New collision detection
@@ -66,7 +69,7 @@ var update = function () {
     fallables.forEach(function (f) {
         if (f.isFalling) {
             monsters.forEach(function (m) {
-                if (Math.abs(f.pos.x - m.pos.x) < 0.7 && Math.abs(f.pos.y - m.pos.y) < 0.7)
+                if (Math.abs(f.pos.x - m.pos.x) < silver_monster_hotbox && Math.abs(f.pos.y - m.pos.y) < silver_monster_hotbox)
                     m.kill();
             });
         }
@@ -76,7 +79,7 @@ var update = function () {
 
     // Player -> Monsters
     monsters.forEach(function (f) {
-        if (Math.abs(f.pos.x - player.pos.x) < 1 && Math.abs(f.pos.y - player.pos.y) < 1) {
+        if (Math.abs(f.pos.x - player.pos.x) < silver_monster_hotbox && Math.abs(f.pos.y - player.pos.y) < silver_monster_hotbox) {
             f.kill();
             player.kill();
         }
@@ -91,7 +94,7 @@ var update = function () {
         }
         // Monster -> Explosion overlay
         monsters.forEach(function (m) {
-            if (Math.abs(f.blockPos.x - m.pos.x) < 1 && Math.abs(f.blockPos.y - m.pos.y) < 1)
+            if (Math.abs(f.blockPos.x - m.pos.x) < silver_monster_hotbox && Math.abs(f.blockPos.y - m.pos.y) < silver_monster_hotbox)
                 m.kill();
         });
         // Trash -> explosion overlay
