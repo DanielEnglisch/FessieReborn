@@ -57,6 +57,7 @@ function Exit(pos) {
 }
 
 function ExplosionOverlay(pos, img, time) {
+    this.duration = time;
     this.animation = Object.assign({},img);
     this.timeUntil = Date.now() + time;
     this.blockPos = pos;

@@ -88,6 +88,10 @@ var update = function () {
 
     // Monster -> Explosion overlay
     explosion_overlays.forEach(function (f) {
+
+        if(Math.abs(f.timeUntil - Date.now()) > f.duration - EXPLOSION_DELAY)
+            return;
+            
         // Player -> Explosion overlay
         if (Math.abs(f.blockPos.x - player.pos.x) < 1 && Math.abs(f.blockPos.y - player.pos.y) < 1) {
             player.kill();
@@ -248,15 +252,11 @@ var spawnExplosion = function (blockPos, type) {
 
     for (var x = blockPos.x - 1; x <= blockPos.x + 1; x++) {
         for (var y = blockPos.y - 1; y <= blockPos.y + 1; y++) {
-            if (isPlayer(x, y))
-                player.kill();
+           
             if (world[x][y] == Block.DIRT) {
                 world[x][y] = Block.AIR;
             }
-            if (isMonster(x, y)) {
-                getMonster(x, y).kill();
-            }
-
+            
             switch (type) {
                 case Explosion.FIRE:
                     explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.fire_explosion,1000)); 
