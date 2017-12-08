@@ -14,9 +14,12 @@ var main = function () {
     addEvents();
     initCanvas();
     initWorld();
-    tex.load("img/");
-    startBackgroundMusic();
-    loop();
+    tex.load("img/", function(){
+        startBackgroundMusic();
+        loop();
+    });
+
+    
 };
 
 
