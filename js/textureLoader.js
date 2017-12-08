@@ -180,7 +180,7 @@ function TexturesBundle() {
     this.slime_explosion.load(dir + "slime_explosion/");
     this.fire_explosion.load(dir + "fire_explosion/");
     this.silver_monster_anim.load(dir + "silver_monster/");
-
+    console.log("Loaded all textures!");
   }
 
 

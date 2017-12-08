@@ -36,7 +36,7 @@
   <link rel="stylesheet" type="text/css" href="css/game.css">
 </head>
 
-<body onload="main();">
+<body>
 
   <div id="navigation">
     <a href="index.php">Game</a>

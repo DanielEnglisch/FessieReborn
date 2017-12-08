@@ -3,6 +3,12 @@ var initWorld = function () {
     loadLevel();
 }
 
+document.onreadystatechange = () => {
+    if (document.readyState === 'complete') {
+      main();
+    }
+  };
+  
 
 var main = function () {
     addEvents();
