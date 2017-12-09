@@ -13,9 +13,9 @@ document.onreadystatechange = () => {
 var main = function () {
     addEvents();
     initCanvas();
-    initWorld();
     tex.load("img/", function(){
         console.log("LOADED TEXTURES");
+        initWorld();        
         startBackgroundMusic();
         loop();
     });
