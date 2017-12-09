@@ -1,5 +1,7 @@
 function TexturesBundle() {
-  this.loadingImages = 0;  
+  this.loadingImages = 0;
+  this.allTexturesLoading = false;
+
   this.player_neutral = new Image();
   this.player_up = new Image();
   this.player_down = new Image();
@@ -134,120 +136,124 @@ function TexturesBundle() {
   this.callback = null;
   this.load = function (dir, callback) {
     this.callback = callback;
-    this.player_neutral = this.blockloadImage( dir + "p.png");
-    this.player_up = this.blockloadImage( dir + "p_up.png");
-    this.player_down = this.blockloadImage( dir + "p_down.png");
-    this.player_left = this.blockloadImage( dir + "p_left.png");
-    this.player_right = this.blockloadImage( dir + "p_right.png");
+    this.player_neutral = this.blockloadImage(dir + "p.png");
+    this.player_up = this.blockloadImage(dir + "p_up.png");
+    this.player_down = this.blockloadImage(dir + "p_down.png");
+    this.player_left = this.blockloadImage(dir + "p_left.png");
+    this.player_right = this.blockloadImage(dir + "p_right.png");
 
     this.wall = this.blockloadImage(dir + "wall.png");
-    this.exit_closed = this.blockloadImage( dir + "exit_closed.png");
-    this.exit_open = this.blockloadImage( dir + "exit_open.png");
-    this.dumpster1 = this.blockloadImage( dir + "dumpster1.png");
-    this.dumpster2 = this.blockloadImage( dir + "dumpster2.png");
-    this.dumpster3 = this.blockloadImage( dir + "dumpster3.png");
-    this.dumpster4 = this.blockloadImage( dir + "dumpster4.png");
+    this.exit_closed = this.blockloadImage(dir + "exit_closed.png");
+    this.exit_open = this.blockloadImage(dir + "exit_open.png");
+    this.dumpster1 = this.blockloadImage(dir + "dumpster1.png");
+    this.dumpster2 = this.blockloadImage(dir + "dumpster2.png");
+    this.dumpster3 = this.blockloadImage(dir + "dumpster3.png");
+    this.dumpster4 = this.blockloadImage(dir + "dumpster4.png");
 
-    this.trash1 = this.blockloadImage( dir + "trash1.png");
-    this.trash2 = this.blockloadImage( dir + "trash2.png");
-    this.trash3 = this.blockloadImage( dir + "trash3.png");
-    this.trash4 = this.blockloadImage( dir + "trash4.png");
-    this.trash5 = this.blockloadImage( dir + "trash5.png");
-    this.trash6 = this.blockloadImage( dir + "trash6.png");
-    this.trash7 = this.blockloadImage( dir + "trash7.png");
-    this.trash8 = this.blockloadImage( dir + "trash8.png");
-    this.trash9 = this.blockloadImage( dir + "trash9.png");
-    this.trash10 = this.blockloadImage( dir + "trash10.png");
-    this.trash11 = this.blockloadImage( dir + "trash11.png");
-    this.trash12 = this.blockloadImage( dir + "trash12.png");
-    this.trash13 = this.blockloadImage( dir + "trash13.png");
-    this.trash14 = this.blockloadImage( dir + "trash14.png");
-    this.trash15 = this.blockloadImage( dir + "trash15.png");
-    this.trash16 = this.blockloadImage( dir + "trash16.png");
-    this.trash17 = this.blockloadImage( dir + "trash17.png");
-    this.trash18 = this.blockloadImage( dir + "trash18.png");
+    this.trash1 = this.blockloadImage(dir + "trash1.png");
+    this.trash2 = this.blockloadImage(dir + "trash2.png");
+    this.trash3 = this.blockloadImage(dir + "trash3.png");
+    this.trash4 = this.blockloadImage(dir + "trash4.png");
+    this.trash5 = this.blockloadImage(dir + "trash5.png");
+    this.trash6 = this.blockloadImage(dir + "trash6.png");
+    this.trash7 = this.blockloadImage(dir + "trash7.png");
+    this.trash8 = this.blockloadImage(dir + "trash8.png");
+    this.trash9 = this.blockloadImage(dir + "trash9.png");
+    this.trash10 = this.blockloadImage(dir + "trash10.png");
+    this.trash11 = this.blockloadImage(dir + "trash11.png");
+    this.trash12 = this.blockloadImage(dir + "trash12.png");
+    this.trash13 = this.blockloadImage(dir + "trash13.png");
+    this.trash14 = this.blockloadImage(dir + "trash14.png");
+    this.trash15 = this.blockloadImage(dir + "trash15.png");
+    this.trash16 = this.blockloadImage(dir + "trash16.png");
+    this.trash17 = this.blockloadImage(dir + "trash17.png");
+    this.trash18 = this.blockloadImage(dir + "trash18.png");
 
-    this.air = this.blockloadImage( dir + "air.png");
-    this.dirt = this.blockloadImage( dir + "dirt.png");
-    this.steel_wall = this.blockloadImage( dir + "steel_wall.png");
+    this.air = this.blockloadImage(dir + "air.png");
+    this.dirt = this.blockloadImage(dir + "dirt.png");
+    this.steel_wall = this.blockloadImage(dir + "steel_wall.png");
 
-    this.bomb = this.blockloadImage( dir + "bomb.png");
-    this.force_field = this.blockloadImage( dir + "force_field.png");
-    this.fire_ball = this.blockloadImage( dir + "fire_ball.png");
-    this.fire = this.blockloadImage( dir + "fire.png");
-    this.bluewall = this.blockloadImage( dir + "bluewall.png");
-    this.sewer = this.blockloadImage( dir + "sewer.png");
-    this.silver_monster= this.blockloadImage( dir + "silver_monster.png");
+    this.bomb = this.blockloadImage(dir + "bomb.png");
+    this.force_field = this.blockloadImage(dir + "force_field.png");
+    this.fire_ball = this.blockloadImage(dir + "fire_ball.png");
+    this.fire = this.blockloadImage(dir + "fire.png");
+    this.bluewall = this.blockloadImage(dir + "bluewall.png");
+    this.sewer = this.blockloadImage(dir + "sewer.png");
+    this.silver_monster = this.blockloadImage(dir + "silver_monster.png");
 
 
     this.slime_explosion.load(dir + "slime_explosion/");
     this.fire_explosion.load(dir + "fire_explosion/");
     this.silver_monster_anim.load(dir + "silver_monster/");
 
-  }
+    this.allTexturesLoading = true;
+ 
+  
+}
 
-  this.blockloadImage = function(src){
-    console.log("Loading "+ src);
+this.blockloadImage = function (src) {
+  console.log("Loading " + src);
+  var supa = this;
+  var newImg = new Image();
+  newImg.src = src;
+  this.loadingImages++;
 
-    var supa = this;
-    var newImg = new Image();
-    newImg.src = src;
-this.loadingImages++;
-
-    newImg.addEventListener('error', function() {
-      console.error("Error loading "+src);
-      supa.loadingImages--;
-      if(supa.loadingImages == 0){
+  newImg.addEventListener('error', function () {
+    console.error("Error loading " + src);
+    supa.loadingImages--;
+    if (supa.loadingImages == 0) {
+      if (supa.allTexturesLoading)
         supa.callback();
-      }
-    });
+    }
+  });
 
-      newImg.onload =  function(){
-        supa.loadingImages--;
-        console.log("Loaded "+ src + "("+supa.loadingImages  + " left)");
-        if(supa.loadingImages == 0){
-          supa.callback();
-        }
-      }
-    
-    return newImg;
+  newImg.onload = function () {
+    supa.loadingImages--;
+    console.log("Loaded " + src + "(" + supa.loadingImages + " left)");
+    if (supa.loadingImages == 0) {
+      if (supa.allTexturesLoading)
+        supa.callback();
+    }
   }
+
+  return newImg;
+}
   
 }
 
 
 
-function Animation(duration){
+function Animation(duration) {
 
-  this.imageId= 0;
+  this.imageId = 0;
   this.duration = duration;
-  this.getImage = function(){
+  this.getImage = function () {
     return this.images[this.imageId];
   }
   this.images = [];
-  this.cooldownUntil = Date.now() +  this.duration/this.images.length;
-  this.load = function(dir){
+  this.cooldownUntil = Date.now() + this.duration / this.images.length;
+  this.load = function (dir) {
 
-    
-    var obj= loadJSON(dir + "info.json")
-      var num_images = obj.num_images;
 
-      // Set SRC:
-      for(var i = 0; i < num_images; i++){
-        this.images[i] = tex.blockloadImage(dir + "" + i +".png");
-      }
+    var obj = loadJSON(dir + "info.json")
+    var num_images = obj.num_images;
 
-      this.cooldownUntil = Date.now() +  this.duration/this.images.length;
+    // Set SRC:
+    for (var i = 0; i < num_images; i++) {
+      this.images[i] = tex.blockloadImage(dir + "" + i + ".png");
+    }
 
-      
+    this.cooldownUntil = Date.now() + this.duration / this.images.length;
+
+
   }
 
-  this.update = function(){
+  this.update = function () {
 
-    
+
     if (Date.now() >= this.cooldownUntil) {
-      this.imageId = (this.imageId+1) % (this.images.length);    
-      this.cooldownUntil = Date.now() + this.duration/this.images.length;
+      this.imageId = (this.imageId + 1) % (this.images.length);
+      this.cooldownUntil = Date.now() + this.duration / this.images.length;
     }
   }
 

@@ -15,6 +15,7 @@ var main = function () {
     initCanvas();
     initWorld();
     tex.load("img/", function(){
+        console.log("LOADED TEXTURES");
         startBackgroundMusic();
         loop();
     });
