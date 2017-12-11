@@ -3,6 +3,7 @@ inherits(SilverMonster, Monster);
 function SilverMonster(pos) {
     SilverMonster.super_.call(this, pos, Block.SILVER_MONSTER);
     this.dir = Direc.RIGHT;
+    this.hitbox = 0.65;
     this.animation = tex.silver_monster_anim;
     this.movementSpeed = 0.01;
     this.update = function () {

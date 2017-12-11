@@ -89,7 +89,7 @@ var update = function () {
 
     // Player -> Monsters
     monsters.forEach(function (f) {
-        if (Math.abs(f.pos.x - player.pos.x) < silver_monster_hotbox && Math.abs(f.pos.y - player.pos.y) < silver_monster_hotbox) {
+        if (Math.abs(f.pos.x - player.pos.x) < f.hitbox && Math.abs(f.pos.y - player.pos.y) < f.hitbox) {
             f.kill();
             player.kill();
         }
@@ -108,7 +108,7 @@ var update = function () {
         }
         // Monster -> Explosion overlay
         monsters.forEach(function (m) {
-            if (Math.abs(f.blockPos.x - m.pos.x) < silver_monster_hotbox && Math.abs(f.blockPos.y - m.pos.y) < silver_monster_hotbox)
+            if (Math.abs(f.blockPos.x - m.pos.x) < f.hitbox && Math.abs(f.blockPos.y - m.pos.y) < f.hitbox)
                 m.kill();
         });
         // Trash -> explosion overlay

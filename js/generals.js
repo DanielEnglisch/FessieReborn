@@ -144,6 +144,7 @@ inherits(Monster, GameObject);
 function Monster(pos) {
     Monster.super_.call(this, pos, -1);
     this.dir = Direc.RIGHT;
+    this.hitbox = 1;
     this.movementSpeed = 0.015;
     this.kill = function () {
         monsters.splice(monsters.indexOf(this), 1);
