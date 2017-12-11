@@ -1,8 +1,8 @@
 const vol_music = 0.2;
 const vol_sound = 0.7;
 
-const silver_monster_hotbox = 0.5
-const EXPLOSION_DELAY  = 300;
+const silver_monster_hotbox = 0.65
+const EXPLOSION_DELAY  = 250;
 
 var canvas = document.getElementById("screen");
 var context = null;

@@ -44,7 +44,7 @@ function Player(pos) {
             playDirt();
             // If is monster
         } else if (isExit(this.blockPos.x + dx, this.blockPos.y + dy)) {
-            // TODO: Exit logic
+
             if (exit.isOpen == false)
                 return;
             else {
