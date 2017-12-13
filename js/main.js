@@ -7,16 +7,17 @@ document.onreadystatechange = () => {
     if (document.readyState === 'complete') {
       main();
     }
-  };
+};
   
-
+var loadingtime = Date.now();
 var main = function () {
     addEvents();
     initCanvas();
     tex.load("img/", function(){
-        console.log("LOADED TEXTURES");
+        console.log("Loaded textures.");
         initWorld();        
         startBackgroundMusic();
+        console.log("Loading took: " + (Date.now()-loadingtime)/1000 + "s");        
         loop();
     });
 

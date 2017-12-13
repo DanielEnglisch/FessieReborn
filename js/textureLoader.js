@@ -192,7 +192,7 @@ function TexturesBundle() {
 }
 
 this.blockloadImage = function (src) {
-  console.log("Loading " + src);
+  //console.log("Loading " + src);
   var supa = this;
   var newImg = new Image();
   newImg.src = src;
@@ -209,7 +209,7 @@ this.blockloadImage = function (src) {
 
   newImg.onload = function () {
     supa.loadingImages--;
-    console.log("Loaded " + src + "(" + supa.loadingImages + " left)");
+    //console.log("Loaded " + src + "(" + supa.loadingImages + " left)");
     if (supa.loadingImages == 0) {
       if (supa.allTexturesLoading)
         supa.callback();
