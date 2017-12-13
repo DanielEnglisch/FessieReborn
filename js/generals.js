@@ -64,6 +64,13 @@ function Fallable(pos, type) {
             }
         });
 
+        monsters.forEach(function (f) {
+            console.log(Math.abs(f.pos.x - myBlockPos.x + dx));
+            if (Math.abs(f.pos.x - myBlockPos.x + dx) <= 2 + f.hitbox && Math.abs(f.pos.y - myBlockPos.y + dy) <= 2 + f.hitbox) {
+                succ = false;
+            }
+        });
+
         if (!succ)
             return false;
 

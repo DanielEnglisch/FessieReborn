@@ -23,7 +23,7 @@ var isTrash = function (x, y) {
 var isMonster = function (x, y) {
     var succ = false;
     monsters.forEach(function (f) {
-        if (Math.abs(f.pos.x - x) < f.hitbox && Math.abs(f.pos.y - y) < f.hitbox) {
+        if (x == f.blockPos.x && y == f.blockPos.y) {
             succ = true;
         }
     });
