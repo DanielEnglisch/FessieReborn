@@ -80,7 +80,7 @@ var update = function () {
     fallables.forEach(function (f) {
         if (f.isFalling) {
             monsters.forEach(function (m) {
-                if (Math.abs(f.pos.x - m.pos.x) < silver_monster_hotbox && Math.abs(f.pos.y - m.pos.y) < silver_monster_hotbox)
+                if (Math.abs(f.pos.x - m.pos.x) < m.hitbox && Math.abs(f.pos.y - m.pos.y) < m.hitbox)
                     m.kill();
             });
         }
