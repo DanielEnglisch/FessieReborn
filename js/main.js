@@ -110,7 +110,7 @@ var update = function () {
         // Monster -> Explosion overlay
         monsters.forEach(function (m) {
             if (Math.abs(f.blockPos.x - m.pos.x) < 1 && Math.abs(f.blockPos.y - m.pos.y) < 1)
-                m.kill();
+                m.kill(); 
         });
         // Collectables -> explosion overlay
         fallables.forEach(function (t) {
