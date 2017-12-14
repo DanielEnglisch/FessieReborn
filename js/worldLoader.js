@@ -4,6 +4,11 @@ var reloadLevel = function () {
 
 var loadLevel = function () {
     // Reset everything:
+
+    timeOuts.forEach(function(t){
+        clearTimeout(t);
+    });
+
     world = [];
     player = null;
     fallables = [];
@@ -11,6 +16,7 @@ var loadLevel = function () {
     items_left = 0;
     exit = null;
     monsters = [];
+    num_bombs = 0;
     STOP = false;
     explosion_overlays = [];
     // Load form file into world matrix

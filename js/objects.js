@@ -58,6 +58,7 @@ function Exit(pos) {
 
 function ExplosionOverlay(pos, img, time) {
     this.duration = time;
+    
     this.animation = Object.assign({}, img);
     this.timeUntil = Date.now() + time;
     this.blockPos = pos;
@@ -91,6 +92,7 @@ function Bomb(pos) {
 
     this.collect = function () {
         console.log("Collected bomb!");
+        num_bombs++;
         fallables.splice(fallables.indexOf(this), 1);
         playAudio(audio.trash_collect);
       

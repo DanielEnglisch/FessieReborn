@@ -27,11 +27,11 @@ function Player(pos) {
         var success = true;
 
         // When requested position is wall return
-        if (isWall(this.blockPos.x + dx, this.blockPos.y + dy))
+        if (isWall(this.blockPos.x + dx, this.blockPos.y + dy) || world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.BOMB)
             return;
         // Walk on dirt
         else if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.DIRT) {
-            world[this.blockPos.x + dx][this.blockPos.y + dy] = 0;
+            world[this.blockPos.x + dx][this.blockPos.y + dy] = Block.AIR;
             playDirt();
             // If is monster
         } else if (isExit(this.blockPos.x + dx, this.blockPos.y + dy)) {
