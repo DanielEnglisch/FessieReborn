@@ -3,7 +3,7 @@ var GameObject = function (position, type) {
     this.sourceBlock = position;
     this.type = type;
     this.moving = false;
-    
+
     this.pos = new Vec(position.x, position.y);
     this.updateAnimaiton = function (yspeed, xspeed = movementSpeed) {
         // Basic animaiton
@@ -150,7 +150,7 @@ var belowCanSlip = function (fallable) {
         return true;
     }
 
-    
+
 }
 
 inherits(Monster, GameObject);
@@ -169,14 +169,15 @@ function Monster(pos) {
 
     }
 
-    
+
 
 }
 
 inherits(Collectable, Fallable);
+
 function Collectable(pos, type) {
     Collectable.super_.call(this, pos, type);
-    this.collect = function(){
+    this.collect = function () {
         console.log("Collected " + this.type);
     }
 }
