@@ -300,6 +300,17 @@ var spawnBombOnPlayer = function () {
     if (num_bombs > 0 && world[pos.x][pos.y] != Block.BOMB) {
 
 
+        // Check monster intersection
+        var coll = false;
+        monsters.forEach(function(m){
+            if(Math.abs(m.pos.x - pos.x) < 1 && Math.abs(m.pos.y - pos.y) < 1){
+                coll = true;
+            }
+        });
+        if(coll)
+            return;
+
+
         world[pos.x][pos.y] = Block.BOMB;
 
         playAudio(audio.fire);
