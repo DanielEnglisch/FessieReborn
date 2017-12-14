@@ -37,6 +37,7 @@ var GameObject = function (position, type) {
 };
 
 inherits(Fallable, GameObject);
+
 function Fallable(pos, type) {
     Fallable.super_.call(this, pos, type);
 
@@ -52,7 +53,7 @@ function Fallable(pos, type) {
             return;
 
         var succ = true;
-        
+
         // When requested position is wall return
         if (!isAir(this.blockPos.x + dx, this.blockPos.y + dy))
             return false;
@@ -64,6 +65,7 @@ function Fallable(pos, type) {
             }
         });
 
+        // Only move dumpster when there is space and no monster (only in x)
         monsters.forEach(function (f) {
             console.log(Math.abs(f.pos.x - myBlockPos.x + dx));
             if (Math.abs(f.pos.x - myBlockPos.x + dx) <= 2 + f.hitbox && Math.abs(f.pos.y - myBlockPos.y + dy) <= 1) {
@@ -148,6 +150,7 @@ var belowCanSlip = function (fallable) {
 }
 
 inherits(Monster, GameObject);
+
 function Monster(pos) {
     Monster.super_.call(this, pos, -1);
     this.dir = Direc.RIGHT;
@@ -155,8 +158,8 @@ function Monster(pos) {
     this.movementSpeed = 0.015;
     this.kill = function () {
         monsters.splice(monsters.indexOf(this), 1);
-        spawnExplosion(posToBlock(this.pos) , Explosion.FIRE);
-        
+        spawnExplosion(posToBlock(this.pos), Explosion.FIRE);
+
     }
     this.update = function () {
 
@@ -169,6 +172,10 @@ function Monster(pos) {
 }
 
 inherits(Collectable, Fallable);
+
 function Collectable(pos, type) {
     Collectable.super_.call(this, pos, type);
+    this.collect = function(){
+        console.log("Collected " + this.type);
+    }
 }

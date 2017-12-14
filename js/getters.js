@@ -30,6 +30,14 @@ var isMonster = function (x, y) {
     return succ;
 }
 
+var isCollectable = function (x, y) {
+   var fallable = getFallable(x,y);
+
+    return fallable != null && fallable.type == Block.TRASH;
+}
+
+
+
 var getFallable = function (x, y) {
     var result = null;
     fallables.forEach(function (f) {

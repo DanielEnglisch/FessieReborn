@@ -7,15 +7,9 @@ function Player(pos) {
 
         if (this.moving)
             return;
-        if (isTrash(this.blockPos.x + dx, this.blockPos.y + dy)) {
-            fallables.splice(fallables.indexOf(getTrash(this.blockPos.x + dx, this.blockPos.y + dy)), 1);
-
-            items_left--;
-            playAudio(audio.trash_collect);
-
-            if (items_left == 0) {
-                exit.open();
-            }
+        if (isCollectable(this.blockPos.x + dx, this.blockPos.y + dy)) {
+            var item = getFallable(this.blockPos.x + dx, this.blockPos.y + dy);
+            item.collect();
         }
 
         else if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.DIRT) {
@@ -71,20 +65,9 @@ function Player(pos) {
                 } else
                     // Try to move fallable
                     if (playerblockpos.x + dx == f.blockPos.x && playerblockpos.y + dy == f.blockPos.y) {
-                        if (f.type == Block.TRASH) {
+                        if (isCollectable(f.blockPos.x,f.blockPos.y)) {
+                            f.collect();
 
-                            // If trash is moving and you are runnin
-                            if(dy == -1 && f.moving){
-                                player.kill();
-                            }
-
-                            obj.splice(index, 1);
-                            items_left--;
-                            playAudio(audio.trash_collect);
-
-                            if (items_left == 0) {
-                                exit.open();
-                            }
 
                         } else
                             // Try to move fallable
