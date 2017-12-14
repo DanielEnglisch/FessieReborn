@@ -68,6 +68,12 @@ function SilverMonster(pos) {
             }
         });
 
+        // Exit bug fix
+        if(world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.EXIT){
+            coll = true;
+            console.log("EXIT IN THE WAY");            
+        }
+
         // If nothing in the way move
         if(!coll){
             this.blockPos.x += dx;
