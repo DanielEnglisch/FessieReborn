@@ -26,13 +26,7 @@ function Trash(pos) {
         context.drawImage(this.image, this.pos.x * scale, this.pos.y * scale, scale, scale);
         context.stroke();
     }
-    this.fallEvent = function () {
-        playAudio(audio.trash_land);
-        if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
-            player.kill();
-        }
-    }
-
+    
     this.collect = function () {
         // Remove Item
         fallables.splice(fallables.indexOf(this), 1);
@@ -44,8 +38,6 @@ function Trash(pos) {
         }
     }
 }
-
-
 
 function Exit(pos) {
     this.open = function () {
@@ -82,3 +74,26 @@ function ExplosionOverlay(pos, img, time) {
         context.stroke();
     }
 }
+
+
+
+inherits(Bomb, Collectable);
+
+function Bomb(pos) {
+    Bomb.super_.call(this, pos, Block.BOMB);
+    this.image = tex.bomb;
+    this.draw = function (context) {
+        context.drawImage(this.image, this.pos.x * scale, this.pos.y * scale, scale, scale);
+        context.stroke();
+    }
+   
+
+
+    this.collect = function () {
+        console.log("Collected bomb!");
+        fallables.splice(fallables.indexOf(this), 1);
+        playAudio(audio.trash_collect);
+      
+    }
+}
+

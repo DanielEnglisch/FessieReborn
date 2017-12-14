@@ -3,6 +3,7 @@ var GameObject = function (position, type) {
     this.sourceBlock = position;
     this.type = type;
     this.moving = false;
+    
     this.pos = new Vec(position.x, position.y);
     this.updateAnimaiton = function (yspeed, xspeed = movementSpeed) {
         // Basic animaiton
@@ -42,10 +43,11 @@ function Fallable(pos, type) {
     Fallable.super_.call(this, pos, type);
 
     this.fallEvent = function () {
-
-
+        playAudio(audio.trash_land);
+        if (isPlayer(this.blockPos.x, this.blockPos.y + 1)) {
+            player.kill();
+        }
     }
-
     this.move = function (dx, dy, playerCause = false) {
 
         // Can't move when it's already moving and cant move vertically
@@ -147,6 +149,8 @@ var belowCanSlip = function (fallable) {
     ) {
         return true;
     }
+
+    
 }
 
 inherits(Monster, GameObject);
@@ -165,14 +169,11 @@ function Monster(pos) {
 
     }
 
-    this.draw = function (context) {
-
-    }
+    
 
 }
 
 inherits(Collectable, Fallable);
-
 function Collectable(pos, type) {
     Collectable.super_.call(this, pos, type);
     this.collect = function(){

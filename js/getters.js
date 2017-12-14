@@ -33,10 +33,8 @@ var isMonster = function (x, y) {
 var isCollectable = function (x, y) {
    var fallable = getFallable(x,y);
 
-    return fallable != null && fallable.type == Block.TRASH;
+    return fallable != null && (fallable.type == Block.TRASH || fallable.type == Block.BOMB);
 }
-
-
 
 var getFallable = function (x, y) {
     var result = null;

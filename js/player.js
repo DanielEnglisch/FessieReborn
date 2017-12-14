@@ -1,4 +1,5 @@
 inherits(Player, GameObject);
+
 function Player(pos) {
     Player.super_.call(this, pos, Block.PLAYER);
     this.looking = Direc.NONE;
@@ -10,9 +11,7 @@ function Player(pos) {
         if (isCollectable(this.blockPos.x + dx, this.blockPos.y + dy)) {
             var item = getFallable(this.blockPos.x + dx, this.blockPos.y + dy);
             item.collect();
-        }
-
-        else if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.DIRT) {
+        } else if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.DIRT) {
             world[this.blockPos.x + dx][this.blockPos.y + dy] = 0;
             playDirt();
         }
@@ -20,8 +19,6 @@ function Player(pos) {
 
     }
     this.move = function (dx, dy) {
-
-
 
         // Can't move when already moving
         if (this.moving)
@@ -65,7 +62,7 @@ function Player(pos) {
                 } else
                     // Try to move fallable
                     if (playerblockpos.x + dx == f.blockPos.x && playerblockpos.y + dy == f.blockPos.y) {
-                        if (isCollectable(f.blockPos.x,f.blockPos.y)) {
+                        if (isCollectable(f.blockPos.x, f.blockPos.y)) {
                             f.collect();
 
 
@@ -108,7 +105,7 @@ function Player(pos) {
     }
 
     this.draw = function (context) {
-        if(STOP)
+        if (STOP)
             return;
         switch (this.looking) {
             case Direc.UP:
@@ -136,7 +133,7 @@ function Player(pos) {
         playAudio(audio.die);
         STOP = true;
         this.isDead = true;
-        setTimeout(function(){
+        setTimeout(function () {
             reloadLevel();
 
         }, 2000);

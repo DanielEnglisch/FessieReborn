@@ -13,7 +13,8 @@ const Block = {
     DIRT: 5,
     EXIT: 6,
     STEEL_WALL: 7,
-    SILVER_MONSTER: 8
+    SILVER_MONSTER: 8,
+    BOMB: 9,
 };
 
 const Direc = {

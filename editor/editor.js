@@ -24,7 +24,8 @@ const Block = {
     DIRT: 5,
     EXIT: 6,
     STEEL_WALL: 7,
-    SILVER_MONSTER: 8
+    SILVER_MONSTER: 8,
+    BOMB:9
 };
 
 var loadEditor = function (txt) {
@@ -66,7 +67,7 @@ var main = function () {
 
 
     // Change block
-    tex.load("../img/");
+    tex.load("../img/", function(){});
     $('img').click(function (e) {
 
         if (e.target.id == "10x10") {
@@ -170,6 +171,10 @@ var draw = function () {
 
             } else if (world[x * ysize + y] == Block.SILVER_MONSTER) {
                 context.drawImage(tex.silver_monster, x * scale, y * scale, scale, scale);
+                context.stroke();
+
+            }else if (world[x * ysize + y] == Block.BOMB) {
+                context.drawImage(tex.bomb, x * scale, y * scale, scale, scale);
                 context.stroke();
 
             }

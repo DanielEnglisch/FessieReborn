@@ -109,20 +109,18 @@ var update = function () {
         }
         // Monster -> Explosion overlay
         monsters.forEach(function (m) {
-            if (Math.abs(f.blockPos.x - m.pos.x) < f.hitbox && Math.abs(f.blockPos.y - m.pos.y) < f.hitbox)
+            if (Math.abs(f.blockPos.x - m.pos.x) < 1 && Math.abs(f.blockPos.y - m.pos.y) < 1)
                 m.kill();
         });
-        // Trash -> explosion overlay
+        // Collectables -> explosion overlay
         fallables.forEach(function (t) {
-            if (t.type == Block.TRASH) {
+            if (isCollectable(f.blockPos.x, f.blockPos.y)) {
                 if (Math.abs(f.blockPos.x - t.pos.x) < 1 && Math.abs(f.blockPos.y - t.pos.y) < 1)
                     fallables.splice(fallables.indexOf(t), 1);
             }
         });
 
     });
-
-
 
     player.update();
 
