@@ -80,5 +80,5 @@ var isExit = function (x, y) {
 }
 
 var isAir = function (x, y) {
-    return world[x][y] == Block.AIR && !isFallable(x, y) && !isExit(x, y) && !isMonster(x, y) && !isPlayer(x, y) && world[x][y] != Block.BOMB;
+    return world[x][y] == Block.AIR && !isFallable(x, y)  && !isExit(x, y) && !isMonster(x, y) && !isPlayer(x, y) && world[x][y] != Block.BOMB;
 }
