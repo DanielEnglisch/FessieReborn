@@ -71,7 +71,10 @@ function Fallable(pos, type) {
         // Only move dumpster when there is space and no monster (only in x)
         monsters.forEach(function (f) {
             if (Math.abs(f.pos.x - myBlockPos.x + dx) <= 2 + f.hitbox && Math.abs(f.pos.y - myBlockPos.y + dy) <= 1) {
-                succ = false;
+                if (f.pos.x - myBlockPos.x + dx > 0 && dx > 0 ||
+                    f.pos.x - myBlockPos.x + dx < 0 && dx < 0)
+                    succ = false;
+
             }
         });
 
