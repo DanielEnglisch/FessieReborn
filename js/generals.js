@@ -127,7 +127,7 @@ function Fallable(pos, type) {
                 if (!belowCanSlip(this))
                     this.move(-1, 0);
             }
-        } else if (isAir(this.blockPos.x, this.blockPos.y + 1) || isMonster(this.blockPos.x, this.blockPos.y + 1)) {
+        } else if (isAir(this.blockPos.x, this.blockPos.y + 1) || (isMonster(this.blockPos.x, this.blockPos.y + 1) && !isPlayer(this.blockPos.x, this.blockPos.y + 1))) {
             this.blockPos = new Vec(this.blockPos.x, this.blockPos.y + 1);
             this.isFalling = true;
         }
