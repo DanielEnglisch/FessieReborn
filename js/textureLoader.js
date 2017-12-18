@@ -126,7 +126,7 @@ function TexturesBundle() {
   this.fire_ball = new Image();
   this.force_field = new Image();
   this.bomb = new Image();
-  this.bluewall = new Image();
+  this.blue_wall = new Image();
   this.sewer = new Image();
   this.silver_monster = new Image();
 
@@ -177,7 +177,7 @@ function TexturesBundle() {
     this.force_field = this.blockloadImage(dir + "force_field.png");
     this.fire_ball = this.blockloadImage(dir + "fire_ball.png");
     this.fire = this.blockloadImage(dir + "fire.png");
-    this.bluewall = this.blockloadImage(dir + "bluewall.png");
+    this.blue_wall = this.blockloadImage(dir + "bluewall.png");
     this.sewer = this.blockloadImage(dir + "sewer.png");
     this.silver_monster = this.blockloadImage(dir + "silver_monster.png");
 

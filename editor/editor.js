@@ -15,19 +15,6 @@ var Vec = function (x, y) {
 var tex = new TexturesBundle();
 
 
-const Block = {
-    AIR: 0,
-    WALL: 1,
-    PLAYER: 2,
-    DUMPSTER: 3,
-    TRASH: 4,
-    DIRT: 5,
-    EXIT: 6,
-    STEEL_WALL: 7,
-    SILVER_MONSTER: 8,
-    BOMB:9
-};
-
 var loadEditor = function (txt) {
     world = [];
 
@@ -171,6 +158,14 @@ var draw = function () {
 
             } else if (world[x * ysize + y] == Block.SILVER_MONSTER) {
                 context.drawImage(tex.silver_monster, x * scale, y * scale, scale, scale);
+                context.stroke();
+
+            }else if (world[x * ysize + y] == Block.BLUE_WALL) {
+                context.drawImage(tex.blue_wall, x * scale, y * scale, scale, scale);
+                context.stroke();
+
+            }else if (world[x * ysize + y] == Block.SEWER) {
+                context.drawImage(tex.sewer, x * scale, y * scale, scale, scale);
                 context.stroke();
 
             }else if (world[x * ysize + y] == Block.BOMB) {

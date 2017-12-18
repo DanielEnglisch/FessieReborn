@@ -72,7 +72,7 @@ var isPlayer = function (x, y) {
 }
 
 var isWall = function (x, y) {
-    return world[x][y] == Block.WALL || world[x][y] == Block.STEEL_WALL;
+    return world[x][y] == Block.WALL || world[x][y] == Block.STEEL_WALL || world[x][y] == Block.SEWER || world[x][y] == Block.BLUE_WALL;
 }
 
 var isExit = function (x, y) {

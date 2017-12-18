@@ -43,6 +43,9 @@
     <img src="../img/steel_wall.png" width="32px" height="32px" id="7">
     <img src="../img/silver_monster.png" width="32px" height="32px" id="8">
     <img src="../img/bomb.png" width="32px" height="32px" id="9">
+    <img src="../img/sewer.png" width="32px" height="32px" id="A">
+    <img src="../img/bluewall.png" width="32px" height="32px" id="B">
+
 
     <img src="../img/10x10.png" width="32px" height="32px" id="10x10">
     <img src="../img/20x20.png" width="32px" height="32px" id="20x20">
@@ -55,6 +58,7 @@
       Not found
     </canvas>
   </div>
+  <script type="text/javascript" src="../js/enums.js"></script>  
   <script type="text/javascript" src="../js/utils.js"></script>  
   <script type="text/javascript" src="../js/textureLoader.js"></script>  
   <script type="text/javascript" src="editor.js"></script>
