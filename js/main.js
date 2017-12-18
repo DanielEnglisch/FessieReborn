@@ -277,8 +277,10 @@ var spawnExplosion = function (blockPos, type) {
     for (var x = blockPos.x - 1; x <= blockPos.x + 1; x++) {
         for (var y = blockPos.y - 1; y <= blockPos.y + 1; y++) {
 
-            if (world[x][y] == Block.DIRT ||world[x][y] == Block.SEWER ||world[x][y] == Block.BLUE_WALL  ) {
+            if (world[x][y] == Block.DIRT) {
                 world[x][y] = Block.AIR;
+            }else if(type == Explosion.FIRE && world[x][y] == Block.SEWER ||world[x][y] == Block.BLUE_WALL  ){
+                world[x][y] = Block.AIR;                
             }
 
             switch (type) {
