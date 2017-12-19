@@ -96,10 +96,13 @@ function Player(pos) {
         // Normal walk sound
         playAudio(audio.walk);
 
+        this.moving = true;
+
     }
 
     this.update = function () {
         this.updateAnimaiton(movementSpeed);
+
 
         tex.fessie_left.update();
         tex.fessie_right.update();
@@ -114,34 +117,32 @@ function Player(pos) {
 
     this.draw = function (context) {
 
-
-
         if (STOP)
             return;
         switch (this.looking) {
             case Direc.UP:
-                if (this.moving || (keys[38] || keys[87]))
+                if (this.moving)
                     context.drawImage(tex.fessie_up.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
                 else
                     context.drawImage(tex.fessie_idle_center.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
 
                 break;
             case Direc.DOWN:
-                if (this.moving || (keys[40] || keys[83]))
+                if (this.moving)
                     context.drawImage(tex.fessie_down.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
                 else
                     context.drawImage(tex.fessie_idle_center.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
 
                 break;
             case Direc.LEFT:
-                if (this.moving || (keys[37] || keys[65]))
+                if (this.moving)
                     context.drawImage(tex.fessie_left.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
                 else
                     context.drawImage(tex.fessie_idle_left.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
 
                 break;
             case Direc.RIGHT:
-                if (this.moving || (keys[39] || keys[68]))
+                if (this.moving)
                     context.drawImage(tex.fessie_right.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
                 else
                     context.drawImage(tex.fessie_idle_right.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
