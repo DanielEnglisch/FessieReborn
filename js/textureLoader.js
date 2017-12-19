@@ -133,6 +133,20 @@ function TexturesBundle() {
   this.slime_explosion = new Animation(1000);
   this.fire_explosion = new Animation(1000);
   this.silver_monster_anim = new Animation(1500);
+
+
+  // Fessie animation
+  this.fessie_right = new Animation(500);
+  this.fessie_left = new Animation(500);
+  this.fessie_up = new Animation(500);
+  this.fessie_down = new Animation(500);
+
+  this.fessie_idle_left = new Animation(500);
+  this.fessie_idle_right = new Animation(500);
+  this.fessie_idle_center = new Animation(500);
+  
+
+
   this.callback = null;
   this.load = function (dir, callback) {
     this.callback = callback;
@@ -185,6 +199,17 @@ function TexturesBundle() {
     this.slime_explosion.load(dir + "slime_explosion/");
     this.fire_explosion.load(dir + "fire_explosion/");
     this.silver_monster_anim.load(dir + "silver_monster/");
+
+    // Fessie animation
+    this.fessie_right.load(dir + "fessie_right/");
+    this.fessie_left.load(dir + "fessie_left/");
+    this.fessie_down.load(dir + "fessie_down/");
+    this.fessie_up.load(dir + "fessie_up/");
+
+    this.fessie_idle_center.load(dir + "fessie_idle_center/");
+    this.fessie_idle_left.load(dir + "fessie_idle_left/");
+    this.fessie_idle_right.load(dir + "fessie_idle_right/");
+    
 
     this.allTexturesLoading = true;
  

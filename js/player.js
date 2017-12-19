@@ -99,29 +99,55 @@ function Player(pos) {
     }
 
     this.update = function () {
-
         this.updateAnimaiton(movementSpeed);
+
+        tex.fessie_left.update();
+        tex.fessie_right.update();
+        tex.fessie_up.update();
+        tex.fessie_down.update();
+        tex.fessie_idle_left.update();
+        tex.fessie_idle_right.update();
+        tex.fessie_idle_center.update();
+
         refreshOffset();
     }
 
     this.draw = function (context) {
+
+
+
         if (STOP)
             return;
         switch (this.looking) {
             case Direc.UP:
-                context.drawImage(tex.player_up, this.pos.x * scale, this.pos.y * scale, scale, scale);
+                if (this.moving || (keys[38] || keys[87]))
+                    context.drawImage(tex.fessie_up.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
+                else
+                    context.drawImage(tex.fessie_idle_center.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
+
                 break;
             case Direc.DOWN:
-                context.drawImage(tex.player_down, this.pos.x * scale, this.pos.y * scale, scale, scale);
+                if (this.moving || (keys[40] || keys[83]))
+                    context.drawImage(tex.fessie_down.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
+                else
+                    context.drawImage(tex.fessie_idle_center.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
+
                 break;
             case Direc.LEFT:
-                context.drawImage(tex.player_left, this.pos.x * scale, this.pos.y * scale, scale, scale);
+                if (this.moving || (keys[37] || keys[65]))
+                    context.drawImage(tex.fessie_left.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
+                else
+                    context.drawImage(tex.fessie_idle_left.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
+
                 break;
             case Direc.RIGHT:
-                context.drawImage(tex.player_right, this.pos.x * scale, this.pos.y * scale, scale, scale);
+                if (this.moving || (keys[39] || keys[68]))
+                    context.drawImage(tex.fessie_right.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
+                else
+                    context.drawImage(tex.fessie_idle_right.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
                 break;
             default:
-                context.drawImage(tex.player_neutral, this.pos.x * scale, this.pos.y * scale, scale, scale);
+                context.drawImage(tex.fessie_idle_center.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
                 break;
         }
         context.stroke();

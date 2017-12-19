@@ -209,9 +209,9 @@ var redraw = function () {
                 context.drawImage(tex.bomb, x * scale, y * scale, scale, scale);
             } else if (world[x][y] == Block.DIRT) {
                 context.drawImage(tex.dirt, x * scale, y * scale, scale, scale);
-            }else if (world[x][y] == Block.SEWER) {
+            } else if (world[x][y] == Block.SEWER) {
                 context.drawImage(tex.sewer, x * scale, y * scale, scale, scale);
-            }else if (world[x][y] == Block.BLUE_WALL) {
+            } else if (world[x][y] == Block.BLUE_WALL) {
                 context.drawImage(tex.blue_wall, x * scale, y * scale, scale, scale);
             } else {
                 // Everthing else
@@ -279,8 +279,8 @@ var spawnExplosion = function (blockPos, type) {
 
             if (world[x][y] == Block.DIRT) {
                 world[x][y] = Block.AIR;
-            }else if(type == Explosion.FIRE && world[x][y] == Block.SEWER ||world[x][y] == Block.BLUE_WALL  ){
-                world[x][y] = Block.AIR;                
+            } else if (type == Explosion.FIRE && world[x][y] == Block.SEWER || world[x][y] == Block.BLUE_WALL) {
+                world[x][y] = Block.AIR;
             }
 
             switch (type) {
@@ -308,12 +308,12 @@ var spawnBombOnPlayer = function () {
 
         // Check monster intersection
         var coll = false;
-        monsters.forEach(function(m){
-            if(Math.abs(m.pos.x - pos.x) < 1 && Math.abs(m.pos.y - pos.y) < 1){
+        monsters.forEach(function (m) {
+            if (Math.abs(m.pos.x - pos.x) < 1 && Math.abs(m.pos.y - pos.y) < 1) {
                 coll = true;
             }
         });
-        if(coll)
+        if (coll)
             return;
 
 
