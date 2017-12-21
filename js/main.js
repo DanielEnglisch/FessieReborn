@@ -262,7 +262,10 @@ var redraw = function () {
     if (player.isDead && !player.hasFinished) {
         context.font = "72px Arial";
         context.fillStyle = "red";
+        context.strokeStyle = "black";
         context.fillText("You died!", canvas.width / 2, canvas.height / 2);
+        context.strokeText("You died!", canvas.width / 2, canvas.height / 2);
+
     }
 
 
