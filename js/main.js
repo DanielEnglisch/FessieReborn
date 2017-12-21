@@ -86,15 +86,17 @@ var update = function () {
     });
 
 
+    if (!STOP) {
+        // Player -> Monsters
+        monsters.forEach(function (f) {
+            if (Math.abs(f.pos.x - player.pos.x) < f.hitbox && Math.abs(f.pos.y - player.pos.y) < f.hitbox) {
+                f.kill();
+                player.kill();
+            }
 
-    // Player -> Monsters
-    monsters.forEach(function (f) {
-        if (Math.abs(f.pos.x - player.pos.x) < f.hitbox && Math.abs(f.pos.y - player.pos.y) < f.hitbox) {
-            f.kill();
-            player.kill();
-        }
+        });
+    }
 
-    });
 
     // Monster -> Explosion overlay
     explosion_overlays.forEach(function (f) {
@@ -102,8 +104,9 @@ var update = function () {
         if (Math.abs(f.timeUntil - Date.now()) > f.duration - EXPLOSION_DELAY)
             return;
 
+
         // Player -> Explosion overlay
-        if (Math.abs(f.blockPos.x - player.pos.x) < 1 && Math.abs(f.blockPos.y - player.pos.y) < 1) {
+        if (!STOP && Math.abs(f.blockPos.x - player.pos.x) < 1 && Math.abs(f.blockPos.y - player.pos.y) < 1) {
             player.kill();
         }
         // Monster -> Explosion overlay

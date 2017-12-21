@@ -101,6 +101,13 @@ function Player(pos) {
     }
 
     this.update = function () {
+
+         // Death Animation
+         if(STOP){
+            this.pos.y+=0.1;
+            return;
+        }
+
         this.updateAnimaiton(movementSpeed);
 
 
@@ -112,13 +119,20 @@ function Player(pos) {
         tex.fessie_idle_right.update();
         tex.fessie_idle_center.update();
 
+       
+
         refreshOffset();
     }
 
     this.draw = function (context) {
 
-        if (STOP)
-            return;
+        // Death animation
+        if (STOP){
+            context.drawImage(tex.player_neutral, this.pos.x * scale, this.pos.y * scale, scale, scale);
+            context.stroke();
+            return;            
+        }
+
         switch (this.looking) {
             case Direc.UP:
                 if (this.moving)
