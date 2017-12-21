@@ -86,7 +86,7 @@ var update = function () {
     });
 
 
-    if (!STOP) {
+    if (!player.isDead) {
         // Player -> Monsters
         monsters.forEach(function (f) {
             if (Math.abs(f.pos.x - player.pos.x) < f.hitbox && Math.abs(f.pos.y - player.pos.y) < f.hitbox) {
@@ -106,7 +106,7 @@ var update = function () {
 
 
         // Player -> Explosion overlay
-        if (!STOP && Math.abs(f.blockPos.x - player.pos.x) < 1 && Math.abs(f.blockPos.y - player.pos.y) < 1) {
+        if (!player.isDead && Math.abs(f.blockPos.x - player.pos.x) < 1 && Math.abs(f.blockPos.y - player.pos.y) < 1) {
             player.kill();
         }
         // Monster -> Explosion overlay
@@ -138,7 +138,7 @@ var update = function () {
         m.update();
     });
 
-    if (STOP)
+    if (player.isDead)
         return;
 
     // STRG Grabbing
@@ -259,10 +259,10 @@ var redraw = function () {
     context.fillText("Items left: " + items_left, canvas.width / 2, canvas.height - 25);
     context.fillText("Bombs: " + num_bombs, canvas.width / 3, canvas.height - 25);
 
-    if (player.isDead == true) {
+    if (player.isDead && !player.hasFinished) {
         context.font = "72px Arial";
         context.fillStyle = "red";
-        context.fillText("You got recked!", canvas.width / 2, canvas.height / 2);
+        context.fillText("You died!", canvas.width / 2, canvas.height / 2);
     }
 
 

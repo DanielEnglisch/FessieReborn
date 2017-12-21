@@ -17,7 +17,6 @@ var loadLevel = function () {
     exit = null;
     monsters = [];
     num_bombs = 0;
-    STOP = false;
     explosion_overlays = [];
     // Load form file into world matrix
     var txt = levelString;

@@ -10,7 +10,6 @@ const gravity = 0.05;
 const movementSpeed = 0.075;
 var items_left = 0;
 var num_bombs = 0;
-var STOP = false;
 
 var timeOuts = [];
 var xOffset = 0;

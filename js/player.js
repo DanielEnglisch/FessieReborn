@@ -47,7 +47,8 @@ function Player(pos) {
                         window.location.href = "?lvl=" + nextLevel;
                 }, true);
                 audio.finish.play();
-                STOP = true;
+                this.isDead = true;
+                this.hasFinished = true;
             }
         } else {
             // Check if requested position is Fallable
@@ -99,11 +100,11 @@ function Player(pos) {
         this.moving = true;
 
     }
-
+    this.hasFinished = false;
     this.update = function () {
 
          // Death Animation
-         if(STOP){
+         if(this.isDead && !this.hasFinished){
             this.pos.y+=0.1;
             return;
         }
@@ -127,7 +128,7 @@ function Player(pos) {
     this.draw = function (context) {
 
         // Death animation
-        if (STOP){
+        if (this.isDead && !this.hasFinished){
             context.drawImage(tex.player_neutral, this.pos.x * scale, this.pos.y * scale, scale, scale);
             context.stroke();
             return;            
@@ -169,10 +170,10 @@ function Player(pos) {
     }
 
     this.kill = function () {
-        if (STOP)
+        if (this.isDead)
             return;
         playAudio(audio.die);
-        STOP = true;
+        this.isDead = true;
         this.isDead = true;
         setTimeout(function () {
             reloadLevel();
