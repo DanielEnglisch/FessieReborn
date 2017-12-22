@@ -129,7 +129,7 @@ function Player(pos) {
 
         // Death animation
         if (this.isDead && !this.hasFinished){
-            context.drawImage(tex.player_neutral, this.pos.x * scale, this.pos.y * scale, scale, scale);
+            context.drawImage(tex.fessie_dead, this.pos.x * scale, this.pos.y * scale, scale, scale);
             context.stroke();
             return;            
         }

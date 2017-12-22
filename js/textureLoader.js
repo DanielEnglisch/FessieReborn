@@ -2,7 +2,7 @@ function TexturesBundle() {
   this.loadingImages = 0;
   this.allTexturesLoading = false;
 
-  this.player_neutral = new Image();
+  this.fessie_dead = new Image();
 
   this.dumpster1 = new Image();
   this.dumpster2 = new Image();
@@ -146,7 +146,7 @@ function TexturesBundle() {
   this.callback = null;
   this.load = function (dir, callback) {
     this.callback = callback;
-    this.player_neutral = this.blockloadImage(dir + "p.png");
+    this.fessie_dead = this.blockloadImage(dir + "fessie_dead.png");
 
     this.wall = this.blockloadImage(dir + "wall.png");
     this.exit_closed = this.blockloadImage(dir + "exit_closed.png");
