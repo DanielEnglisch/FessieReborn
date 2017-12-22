@@ -72,7 +72,11 @@ var isPlayer = function (x, y) {
 }
 
 var isWall = function (x, y) {
-    return world[x][y] == Block.WALL || world[x][y] == Block.STEEL_WALL || world[x][y] == Block.SEWER || world[x][y] == Block.BLUE_WALL;
+    return world[x][y] == Block.WALL || world[x][y] == Block.STEEL_WALL || isBreakable(x,y);
+}
+
+var isBreakable = function(x,y){
+    return  world[x][y] == Block.SEWER || world[x][y] == Block.BLUE_WALL || world[x][y] == Block.WALL_ORGANIC;
 }
 
 var isExit = function (x, y) {

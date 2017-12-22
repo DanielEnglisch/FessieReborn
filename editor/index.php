@@ -35,7 +35,7 @@
   <div id="palett">
     <img src="../img/air.png" width="32px" height="32px" id="0" style="border:3px solid rgb(248, 132, 0);">      
     <img src="../img/wall.png" width="32px" height="32px" id="1">
-    <img src="../img/p.png" width="32px" height="32px" id="2">          
+    <img src="../img/fessie_neutral.png" width="32px" height="32px" id="2">          
     <img src="../img/dumpster1.png" width="32px" height="32px" id="3">
     <img src="../img/trash13.png" width="32px" height="32px" id="4">
     <img src="../img/dirt.png" width="32px" height="32px" id="5">
@@ -45,6 +45,7 @@
     <img src="../img/bomb.png" width="32px" height="32px" id="9">
     <img src="../img/sewer.png" width="32px" height="32px" id="A">
     <img src="../img/bluewall.png" width="32px" height="32px" id="B">
+    <img src="../img/wall_organic.png" width="32px" height="32px" id="C">
 
 
     <img src="../img/10x10.png" width="32px" height="32px" id="10x10">

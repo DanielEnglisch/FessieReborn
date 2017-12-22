@@ -16,7 +16,8 @@ const Block = {
     SILVER_MONSTER: 8,
     BOMB: 9,
     SEWER: 'A',
-    BLUE_WALL: 'B'
+    BLUE_WALL: 'B',
+    WALL_ORGANIC: 'C'
 };
 
 const Direc = {

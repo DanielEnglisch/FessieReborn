@@ -145,7 +145,7 @@ var draw = function () {
                 context.stroke();
 
             } else if (world[x * ysize + y] == Block.PLAYER) {
-                context.drawImage(tex.player_neutral, x * scale, y * scale, scale, scale);
+                context.drawImage(tex.fessie_neutral, x * scale, y * scale, scale, scale);
                 context.stroke();
 
             } else if (world[x * ysize + y] == Block.TRASH) {
@@ -170,6 +170,10 @@ var draw = function () {
 
             }else if (world[x * ysize + y] == Block.BOMB) {
                 context.drawImage(tex.bomb, x * scale, y * scale, scale, scale);
+                context.stroke();
+
+            }else if (world[x * ysize + y] == Block.WALL_ORGANIC) {
+                context.drawImage(tex.wall_organic, x * scale, y * scale, scale, scale);
                 context.stroke();
 
             }

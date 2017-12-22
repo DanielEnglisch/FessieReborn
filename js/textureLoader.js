@@ -2,6 +2,7 @@ function TexturesBundle() {
   this.loadingImages = 0;
   this.allTexturesLoading = false;
 
+  this.fessie_neutral = new Image();
   this.fessie_dead = new Image();
 
   this.dumpster1 = new Image();
@@ -124,6 +125,9 @@ function TexturesBundle() {
   this.bomb = new Image();
   this.blue_wall = new Image();
   this.sewer = new Image();
+  this.wall_organic = new Image();
+  
+
   this.silver_monster = new Image();
 
   this.slime_explosion = new Animation(1000);
@@ -146,6 +150,8 @@ function TexturesBundle() {
   this.callback = null;
   this.load = function (dir, callback) {
     this.callback = callback;
+    
+    this.fessie_neutral = this.blockloadImage(dir + "fessie_neutral.png");    
     this.fessie_dead = this.blockloadImage(dir + "fessie_dead.png");
 
     this.wall = this.blockloadImage(dir + "wall.png");
@@ -185,6 +191,8 @@ function TexturesBundle() {
     this.fire = this.blockloadImage(dir + "fire.png");
     this.blue_wall = this.blockloadImage(dir + "bluewall.png");
     this.sewer = this.blockloadImage(dir + "sewer.png");
+    this.wall_organic = this.blockloadImage(dir + "wall_organic.png");
+    
     this.silver_monster = this.blockloadImage(dir + "silver_monster.png");
 
 

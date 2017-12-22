@@ -216,6 +216,8 @@ var redraw = function () {
                 context.drawImage(tex.sewer, x * scale, y * scale, scale, scale);
             } else if (world[x][y] == Block.BLUE_WALL) {
                 context.drawImage(tex.blue_wall, x * scale, y * scale, scale, scale);
+            } else if (world[x][y] == Block.WALL_ORGANIC) {
+                context.drawImage(tex.wall_organic, x * scale, y * scale, scale, scale);
             } else {
                 // Everthing else
                 context.drawImage(tex.air, x * scale, y * scale, scale, scale);
@@ -285,7 +287,7 @@ var spawnExplosion = function (blockPos, type) {
 
             if (world[x][y] == Block.DIRT) {
                 world[x][y] = Block.AIR;
-            } else if (type == Explosion.FIRE && world[x][y] == Block.SEWER || world[x][y] == Block.BLUE_WALL) {
+            } else if (type == Explosion.FIRE && isBreakable(x,y)) {
                 world[x][y] = Block.AIR;
             }
 
