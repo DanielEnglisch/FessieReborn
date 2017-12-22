@@ -16,20 +16,71 @@ function TrashMonster(pos) {
         // If Player is in range follow else idle arround randomly
         if(Math.sqrt(Math.pow(this.blockPos.x - player.blockPos.x, 2) +Math.pow(this.blockPos.y - player.blockPos.y, 2) ) <= 6){
             // If player is in range
-            if(this.blockPos.x - player.blockPos.x > 0){
+           if(Math.abs(this.blockPos.x - player.blockPos.x) >= Math.abs(this.blockPos.y - player.blockPos.y)){
+               if(this.blockPos.x - player.blockPos.x > 0)
                 dx--;
-            }else if(this.blockPos.x - player.blockPos.x < 0){
-                dx++;
-            }else  if(this.blockPos.y - player.blockPos.y > 0){
-                dy--;
-            }else if(this.blockPos.y - player.blockPos.y < 0){
-                dy++;
-            }
+               else
+               dx++;
+           }else if(Math.abs(this.blockPos.x - player.blockPos.x) <= Math.abs(this.blockPos.y - player.blockPos.y)){
+               if(this.blockPos.y - player.blockPos.y > 0)
+               dy--;
+               else
+               dy++;
+           }
+        }else{
+
+            if (this.dir == Direc.RIGHT) {
+                
+                            if (isAir(this.blockPos.x + 1, this.blockPos.y) || (isPlayer(this.blockPos.x + 1, this.blockPos.y)&& !isMonster(this.blockPos.x + 1, this.blockPos.y)))
+                                dx++;
+                            else {
+                                if ((Math.floor(Math.random() * 2) + 1) == 1) {
+                                    this.dir = Direc.DOWN;
+                                } else
+                                    this.dir = Direc.LEFT;
+                            }
+                
+                        } else if (this.dir == Direc.DOWN) {
+                
+                            if (isAir(this.blockPos.x, this.blockPos.y + 1) || (isPlayer(this.blockPos.x, this.blockPos.y + 1)&& !isMonster(this.blockPos.x, this.blockPos.y + 1)))
+                                dy++;
+                            else {
+                                if ((Math.floor(Math.random() * 2) + 1) == 1) {
+                                    this.dir = Direc.RIGHT;
+                                } else
+                                    this.dir = Direc.UP;
+                            }
+                
+                        } else if (this.dir == Direc.LEFT) {
+                
+                            if (isAir(this.blockPos.x - 1, this.blockPos.y) ||( isPlayer(this.blockPos.x - 1, this.blockPos.y) && !isMonster(this.blockPos.x - 1, this.blockPos.y)))
+                                dx--;
+                            else {
+                                if ((Math.floor(Math.random() * 2) + 1) == 1) {
+                                    this.dir = Direc.UP;
+                                } else
+                                    this.dir = Direc.RIGHT;
+                            }
+                
+                        } else if (this.dir == Direc.UP) {
+                
+                            if (isAir(this.blockPos.x, this.blockPos.y - 1) || (isPlayer(this.blockPos.x, this.blockPos.y - 1)&& !isMonster(this.blockPos.x, this.blockPos.y - 1)))
+                                dy--;
+                            else {
+                                if ((Math.floor(Math.random() * 2) + 1) == 1) {
+                                    this.dir = Direc.LEFT;
+                                } else
+                                    this.dir = Direc.DOWN;
+                            }
+                
+                        }
         }
+
+
         var coll = false;
         
 
-        if(!isAir(this.blockPos.x + dx, this.blockPos.y+dy))
+        if(!isAir(this.blockPos.x + dx, this.blockPos.y+dy) && !isPlayer(this.blockPos.x + dx, this.blockPos.y+dy))
             coll = true;
 
 
