@@ -30,7 +30,7 @@ function Trash(pos) {
     this.collect = function () {
         // Remove Item
         fallables.splice(fallables.indexOf(this), 1);
-        if (items_left > 1)
+        if (items_left > 0)
             items_left--;
 
         else {
