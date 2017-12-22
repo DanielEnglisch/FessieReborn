@@ -274,6 +274,9 @@ function Animation(duration) {
 
   this.imageId = 0;
   this.duration = duration;
+  this.reset=function(){
+    this.imageId = 0;
+  }
   this.getImage = function () {
     return this.images[this.imageId];
   }

@@ -4,10 +4,17 @@ function Player(pos) {
     Player.super_.call(this, pos, Block.PLAYER);
     this.looking = Direc.NONE;
     this.isDead = false;
+    this.isGrabbing = false;
+    this.grabTimeout = null;
+
     this.grab = function (dx, dy) {
 
-        if (this.moving)
+        if (this.isGrabbing || this.moving)
             return;
+
+            this.isGrabbing = true;
+            
+
         if (isCollectable(this.blockPos.x + dx, this.blockPos.y + dy)) {
             var item = getFallable(this.blockPos.x + dx, this.blockPos.y + dy);
             item.collect();
@@ -16,10 +23,37 @@ function Player(pos) {
             playDirt();
         }
 
+        // Adjust look direction
+        if (dx == 1 && dy == 0)
+            player.looking = Direc.RIGHT;
+        else if (dx == -1 && dy == 0)
+            player.looking = Direc.LEFT;
+
+        else if (dx == 0 && dy == 1)
+            player.looking = Direc.DOWN;
+        else if (dx == 0 && dy == -1)
+            player.looking = Direc.UP;
+
+
+
+        // Reset animation after grabbing
+        var self = this;
+        timeOuts.push(self.grabTimeout = setTimeout(function () {
+
+            self.isGrabbing = false;
+            self.looking = Direc.NONE;
+
+        }, 250));
+
 
     }
     this.move = function (dx, dy) {
-
+    
+         // Cancel Grabbing
+         this.isGrabbing = false;
+         if(this.grabTimeout != null)
+         clearTimeout(this.grabTimeout);
+         
         // Can't move when already moving
         if (this.moving)
             return;
@@ -103,9 +137,9 @@ function Player(pos) {
     this.hasFinished = false;
     this.update = function () {
 
-         // Death Animation
-         if(this.isDead && !this.hasFinished){
-            this.pos.y+=0.1;
+        // Death Animation
+        if (this.isDead && !this.hasFinished) {
+            this.pos.y += 0.1;
             return;
         }
 
@@ -120,7 +154,21 @@ function Player(pos) {
         tex.fessie_idle_right.update();
         tex.fessie_idle_center.update();
 
-       
+
+        // Update grabbing animations
+        if (this.isGrabbing) {
+            tex.fessie_grab_down.update();
+            tex.fessie_grab_left.update();
+            tex.fessie_grab_right.update();
+            tex.fessie_grab_up.update();
+        } else {
+            tex.fessie_grab_down.reset();
+            tex.fessie_grab_left.reset();
+            tex.fessie_grab_right.reset();
+            tex.fessie_grab_up.reset();
+        }
+
+
 
         refreshOffset();
     }
@@ -128,16 +176,18 @@ function Player(pos) {
     this.draw = function (context) {
 
         // Death animation
-        if (this.isDead && !this.hasFinished){
+        if (this.isDead && !this.hasFinished) {
             context.drawImage(tex.fessie_dead, this.pos.x * scale, this.pos.y * scale, scale, scale);
             context.stroke();
-            return;            
+            return;
         }
 
         switch (this.looking) {
             case Direc.UP:
                 if (this.moving)
                     context.drawImage(tex.fessie_up.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
+                else if (this.isGrabbing)
+                    context.drawImage(tex.fessie_grab_up.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
                 else
                     context.drawImage(tex.fessie_idle_center.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
 
@@ -145,6 +195,8 @@ function Player(pos) {
             case Direc.DOWN:
                 if (this.moving)
                     context.drawImage(tex.fessie_down.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
+                else if (this.isGrabbing)
+                    context.drawImage(tex.fessie_grab_down.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
                 else
                     context.drawImage(tex.fessie_idle_center.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
 
@@ -152,6 +204,8 @@ function Player(pos) {
             case Direc.LEFT:
                 if (this.moving)
                     context.drawImage(tex.fessie_left.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
+                else if (this.isGrabbing)
+                    context.drawImage(tex.fessie_grab_left.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
                 else
                     context.drawImage(tex.fessie_idle_left.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
 
@@ -159,6 +213,8 @@ function Player(pos) {
             case Direc.RIGHT:
                 if (this.moving)
                     context.drawImage(tex.fessie_right.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
+                else if (this.isGrabbing)
+                    context.drawImage(tex.fessie_grab_right.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
                 else
                     context.drawImage(tex.fessie_idle_right.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
                 break;
