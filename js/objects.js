@@ -26,21 +26,29 @@ function Trash(pos) {
         context.drawImage(this.image, this.pos.x * scale, this.pos.y * scale, scale, scale);
         context.stroke();
     }
-    
+
     this.collect = function () {
         // Remove Item
         fallables.splice(fallables.indexOf(this), 1);
-        items_left--;
-        playAudio(audio.trash_collect);
-        // Check Exit
+        if (items_left > 1)
+            items_left--;
+
+        else {
+            // TODO: MORE SCORE
+        }
+        // Check exit
         if (items_left == 0) {
             exit.open();
         }
+        playAudio(audio.trash_collect);
+
     }
 }
 
 function Exit(pos) {
     this.open = function () {
+        if (this.isOpen)
+            return;
         playAudio(audio.exit_open);
         this.isOpen = true;
     }
@@ -58,7 +66,7 @@ function Exit(pos) {
 
 function ExplosionOverlay(pos, img, time) {
     this.duration = time;
-    
+
     this.animation = Object.assign({}, img);
     this.timeUntil = Date.now() + time;
     this.blockPos = pos;
@@ -87,7 +95,7 @@ function Bomb(pos) {
         context.drawImage(this.image, this.pos.x * scale, this.pos.y * scale, scale, scale);
         context.stroke();
     }
-   
+
 
 
     this.collect = function () {
@@ -95,7 +103,7 @@ function Bomb(pos) {
         num_bombs++;
         fallables.splice(fallables.indexOf(this), 1);
         playAudio(audio.trash_collect);
-      
+
     }
 }
 

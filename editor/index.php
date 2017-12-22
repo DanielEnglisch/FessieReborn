@@ -42,6 +42,7 @@
     <img src="../img/exit_open.png" width="32px" height="32px" id="6">          
     <img src="../img/steel_wall.png" width="32px" height="32px" id="7">
     <img src="../img/silver_monster.png" width="32px" height="32px" id="8">
+    <img src="../img/trash_monster_center/0.png" width="32px" height="32px" id="D">
     <img src="../img/bomb.png" width="32px" height="32px" id="9">
     <img src="../img/sewer.png" width="32px" height="32px" id="A">
     <img src="../img/bluewall.png" width="32px" height="32px" id="B">

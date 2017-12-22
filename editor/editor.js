@@ -176,6 +176,10 @@ var draw = function () {
                 context.drawImage(tex.wall_organic, x * scale, y * scale, scale, scale);
                 context.stroke();
 
+            }else if (world[x * ysize + y] == Block.TRASH_MONSTER) {
+                context.drawImage(tex.trash_monster_center.getImage(), x * scale, y * scale, scale, scale);
+                context.stroke();
+
             }
 
         }

@@ -158,14 +158,23 @@ var belowCanSlip = function (fallable) {
 
 inherits(Monster, GameObject);
 
-function Monster(pos) {
+function Monster(pos, type) {
     Monster.super_.call(this, pos, -1);
     this.dir = Direc.RIGHT;
     this.hitbox = 1;
+    this.type = type;
     this.movementSpeed = 0.015;
     this.kill = function () {
         monsters.splice(monsters.indexOf(this), 1);
-        spawnExplosion(posToBlock(this.pos), Explosion.FIRE);
+        switch (this.type) {
+            case Block.SILVER_MONSTER:
+                spawnExplosion(posToBlock(this.pos), Explosion.FIRE);
+
+                break;
+            case Block.TRASH_MONSTER:
+                spawnExplosion(posToBlock(this.pos), Explosion.TRASH);
+                break;
+        }
 
     }
     this.update = function () {

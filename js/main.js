@@ -73,6 +73,13 @@ var addEvents = function () {
 
 var update = function () {
 
+
+    // Update synched animations Monsters
+    tex.silver_monster_anim.update();
+    tex.trash_monster_center.update();
+    tex.trash_monster_left.update();
+    tex.trash_monster_right.update();
+    
     // New collision detection
 
     // Fallables -> Monsters
