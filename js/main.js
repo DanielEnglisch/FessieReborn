@@ -235,7 +235,6 @@ var redraw = function () {
         }
     }
 
-    player.draw(context);
     exit.draw(context);
 
     // Draw fallables
@@ -247,6 +246,10 @@ var redraw = function () {
     monsters.forEach(function (m) {
         m.draw(context);
     });
+
+
+    player.draw(context);
+    
 
     // Draw explosionjs
     explosion_overlays.forEach(function (m) {
