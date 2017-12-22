@@ -145,7 +145,16 @@ function TexturesBundle() {
   this.fessie_idle_right = new Animation(500);
   this.fessie_idle_center = new Animation(500);
   
-
+  this.fessie_grab_down = new Animation(250);
+  this.fessie_grab_left = new Animation(250);
+  this.fessie_grab_right = new Animation(250);
+  this.fessie_grab_up = new Animation(250);
+  
+  // Trash Monster
+  this.trash_monster_center = new Animation(250);
+  this.trash_monster_left = new Animation(250);
+  this.trash_monster_right = new Animation(250);
+  
 
   this.callback = null;
   this.load = function (dir, callback) {
@@ -193,11 +202,13 @@ function TexturesBundle() {
     this.sewer = this.blockloadImage(dir + "sewer.png");
     this.wall_organic = this.blockloadImage(dir + "wall_organic.png");
     
-    this.silver_monster = this.blockloadImage(dir + "silver_monster.png");
 
 
     this.slime_explosion.load(dir + "slime_explosion/");
     this.fire_explosion.load(dir + "fire_explosion/");
+
+    // Silver Monster
+    this.silver_monster = this.blockloadImage(dir + "silver_monster.png");    
     this.silver_monster_anim.load(dir + "silver_monster/");
 
     // Fessie animation
@@ -209,6 +220,17 @@ function TexturesBundle() {
     this.fessie_idle_center.load(dir + "fessie_idle_center/");
     this.fessie_idle_left.load(dir + "fessie_idle_left/");
     this.fessie_idle_right.load(dir + "fessie_idle_right/");
+    
+    this.fessie_grab_up.load(dir + "fessie_grab_up/");
+    this.fessie_grab_down.load(dir + "fessie_grab_down/");
+    this.fessie_grab_left.load(dir + "fessie_grab_left/");
+    this.fessie_grab_right.load(dir + "fessie_grab_right/");
+
+    // Trash Monster
+    this.trash_monster_center.load(dir + "trash_monster_center/");
+    this.trash_monster_left.load(dir + "trash_monster_left/");
+    this.trash_monster_right.load(dir + "trash_monster_right/");
+    
     
 
     this.allTexturesLoading = true;
