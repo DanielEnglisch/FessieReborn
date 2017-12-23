@@ -5,7 +5,7 @@ function TrashMonster(pos) {
     this.dir = Direc.RIGHT;
     this.looking = Direc.NONE;
     this.hitbox = 0.75;
-    this.movementSpeed = 0.04;
+    this.movementSpeed = 0.03;
     this.update = function () {
 
         if (!this.updateAnimaiton(this.movementSpeed, this.movementSpeed))
