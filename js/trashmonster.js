@@ -16,19 +16,19 @@ function TrashMonster(pos) {
         // If Player is in range follow else idle arround randomly
         if(Math.sqrt(Math.pow(this.blockPos.x - player.blockPos.x, 2) +Math.pow(this.blockPos.y - player.blockPos.y, 2) ) <= 6){
             // If player is in range
-           if(Math.abs(this.blockPos.x - player.blockPos.x) >= Math.abs(this.blockPos.y - player.blockPos.y)){
-               if(this.blockPos.x - player.blockPos.x > 0)
+               if(this.blockPos.x - player.blockPos.x > 0 && !(!isAir(this.blockPos.x  -1, this.blockPos.y+dy) && !isPlayer(this.blockPos.x -1, this.blockPos.y+dy)))
                 dx--;
-               else
+               else if(this.blockPos.x - player.blockPos.x < 0 && !(!isAir(this.blockPos.x + 1, this.blockPos.y+dy) && !isPlayer(this.blockPos.x +1, this.blockPos.y+dy)))
                dx++;
-           }else if(Math.abs(this.blockPos.x - player.blockPos.x) <= Math.abs(this.blockPos.y - player.blockPos.y)){
-               if(this.blockPos.y - player.blockPos.y > 0)
+              else {
+                  if(this.blockPos.y - player.blockPos.y > 0 && !(!isAir(this.blockPos.x, this.blockPos.y-1) && !isPlayer(this.blockPos.x , this.blockPos.y-1)))
                dy--;
-               else
+               else if(this.blockPos.y - player.blockPos.y < 0 && !(!isAir(this.blockPos.x , this.blockPos.y+1) && !isPlayer(this.blockPos.x , this.blockPos.y+1)))
                dy++;
-           }
+              }
+           
         }else{
-
+            // Else silver bomb logic
             if (this.dir == Direc.RIGHT) {
                 
                             if (isAir(this.blockPos.x + 1, this.blockPos.y) || (isPlayer(this.blockPos.x + 1, this.blockPos.y)&& !isMonster(this.blockPos.x + 1, this.blockPos.y)))
