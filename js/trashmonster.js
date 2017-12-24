@@ -20,12 +20,12 @@ function TrashMonster(pos) {
                 dx--;
                else if(this.blockPos.x - player.blockPos.x < 0 && !(!isAir(this.blockPos.x + 1, this.blockPos.y+dy) && !isPlayer(this.blockPos.x +1, this.blockPos.y+dy)))
                dx++;
-              else {
+              else 
                   if(this.blockPos.y - player.blockPos.y > 0 && !(!isAir(this.blockPos.x, this.blockPos.y-1) && !isPlayer(this.blockPos.x , this.blockPos.y-1)))
                dy--;
                else if(this.blockPos.y - player.blockPos.y < 0 && !(!isAir(this.blockPos.x , this.blockPos.y+1) && !isPlayer(this.blockPos.x , this.blockPos.y+1)))
                dy++;
-              }
+              
            
         }else{
             // Else silver bomb logic
