@@ -72,6 +72,7 @@
   <script type="text/javascript" src="js/player.js"></script>
   <script type="text/javascript" src="js/silvermonster.js"></script>
   <script type="text/javascript" src="js/trashmonster.js"></script>
+  <script type="text/javascript" src="js/slimemonster.js"></script>
 
   <script type="text/javascript" src="js/objects.js"></script>
 

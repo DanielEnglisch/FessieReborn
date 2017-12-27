@@ -1,7 +1,7 @@
 
 inherits(TrashMonster, Monster);
 function TrashMonster(pos) {
-    SilverMonster.super_.call(this, pos, Block.TRASH_MONSTER);
+    TrashMonster.super_.call(this, pos, Block.TRASH_MONSTER);
     this.dir = Direc.RIGHT;
     this.looking = Direc.NONE;
     this.hitbox = 0.75;

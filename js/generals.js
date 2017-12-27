@@ -174,6 +174,9 @@ function Monster(pos, type) {
             case Block.TRASH_MONSTER:
                 spawnExplosion(posToBlock(this.pos), Explosion.TRASH);
                 break;
+                case Block.SLIME_MONSTER:
+                spawnExplosion(posToBlock(this.pos), Explosion.SLIME);
+                break;
         }
 
     }

@@ -18,7 +18,8 @@ const Block = {
     SEWER: 'A',
     BLUE_WALL: 'B',
     WALL_ORGANIC: 'C',
-    TRASH_MONSTER: 'D'
+    TRASH_MONSTER: 'D',
+    SLIME_MONSTER: 'E'
 };
 
 const Direc = {

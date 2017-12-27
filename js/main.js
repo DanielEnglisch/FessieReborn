@@ -76,10 +76,16 @@ var update = function () {
 
     // Update synched animations Monsters
     tex.silver_monster_anim.update();
+
     tex.trash_monster_center.update();
     tex.trash_monster_left.update();
     tex.trash_monster_right.update();
-    
+
+    tex.slime_monster_center.update();
+    tex.slime_monster_left.update();
+    tex.slime_monster_right.update();
+
+
     // New collision detection
 
     // Fallables -> Monsters
@@ -306,7 +312,7 @@ var spawnExplosion = function (blockPos, type) {
                     explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.fire_explosion, 1000));
                     break;
                 case Explosion.SLIME:
-                    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.slime_explosion, 10000));
+                    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.slime_explosion, 15000));
                     break;
                 case Explosion.TRASH:
                     if (isAir(x, y)) fallables.push(new Trash(new Vec(x, y)));

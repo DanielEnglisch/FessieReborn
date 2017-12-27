@@ -180,6 +180,10 @@ var draw = function () {
                 context.drawImage(tex.trash_monster_center.getImage(), x * scale, y * scale, scale, scale);
                 context.stroke();
 
+            }else if (world[x * ysize + y] == Block.SLIME_MONSTER) {
+                context.drawImage(tex.slime_monster_center.getImage(), x * scale, y * scale, scale, scale);
+                context.stroke();
+
             }
 
         }

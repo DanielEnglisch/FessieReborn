@@ -130,7 +130,7 @@ function TexturesBundle() {
 
   this.silver_monster = new Image();
 
-  this.slime_explosion = new Animation(1000);
+  this.slime_explosion = new Animation(500);
   this.fire_explosion = new Animation(1000);
   this.silver_monster_anim = new Animation(1500);
 
@@ -155,6 +155,10 @@ function TexturesBundle() {
   this.trash_monster_left = new Animation(250);
   this.trash_monster_right = new Animation(250);
   
+  // Slime Monster
+  this.slime_monster_center = new Animation(500);
+  this.slime_monster_left = new Animation(500);
+  this.slime_monster_right = new Animation(500);
 
   this.callback = null;
   this.load = function (dir, callback) {
@@ -230,6 +234,11 @@ function TexturesBundle() {
     this.trash_monster_center.load(dir + "trash_monster_center/");
     this.trash_monster_left.load(dir + "trash_monster_left/");
     this.trash_monster_right.load(dir + "trash_monster_right/");
+
+    // Slime Monster
+    this.slime_monster_center.load(dir + "slime_monster_center/");
+    this.slime_monster_left.load(dir + "slime_monster_left/");
+    this.slime_monster_right.load(dir + "slime_monster_right/");
     
     
 
