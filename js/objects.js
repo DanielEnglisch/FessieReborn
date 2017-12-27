@@ -28,6 +28,8 @@ function Trash(pos) {
     }
 
     this.collect = function () {
+        score += 100;
+
         // Remove Item
         fallables.splice(fallables.indexOf(this), 1);
         if (items_left > 0)
@@ -106,4 +108,3 @@ function Bomb(pos) {
 
     }
 }
-

@@ -255,7 +255,7 @@ var redraw = function () {
 
 
     player.draw(context);
-    
+
 
     // Draw explosionjs
     explosion_overlays.forEach(function (m) {
@@ -276,6 +276,7 @@ var redraw = function () {
     context.fillStyle = "rgb(248, 132, 0)";
     context.fillText("Items left: " + items_left, canvas.width / 2, canvas.height - 25);
     context.fillText("Bombs: " + num_bombs, canvas.width / 3, canvas.height - 25);
+    context.fillText("Score: " + score, canvas.width * 2/ 3, canvas.height - 25);
 
     if (player.isDead && !player.hasFinished) {
         context.font = "72px Arial";
@@ -303,7 +304,7 @@ var spawnExplosion = function (blockPos, type) {
 
             if (world[x][y] == Block.DIRT) {
                 world[x][y] = Block.AIR;
-            } else if (type == Explosion.FIRE && isBreakable(x,y)) {
+            } else if (type == Explosion.FIRE && isBreakable(x, y)) {
                 world[x][y] = Block.AIR;
             }
 

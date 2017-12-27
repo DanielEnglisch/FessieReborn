@@ -165,6 +165,7 @@ function Monster(pos, type) {
     this.type = type;
     this.movementSpeed = 0.015;
     this.kill = function () {
+        score+=200;
         monsters.splice(monsters.indexOf(this), 1);
         switch (this.type) {
             case Block.SILVER_MONSTER:

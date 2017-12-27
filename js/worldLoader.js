@@ -14,6 +14,7 @@ var loadLevel = function () {
     fallables = [];
     keys = [];
     items_left = 0;
+    score = 0;
     exit = null;
     monsters = [];
     num_bombs = 0;
