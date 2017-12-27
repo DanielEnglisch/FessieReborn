@@ -35,9 +35,6 @@ function Trash(pos) {
         if (items_left > 0)
             items_left--;
 
-        else {
-            // TODO: MORE SCORE
-        }
         // Check exit
         if (items_left == 0) {
             exit.open();
