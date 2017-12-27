@@ -159,6 +159,8 @@ function TexturesBundle() {
   this.slime_monster_center = new Animation(500);
   this.slime_monster_left = new Animation(500);
   this.slime_monster_right = new Animation(500);
+  this.slime_plop = new Animation(200);
+  this.slime_plop_reverse = new Animation(200);
 
   this.callback = null;
   this.load = function (dir, callback) {
@@ -239,7 +241,9 @@ function TexturesBundle() {
     this.slime_monster_center.load(dir + "slime_monster_center/");
     this.slime_monster_left.load(dir + "slime_monster_left/");
     this.slime_monster_right.load(dir + "slime_monster_right/");
-    
+    this.slime_plop.load(dir + "slime_plop/");
+    this.slime_plop_reverse.load(dir + "slime_plop_reverse/");
+
     
 
     this.allTexturesLoading = true;
@@ -283,9 +287,11 @@ function Animation(duration) {
 
   this.imageId = 0;
   this.duration = duration;
+
   this.reset=function(){
     this.imageId = 0;
   }
+
   this.getImage = function () {
     return this.images[this.imageId];
   }

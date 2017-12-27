@@ -116,24 +116,28 @@ var update = function () {
 
         if (Math.abs(f.timeUntil - Date.now()) > f.duration - EXPLOSION_DELAY)
             return;
+        // Only if it's deadly
 
-
-        // Player -> Explosion overlay
-        if (!player.isDead && Math.abs(f.blockPos.x - player.pos.x) < 1 && Math.abs(f.blockPos.y - player.pos.y) < 1) {
-            player.kill();
-        }
-        // Monster -> Explosion overlay
-        monsters.forEach(function (m) {
-            if (Math.abs(f.blockPos.x - m.pos.x) < 1 && Math.abs(f.blockPos.y - m.pos.y) < 1)
-                m.kill();
-        });
-        // Collectables -> explosion overlay
-        fallables.forEach(function (t) {
-            if (isCollectable(f.blockPos.x, f.blockPos.y)) {
-                if (Math.abs(f.blockPos.x - t.pos.x) < 1 && Math.abs(f.blockPos.y - t.pos.y) < 1)
-                    fallables.splice(fallables.indexOf(t), 1);
+        if (f.isDeadly) {
+            // Player -> Explosion overlay
+            if (!player.isDead && Math.abs(f.blockPos.x - player.pos.x) < 1 && Math.abs(f.blockPos.y - player.pos.y) < 1) {
+                player.kill();
             }
-        });
+            // Monster -> Explosion overlay
+            monsters.forEach(function (m) {
+                if (Math.abs(f.blockPos.x - m.pos.x) < 1 && Math.abs(f.blockPos.y - m.pos.y) < 1)
+                    m.kill();
+            });
+            // Collectables -> explosion overlay
+            fallables.forEach(function (t) {
+                if (isCollectable(f.blockPos.x, f.blockPos.y)) {
+                    if (Math.abs(f.blockPos.x - t.pos.x) < 1 && Math.abs(f.blockPos.y - t.pos.y) < 1)
+                        fallables.splice(fallables.indexOf(t), 1);
+                }
+            });
+
+        }
+
 
     });
 
@@ -276,7 +280,7 @@ var redraw = function () {
     context.fillStyle = "rgb(248, 132, 0)";
     context.fillText("Items left: " + items_left, canvas.width / 2, canvas.height - 25);
     context.fillText("Bombs: " + num_bombs, canvas.width / 3, canvas.height - 25);
-    context.fillText("Score: " + score, canvas.width * 2/ 3, canvas.height - 25);
+    context.fillText("Score: " + score, canvas.width * 2 / 3, canvas.height - 25);
 
     if (player.isDead && !player.hasFinished) {
         context.font = "72px Arial";
@@ -313,7 +317,7 @@ var spawnExplosion = function (blockPos, type) {
                     explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.fire_explosion, 1000));
                     break;
                 case Explosion.SLIME:
-                    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.slime_explosion, 15000));
+                    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.slime_plop,200, false, addSlime));
                     break;
                 case Explosion.TRASH:
                     if (isAir(x, y)) fallables.push(new Trash(new Vec(x, y)));
@@ -324,6 +328,14 @@ var spawnExplosion = function (blockPos, type) {
     }
 
 };
+
+var addSlime = function(x,y){
+    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.slime_explosion,15000, true, addPlop));
+}
+
+var addPlop = function(x,y){
+    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.slime_plop_reverse,200, false));
+}
 
 var spawnBombOnPlayer = function () {
     var pos = Object.assign({}, player.blockPos);

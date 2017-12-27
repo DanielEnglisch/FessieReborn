@@ -63,9 +63,10 @@ function Exit(pos) {
     }
 }
 
-function ExplosionOverlay(pos, img, time) {
+function ExplosionOverlay(pos, img, time, deadly = true,callback = function(){}) {
     this.duration = time;
-
+    this.isDeadly = deadly;
+    this.callback = callback;
     this.animation = Object.assign({}, img);
     this.timeUntil = Date.now() + time;
     this.blockPos = pos;
@@ -74,7 +75,9 @@ function ExplosionOverlay(pos, img, time) {
         this.animation.update();
 
         if (Date.now() >= this.timeUntil) {
+            this.callback(this.blockPos.x, this.blockPos.y);
             explosion_overlays.splice(explosion_overlays.indexOf(this), 1);
+
         }
     }
     this.draw = function (context) {
