@@ -3,6 +3,8 @@ var GameObject = function (position, type) {
     this.sourceBlock = position;
     this.type = type;
     this.moving = false;
+    this.oldBlockPos = new Vec(position.x, position.y);
+
 
     this.pos = new Vec(position.x, position.y);
     this.updateAnimaiton = function (yspeed, xspeed = movementSpeed) {
@@ -31,6 +33,9 @@ var GameObject = function (position, type) {
             this.sourceBlock = new Vec(this.blockPos.x, this.blockPos.y);
             this.pos.x = this.blockPos.x;
             this.pos.y = this.blockPos.y;
+            this.oldBlockPos.x = this.blockPos.x;
+            this.oldBlockPos.y = this.blockPos.y;
+
             this.moving = false;
             return true;
         }
@@ -165,7 +170,7 @@ function Monster(pos, type) {
     this.type = type;
     this.movementSpeed = 0.015;
     this.kill = function () {
-        score+=200;
+        score += 200;
         monsters.splice(monsters.indexOf(this), 1);
         switch (this.type) {
             case Block.SILVER_MONSTER:
@@ -175,7 +180,7 @@ function Monster(pos, type) {
             case Block.TRASH_MONSTER:
                 spawnExplosion(posToBlock(this.pos), Explosion.TRASH);
                 break;
-                case Block.SLIME_MONSTER:
+            case Block.SLIME_MONSTER:
                 spawnExplosion(posToBlock(this.pos), Explosion.SLIME);
                 break;
         }

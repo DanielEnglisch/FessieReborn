@@ -19,7 +19,7 @@ function SlimeMonster(pos) {
     // Else silver bomb logic
     if (this.dir == Direc.RIGHT) {
 
-      if (isAir(this.blockPos.x + 1, this.blockPos.y) || (isPlayer(this.blockPos.x + 1, this.blockPos.y) && !isMonster(this.blockPos.x + 1, this.blockPos.y)))
+      if (isAir(this.blockPos.x + 1, this.blockPos.y) || (isPlayer(this.blockPos.x + 1, this.blockPos.y) && !isMonsterAlt(this.blockPos.x + 1, this.blockPos.y)))
         dx++;
       else {
         if ((Math.floor(Math.random() * 2) + 1) == 1) {
@@ -30,7 +30,7 @@ function SlimeMonster(pos) {
 
     } else if (this.dir == Direc.DOWN) {
 
-      if (isAir(this.blockPos.x, this.blockPos.y + 1) || (isPlayer(this.blockPos.x, this.blockPos.y + 1) && !isMonster(this.blockPos.x, this.blockPos.y + 1)))
+      if (isAir(this.blockPos.x, this.blockPos.y + 1) || (isPlayer(this.blockPos.x, this.blockPos.y + 1) && !isMonsterAlt(this.blockPos.x, this.blockPos.y + 1)))
         dy++;
       else {
         if ((Math.floor(Math.random() * 2) + 1) == 1) {
@@ -41,7 +41,7 @@ function SlimeMonster(pos) {
 
     } else if (this.dir == Direc.LEFT) {
 
-      if (isAir(this.blockPos.x - 1, this.blockPos.y) || (isPlayer(this.blockPos.x - 1, this.blockPos.y) && !isMonster(this.blockPos.x - 1, this.blockPos.y)))
+      if (isAir(this.blockPos.x - 1, this.blockPos.y) || (isPlayer(this.blockPos.x - 1, this.blockPos.y) && !isMonsterAlt(this.blockPos.x - 1, this.blockPos.y)))
         dx--;
       else {
         if ((Math.floor(Math.random() * 2) + 1) == 1) {
@@ -52,7 +52,7 @@ function SlimeMonster(pos) {
 
     } else if (this.dir == Direc.UP) {
 
-      if (isAir(this.blockPos.x, this.blockPos.y - 1) || (isPlayer(this.blockPos.x, this.blockPos.y - 1) && !isMonster(this.blockPos.x, this.blockPos.y - 1)))
+      if (isAir(this.blockPos.x, this.blockPos.y - 1) || (isPlayer(this.blockPos.x, this.blockPos.y - 1) && !isMonsterAlt(this.blockPos.x, this.blockPos.y - 1)))
         dy--;
       else {
         if ((Math.floor(Math.random() * 2) + 1) == 1) {
@@ -68,7 +68,7 @@ function SlimeMonster(pos) {
     var coll = false;
 
 
-    if (!isAir(this.blockPos.x + dx, this.blockPos.y + dy) && !isPlayer(this.blockPos.x + dx, this.blockPos.y + dy))
+    if ((!isAir(this.blockPos.x + dx, this.blockPos.y + dy) && (!isPlayer(this.blockPos.x + dx, this.blockPos.y + dy))) || isMonsterAlt(this, this.blockPos.x + dx, this.blockPos.y + dy))
       coll = true;
 
 
@@ -89,6 +89,8 @@ function SlimeMonster(pos) {
 
     // If nothing in the way move
     if (!coll) {
+      this.oldBlockPos.x = this.blockPos.x;
+      this.oldBlockPos.y = this.blockPos.y;
       this.blockPos.x += dx;
       this.blockPos.y += dy;
 

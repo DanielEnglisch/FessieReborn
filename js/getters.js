@@ -30,8 +30,21 @@ var isMonster = function (x, y) {
     return succ;
 }
 
+var isMonsterAlt = function (me, x, y) {
+    var succ = false;
+
+
+    monsters.forEach(function (f) {
+
+        if (f != me && (x == f.blockPos.x && y == f.blockPos.y) || ((x == f.oldBlockPos.x && y == f.oldBlockPos.y))) {
+            succ = true;
+        }
+    });
+    return succ;
+}
+
 var isCollectable = function (x, y) {
-   var fallable = getFallable(x,y);
+    var fallable = getFallable(x, y);
 
     return fallable != null && (fallable.type == Block.TRASH || fallable.type == Block.BOMB);
 }
@@ -72,11 +85,11 @@ var isPlayer = function (x, y) {
 }
 
 var isWall = function (x, y) {
-    return world[x][y] == Block.WALL || world[x][y] == Block.STEEL_WALL || isBreakable(x,y);
+    return world[x][y] == Block.WALL || world[x][y] == Block.STEEL_WALL || isBreakable(x, y);
 }
 
-var isBreakable = function(x,y){
-    return  world[x][y] == Block.SEWER || world[x][y] == Block.BLUE_WALL || world[x][y] == Block.WALL_ORGANIC;
+var isBreakable = function (x, y) {
+    return world[x][y] == Block.SEWER || world[x][y] == Block.BLUE_WALL || world[x][y] == Block.WALL_ORGANIC;
 }
 
 var isExit = function (x, y) {
@@ -84,5 +97,5 @@ var isExit = function (x, y) {
 }
 
 var isAir = function (x, y) {
-    return world[x][y] == Block.AIR && !isFallable(x, y)  && !isExit(x, y) && !isMonster(x, y) && !isPlayer(x, y) && world[x][y] != Block.BOMB;
+    return world[x][y] == Block.AIR && !isFallable(x, y) && !isExit(x, y) && !isMonster(x, y) && !isPlayer(x, y) && world[x][y] != Block.BOMB;
 }

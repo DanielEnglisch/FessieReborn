@@ -13,7 +13,7 @@ function SilverMonster(pos) {
 
         if (this.dir == Direc.RIGHT) {
 
-            if (isAir(this.blockPos.x + 1, this.blockPos.y) || (isPlayer(this.blockPos.x + 1, this.blockPos.y)&& !isMonster(this.blockPos.x + 1, this.blockPos.y)))
+            if (isAir(this.blockPos.x + 1, this.blockPos.y) || (isPlayer(this.blockPos.x + 1, this.blockPos.y) && !isMonsterAlt(this.blockPos.x + 1, this.blockPos.y)))
                 dx++;
             else {
                 if ((Math.floor(Math.random() * 2) + 1) == 1) {
@@ -24,7 +24,7 @@ function SilverMonster(pos) {
 
         } else if (this.dir == Direc.DOWN) {
 
-            if (isAir(this.blockPos.x, this.blockPos.y + 1) || (isPlayer(this.blockPos.x, this.blockPos.y + 1)&& !isMonster(this.blockPos.x, this.blockPos.y + 1)))
+            if (isAir(this.blockPos.x, this.blockPos.y + 1) || (isPlayer(this.blockPos.x, this.blockPos.y + 1) && !isMonsterAlt(this.blockPos.x, this.blockPos.y + 1)))
                 dy++;
             else {
                 if ((Math.floor(Math.random() * 2) + 1) == 1) {
@@ -35,7 +35,7 @@ function SilverMonster(pos) {
 
         } else if (this.dir == Direc.LEFT) {
 
-            if (isAir(this.blockPos.x - 1, this.blockPos.y) ||( isPlayer(this.blockPos.x - 1, this.blockPos.y) && !isMonster(this.blockPos.x - 1, this.blockPos.y)))
+            if (isAir(this.blockPos.x - 1, this.blockPos.y) || (isPlayer(this.blockPos.x - 1, this.blockPos.y) && !isMonsterAlt(this.blockPos.x - 1, this.blockPos.y)))
                 dx--;
             else {
                 if ((Math.floor(Math.random() * 2) + 1) == 1) {
@@ -46,7 +46,7 @@ function SilverMonster(pos) {
 
         } else if (this.dir == Direc.UP) {
 
-            if (isAir(this.blockPos.x, this.blockPos.y - 1) || (isPlayer(this.blockPos.x, this.blockPos.y - 1)&& !isMonster(this.blockPos.x, this.blockPos.y - 1)))
+            if (isAir(this.blockPos.x, this.blockPos.y - 1) || (isPlayer(this.blockPos.x, this.blockPos.y - 1) && !isMonsterAlt(this.blockPos.x, this.blockPos.y - 1)))
                 dy--;
             else {
                 if ((Math.floor(Math.random() * 2) + 1) == 1) {
@@ -56,30 +56,36 @@ function SilverMonster(pos) {
             }
 
         }
+        var coll = false;
+
+        if ((!isAir(this.blockPos.x + dx, this.blockPos.y + dy) && (!isPlayer(this.blockPos.x + dx, this.blockPos.y + dy))) || isMonsterAlt(this, this.blockPos.x + dx, this.blockPos.y + dy))
+            coll = true;
 
         // Check if dumpster is not in the way (pos)
         var bp = this.blockPos;
-        var coll = false;
-        fallables.forEach(function(dumpster){
-            if(Math.abs(bp.x + dx - dumpster.pos.x) < 1 && Math.abs(bp.y + dy - dumpster.pos.y) < 1){
-                coll=true;
+        fallables.forEach(function (dumpster) {
+            if (Math.abs(bp.x + dx - dumpster.pos.x) < 1 && Math.abs(bp.y + dy - dumpster.pos.y) < 1) {
+                coll = true;
             }
         });
 
         // Exit bug fix
-        if(world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.EXIT){
+        if (world[this.blockPos.x + dx][this.blockPos.y + dy] == Block.EXIT) {
             coll = true;
-            console.log("EXIT IN THE WAY");            
+            console.log("EXIT IN THE WAY");
         }
 
         // If nothing in the way move
-        if(!coll){
+        if (!coll) {
+            this.oldBlockPos.x = this.blockPos.x;
+            this.oldBlockPos.y = this.blockPos.y;
+
             this.blockPos.x += dx;
             this.blockPos.y += dy;
         }
-            
 
-      
+
+
 
     }
 
