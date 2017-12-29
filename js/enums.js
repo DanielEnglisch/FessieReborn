@@ -19,7 +19,8 @@ const Block = {
     BLUE_WALL: 'B',
     WALL_ORGANIC: 'C',
     TRASH_MONSTER: 'D',
-    SLIME_MONSTER: 'E'
+    SLIME_MONSTER: 'E',
+    FORCE_FIELD: 'F'
 };
 
 const Direc = {

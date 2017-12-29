@@ -121,7 +121,6 @@ function TexturesBundle() {
 
   this.fire = new Image();
   this.fire_ball = new Image();
-  this.force_field = new Image();
   this.bomb = new Image();
   this.blue_wall = new Image();
   this.sewer = new Image();
@@ -162,6 +161,10 @@ function TexturesBundle() {
   this.slime_plop = new Animation(200);
   this.slime_plop_reverse = new Animation(200);
 
+  this.force_field = new Animation(500);
+  this.force_shield = new Animation(500);
+  
+  
   this.callback = null;
   this.load = function (dir, callback) {
     this.callback = callback;
@@ -201,7 +204,6 @@ function TexturesBundle() {
     this.steel_wall = this.blockloadImage(dir + "steel_wall.png");
 
     this.bomb = this.blockloadImage(dir + "bomb.png");
-    this.force_field = this.blockloadImage(dir + "force_field.png");
     this.fire_ball = this.blockloadImage(dir + "fire_ball.png");
     this.fire = this.blockloadImage(dir + "fire.png");
     this.blue_wall = this.blockloadImage(dir + "bluewall.png");
@@ -244,6 +246,8 @@ function TexturesBundle() {
     this.slime_plop.load(dir + "slime_plop/");
     this.slime_plop_reverse.load(dir + "slime_plop_reverse/");
 
+    this.force_field.load(dir + "force_field/");
+    this.force_shield.load(dir + "force_shield/");
     
 
     this.allTexturesLoading = true;

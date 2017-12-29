@@ -184,6 +184,10 @@ var draw = function () {
                 context.drawImage(tex.slime_monster_center.getImage(), x * scale, y * scale, scale, scale);
                 context.stroke();
 
+            }else if (world[x * ysize + y] == Block.FORCE_FIELD) {
+                context.drawImage(tex.force_field, x * scale, y * scale, scale, scale);
+                context.stroke();
+
             }
 
         }

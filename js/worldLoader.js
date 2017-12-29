@@ -54,7 +54,10 @@ var loadLevel = function () {
                 fallables.push(new Trash(new Vec(x, y)));
                 world[x][y] = 0;
                 items_left++;
-            } else if (world[x][y] == Block.EXIT) {
+            } else if (world[x][y] == Block.FORCE_FIELD) {
+                fallables.push(new ForceField(new Vec(x, y)));
+                world[x][y] = 0;
+            }else if (world[x][y] == Block.EXIT) {
                 exit = new Exit(new Vec(x, y));
             } else if (world[x][y] == Block.SILVER_MONSTER) {
                 monsters.push(new SilverMonster(new Vec(x, y)));

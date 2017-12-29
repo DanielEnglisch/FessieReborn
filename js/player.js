@@ -5,6 +5,7 @@ function Player(pos) {
     this.looking = Direc.NONE;
     this.isDead = false;
     this.isGrabbing = false;
+    this.forceField = false;
     this.grabTimeout = null;
 
     this.grab = function (dx, dy) {
@@ -222,14 +223,19 @@ function Player(pos) {
                 context.drawImage(tex.fessie_idle_center.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
                 break;
         }
+        if(this.forceField){
+            context.drawImage(tex.force_shield.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
+        }
         context.stroke();
+        
+        
     }
 
     this.kill = function () {
-        if (this.isDead)
+
+        if (this.forceField || this.isDead)
             return;
         playAudio(audio.die);
-        this.isDead = true;
         this.isDead = true;
         setTimeout(function () {
             reloadLevel();

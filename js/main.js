@@ -85,6 +85,10 @@ var update = function () {
     tex.slime_monster_left.update();
     tex.slime_monster_right.update();
 
+    tex.force_shield.update();
+    tex.force_field.update();
+    
+
 
     // New collision detection
 

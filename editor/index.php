@@ -38,6 +38,8 @@
     <img src="../img/fessie_neutral.png" width="32px" height="32px" id="2">          
     <img src="../img/dumpster1.png" width="32px" height="32px" id="3">
     <img src="../img/trash13.png" width="32px" height="32px" id="4">
+    <img src="../img/force_field.png" width="32px" height="32px" id="F">
+
     <img src="../img/dirt.png" width="32px" height="32px" id="5">
     <img src="../img/exit_open.png" width="32px" height="32px" id="6">          
     <img src="../img/steel_wall.png" width="32px" height="32px" id="7">

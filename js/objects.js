@@ -44,6 +44,28 @@ function Trash(pos) {
     }
 }
 
+inherits(ForceField, Collectable);
+
+function ForceField(pos) {
+    ForceField.super_.call(this, pos, Block.FORCE_FIELD);
+
+    this.draw = function (context) {
+        context.drawImage(tex.force_field.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
+        context.stroke();
+    }
+
+    this.collect = function () {
+       
+        playAudio(audio.force_field);
+        player.forceField = true;
+        timeOuts.push(setTimeout(function () {
+            player.forceField = false;
+        }, 10000));
+        fallables.splice(fallables.indexOf(this), 1);
+        
+    }
+}
+
 function Exit(pos) {
     this.open = function () {
         if (this.isOpen)
