@@ -185,7 +185,7 @@ var draw = function () {
                 context.stroke();
 
             }else if (world[x * ysize + y] == Block.FORCE_FIELD) {
-                context.drawImage(tex.force_field, x * scale, y * scale, scale, scale);
+                context.drawImage(tex.force_field.getImage(), x * scale, y * scale, scale, scale);
                 context.stroke();
 
             }
