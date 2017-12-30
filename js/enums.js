@@ -2,6 +2,7 @@ const Explosion = {
     FIRE: 0,
     SLIME: 1,
     TRASH: 2,
+    BREATH: 3
 };
 
 const Block = {
@@ -20,7 +21,8 @@ const Block = {
     WALL_ORGANIC: 'C',
     TRASH_MONSTER: 'D',
     SLIME_MONSTER: 'E',
-    FORCE_FIELD: 'F'
+    FORCE_FIELD: 'F',
+    FIRE_ORB: 'G'
 };
 
 const Direc = {

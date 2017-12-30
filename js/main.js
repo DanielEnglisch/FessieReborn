@@ -88,6 +88,8 @@ var update = function () {
     tex.force_shield.update();
     tex.force_field.update();
 
+    tex.fire_orb.update();
+
 
 
     // New collision detection
@@ -124,7 +126,7 @@ var update = function () {
 
         if (f.isDeadly) {
             // Player -> Explosion overlay
-            if (!player.isDead && Math.abs(f.blockPos.x - player.pos.x) < 1 && Math.abs(f.blockPos.y - player.pos.y) < 1) {
+            if (!player.isDead && f.type != Explosion.BREATH && Math.abs(f.blockPos.x - player.pos.x) < 1 && Math.abs(f.blockPos.y - player.pos.y) < 1) {
                 player.kill();
             }
             // Monster -> Explosion overlay
@@ -134,7 +136,7 @@ var update = function () {
             });
             // Only for fire:
 
-            if (f.type == Explosion.FIRE) {
+            if (f.type == Explosion.FIRE || f.type == Explosion.BREATH) {
                 // Collectables -> explosion overlay
                 fallables.forEach(function (t) {
                     if (isCollectable(f.blockPos.x, f.blockPos.y)) {
@@ -178,6 +180,14 @@ var update = function () {
             player.grab(-1, 0);
         } else if (keys[39] || keys[68]) {
             player.grab(1, 0);
+        }
+        // SHIFT Fire
+    } else if (keys[16]) {
+
+        if (keys[37] || keys[65]) {
+            player.fire(-1);
+        } else if (keys[39] || keys[68]) {
+            player.fire(1);
         }
     } else {
         if (keys[38] || keys[87]) {
@@ -256,8 +266,8 @@ var redraw = function () {
 
     exit.draw(context);
 
-     // Draw explosionjs
-     explosion_overlays.forEach(function (m) {
+    // Draw explosionjs
+    explosion_overlays.forEach(function (m) {
         m.draw(context);
     });
 
@@ -276,7 +286,7 @@ var redraw = function () {
     player.draw(context);
 
 
-   
+
 
     context.restore();
 
@@ -291,6 +301,7 @@ var redraw = function () {
     context.fillStyle = "rgb(248, 132, 0)";
     context.fillText("Items left: " + items_left, canvas.width / 2, canvas.height - 25);
     context.fillText("Bombs: " + num_bombs, canvas.width / 3, canvas.height - 25);
+    context.fillText("Fire: " + num_fires, (canvas.width / 5), canvas.height - 25);
     context.fillText("Score: " + score, canvas.width * 2 / 3, canvas.height - 25);
 
     if (player.isDead && !player.hasFinished) {
@@ -325,10 +336,10 @@ var spawnExplosion = function (blockPos, type) {
 
             switch (type) {
                 case Explosion.FIRE:
-                    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.fire_explosion, 1000));
+                    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.fire_explosion, 1000, Explosion.FIRE));
                     break;
                 case Explosion.SLIME:
-                    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.slime_plop, 200, false, addSlime));
+                    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.slime_plop, 200, Explosion.SLIME, false, addSlime));
                     break;
                 case Explosion.TRASH:
                     if (isAir(x, y)) fallables.push(new Trash(new Vec(x, y)));
@@ -341,11 +352,11 @@ var spawnExplosion = function (blockPos, type) {
 };
 
 var addSlime = function (x, y) {
-    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.slime_explosion, 15000, true, addPlop));
+    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.slime_explosion, 15000, Explosion.SLIME, true, addPlop));
 }
 
 var addPlop = function (x, y) {
-    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.slime_plop_reverse, 200, false));
+    explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.slime_plop_reverse, 200, Explosion.SLIME, false));
 }
 
 var spawnBombOnPlayer = function () {

@@ -119,15 +119,11 @@ function TexturesBundle() {
   this.exit_closed = new Image();
   this.steel_wall = new Image();
 
-  this.fire = new Image();
-  this.fire_ball = new Image();
   this.bomb = new Image();
   this.blue_wall = new Image();
   this.sewer = new Image();
   this.wall_organic = new Image();
   
-
-  this.silver_monster = new Image();
 
   this.slime_explosion = new Animation(500);
   this.fire_explosion = new Animation(1000);
@@ -164,6 +160,9 @@ function TexturesBundle() {
   this.force_field = new Animation(500);
   this.force_shield = new Animation(500);
   
+  this.fire_orb = new Animation(500);
+  this.fire_left = new Animation(500);
+  this.fire_right = new Animation(500);
   
   this.callback = null;
   this.load = function (dir, callback) {
@@ -204,8 +203,8 @@ function TexturesBundle() {
     this.steel_wall = this.blockloadImage(dir + "steel_wall.png");
 
     this.bomb = this.blockloadImage(dir + "bomb.png");
-    this.fire_ball = this.blockloadImage(dir + "fire_ball.png");
-    this.fire = this.blockloadImage(dir + "fire.png");
+
+
     this.blue_wall = this.blockloadImage(dir + "bluewall.png");
     this.sewer = this.blockloadImage(dir + "sewer.png");
     this.wall_organic = this.blockloadImage(dir + "wall_organic.png");
@@ -216,7 +215,6 @@ function TexturesBundle() {
     this.fire_explosion.load(dir + "fire_explosion/");
 
     // Silver Monster
-    this.silver_monster = this.blockloadImage(dir + "silver_monster.png");    
     this.silver_monster_anim.load(dir + "silver_monster/");
 
     // Fessie animation
@@ -249,6 +247,9 @@ function TexturesBundle() {
     this.force_field.load(dir + "force_field/");
     this.force_shield.load(dir + "force_shield/");
     
+    this.fire_left.load(dir + "fire_left/");
+    this.fire_right.load(dir + "fire_right/");
+    this.fire_orb.load(dir + "fire_orb/");
 
     this.allTexturesLoading = true;
  

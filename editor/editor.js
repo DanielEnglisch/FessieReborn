@@ -157,7 +157,7 @@ var draw = function () {
                 context.stroke();
 
             } else if (world[x * ysize + y] == Block.SILVER_MONSTER) {
-                context.drawImage(tex.silver_monster, x * scale, y * scale, scale, scale);
+                context.drawImage(tex.silver_monster_anim.getImage(), x * scale, y * scale, scale, scale);
                 context.stroke();
 
             }else if (world[x * ysize + y] == Block.BLUE_WALL) {
@@ -186,6 +186,10 @@ var draw = function () {
 
             }else if (world[x * ysize + y] == Block.FORCE_FIELD) {
                 context.drawImage(tex.force_field.getImage(), x * scale, y * scale, scale, scale);
+                context.stroke();
+
+            }else if (world[x * ysize + y] == Block.FIRE_ORB) {
+                context.drawImage(tex.fire_orb.getImage(), x * scale, y * scale, scale, scale);
                 context.stroke();
 
             }

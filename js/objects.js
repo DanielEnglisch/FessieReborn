@@ -66,6 +66,24 @@ function ForceField(pos) {
     }
 }
 
+inherits(FireOrb, Collectable);
+
+function FireOrb(pos) {
+    FireOrb.super_.call(this, pos, Block.FIRE_ORB);
+
+    this.draw = function (context) {
+        context.drawImage(tex.fire_orb.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
+        context.stroke();
+    }
+
+    this.collect = function () {
+        num_fires++;
+        playAudio(audio.trash_collect);
+        fallables.splice(fallables.indexOf(this), 1);
+        
+    }
+}
+
 function Exit(pos) {
     this.open = function () {
         if (this.isOpen)
@@ -85,8 +103,9 @@ function Exit(pos) {
     }
 }
 
-function ExplosionOverlay(pos, img, time, deadly = true,callback = function(){}) {
+function ExplosionOverlay(pos, img, time, type, deadly = true,callback = function(){}) {
     this.duration = time;
+    this.type = type;
     this.isDeadly = deadly;
     this.callback = callback;
     this.animation = Object.assign({}, img);
@@ -123,7 +142,7 @@ function Bomb(pos) {
 
 
     this.collect = function () {
-        console.log("Collected bomb!");
+
         num_bombs++;
         fallables.splice(fallables.indexOf(this), 1);
         playAudio(audio.trash_collect);

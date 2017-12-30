@@ -13,8 +13,8 @@ function Player(pos) {
         if (this.isGrabbing || this.moving)
             return;
 
-            this.isGrabbing = true;
-            
+        this.isGrabbing = true;
+
 
         if (isCollectable(this.blockPos.x + dx, this.blockPos.y + dy)) {
             var item = getFallable(this.blockPos.x + dx, this.blockPos.y + dy);
@@ -49,12 +49,12 @@ function Player(pos) {
 
     }
     this.move = function (dx, dy) {
-    
-         // Cancel Grabbing
-         this.isGrabbing = false;
-         if(this.grabTimeout != null)
-         clearTimeout(this.grabTimeout);
-         
+
+        // Cancel Grabbing
+        this.isGrabbing = false;
+        if (this.grabTimeout != null)
+            clearTimeout(this.grabTimeout);
+
         // Can't move when already moving
         if (this.moving)
             return;
@@ -223,13 +223,39 @@ function Player(pos) {
                 context.drawImage(tex.fessie_idle_center.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
                 break;
         }
-        if(this.forceField){
+        if (this.forceField) {
             context.drawImage(tex.force_shield.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
         }
         context.stroke();
-        
-        
+
+
     }
+    this.fireBlocks = 0;
+    this.fire = function (dx) {
+
+        if(this.fireBlocks != 0 || num_fires <= 0)
+            return;
+
+        var offset = dx;
+        while (world[this.blockPos.x + offset][this.blockPos.y] == Block.AIR || world[this.blockPos.x + offset][this.blockPos.y] == Block.DIRT) {
+
+            world[this.blockPos.x + offset][this.blockPos.y] = Block.AIR;
+            this.fireBlocks++;
+            if (dx > 0)
+                explosion_overlays.push(new ExplosionOverlay(new Vec(this.blockPos.x + offset, this.blockPos.y), tex.fire_right, 400, Explosion.BREATH, true,decrFireBlocks));
+            else
+                explosion_overlays.push(new ExplosionOverlay(new Vec(this.blockPos.x + offset, this.blockPos.y), tex.fire_left, 400, Explosion.BREATH, true, decrFireBlocks));
+
+            offset += dx;
+        }
+
+        num_fires--;        
+        playAudio(audio.fire);
+
+
+    }
+
+    
 
     this.kill = function () {
 
@@ -243,4 +269,9 @@ function Player(pos) {
         }, 2000);
     }
 
+}
+
+// Fire delay
+var decrFireBlocks = function(x,y){
+    player.fireBlocks--;
 }

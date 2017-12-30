@@ -18,6 +18,7 @@ var loadLevel = function () {
     exit = null;
     monsters = [];
     num_bombs = 0;
+    num_fires = 0;    
     explosion_overlays = [];
     
 
@@ -56,6 +57,9 @@ var loadLevel = function () {
                 items_left++;
             } else if (world[x][y] == Block.FORCE_FIELD) {
                 fallables.push(new ForceField(new Vec(x, y)));
+                world[x][y] = 0;
+            }else if (world[x][y] == Block.FIRE_ORB) {
+                fallables.push(new FireOrb(new Vec(x, y)));
                 world[x][y] = 0;
             }else if (world[x][y] == Block.EXIT) {
                 exit = new Exit(new Vec(x, y));
