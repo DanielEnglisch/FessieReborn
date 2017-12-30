@@ -1,6 +1,7 @@
 <?php
 
   $db = new PDO('mysql:host=localhost;dbname=fessie;charset=utf8', 'root', '');
+	
   $levelString = "";
   $nextLevel = 0;
   $lvl = 1;
@@ -39,10 +40,10 @@
 <body>
 
   <div id="navigation">
-    <a href="index.php">Game</a>
-    <a href="#">Info</a>
+    <a href="index.php">Game <?php if($levelTesting == false) echo "-LVL".$lvl."-";?> </a>
+    <a href="info/">Info</a>
     <?php echo '<a href="./editor?data=' . $levelString . '">Level Editor</a>'; ?>
-    <a href="#">Login</a>
+    <a href="select/">Level Selection</a>
   </div>
 
   <div id="wrapper">

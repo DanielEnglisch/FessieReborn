@@ -21,9 +21,9 @@
 
   <div id="navigation">
   <a href="../">Game</a>
-  <a href="#">Info</a>
+  <a href="../info/">Info</a>
   <a href="#">Level Editor</a>
-  <a href="#">Login</a>
+  <a href="../select/">Level Selection</a>
   </div>
   
   <script type="text/javascript">
