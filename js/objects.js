@@ -44,6 +44,18 @@ function Trash(pos) {
     }
 }
 
+
+inherits(ToxicTrash, Trash);
+function ToxicTrash(pos) {
+    ToxicTrash.super_.call(this, pos, Block.TOXIC_TRASH);
+    this.image = tex.toxic_trash.cloneImage();
+    this.fallEvent = function () {
+        spawnExplosion(this.blockPos, Explosion.SLIME);
+        fallables.splice(fallables.indexOf(this), 1);
+    }
+
+}
+
 inherits(ForceField, Collectable);
 
 function ForceField(pos) {

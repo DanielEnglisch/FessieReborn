@@ -46,7 +46,7 @@ var isMonsterAlt = function (me, x, y) {
 var isCollectable = function (x, y) {
     var fallable = getFallable(x, y);
 
-    return fallable != null && (fallable.type == Block.TRASH || fallable.type == Block.BOMB||  fallable.type == Block.FORCE_FIELD || fallable.type == Block.FIRE_ORB);
+    return fallable != null && (fallable.type == Block.TRASH  || fallable.type == Block.TOXIC_TRASH|| fallable.type == Block.BOMB||  fallable.type == Block.FORCE_FIELD || fallable.type == Block.FIRE_ORB);
 }
 
 var getFallable = function (x, y) {

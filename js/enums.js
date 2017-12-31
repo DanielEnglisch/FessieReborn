@@ -22,7 +22,8 @@ const Block = {
     TRASH_MONSTER: 'D',
     SLIME_MONSTER: 'E',
     FORCE_FIELD: 'F',
-    FIRE_ORB: 'G'
+    FIRE_ORB: 'G',
+    TOXIC_TRASH: 'H'
 };
 
 const Direc = {

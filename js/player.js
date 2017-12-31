@@ -141,6 +141,7 @@ function Player(pos) {
         // Death Animation
         if (this.isDead && !this.hasFinished) {
             this.pos.y += 0.1;
+            this.blockPos.y+=1;
             return;
         }
 

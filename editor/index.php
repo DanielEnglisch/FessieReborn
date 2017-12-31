@@ -37,7 +37,9 @@
     <img src="../img/wall.png" width="32px" height="32px" id="1">
     <img src="../img/fessie_neutral.png" width="32px" height="32px" id="2">          
     <img src="../img/dumpster/0.png" width="32px" height="32px" id="3">
-    <img src="../img/trash/0.png" width="32px" height="32px" id="4">
+    <img src="../img/trash/6.png" width="32px" height="32px" id="4">
+    <img src="../img/toxic_trash/3.png" width="32px" height="32px" id="H">
+
     <img src="../img/force_field/0.png" width="32px" height="32px" id="F">
     <img src="../img/fire_orb/0.png" width="32px" height="32px" id="G">
 

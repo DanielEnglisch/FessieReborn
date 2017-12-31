@@ -149,7 +149,11 @@ var draw = function () {
                 context.stroke();
 
             } else if (world[x * ysize + y] == Block.TRASH) {
-                context.drawImage(tex.trash.images[0], x * scale, y * scale, scale, scale);
+                context.drawImage(tex.trash.images[6], x * scale, y * scale, scale, scale);
+                context.stroke();
+
+            }else if (world[x * ysize + y] == Block.TOXIC_TRASH) {
+                context.drawImage(tex.toxic_trash.images[3], x * scale, y * scale, scale, scale);
                 context.stroke();
 
             } else if (world[x * ysize + y] == Block.EXIT) {

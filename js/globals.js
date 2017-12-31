@@ -1,7 +1,7 @@
 const vol_music = 0.2;
 const vol_sound = 0.7;
 
-const EXPLOSION_DELAY  = 250;
+const EXPLOSION_DELAY  = 100;
 
 var canvas = document.getElementById("screen");
 var context = null;
@@ -25,10 +25,10 @@ var monsters = [];
 var keys = [];
 var explosion_overlays = [];
 
-var tex = new TexturesBundle();
-var audio = new AudioBundle();
+const tex = new TexturesBundle();
+const audio = new AudioBundle();
 
 var time = Date.now();
-var ups = 120;
+const ups = 120;
 
 

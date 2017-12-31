@@ -55,6 +55,10 @@ var loadLevel = function () {
                 fallables.push(new Trash(new Vec(x, y)));
                 world[x][y] = 0;
                 items_left++;
+            } else if (world[x][y] == Block.TOXIC_TRASH) {
+                fallables.push(new ToxicTrash(new Vec(x, y)));
+                world[x][y] = 0;
+                items_left++;
             } else if (world[x][y] == Block.FORCE_FIELD) {
                 fallables.push(new ForceField(new Vec(x, y)));
                 world[x][y] = 0;
