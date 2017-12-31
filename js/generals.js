@@ -175,7 +175,6 @@ function Monster(pos, type) {
         switch (this.type) {
             case Block.SILVER_MONSTER:
                 spawnExplosion(posToBlock(this.pos), Explosion.FIRE);
-
                 break;
             case Block.TRASH_MONSTER:
                 spawnExplosion(posToBlock(this.pos), Explosion.TRASH);

@@ -43,6 +43,11 @@
     <b>Bombe legen</b>: [Leertaste]<br>
     <b>Aktuelles Level neustarten</b>: [R]
   </p>
+  <h1> Spielfeld  </h1>
+  <p>
+    
+  </p>
+
 
 </body>
 
