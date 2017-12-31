@@ -249,6 +249,12 @@ function Player(pos) {
             offset += dx;
         }
 
+        // Direction
+        if(dx > 0)
+            this.looking = Direc.RIGHT;
+        else
+            this.looking = Direc.LEFT;
+
         num_fires--;        
         playAudio(audio.fire);
 
