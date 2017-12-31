@@ -5,113 +5,6 @@ function TexturesBundle() {
   this.fessie_neutral = new Image();
   this.fessie_dead = new Image();
 
-  this.dumpster1 = new Image();
-  this.dumpster2 = new Image();
-  this.dumpster3 = new Image();
-  this.dumpster4 = new Image();
-
-  // Dumpster variation
-  this.dumpster = function () {
-    var num = Math.floor(Math.random() * 4) + 1;
-    switch (num) {
-      case 1:
-        return this.dumpster1;
-        break;
-      case 2:
-        return this.dumpster2;
-        break;
-      case 3:
-        return this.dumpster3;
-        break;
-      case 4:
-        return this.dumpster4;
-        break;
-    }
-
-  };
-
-  this.trash1 = new Image();
-  this.trash2 = new Image();
-  this.trash3 = new Image();
-  this.trash4 = new Image();
-  this.trash5 = new Image();
-  this.trash6 = new Image();
-  this.trash7 = new Image();
-  this.trash8 = new Image();
-  this.trash9 = new Image();
-  this.trash10 = new Image();
-  this.trash11 = new Image();
-  this.trash12 = new Image();
-  this.trash13 = new Image();
-  this.trash14 = new Image();
-  this.trash15 = new Image();
-  this.trash16 = new Image();
-  this.trash17 = new Image();
-  this.trash18 = new Image();
-
-
-  // Trash variation
-  this.trash = function () {
-    var num = Math.floor(Math.random() * 18) + 1;
-    switch (num) {
-      case 1:
-        return this.trash1;
-        break;
-      case 2:
-        return this.trash2;
-        break;
-      case 3:
-        return this.trash3;
-        break;
-      case 4:
-        return this.trash4;
-        break;
-      case 5:
-        return this.trash5;
-        break;
-      case 6:
-        return this.trash6;
-        break;
-      case 7:
-        return this.trash7;
-        break;
-      case 8:
-        return this.trash8;
-        break;
-      case 9:
-        return this.trash9;
-        break;
-      case 10:
-        return this.trash10;
-        break;
-      case 11:
-        return this.trash11;
-        break;
-      case 12:
-        return this.trash12;
-        break;
-      case 13:
-        return this.trash13;
-        break;
-      case 14:
-        return this.trash14;
-        break;
-      case 15:
-        return this.trash15;
-        break;
-      case 16:
-        return this.trash16;
-        break;
-      case 17:
-        return this.trash17;
-        break;
-      case 18:
-        return this.trash18;
-        break;
-    }
-
-  };
-
   this.wall = new Image();
   this.air = new Image();
   this.dirt = new Image();
@@ -124,6 +17,11 @@ function TexturesBundle() {
   this.sewer = new Image();
   this.wall_organic = new Image();
   
+  // Variants
+  this.trash = new VariantTexture();
+  this.toxic_trash = new VariantTexture();
+  this.dumpster = new VariantTexture();
+
 
   this.slime_explosion = new Animation(500);
   this.fire_explosion = new Animation(1000);
@@ -174,29 +72,11 @@ function TexturesBundle() {
     this.wall = this.blockloadImage(dir + "wall.png");
     this.exit_closed = this.blockloadImage(dir + "exit_closed.png");
     this.exit_open = this.blockloadImage(dir + "exit_open.png");
-    this.dumpster1 = this.blockloadImage(dir + "dumpster1.png");
-    this.dumpster2 = this.blockloadImage(dir + "dumpster2.png");
-    this.dumpster3 = this.blockloadImage(dir + "dumpster3.png");
-    this.dumpster4 = this.blockloadImage(dir + "dumpster4.png");
 
-    this.trash1 = this.blockloadImage(dir + "trash1.png");
-    this.trash2 = this.blockloadImage(dir + "trash2.png");
-    this.trash3 = this.blockloadImage(dir + "trash3.png");
-    this.trash4 = this.blockloadImage(dir + "trash4.png");
-    this.trash5 = this.blockloadImage(dir + "trash5.png");
-    this.trash6 = this.blockloadImage(dir + "trash6.png");
-    this.trash7 = this.blockloadImage(dir + "trash7.png");
-    this.trash8 = this.blockloadImage(dir + "trash8.png");
-    this.trash9 = this.blockloadImage(dir + "trash9.png");
-    this.trash10 = this.blockloadImage(dir + "trash10.png");
-    this.trash11 = this.blockloadImage(dir + "trash11.png");
-    this.trash12 = this.blockloadImage(dir + "trash12.png");
-    this.trash13 = this.blockloadImage(dir + "trash13.png");
-    this.trash14 = this.blockloadImage(dir + "trash14.png");
-    this.trash15 = this.blockloadImage(dir + "trash15.png");
-    this.trash16 = this.blockloadImage(dir + "trash16.png");
-    this.trash17 = this.blockloadImage(dir + "trash17.png");
-    this.trash18 = this.blockloadImage(dir + "trash18.png");
+    // Variants
+    this.trash.load(dir + "trash/");
+    this.toxic_trash.load(dir + "toxic_trash/");
+    this.dumpster.load(dir + "dumpster/");
 
     this.air = this.blockloadImage(dir + "air.png");
     this.dirt = this.blockloadImage(dir + "dirt.png");
@@ -327,6 +207,26 @@ function Animation(duration) {
     }
   }
 
+}
 
+
+function VariantTexture() {
+
+
+  this.cloneImage = function () {
+    return this.images[Math.floor(Math.random() * this.images.length)];
+  }
+  this.images = [];
+  this.load = function (dir) {
+
+    var obj = loadJSON(dir + "info.json")
+    var num_images = obj.num_images;
+
+    // Set SRC:
+    for (var i = 0; i < num_images; i++) {
+      this.images[i] = tex.blockloadImage(dir + "" + i + ".png");
+    }
+
+  }
 
 }

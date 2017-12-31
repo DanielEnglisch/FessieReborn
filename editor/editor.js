@@ -137,7 +137,7 @@ var draw = function () {
                 context.stroke();
 
             } else if (world[x * ysize + y] == Block.DUMPSTER) {
-                context.drawImage(tex.dumpster1, x * scale, y * scale, scale, scale);
+                context.drawImage(tex.dumpster.images[0], x * scale, y * scale, scale, scale);
                 context.stroke();
 
             } else if (world[x * ysize + y] == Block.DIRT) {
@@ -149,7 +149,7 @@ var draw = function () {
                 context.stroke();
 
             } else if (world[x * ysize + y] == Block.TRASH) {
-                context.drawImage(tex.trash13, x * scale, y * scale, scale, scale);
+                context.drawImage(tex.trash.images[0], x * scale, y * scale, scale, scale);
                 context.stroke();
 
             } else if (world[x * ysize + y] == Block.EXIT) {

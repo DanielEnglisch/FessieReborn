@@ -2,7 +2,7 @@ inherits(Dumpster, Fallable);
 
 function Dumpster(pos) {
     Dumpster.super_.call(this, pos, Block.DUMPSTER);
-    this.image = tex.dumpster();
+    this.image = tex.dumpster.cloneImage();
     this.draw = function (context) {
         context.drawImage(this.image, this.pos.x * scale, this.pos.y * scale, scale, scale);
         context.stroke();
@@ -21,7 +21,7 @@ inherits(Trash, Collectable);
 
 function Trash(pos) {
     Trash.super_.call(this, pos, Block.TRASH);
-    this.image = tex.trash();
+    this.image = tex.trash.cloneImage();
     this.draw = function (context) {
         context.drawImage(this.image, this.pos.x * scale, this.pos.y * scale, scale, scale);
         context.stroke();
