@@ -1,7 +1,5 @@
 <?php
-
   $db = new PDO('mysql:host=localhost;dbname=fessie;charset=utf8', 'root', '');
-	
 	$sth = $db->prepare("SELECT * FROM levels");
   $sth->execute();
 $result = $sth -> fetchAll();
@@ -13,7 +11,27 @@ $result = $sth -> fetchAll();
   <meta charset="utf8">
   <title>Fessie reborn</title>
   <link rel="stylesheet" type="text/css" href="../css/game.css">
-</head>
+	<style>
+		table {
+      margin: 0 auto;
+      margin-top: 50px;
+   }
+   td, th{
+    padding-top: 7px;
+     background: #1a1a1a;
+     font-family: "Lucida Console";
+     color: white;
+     text-decoration: none;
+     text-align: center;
+     vertical-align: middle;
+     width: 33%;
+   }
+   a:hover{
+    color: rgb(248, 132, 0);
+    
+  }
+	</style>
+	</head>
 
 <body>
 

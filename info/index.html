@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf8">
+  <title>Fessie reborn</title>
+  <link rel="stylesheet" type="text/css" href="../css/game.css">
+  <style>
+    h1{
+      padding-left: 10px;
+    }
+    p, li{
+      font-size: 12px;
+      padding-left: 20px;
+      max-width: 50%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="navigation">
+    <a href="../">Game</a>
+    <a href="#">Info</a>
+    <a href="../editor/">Level Editor</a>
+    <a href="../select/">Level Selection</a>
+  </div>
+
+  <h1> Spielidee </h1>
+  <p>
+    "Fessie Reborn" ist ein Spiel ganz in der Tradition der Spielhallen-Art.
+    Der Spieler schlüpft in die Rolle des Drachen Fessie. Seine Aufgabe ist es,
+    in vielen labyrinthartigen Levels diversen Müll aufzusammeln.
+    Um durch die Level zu kommen muss Fessie so manchen Gegner austricksen
+    und verzwickte Hindernisse überwinden.
+    Dabei stehen ihm Bomben und die Fähigkeit Feuer zu speien zur Verfügung.
+		Wenn alle vorgefertigten Level durchgespielt wurden bietet der Level Editor
+		eine einfache Möglichkeit neue Level zu erstellen, testen und mit seinen Freunden zu teilen.
+  </p>
+  <h1> Steuerung </h1>
+  <p>
+    <b>Laufen</b>: Pfeiltasten<br>
+    <b>Feuerspeien</b>: [Umschalttaste]+ Pfeil links/rechts<br>
+    <b>Feld neben dem Spieler berühren, ohne es zu betreten</b>: [Strg] + Pfeil links/rechts<br>
+    <b>Bombe legen</b>: [Leertaste]<br>
+    <b>Aktuelles Level neustarten</b>: [R]
+  </p>
+  <h1> Spielfeld  </h1>
+  <p>
+    Das Spielfeld besteht aus Blöcken mit verschiedenen Eigenschaften:
+		<ul>
+		<li>
+			<b>Unzerstörbare Wände</b>: <br>
+			    <img src="../img/wall.png" width="32px">
+					<img src="../img/steel_wall.png" width="32px">
+		</li>
+		<li>
+			<b>Zerstörbare Wände</b>: Können durch Explosionen zerstört werden. <br>
+			<img src="../img/sewer.png" width="32px">
+    <img src="../img/bluewall.png" width="32px">
+    <img src="../img/wall_organic.png" width="32px">
+		</li>
+		<li>  
+			<b>Mülleimer</b>: Können von Fessie verschoben werden und werden von der Gravitationskraft beeinflusst. <br>
+						<img src="../img/dumpster/0.png" width="32px">
+						<img src="../img/dumpster/1.png" width="32px">
+						<img src="../img/dumpster/2.png" width="32px">
+						<img src="../img/dumpster/3.png" width="32px">
+
+		</li>
+		<li>
+		<b>Normaler Müll</b>: Muss eingesammelt werden um das Level erfolgreich abschließen zu können. <br>
+			<img src="../img/trash/0.png" width="32px">
+												<img src="../img/trash/1.png" width="32px">
+									<img src="../img/trash/2.png" width="32px">
+									<img src="../img/trash/3.png" width="32px">
+									<img src="../img/trash/4.png" width="32px">
+									<img src="../img/trash/5.png" width="32px">
+									<img src="../img/trash/6.png" width="32px">
+									<img src="../img/trash/7.png" width="32px">
+									<img src="../img/trash/8.png" width="32px">
+									<img src="../img/trash/9.png" width="32px">
+									<img src="../img/trash/10.png" width="32px">
+									<img src="../img/trash/11.png" width="32px">
+									<img src="../img/trash/12.png" width="32px">
+									<img src="../img/trash/13.png" width="32px">
+
+
+		</li>
+		<li>
+			<b>Giftiger Müll</b>: Muss ebenso eingesammelt werden. Wenn er jedoch hinunterfällt verseucht er für kurze Zeit das Umfeld! <br>
+			<img src="../img/toxic_trash/0.png" width="32px">
+												<img src="../img/toxic_trash/1.png" width="32px">
+									<img src="../img/toxic_trash/2.png" width="32px">
+									<img src="../img/toxic_trash/3.png" width="32px">
+
+
+
+		</li>
+		<li>
+		<b>Monster</b>: Können durch Erschlagen mit Müll bzw. Mülleimern aber auch Explosionen erlegt werden. Jedes Monster hat sein eigenes Verhalten. <br>
+														<img src="../img/silver_monster/0.png" width="32px">
+
+																<img src="../img/slime_monster_center/0.png" width="32px">
+														<img src="../img/trash_monster_center/0.png" width="32px">
+
+		</li>
+		<li>
+			<b>Fähigkeiten</b>: Bombe, Schutzschild und Feuerball <br>
+																	<img src="../img/bomb.png" width="32px">
+														<img src="../img/force_field/0.png" width="32px">
+														<img src="../img/fire_orb/0.png" width="32px">
+
+		</li>
+		<li>
+			<b>Weitere Blöcke</b>: Erde (kann von Fessie durchwandert werden), Ausgang (Öffnet sich wenn der ganze Müll eingesammelt wurde) <br>
+					<img src="../img/dirt.png" width="32px">
+														<img src="../img/exit_closed.png" width="32px">
+		</li>
+		</ul>
+
+
+  </p>
+
+
+</body>
+
+</html>
