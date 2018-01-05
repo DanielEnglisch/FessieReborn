@@ -342,9 +342,9 @@ var spawnExplosion = function (blockPos, type) {
                     explosion_overlays.push(new ExplosionOverlay(new Vec(x, y), tex.slime_plop, 200, Explosion.SLIME, false, addSlime));
                     break;
                 case Explosion.TRASH:
-                    // 2/8 chance of getting trash
+                    // 1/8 chance of getting trash
                     var r = Math.random();
-                    if (isAir(x, y) && r < 0.25) fallables.push(new Trash(new Vec(x, y)));
+                    if (isAir(x, y) && r < 0.125) fallables.push(new Trash(new Vec(x, y)));
                     break;
             }
 
