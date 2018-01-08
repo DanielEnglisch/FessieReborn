@@ -1,3 +1,7 @@
+/**
+ * Globals: Stores all global constants/variables
+ */
+
 const vol_music = 0.2;
 const vol_sound = 0.7;
 
@@ -30,5 +34,3 @@ const audio = new AudioBundle();
 
 var time = Date.now();
 const ups = 120;
-
-

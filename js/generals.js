@@ -1,11 +1,16 @@
+/*
+ * Generals: All general objects that will be extended
+ */
+
+/**
+ * GameObject as general type that almost every other obj extends 
+ */
 var GameObject = function (position, type) {
     this.blockPos = position;
     this.sourceBlock = position;
     this.type = type;
     this.moving = false;
     this.oldBlockPos = new Vec(position.x, position.y);
-
-
     this.pos = new Vec(position.x, position.y);
     this.updateAnimaiton = function (yspeed, xspeed = movementSpeed) {
         // Basic animaiton
@@ -42,6 +47,9 @@ var GameObject = function (position, type) {
     };
 };
 
+/**
+ * Fallables to implement physics and behavior of trash/dumpsters
+ */
 inherits(Fallable, GameObject);
 
 function Fallable(pos, type) {
@@ -161,6 +169,9 @@ var belowCanSlip = function (fallable) {
 
 }
 
+/**
+ * General type Monster, specifically handles kill()
+ */
 inherits(Monster, GameObject);
 
 function Monster(pos, type) {
@@ -189,10 +200,11 @@ function Monster(pos, type) {
 
     }
 
-
-
 }
 
+/**
+ * General class for items that can be collected (Trash, Bombs, ...)
+ */
 inherits(Collectable, Fallable);
 
 function Collectable(pos, type) {

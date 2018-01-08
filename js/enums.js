@@ -1,10 +1,8 @@
-const Explosion = {
-    FIRE: 0,
-    SLIME: 1,
-    TRASH: 2,
-    BREATH: 3
-};
+/**
+ * Enums: Provides enums of this game.
+ */
 
+ /* Type of blocks in the game */
 const Block = {
     AIR: 0,
     WALL: 1,
@@ -26,6 +24,15 @@ const Block = {
     TOXIC_TRASH: 'H'
 };
 
+/* Types of explosions + fire breath */
+const Explosion = {
+    FIRE: 0,
+    SLIME: 1,
+    TRASH: 2,
+    BREATH: 3
+};
+
+/* Type of directions entities can look/move */
 const Direc = {
     UP: 0,
     DOWN: 1,

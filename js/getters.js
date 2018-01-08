@@ -1,4 +1,8 @@
 
+/**
+ * Getters: Helper functions for checking is an entity is on a certain pos
+ */
+
 var isFallable = function (x, y) {
     var succ = false;
     fallables.forEach(function (f) {
@@ -8,7 +12,6 @@ var isFallable = function (x, y) {
     });
     return succ;
 }
-
 
 var isTrash = function (x, y) {
     var succ = false;
@@ -30,9 +33,9 @@ var isMonster = function (x, y) {
     return succ;
 }
 
+/* Also consider previous position of monster */
 var isMonsterAlt = function (me, x, y) {
     var succ = false;
-
 
     monsters.forEach(function (f) {
 

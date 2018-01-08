@@ -1,5 +1,8 @@
+/**
+ * AudioLoader: Responsible for loading and playing sounds.
+ */
 
-
+/* Loads specific audio files */
 function AudioBundle() {
     this.dump_land = new Audio('audio/dumpster_land.wav');
     this.dump_move = new Audio('audio/dumpster_move.wav');
@@ -11,13 +14,10 @@ function AudioBundle() {
     this.dirt3 = new Audio('audio/dirt3.wav');
     this.dirt4 = new Audio('audio/dirt4.wav');
     
-
+    /* Background music */
     this.music1 = new Audio('audio/music1.wav');
     this.music2 = new Audio('audio/music2.wav');
     this.music3 = new Audio('audio/music3.wav');
-    this.music4 = new Audio('audio/music4.wav');
-    this.music5 = new Audio('audio/music5.wav');
-    this.music6 = new Audio('audio/music6.wav');
 
     this.walk = new Audio('audio/walk.wav');
 
@@ -30,9 +30,9 @@ function AudioBundle() {
     this.force_field = new Audio('audio/force_field.wav');
     this.slime_explosion = new Audio('audio/slime_explosion.wav');
     this.slime_squash = new Audio('audio/slime_squash.wav');
-    this.train = new Audio('audio/train.wav');
 }
 
+/* Starts random bg music, auto restarts */
 var startBackgroundMusic = function () {
     var num = Math.floor(Math.random() * 3) + 1;
     var newMusic = null;
@@ -56,6 +56,7 @@ var startBackgroundMusic = function () {
 
 }
 
+/* Plays random dirt sound (walking on dirt) */
 var playDirt = function () {
     var num = Math.floor(Math.random() * 4) + 1;
     var newMusic = null;
@@ -78,6 +79,7 @@ var playDirt = function () {
 
 }
 
+/* Plays (clonded) audio file, specified in AudioBundle */
 var playAudio = function (audio) {
     var sound = audio.cloneNode();
     sound.volume = vol_sound;
