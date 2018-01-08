@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf8">
+  <title>Fessie reborn</title>
+  <link rel="stylesheet" type="text/css" href="../css/game.css">
+  <style>
+    h1{
+      padding-left: 10px;
+      text-align: center;
+    }
+    p, li{
+      font-size: 12px;
+      padding-left: 20px;
+      max-width: 50%;
+    }
+    table {
+      margin: 0 auto;
+      margin-top: 50px;
+   }
+   td, th{
+    padding-top: 7px;
+     background: #1a1a1a;
+     font-family: "Lucida Console";
+     color: white;
+     text-decoration: none;
+     text-align: center;
+     vertical-align: middle;
+     width: 33%;
+   }
+  </style>
+</head>
+
+<body>
+
+  <div id="navigation">
+    <a href="../">Game</a>
+    <a href="../info/">Info</a>
+    <a href="../editor/">Level Editor</a>
+    <a href="../select/">Level Selection</a>
+    <a href="#">My Scoreboard</a>
+  </div>
+
+  <script type="text/javascript" src="../js/score.js"></script>
+
+
+  <h1> Scoreboard </h1>
+
+  <div id="scoreboard">
+
+  </div>
+
+  <script type="text/javascript">
+    printScoreTable("scoreboard");
+  </script>
+
+
+
+</body>
+
+</html>

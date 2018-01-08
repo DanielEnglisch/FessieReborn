@@ -24,6 +24,8 @@
   <a href="../info/">Info</a>
   <a href="#">Level Editor</a>
   <a href="../select/">Level Selection</a>
+  <a href="../score/">My Scoreboard</a>
+
   </div>
   
   <script type="text/javascript">

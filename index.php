@@ -44,6 +44,8 @@
     <a href="info/">Info</a>
     <?php echo '<a href="./editor?data=' . $levelString . '">Level Editor</a>'; ?>
     <a href="select/">Level Selection</a>
+    <a href="score/">My Scoreboard</a>
+
   </div>
 
   <div id="wrapper">
@@ -65,7 +67,8 @@
   </script>
   <script type="text/javascript" src="js/textureLoader.js"></script>
   <script type="text/javascript" src="js/audioLoader.js"></script>
-  
+  <script type="text/javascript" src="js/score.js"></script>
+
   <script type="text/javascript" src="js/utils.js"></script>
   <script type="text/javascript" src="js/getters.js"></script>
 

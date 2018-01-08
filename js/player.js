@@ -78,8 +78,12 @@ function Player(pos) {
 
                     if (levelTesting)
                         window.location.href = "./editor/?data=" + levelString;
-                    else
+                    else{
+                        /* Save score */
+                        setScore(nextLevel-1, score);
                         window.location.href = "?lvl=" + nextLevel;
+
+                    }
                 }, true);
                 audio.finish.play();
                 this.isDead = true;

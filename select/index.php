@@ -30,6 +30,9 @@ $result = $sth -> fetchAll();
     color: rgb(248, 132, 0);
     
   }
+	h1{
+		text-align: center;
+	}
 	</style>
 	</head>
 
@@ -40,7 +43,11 @@ $result = $sth -> fetchAll();
     <a href="../info/">Info</a>
     <a href="../editor/">Level Editor</a>
     <a href="#">Level Selection</a>
+    <a href="../score/">My Scoreboard</a>
+
   </div>
+	
+	<h1> Level selection </h1>
 <table>
 <tr>
     <th>Levels</th>
