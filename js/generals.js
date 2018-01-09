@@ -191,6 +191,7 @@ function Monster(pos, type) {
                 spawnExplosion(posToBlock(this.pos), Explosion.TRASH);
                 break;
             case Block.SLIME_MONSTER:
+                playAudio(audio.slime_squash);
                 spawnExplosion(posToBlock(this.pos), Explosion.SLIME);
                 break;
         }
