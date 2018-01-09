@@ -227,8 +227,9 @@ var initCanvas = function () {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight - 40;
     context = canvas.getContext("2d");
+    if(!context)
+        console.error("Canvas init failed!");
 };
-
 
 var redraw = function () {
     context.clearRect(0, 0, window.innerWidth, window.innerHeight);
