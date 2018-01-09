@@ -1,3 +1,7 @@
+/*
+ * Score: Handles locally stored scoreboard
+ */
+
 var setScore = function (lvl, score) {
   if (typeof (Storage) !== "undefined") {
 
@@ -8,7 +12,7 @@ var setScore = function (lvl, score) {
     }
 
     scoreboard.forEach(function (item, index, object) {
-      if(item.lvl === lvl)
+      if (item.lvl === lvl)
         scoreboard.splice(index, 1);
     });
 
@@ -18,7 +22,7 @@ var setScore = function (lvl, score) {
   }
 }
 
-function compare(a,b) {
+function compare(a, b) {
   if (a.lvl < b.lvl)
     return -1;
   if (a.lvl > b.lvl)
@@ -36,9 +40,9 @@ var printScoreTable = function (id) {
     }
     var table = "<table><tr><th>Level</th><th>Score</th></tr>"
     scoreboard.forEach(function (e) {
-      table+="<tr><td>"+ e.lvl + "</td><td>" + e.value+ "</td>";
+      table += "<tr><td>" + e.lvl + "</td><td>" + e.value + "</td>";
     });
-    table+="</table>";
+    table += "</table>";
 
   }
 

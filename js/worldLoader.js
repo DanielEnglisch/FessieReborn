@@ -1,3 +1,7 @@
+/**
+ * WorldLoader: Handles loading of level based on levelString
+ */
+
 var reloadLevel = function () {
     loadLevel();
 }

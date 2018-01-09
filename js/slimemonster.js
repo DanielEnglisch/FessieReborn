@@ -1,5 +1,7 @@
+/**
+ * SlimeMonster: Slime explosion monster
+ */
 inherits(SlimeMonster, Monster);
-
 function SlimeMonster(pos) {
   SlimeMonster.super_.call(this, pos, Block.SLIME_MONSTER);
   this.dir = Direc.RIGHT;

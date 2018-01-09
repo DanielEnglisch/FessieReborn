@@ -1,5 +1,8 @@
-inherits(Dumpster, Fallable);
+/**
+ * Objects: Extended Objects (Dumpster, Trash, Bomb, ...)
+ */
 
+inherits(Dumpster, Fallable);
 function Dumpster(pos) {
     Dumpster.super_.call(this, pos, Block.DUMPSTER);
     this.image = tex.dumpster.cloneImage();
@@ -18,7 +21,6 @@ function Dumpster(pos) {
 
 
 inherits(Trash, Collectable);
-
 function Trash(pos) {
     Trash.super_.call(this, pos, Block.TRASH);
     this.image = tex.trash.cloneImage();
@@ -57,7 +59,6 @@ function ToxicTrash(pos) {
 }
 
 inherits(ForceField, Collectable);
-
 function ForceField(pos) {
     ForceField.super_.call(this, pos, Block.FORCE_FIELD);
 
@@ -79,7 +80,6 @@ function ForceField(pos) {
 }
 
 inherits(FireOrb, Collectable);
-
 function FireOrb(pos) {
     FireOrb.super_.call(this, pos, Block.FIRE_ORB);
 
@@ -142,7 +142,6 @@ function ExplosionOverlay(pos, img, time, type, deadly = true,callback = functio
 
 
 inherits(Bomb, Collectable);
-
 function Bomb(pos) {
     Bomb.super_.call(this, pos, Block.BOMB);
     this.image = tex.bomb;
@@ -150,8 +149,6 @@ function Bomb(pos) {
         context.drawImage(this.image, this.pos.x * scale, this.pos.y * scale, scale, scale);
         context.stroke();
     }
-
-
 
     this.collect = function () {
 

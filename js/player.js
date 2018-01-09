@@ -1,5 +1,8 @@
-inherits(Player, GameObject);
+/**
+ * Player object class
+ */
 
+inherits(Player, GameObject);
 function Player(pos) {
     Player.super_.call(this, pos, Block.PLAYER);
     this.looking = Direc.NONE;

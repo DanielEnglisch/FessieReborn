@@ -1,3 +1,8 @@
+/**
+ * TextureLoader: Provides and loads images / animations
+ */
+
+/* Contains all files */
 function TexturesBundle() {
   this.loadingImages = 0;
   this.allTexturesLoading = false;
@@ -136,8 +141,8 @@ function TexturesBundle() {
   
 }
 
+/* Async load image */
 this.blockloadImage = function (src) {
-  //console.log("Loading " + src);
   var supa = this;
   var newImg = new Image();
   newImg.src = src;
@@ -167,7 +172,7 @@ this.blockloadImage = function (src) {
 }
 
 
-
+/* Animation object that handles timing of animations */
 function Animation(duration) {
 
   this.imageId = 0;
@@ -209,9 +214,8 @@ function Animation(duration) {
 
 }
 
-
+/* Privides random texture for variants like Dumpster and Trash */
 function VariantTexture() {
-
 
   this.cloneImage = function () {
     return this.images[Math.floor(Math.random() * this.images.length)];

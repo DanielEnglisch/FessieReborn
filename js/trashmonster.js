@@ -1,3 +1,6 @@
+/**
+ * TrashMonster: Trash explosion monster
+ */
 
 inherits(TrashMonster, Monster);
 function TrashMonster(pos) {

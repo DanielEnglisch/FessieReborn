@@ -50,7 +50,6 @@ var refreshOffset = function () {
 
 var addEvents = function () {
     window.addEventListener("resize", function (e) {
-        console.log("RESIZE");
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight - 40;
         refreshOffset();

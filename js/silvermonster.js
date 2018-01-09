@@ -1,4 +1,6 @@
-
+/**
+ * SilverMonster: Fire explosion monster
+ */
 inherits(SilverMonster, Monster);
 function SilverMonster(pos) {
     SilverMonster.super_.call(this, pos, Block.SILVER_MONSTER);
