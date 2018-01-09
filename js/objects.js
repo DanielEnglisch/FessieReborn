@@ -110,6 +110,14 @@ function Exit(pos) {
             context.drawImage(tex.exit_open, this.pos.x * scale, this.pos.y * scale, scale, scale);
         else
             context.drawImage(tex.exit_closed, this.pos.x * scale, this.pos.y * scale, scale, scale);
+        
+        context.stroke();
+
+
+        if(player.hasFinished){
+            tex.fessie_exit.update();
+            context.drawImage(tex.fessie_exit.getImage(), this.pos.x * scale, this.pos.y * scale, scale, scale);
+        }
 
         context.stroke();
     }

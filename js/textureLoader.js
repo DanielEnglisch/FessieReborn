@@ -47,7 +47,8 @@ function TexturesBundle() {
   this.fessie_grab_left = new Animation(250);
   this.fessie_grab_right = new Animation(250);
   this.fessie_grab_up = new Animation(250);
-  
+  this.fessie_exit = new Animation(2500);
+
   // Trash Monster
   this.trash_monster_center = new Animation(250);
   this.trash_monster_left = new Animation(250);
@@ -116,6 +117,7 @@ function TexturesBundle() {
     this.fessie_grab_down.load(dir + "fessie_grab_down/");
     this.fessie_grab_left.load(dir + "fessie_grab_left/");
     this.fessie_grab_right.load(dir + "fessie_grab_right/");
+    this.fessie_exit.load(dir + "fessie_exit/");
 
     // Trash Monster
     this.trash_monster_center.load(dir + "trash_monster_center/");

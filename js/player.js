@@ -189,6 +189,9 @@ function Player(pos) {
             context.drawImage(tex.fessie_dead, this.pos.x * scale, this.pos.y * scale, scale, scale);
             context.stroke();
             return;
+        }else if(this.hasFinished){
+
+            return;
         }
 
         switch (this.looking) {
