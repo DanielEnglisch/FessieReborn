@@ -1,8 +1,10 @@
 <?php
-  $db = new PDO('mysql:host=localhost;dbname=fessie;charset=utf8', 'root', '');
+
+  require "../connection.php";
+
 	$sth = $db->prepare("SELECT * FROM levels");
   $sth->execute();
-$result = $sth -> fetchAll();
+  $result = $sth -> fetchAll();
 ?>
 <!doctype html>
 <html>

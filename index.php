@@ -1,6 +1,6 @@
 <?php
 
-  $db = new PDO('mysql:host=localhost;dbname=fessie;charset=utf8', 'root', '');
+  require "connection.php";
 	
   $levelString = "";
   $nextLevel = 0;
