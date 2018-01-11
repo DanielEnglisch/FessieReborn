@@ -299,17 +299,17 @@ var redraw = function () {
     context.textAlign = "center";
     context.textBaseline = "middle";
     context.fillStyle = "rgb(248, 132, 0)";
-    context.fillText("Items left: " + items_left, canvas.width / 2, canvas.height - 25);
-    context.fillText("Bombs: " + num_bombs, canvas.width / 3, canvas.height - 25);
-    context.fillText("Fire: " + num_fires, (canvas.width / 5), canvas.height - 25);
-    context.fillText("Score: " + score, canvas.width * 2 / 3, canvas.height - 25);
+    context.fillText("Müll übrig: " + items_left, canvas.width / 2, canvas.height - 25);
+    context.fillText("Bomben: " + num_bombs, canvas.width / 3, canvas.height - 25);
+    context.fillText("Feuer: " + num_fires, (canvas.width / 5), canvas.height - 25);
+    context.fillText("Punkte: " + score, canvas.width * 2 / 3, canvas.height - 25);
 
     if (player.isDead && !player.hasFinished) {
         context.font = "72px Arial";
         context.fillStyle = "red";
         context.strokeStyle = "black";
-        context.fillText("You died!", canvas.width / 2, canvas.height / 2);
-        context.strokeText("You died!", canvas.width / 2, canvas.height / 2);
+        context.fillText("Nochmal!", canvas.width / 2, canvas.height / 2);
+        context.strokeText("Nochmal!", canvas.width / 2, canvas.height / 2);
 
     }
 
