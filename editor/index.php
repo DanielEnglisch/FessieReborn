@@ -13,18 +13,18 @@
 
 <head>
   <meta charset="utf8">
-  <title>Fessie reborn</title>
+  <title>FessieReborn</title>
   <link rel="stylesheet" type="text/css" href="../css/editor.css">
 </head>
 
 <body onload="main();">
 
   <div id="navigation">
-  <a href="../">Game</a>
-  <a href="../info/">Info</a>
+  <a href="../">Spiel</a>
+  <a href="../info/">Anleitung</a>
   <a href="#">Level Editor</a>
-  <a href="../select/">Level Selection</a>
-  <a href="../score/">My Scoreboard</a>
+  <a href="../select/">Levelauswahl</a>
+  <a href="../score/">Scoreboard</a>
 
   </div>
   

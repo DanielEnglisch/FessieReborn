@@ -33,18 +33,18 @@
 
 <head>
   <meta charset="utf8">
-  <title>Fessie reborn</title>
+  <title>FessieReborn</title>
   <link rel="stylesheet" type="text/css" href="css/game.css">
 </head>
 
 <body>
 
   <div id="navigation">
-    <a href="index.php">Game <?php if($levelTesting == false) echo "-LVL".$lvl."-";?> </a>
-    <a href="info/">Info</a>
+    <a href="index.php">Spiel <?php if($levelTesting == false) echo "-LVL".$lvl."-";?> </a>
+    <a href="info/">Anleitung</a>
     <?php echo '<a href="./editor?data=' . $levelString . '">Level Editor</a>'; ?>
-    <a href="select/">Level Selection</a>
-    <a href="score/">My Scoreboard</a>
+    <a href="select/">Levelauswahl</a>
+    <a href="score/">Scoreboard</a>
 
   </div>
 

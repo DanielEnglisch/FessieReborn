@@ -11,7 +11,7 @@
 
 <head>
   <meta charset="utf8">
-  <title>Fessie reborn</title>
+  <title>FessieReborn</title>
   <link rel="stylesheet" type="text/css" href="../css/game.css">
 	<style>
 		table {
@@ -41,15 +41,15 @@
 <body>
 
   <div id="navigation">
-    <a href="../">Game</a>
-    <a href="../info/">Info</a>
+    <a href="../">Spiel</a>
+    <a href="../info/">Anleitung</a>
     <a href="../editor/">Level Editor</a>
-    <a href="#">Level Selection</a>
-    <a href="../score/">My Scoreboard</a>
+    <a href="#">Levelauswahl</a>
+    <a href="../score/">Scoreboard</a>
 
   </div>
 	
-	<h1> Level selection </h1>
+	<h1> Levelauswahl </h1>
 <table>
 <tr>
     <th>Levels</th>
