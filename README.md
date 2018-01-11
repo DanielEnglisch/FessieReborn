@@ -3,4 +3,4 @@
 * Brand new levels
 * Online level creator with share functionality
 
-![IMAGE NOT FOUND](https://github.com/DanielEnglisch/WDP3-Project/blob/master/docs/screenshot.PNG "Screenshot")
+![](https://github.com/DanielEnglisch/WDP3-Project/blob/master/docs/screenshot.png =250x)
