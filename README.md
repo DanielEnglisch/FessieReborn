@@ -20,10 +20,12 @@ Ein web-basiertes oldschool Spiel basierend auf "Fessie räumt auf".
  <img src="https://github.com/DanielEnglisch/FessieReborn/blob/master/docs/levels.png"  style="width: 100px;"/>
 6. In der Datei 'connection.php' die Zugangsdaten der MySql Datenbank eintragen.
 Standardzugangsdaten für MySQL in XAMPP (Benutzer 'root' ohne Passwort)
-```php
+
+```
 $conf['host'] = 'localhost';
 $conf['database'] = 'myDatabaseName';
 $conf['user'] = 'root';
 $conf['passwd'] = '';
 ```
+
 8. Spielen
