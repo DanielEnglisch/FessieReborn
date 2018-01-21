@@ -66,7 +66,7 @@ var main = function () {
             window.location.href = "../?data=" + getData();
         } else if (e.target.id == "export") {
 
-            alert("http://localhost/WDP3-Project/?data=" + getData());
+            alert(location.protocol + '//' + location.host + location.pathname+ "../?data=" + getData());
         } else {
             paintID = e.target.id;
             $('img').css('border', 'none');
@@ -85,6 +85,10 @@ var main = function () {
     // Load form file into world matrix
     if (levelString != "")
         loadEditor(levelString);
+		else
+			// Load 10x10
+		            loadEditor("1111111111X1255555551X1555545551X1555555551X1555555551X1555555551X1555555551X1555555551X1555555561X1111111111");
+
 
     canvas.addEventListener('mousedown', function (event) {
 
