@@ -15,10 +15,12 @@ Ein web-basiertes oldschool Spiel basierend auf "Fessie räumt auf".
 3. Die heruntergeladene zip in das htdocs Verzeichnis der XAMPP Installation extrahieren.
 4. Eine neue MySQL Datenbank erstellen. (http://localhost/phpmyadmin)
  <img src="https://github.com/DanielEnglisch/FessieReborn/blob/master/docs/createDB.png"  style="width: 100px;"/>
+ 
 5. Die Datei 'levels.sql' in die zugewiesene Datenbank laden.
  <img src="https://github.com/DanielEnglisch/FessieReborn/blob/master/docs/importLevels.png"  style="width: 100px;"/>
  <img src="https://github.com/DanielEnglisch/FessieReborn/blob/master/docs/levels.png"  style="width: 100px;"/>
-6. In der Datei 'connection.php' die Zugangsdaten der MySql Datenbank eintragen.
+ 
+6. In der Datei 'connection.php' die Zugangsdaten der MySql Datenbank eintragen.  
 Standardzugangsdaten für MySQL in XAMPP (Benutzer 'root' ohne Passwort)
 
 ```php
