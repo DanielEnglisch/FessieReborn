@@ -7,11 +7,23 @@ Ein web-basiertes oldschool Spiel basierend auf "Fessie räumt auf".
 * Möglichkeit eigene Levels zu entwerfen
 * Teile deine Levels mit Freunden
   
-    <img src="https://github.com/DanielEnglisch/WDP3-Project/blob/master/docs/screenshot.PNG"  style="width: 200px;"/>
+    <img src="https://github.com/DanielEnglisch/FessieReborn/blob/master/docs/screenshot.png"  style="width: 200px;"/>
 
 ## Installation
-1. Repository clonen bzw. als zip herunterladen
-2. Für die Verwendung wird das Softwarepaket XAMPP empfohlen!
-3. In der connection.php die Zugangsdaten der MySql Datenbank eintragen
-4. Die Tabelle levels.sql in die zugewiesene Datenbank laden
-5. Spielen
+1. Repository als zip herunterladen
+2. Für die Verwendung wird das Softwarepaket <a href="https://www.apachefriends.org/de/index.html">XAMPP</a> empfohlen!
+3. Die heruntergeladene zip in das htdocs Verzeichnis der XAMPP Installation extrahieren.
+4. Eine neue MySQL Datenbank erstellen. (http://localhost/phpmyadmin)
+ <img src="https://github.com/DanielEnglisch/FessieReborn/blob/master/docs/createDB.png"  style="width: 200px;"/>
+5. Die Datei 'levels.sql' in die zugewiesene Datenbank laden.
+ <img src="https://github.com/DanielEnglisch/FessieReborn/blob/master/docs/importLevels.png"  style="width: 200px;"/>
+ <img src="https://github.com/DanielEnglisch/FessieReborn/blob/master/docs/levels.png"  style="width: 200px;"/>
+6. In der Datei 'connection.php' die Zugangsdaten der MySql Datenbank eintragen.
+Standardzugangsdaten für MySQL in XAMPP (Benutzer 'root' ohne Passwort)
+    ```php
+    $conf['host'] = 'localhost';
+    $conf['database'] = 'myDatabaseName';
+    $conf['user'] = 'root';
+    $conf['passwd'] = '';
+    ```
+8. Spielen
