@@ -10,9 +10,10 @@ Ein web-basiertes oldschool Spiel basierend auf "Fessie räumt auf".
     <img src="https://github.com/DanielEnglisch/FessieReborn/blob/master/docs/screenshot.png"  style="width: 200px;"/>
 
 ## Installation
-1. Repository als zip herunterladen
+1. Repository als zip <a href="https://github.com/DanielEnglisch/FessieReborn/archive/master.zip">herunterladen</a>
 2. Für die Verwendung wird das Softwarepaket <a href="https://www.apachefriends.org/de/index.html">XAMPP</a> empfohlen!
 3. Die heruntergeladene zip in das htdocs Verzeichnis der XAMPP Installation extrahieren.
+    <img src="https://github.com/DanielEnglisch/FessieReborn/blob/master/docs/path.png"  style="width: 50px;"/>
 4. Eine neue MySQL Datenbank erstellen. (http://localhost/phpmyadmin)
      <img src="https://github.com/DanielEnglisch/FessieReborn/blob/master/docs/createDB.png"  style="width: 50px;"/>
 5. Die Datei 'levels.sql' in die zugewiesene Datenbank laden.
@@ -24,7 +25,7 @@ Standardzugangsdaten für MySQL in XAMPP (Benutzer 'root' ohne Passwort)
 
 ```php
 $conf['host'] = 'localhost';
-$conf['database'] = 'myDatabaseName';
+$conf['database'] = 'fessie';
 $conf['user'] = 'root';
 $conf['passwd'] = '';
 ```
