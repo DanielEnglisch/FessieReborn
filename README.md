@@ -1,3 +1,11 @@
+# WDP Projekt von Englisch Daniel (S1610307056)
+
+* Projekt-Name: FessieReborn
+* Projekt-Typ: Game
+* Gruppenprojekt: Nein
+* Externe JS/CSS Bibliotheken: Nein
+* Zeitaufwand (h): 30-40
+
 # FessieReborn
 Ein web-basiertes oldschool Spiel basierend auf "Fessie räumt auf".  
 
@@ -32,4 +40,4 @@ $conf['user'] = 'root';
 $conf['passwd'] = '';
 ```
 
-7. Spielen
+7. Auf die Addresse <a href="http://localhost/fessie/">http://localhost/fessie/</a> gehen und spielen.
