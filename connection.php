@@ -2,7 +2,7 @@
 
 /* Enter database information here */
 $conf['host'] = 'localhost';
-$conf['database'] = 'englisch_fessie_db';
+$conf['database'] = 'fessie';
 $conf['user'] = 'root';
 $conf['passwd'] = '';
 
