@@ -147,8 +147,6 @@ function ExplosionOverlay(pos, img, time, type, deadly = true,callback = functio
     }
 }
 
-
-
 inherits(Bomb, Collectable);
 function Bomb(pos) {
     Bomb.super_.call(this, pos, Block.BOMB);
