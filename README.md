@@ -4,7 +4,7 @@
 * Projekt-Typ: Game
 * Gruppenprojekt: Nein
 * Externe JS/CSS Bibliotheken: Nein
-* Zeitaufwand (h): 30-40
+* Zeitaufwand (h): 50-60
 
 # FessieReborn
 Ein web-basiertes oldschool Spiel basierend auf "Fessie räumt auf".  
