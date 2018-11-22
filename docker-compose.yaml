@@ -1,0 +1,46 @@
+version: '3'
+services:
+    apache:
+        build: .docker/apache
+        container_name: fessie_apache
+        ports:
+          - 80:80
+        volumes:
+          - .docker/config/vhosts:/etc/apache2/sites-enabled
+          - .:/home/wwwroot/fessie
+        depends_on:
+          - php
+
+    mysql:
+        image: mysql:5.7.23
+        container_name: fessie_mysql
+        volumes:
+            - ./.docker/data/db:/var/lib/mysql
+            - ./sql/:/docker-entrypoint-initdb.d/
+        environment:
+            MYSQL_ROOT_PASSWORD: 20manue01
+            MYSQL_DATABASE: fessie
+        ports:
+            - 3306:3306
+
+    php:
+        build: .docker/php
+        container_name: fessie_php
+        volumes:
+          - .:/home/wwwroot/fessie
+        depends_on:
+          - mysql
+          
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        restart: always
+        container_name: fessie_phpmyadmin
+        depends_on:
+          - mysql
+        ports:
+          - 8080:80
+        environment:
+          PMA_HOST: mysql
+          PMA_USER: root
+          PMA_PASSWORD: 20manue01
+          PMA_ARBITRARY: 1
