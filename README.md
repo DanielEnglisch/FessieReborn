@@ -20,7 +20,7 @@ Ein web-basiertes oldschool Spiel basierend auf "Fessie räumt auf".
 ## Installation mit Docker
 
 1. Mit einer Eingabeaufforderung in das Projektverzeichnis navigieren.
-2. Den Befehl `docker-compose up` ausführen.
+2. Den Befehl `docker-compose up` ausführen oder die Datei `run.ps1` mit der Windows Powershell ausführen.
 3. Fessie unter `http://localhost/` spielen.
 4. Optional kann die Datenbank unter `http://localhost:8080/` modifiert werden.
 5. Zum Beenden von docker `Strg-C` in der Eingabeaufforderung drücken.
