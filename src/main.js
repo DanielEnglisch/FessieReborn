@@ -1,3 +1,19 @@
+// require ./audioLoader.js
+// require ./enums.js
+// require ./generals.js
+// require ./getters.js
+// require ./globals.js
+// require ./objects.js
+// require ./player.js
+// require ./score.js
+// require ./silvermonster.js
+// require ./slimemonster.js
+// require ./textureLoader.js
+// require ./trashmonster.js
+// require ./utils.js
+// require ./worldLoader.js
+
+
 var initWorld = function () {
     loadLevel();
 }

@@ -69,11 +69,8 @@
     <canvas id="screen">
       Not found
     </canvas>
-  </div>
-  <script type="text/javascript" src="../js/enums.js"></script>  
-  <script type="text/javascript" src="../js/utils.js"></script>  
-  <script type="text/javascript" src="../js/textureLoader.js"></script>  
-  <script type="text/javascript" src="editor.js"></script>
+  </div> 
+  <script type="text/javascript" src="../dist/editor.min.js"></script>
   
   <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"

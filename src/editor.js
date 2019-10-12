@@ -1,3 +1,7 @@
+//require ./enums.js
+//require ./utils.js
+//require ./textureLoader.js
+
 var paintID = 0;
 var scale = 64;
 var xsize = 20;
