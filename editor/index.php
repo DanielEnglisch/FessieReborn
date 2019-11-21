@@ -70,7 +70,7 @@
       Not found
     </canvas>
   </div> 
-  <script type="text/javascript" src="../dist/editor.min.js"></script>
+  <script type="text/javascript" src="../dist/bundle.editor.js"></script>
   
   <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"

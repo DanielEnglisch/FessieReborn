@@ -21,6 +21,7 @@ var initWorld = function () {
 document.onreadystatechange = () => {
     if (document.readyState === 'complete') {
         main();
+        console.log("Fessie Reborn lodaded.")
     }
 };
 

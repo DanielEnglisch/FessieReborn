@@ -65,7 +65,7 @@
       echo 'var levelTesting = false;';
   ?>
   </script>
-  <script type="text/javascript" src="dist/bundle.min.js"></script>
+  <script type="text/javascript" src="dist/bundle.main.js"></script>
 </body>
 
 </html>

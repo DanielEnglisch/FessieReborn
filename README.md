@@ -49,3 +49,6 @@ $conf['passwd'] = '';
 ```
 
 7. Auf die Addresse <a href="http://localhost/fessie/">http://localhost/fessie/</a> gehen und spielen.
+
+## Weiterentwickeln (mit Docker und Gulp)
+Zum Weiterentwickeln von FessieReborn muss zunächst `npm` installiert sein und die Pakete mit `npm install` heruntergeladen werden. Nach dem Starten des Webservers mit `docker-compose up --build` muss der Befehl `gulp` ausgeführt werden. Nun werden alle Änderungen der Dateien in `src/` automatisch erkannt und die Anwendung neu kompiliert. Die Seite muss danach mit `F5` neu geladen werden.

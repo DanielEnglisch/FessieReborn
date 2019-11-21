@@ -3,6 +3,7 @@ services:
     apache:
         build: .docker/apache
         container_name: fessie_apache
+        restart: unless-stopped
         ports:
           - 80:80
         volumes:
@@ -10,9 +11,9 @@ services:
           - .:/home/wwwroot/fessie
         depends_on:
           - php
-
     mysql:
         image: mysql:5.7.23
+        restart: unless-stopped
         container_name: fessie_mysql
         volumes:
             - ./.docker/data/db:/var/lib/mysql
@@ -22,25 +23,11 @@ services:
             MYSQL_DATABASE: fessie
         ports:
             - 3306:3306
-
     php:
+        restart: unless-stopped
         build: .docker/php
         container_name: fessie_php
         volumes:
           - .:/home/wwwroot/fessie
         depends_on:
           - mysql
-          
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        restart: always
-        container_name: fessie_phpmyadmin
-        depends_on:
-          - mysql
-        ports:
-          - 8080:80
-        environment:
-          PMA_HOST: mysql
-          PMA_USER: root
-          PMA_PASSWORD: 20manue01
-          PMA_ARBITRARY: 1
